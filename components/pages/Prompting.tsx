@@ -1,0 +1,119 @@
+import type { CSSProperties } from 'react';
+import { CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
+
+export default function PromptingPage() {
+  return (
+    <Page route="prompting" hidden>
+      <PageBody>
+        <PageHead art="text" eyebrow="Chapter 03"
+          title="Prompting: how to brief an AI so the first draft is usable."
+          lede="Most weak results come from a weak brief. This chapter gives you a template, a worked before and after, a project rules file and six patterns for steering the work." />
+        <section className="sec">
+          <Stick left="01 · Anatomy" right="Five parts" />
+          <div className="rows">
+            <Row cls="rv sticky-k" num="Goal" title="Say what exists at the end">
+              <p>
+                One sentence that names the thing and who it is for. “A one-page site for a fictional studio” is a goal. “Something cool” is not.
+              </p>
+            </Row>
+            <Row cls="rv sticky-k" num="Context" title="Give it the facts it cannot guess">
+              <p>
+                File names, the theme, the libraries you already chose, and what is out of scope. The assistant will otherwise pick for you.
+              </p>
+            </Row>
+            <Row cls="rv sticky-k" num="Constraints" title="Set the limits">
+              <p>
+                Exact library versions, which properties may be animated, the reduced motion rule, the browsers that matter. Constraints are the cheapest way to avoid rework.
+              </p>
+            </Row>
+            <Row cls="rv sticky-k" num="Output" title="Name the format">
+              <p>
+                “The three files, nothing else” stops a long explanation you do not need. Ask for a short plan first when the task is large.
+              </p>
+            </Row>
+            <Row cls="rv sticky-k" num="Check" title="Ask for evidence">
+              <p>
+                End with “list what you tested and what you could not test”. It makes gaps visible instead of hidden.
+              </p>
+            </Row>
+          </div>
+          <div className="rv">
+            <CodeBlock lang="Template" code={"Goal: [what exists at the end, for whom]\nContext: [files, theme, libraries, scope]\nBuild, in order: [numbered list]\nConstraints: [versions, allowed properties, reduced motion, browsers]\nOutput: [format]. Then list what you tested and what you could not test."} />
+          </div>
+        </section>
+        <section className="sec">
+          <Stick left="02 · Before and after" right="Same request" />
+          <div className="rows">
+            <Row cls="rv" num="Weak" title="Vague brief">
+              <CodeBlock lang="Prompt" code={"Make me a cool scroll website with animations."} />
+              <p>
+                You will get a generic page, probably with a heavy library, a gradient and effects nobody asked for. You then spend several rounds undoing choices.
+              </p>
+            </Row>
+            <Row cls="rv" num="Strong" title="Specific brief">
+              <CodeBlock lang="Prompt" code={"Goal: a one-page site for a fictional studio called Northlight, built in plain HTML, CSS and JavaScript.\n\nContext: it is a teaching example. The three files are index.html, style.css and app.js. Dark theme, one accent colour.\n\nBuild, in this order:\n1. A hero with two parallax layers (speeds 0.2 and 0.4).\n2. A sentence that lights up word by word as I scroll through a sticky section.\n3. Three cards that fade up when they enter the viewport, once.\n4. A pinned horizontal gallery with five panels.\n\nConstraints: Lenis 1.1.18 from jsDelivr for smooth scroll. Transform and opacity only. Reduced motion switches everything off.\n\nOutput: the three files, nothing else. Then list what you tested and what you could not test."} />
+              <p>
+                Every ambiguous decision is settled. The result can be checked against the list, item by item.
+              </p>
+            </Row>
+          </div>
+        </section>
+        <section className="sec">
+          <Stick left="03 · Rules file" right="Write it once" />
+          <p className="lede rv" style={{ marginTop: "0" } as CSSProperties}>
+            Put the rules that never change into a file the tool reads at the start of each session, so you stop repeating them. Claude Code reads
+            {" "}
+            <code className="i">CLAUDE.md</code>
+            , Gemini CLI reads
+            {" "}
+            <code className="i">GEMINI.md</code>
+            , and Codex reads
+            {" "}
+            <code className="i">AGENTS.md</code>
+            . File names and loading rules can change, so check the current page for your tool before relying on it.
+          </p>
+          <div className="rv">
+            <CodeBlock lang="CLAUDE.md" code={"# Northlight\n\nStatic site: index.html, style.css, app.js. No build step.\n\n## Rules\n- Vanilla JavaScript. Libraries come from jsDelivr, pinned to an exact version.\n- Animate transform and opacity only.\n- Every motion has a prefers-reduced-motion fallback.\n- Test with `python3 -m http.server 8000`. Never open the file directly.\n- Do not invent copy, statistics, quotes or client logos.\n\n## Done means\n- No console errors at 375, 768 and 1440 px wide.\n- You list the checks you ran and the checks you could not run."} />
+          </div>
+          <p className="muted rv" style={{ maxWidth: "60ch" } as CSSProperties}>
+            Keep it short. Rules that are long or contradictory get ignored more often than short, concrete ones.
+          </p>
+        </section>
+        <section className="sec">
+          <Stick left="04 · Six patterns" right="Copy and adapt" />
+          <div className="rows">
+            <Row cls="rv" num="Plan" title="Plan before code">
+              <p>For anything over a few lines, ask for the plan and approve it first.</p>
+              <CodeBlock lang="Prompt" code={"Do not write code yet. List the files you will change, the order, and the risks. Wait for my approval."} />
+            </Row>
+            <Row cls="rv" num="Small" title="One change at a time">
+              <p>Large combined requests hide which change broke the page.</p>
+              <CodeBlock lang="Prompt" code={"Make only this change: [change]. Do not touch anything else. Tell me which lines you edited."} />
+            </Row>
+            <Row cls="rv" num="Show" title="Ask for evidence">
+              <p>Ask what was run, not whether it works.</p>
+              <CodeBlock lang="Prompt" code={"Open the page at 375 px and 1440 px. Report the console errors verbatim, and name every element that overflows."} />
+            </Row>
+            <Row cls="rv" num="Critique" title="Review as a sceptic">
+              <p>
+                A second pass with a different role catches things the first pass missed.
+              </p>
+              <CodeBlock lang="Prompt" code={"Review this page as a hostile reviewer. List the five weakest points: performance, accessibility, motion that could cause discomfort, and anything that looks invented."} />
+            </Row>
+            <Row cls="rv" num="Explain" title="Make it teach you">
+              <p>You will maintain this code, so ask for reasons.</p>
+              <CodeBlock lang="Prompt" code={"Explain how the parallax maths works in plain terms, with one numeric example. Then say what would break if the speed were 0.9."} />
+            </Row>
+            <Row cls="rv" num="Undo" title="Keep a way back">
+              <p>
+                Commit or copy the folder before each large step. If a change goes wrong, revert and rewrite the prompt rather than patching on top.
+              </p>
+              <CodeBlock lang="bash" code={"git init\ngit add -A && git commit -m \"working hero\""} />
+            </Row>
+          </div>
+        </section>
+        <NextBar label="Next chapter" href="#build" text="Chapter 04: Build" />
+      </PageBody>
+    </Page>
+  );
+}
