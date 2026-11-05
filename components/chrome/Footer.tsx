@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import { chapters } from '@/lib/chapters';
+import BackToTop from './BackToTop';
 
 type Ext = { href: string; label: string };
 const docs: Ext[] = [
@@ -18,7 +20,9 @@ function Column({ title, links }: { title: string; links: Ext[] }) {
     <div className="f-col">
       <div className="mono">{title}</div>
       {links.map((l) => (
-        <a key={l.href} href={l.href} target="_blank" rel="noopener">{l.label}</a>
+        <a key={l.href} href={l.href} target="_blank" rel="noopener">
+          {l.label}
+        </a>
       ))}
     </div>
   );
@@ -30,22 +34,31 @@ export default function Footer() {
       <div className="wrap">
         <div className="f-top">
           <div>
-            <a className="mark" href="#home">Scrollcraft</a>
-            <p>A free tutorial on building a cinematic scroll website with Claude, Gemini or ChatGPT. Commands were checked against official documentation in November 2026. Check the linked pages before you rely on them.</p>
+            <Link className="mark" href="/">
+              Scrollcraft
+            </Link>
+            <p>
+              A free tutorial on building a cinematic scroll website with Claude, Gemini or ChatGPT. Commands were checked against official documentation in
+              November 2026. Check the linked pages before you rely on them.
+            </p>
           </div>
           <div className="f-col">
             <div className="mono">Chapters</div>
             {chapters.map((c) => (
-              <a key={c.id} href={`#${c.id}`}>{c.n} {c.title}</a>
+              <Link key={c.id} href={`/${c.id}`}>
+                {c.n} {c.title}
+              </Link>
             ))}
           </div>
           <Column title="Official docs" links={docs} />
           <Column title="Find skills" links={finds} />
         </div>
-        <div className="bigmark" aria-hidden="true">Scrollcraft</div>
+        <div className="bigmark" aria-hidden="true">
+          Scrollcraft
+        </div>
         <div className="f-bot">
           <span>© 2026 Scrollcraft. A free tutorial.</span>
-          <button type="button" id="totop">Back to top</button>
+          <BackToTop />
         </div>
       </div>
     </footer>

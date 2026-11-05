@@ -1,0 +1,9 @@
+.next
+node_modules
+package-lock.json
+playwright-report
+test-results
+lib/search-index.json
+# Dense on purpose: the stylesheet and the particle maths read better one rule or statement per line.
+app/globals.css
+lib/particles/shapes.ts

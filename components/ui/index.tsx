@@ -1,24 +1,41 @@
+import Link from 'next/link';
 import type { ReactNode } from 'react';
+import ParticleCanvas from '@/components/particles/ParticleCanvas';
+import { getChapter } from '@/lib/chapters';
+import { highlight } from '@/lib/highlight';
+import { readingMinutes } from '@/lib/reading';
+import { slugify } from '@/lib/slug.mjs';
+import ChapterDone from './ChapterDone';
+import CodeFrame from './CodeFrame';
 
-/** A copyable code block. The copy button is wired by the scroll engine through data-copy-code. */
-export function CodeBlock({ lang, code, codeId }: { lang: string; code: string; codeId?: string }) {
+export { PlatformPanel, PlatformTabs } from './PlatformTabs';
+export { CodeFrame };
+
+/** A copyable code block, syntax highlighted at build time. Prompts and plain text stay unstyled. */
+export async function CodeBlock({ lang, code, codeId }: { lang: string; code: string; codeId?: string }) {
+  const lines = await highlight(code, lang);
+  if (!lines) return <CodeFrame lang={lang} code={code} codeId={codeId} />;
   return (
-    <div className="code">
-      <div className="code-bar">
-        <span className="mono">{lang}</span>
-        <button className="cpy" type="button" data-copy-code="">Copy</button>
-      </div>
-      <pre>
-        <code id={codeId}>{code}</code>
-      </pre>
-    </div>
+    <CodeFrame lang={lang} codeId={codeId}>
+      {lines.map((line, i) => (
+        <span key={i}>
+          {line.map((t, j) => (
+            <span key={j} style={{ color: t.color }}>
+              {t.content}
+            </span>
+          ))}
+          {i < lines.length - 1 ? '\n' : null}
+        </span>
+      ))}
+    </CodeFrame>
   );
 }
 
-/** A ruled row with a label on the left and content on the right. */
-export function Row({ num, title, cls, children }: { num: ReactNode; title: ReactNode; cls?: string; children?: ReactNode }) {
+/** A ruled row with a label on the left and content on the right. String titles get an id so search can link to them. */
+export function Row({ num, title, cls, anchor, children }: { num: ReactNode; title: ReactNode; cls?: string; anchor?: string; children?: ReactNode }) {
+  const id = anchor ?? (typeof title === 'string' ? slugify(title) : undefined);
   return (
-    <div className={cls ? `row ${cls}` : 'row'}>
+    <div className={cls ? `row ${cls}` : 'row'} id={id}>
       <div className="k">
         <span className="mono">{num}</span>
         <h3>{title}</h3>
@@ -44,40 +61,43 @@ export function Callout({ children }: { children: ReactNode }) {
 }
 
 /** Sticky section label with an optional right-hand note. */
-export function Stick({ left, right }: { left: ReactNode; right?: ReactNode }) {
+export function Stick({ left, right }: { left: string; right?: ReactNode }) {
   return (
-    <div className="stick">
+    <div className="stick" id={slugify(left)}>
       <span className="mono">{left}</span>
       <span className="mono">{right}</span>
     </div>
   );
 }
 
-/** Link to the next chapter at the end of a page. */
+/** Link to the next chapter at the end of a page. Reaching it marks the current chapter as read. */
 export function NextBar({ label, href, text }: { label: string; href: string; text: string }) {
   return (
     <div className="nextbar rv">
+      <ChapterDone />
       <span className="mono">{label}</span>
-      <a className="btn" href={href} data-magnetic="">
+      <Link className="btn" href={href} data-magnetic="">
         {text} <span aria-hidden="true">→</span>
-      </a>
+      </Link>
     </div>
   );
 }
 
-/** Particle canvas that decorates a chapter header. The shape is drawn by the engine. */
+/** Particle canvas that decorates a chapter header. */
 export function ParticleArt({ kind }: { kind: string }) {
-  return <canvas className="pg-art" data-pc={kind} aria-hidden="true" />;
+  return <ParticleCanvas kind={kind} className="pg-art" />;
 }
 
 /** Canvas, eyebrow, title and lede at the top of a chapter. */
-export function PageHead({ art, eyebrow, title, lede }: { art: string; eyebrow: string; title: ReactNode; lede: ReactNode }) {
+export function PageHead({ chapter, art, eyebrow, title, lede }: { chapter?: string; art: string; eyebrow: string; title: ReactNode; lede: ReactNode }) {
+  const mins = chapter ? readingMinutes(chapter) : undefined;
   return (
     <>
       <ParticleArt kind={art} />
       <div className="eyebrow">
         <i></i>
         <span>{eyebrow}</span>
+        {mins ? <span className="eyebrow-meta">· {mins} min read</span> : null}
       </div>
       <h1 className="pg-title">{title}</h1>
       <p className="lede">{lede}</p>
@@ -89,11 +109,12 @@ export function PageBody({ children }: { children: ReactNode }) {
   return <div className="wrap pg">{children}</div>;
 }
 
-/** One routed view. The engine shows and hides pages by toggling the hidden attribute. */
-export function Page({ route, hidden, id, children }: { route: string; hidden?: boolean; id?: string; children: ReactNode }) {
+/** One chapter view. The enter animation runs on mount, so it plays on every client-side navigation. */
+export function Page({ route, children }: { route: string; children: ReactNode }) {
+  const c = getChapter(route);
   return (
-    <main className="page" data-route={route} hidden={hidden} id={id}>
+    <div className="page enter" data-route={route} aria-label={c ? `Chapter ${c.n}: ${c.title}` : undefined}>
       {children}
-    </main>
+    </div>
   );
 }

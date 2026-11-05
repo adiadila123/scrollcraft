@@ -1,0 +1,665 @@
+{
+ "reading": {
+  "start": 2,
+  "skills": 4,
+  "prompting": 1,
+  "build": 2,
+  "motion": 2,
+  "playground": 1,
+  "advanced": 3,
+  "launch": 1
+ },
+ "entries": [
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#what-you-need",
+   "title": "What you need",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#compare-the-three",
+   "title": "Compare the three",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#install-your-tool",
+   "title": "Install your tool",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#make-the-project-folder",
+   "title": "Make the project folder",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#create-it",
+   "title": "Create it",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#serve-it",
+   "title": "Serve it",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#start-your-ai-inside-it",
+   "title": "Start your AI inside it",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Start",
+   "href": "/start#which-one-should-you-pick",
+   "title": "Which one should you pick?",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#what-a-skill-is",
+   "title": "What a skill is",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#a-folder-with-one-required-file",
+   "title": "A folder with one required file",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#the-description-decides-when-it-loads",
+   "title": "The description decides when it loads",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#it-is-an-open-format",
+   "title": "It is an open format",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#where-to-find-skills",
+   "title": "Where to find skills",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#install-a-skill",
+   "title": "Install a skill",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#claude-code-copy-a-folder",
+   "title": "Claude Code: copy a folder",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#claude-code-from-the-marketplace",
+   "title": "Claude Code: from the marketplace",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#claude-ai-upload-a-zip",
+   "title": "claude.ai: upload a zip",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#copy-a-folder",
+   "title": "Copy a folder",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#install-from-git",
+   "title": "Install from Git",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#codex-cli-copy-a-folder",
+   "title": "Codex CLI: copy a folder",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#chatgpt-website-ask-it-to-build-one",
+   "title": "ChatGPT website: ask it to build one",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#one-installer-for-many-agents",
+   "title": "One installer for many agents",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#the-skills-for-a-cinematic-site",
+   "title": "The skills for a cinematic site",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#write-your-own",
+   "title": "Write your own",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Skills",
+   "href": "/skills#check-that-it-loads",
+   "title": "Check that it loads",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#anatomy",
+   "title": "Anatomy",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#say-what-exists-at-the-end",
+   "title": "Say what exists at the end",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#give-it-the-facts-it-cannot-guess",
+   "title": "Give it the facts it cannot guess",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#set-the-limits",
+   "title": "Set the limits",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#name-the-format",
+   "title": "Name the format",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#ask-for-evidence",
+   "title": "Ask for evidence",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#before-and-after",
+   "title": "Before and after",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#vague-brief",
+   "title": "Vague brief",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#specific-brief",
+   "title": "Specific brief",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#rules-file",
+   "title": "Rules file",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#six-patterns",
+   "title": "Six patterns",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#plan-before-code",
+   "title": "Plan before code",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#one-change-at-a-time",
+   "title": "One change at a time",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#show-the-evidence",
+   "title": "Ask for evidence",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#review-as-a-sceptic",
+   "title": "Review as a sceptic",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#make-it-teach-you",
+   "title": "Make it teach you",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Prompting",
+   "href": "/prompting#keep-a-way-back",
+   "title": "Keep a way back",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#ten-steps",
+   "title": "Ten steps",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#brief-the-ai",
+   "title": "Brief the AI",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#generate-the-skeleton",
+   "title": "Generate the skeleton",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#add-smooth-scrolling",
+   "title": "Add smooth scrolling",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#reveal-on-scroll",
+   "title": "Reveal on scroll",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#give-the-hero-depth",
+   "title": "Give the hero depth",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#add-one-pinned-moment",
+   "title": "Add one pinned moment",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#tell-a-story-with-scrollytelling",
+   "title": "Tell a story with scrollytelling",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#add-a-particle-or-3d-hero",
+   "title": "Add a particle or 3D hero",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#phone-and-accessibility-pass",
+   "title": "Phone and accessibility pass",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#review-like-an-art-director",
+   "title": "Review like an art director",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#complete-example",
+   "title": "Complete example",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#structure",
+   "title": "Structure",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#look-and-layout",
+   "title": "Look and layout",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Build",
+   "href": "/build#behaviour",
+   "title": "Behaviour",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#each-technique-with-code",
+   "title": "Each technique, with code",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#sticky-positioning",
+   "title": "Sticky positioning",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#scroll-snap",
+   "title": "Scroll snap",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#scroll-triggered",
+   "title": "Scroll triggered",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#infinite-scroll",
+   "title": "Infinite scroll",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#scroll-driven",
+   "title": "Scroll driven",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#zoom-on-scroll",
+   "title": "Zoom on scroll",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#parallax",
+   "title": "Parallax",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#horizontal-scroll",
+   "title": "Horizontal scroll",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#scrollytelling",
+   "title": "Scrollytelling",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Motion",
+   "href": "/motion#choosing-and-combining",
+   "title": "Choosing and combining",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Playground",
+   "href": "/playground#smoothing",
+   "title": "Smoothing",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Playground",
+   "href": "/playground#parallax",
+   "title": "Parallax",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Playground",
+   "href": "/playground#stagger",
+   "title": "Stagger",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Playground",
+   "href": "/playground#easing",
+   "title": "Easing",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#choosing-a-stack",
+   "title": "Choosing a stack",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#gsap-with-lenis",
+   "title": "GSAP with Lenis",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#css-scroll-timelines",
+   "title": "CSS scroll timelines",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#next-js-and-react",
+   "title": "Next.js and React",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#performance-and-access",
+   "title": "Performance and access",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#animate-transform-and-opacity",
+   "title": "Animate transform and opacity",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#read-then-write",
+   "title": "Read, then write",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#use-will-change-sparingly",
+   "title": "Use will-change sparingly",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#do-nothing-off-screen",
+   "title": "Do nothing off screen",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#respect-reduced-motion",
+   "title": "Respect reduced motion",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#keep-the-keyboard-working",
+   "title": "Keep the keyboard working",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#troubleshooting",
+   "title": "Troubleshooting",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Advanced",
+   "href": "/advanced#glossary",
+   "title": "Glossary",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#ask-for-evidence",
+   "title": "Ask for evidence",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#do-not-accept-tested",
+   "title": "Do not accept “tested”",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#measure-then-fix",
+   "title": "Measure, then fix",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#common-mistakes",
+   "title": "Common mistakes",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#publish-the-folder",
+   "title": "Publish the folder",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#keep-going",
+   "title": "Keep going",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#where-each-piece-is-documented",
+   "title": "Where each piece is documented",
+   "text": ""
+  },
+  {
+   "kind": "section",
+   "chapter": "Launch",
+   "href": "/launch#libraries-used-here",
+   "title": "Libraries used here",
+   "text": ""
+  }
+ ]
+}
