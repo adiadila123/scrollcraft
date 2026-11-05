@@ -16,20 +16,26 @@ export default function HorizontalScroll({ head, children }: { head: ReactNode; 
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
+    let alive = true;
     const measure = () => {
-      const p = pin.current!,
-        t = track.current!;
-      if (!p.offsetHeight) return;
+      /* fonts.ready can resolve after the page has been left, when the refs are already null */
+      const p = pin.current,
+        t = track.current,
+        h = hs.current;
+      if (!alive || !p || !t || !h || !p.offsetHeight) return;
       t.style.transform = '';
       max.current = Math.max(0, t.scrollWidth - p.clientWidth);
-      hs.current!.style.height = max.current ? `${max.current + p.offsetHeight}px` : '';
+      h.style.height = max.current ? `${max.current + p.offsetHeight}px` : '';
       window.dispatchEvent(new Event('scroll'));
     };
     const ro = new ResizeObserver(measure);
     ro.observe(track.current!);
     ro.observe(pin.current!);
     document.fonts.ready.then(measure);
-    return () => ro.disconnect();
+    return () => {
+      alive = false;
+      ro.disconnect();
+    };
   }, []);
 
   useScroll(() => {

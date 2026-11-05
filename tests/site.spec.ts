@@ -47,6 +47,19 @@ test.describe('navigation', () => {
     await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Motion' })).toHaveAttribute('aria-current', 'page');
   });
 
+  test('leaving the Motion page straight away does not throw', async ({ page }) => {
+    await page.goto('/skills', { waitUntil: 'networkidle' });
+    for (let i = 0; i < 3; i++) {
+      await page.keyboard.press(']');
+      await page.keyboard.press(']');
+      await page.keyboard.press(']');
+      await page.keyboard.press('[');
+      await page.keyboard.press('[');
+      await page.keyboard.press('[');
+    }
+    await page.waitForTimeout(500);
+  });
+
   test('[ and ] step through the chapters', async ({ page }) => {
     await page.goto('/skills', { waitUntil: 'networkidle' });
     await page.keyboard.press(']');
