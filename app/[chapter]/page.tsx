@@ -1,26 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import type { ComponentType } from 'react';
-import AdvancedPage from '@/components/pages/Advanced';
-import BuildPage from '@/components/pages/Build';
-import LaunchPage from '@/components/pages/Launch';
-import MotionPage from '@/components/pages/Motion';
-import PlaygroundPage from '@/components/pages/Playground';
-import PromptingPage from '@/components/pages/Prompting';
-import SkillsPage from '@/components/pages/Skills';
-import StartPage from '@/components/pages/Start';
+import ChapterPage from '@/components/pages/Chapter';
 import { chapters, getChapter, SITE_NAME } from '@/lib/chapters';
-
-const PAGES: Record<string, ComponentType> = {
-  start: StartPage,
-  skills: SkillsPage,
-  prompting: PromptingPage,
-  build: BuildPage,
-  motion: MotionPage,
-  playground: PlaygroundPage,
-  advanced: AdvancedPage,
-  launch: LaunchPage,
-};
+import { chapterContent } from '@/lib/content';
 
 type Props = { params: Promise<{ chapter: string }> };
 
@@ -41,7 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ChapterRoute({ params }: Props) {
-  const Page = PAGES[(await params).chapter];
-  if (!Page) notFound();
-  return <Page />;
+  const id = (await params).chapter;
+  const content = chapterContent(id);
+  if (!content) notFound();
+  return <ChapterPage id={id} content={content} />;
 }

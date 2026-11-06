@@ -34,10 +34,12 @@ push and pull request, and a weekly workflow checks the external links.
       [chapter]/page.tsx    the eight chapters, prerendered; unknown paths are a 404
       */opengraph-image.tsx social cards, generated at build time
       sitemap.ts robots.ts manifest.ts icon.svg not-found.tsx error.tsx
+    content/en/             the text of each chapter, one MDX file each; mdx-components.tsx lists what MDX can use
     components/
-      pages/                one component per chapter (the content)
+      pages/                Home, and Chapter (opening + MDX body + next-chapter band)
       ui/                   CodeBlock (Shiki, build time), Row, Stick, PageHead, PlatformTabs, CopyButton…
-      chrome/               Topbar, MobileNav (tab bar and More sheet), CommandPalette (⌘K), Footer
+      chapter/              ChapterHead (opening and particle backdrop), ChapterRail, NextBand
+      chrome/               Topbar, MobileNav (course bar and chapters sheet), CommandPalette (⌘K), Footer
       engine/               SmoothScroll (Lenis), RouteEffects (focus, reveals, progress bar, [ ] shortcuts)
       home/ build/ motion/ playground/ launch/   the interactive parts of each page
       particles/            ParticleCanvas
@@ -54,7 +56,8 @@ push and pull request, and a weekly workflow checks the external links.
 ## Adding a chapter
 
 1. Add an entry to `lib/chapters.ts`.
-2. Create `components/pages/YourChapter.tsx` from the ui components and add it to `PAGES` in `app/[chapter]/page.tsx`.
+2. Write `content/en/your-chapter.mdx`: `export const meta = { title, lede }`, then the sections, using the components in `mdx-components.tsx`. Keep text that wraps inside a component on one line, or MDX wraps it in an extra paragraph.
+3. Import it in `lib/content.ts`.
 
 The route, navigation, sitemap, social card, reading time and search entries follow automatically.
 
