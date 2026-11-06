@@ -2,6 +2,7 @@
 import { useRef, useSyncExternalStore, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
+import { setLevel } from '@/lib/particles/manager';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useProgress } from '@/lib/progress';
 import { useScroll } from '@/lib/useScroll';
@@ -44,7 +45,9 @@ export default function ChapterHead({
     if (artRef.current) {
       const end = document.querySelector('.next-band')?.getBoundingClientRect().top ?? Infinity;
       const leave = clamp((end - vh * 0.15) / (vh * 0.6), 0, 1);
-      artRef.current.style.opacity = ((1 - p * 0.82) * leave).toFixed(3);
+      const o = (1 - p * 0.82) * leave;
+      artRef.current.style.opacity = o.toFixed(3);
+      setLevel(artRef.current.querySelector('canvas'), o);
       if (!still) artRef.current.style.transform = `scale(${(1 + p * 0.25).toFixed(3)})`;
     }
     if (still) return;

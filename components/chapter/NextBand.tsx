@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
 import ChapterDone from '@/components/ui/ChapterDone';
+import { setLevel } from '@/lib/particles/manager';
 import { neighbours } from '@/lib/chapters';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useScroll } from '@/lib/useScroll';
@@ -23,6 +24,7 @@ export default function NextBand({ from }: { from: string }) {
     const p = clamp((vh - r.top) / (vh + r.height * 0.5), 0, 1);
     art.current.style.transform = `translate3d(0,${((1 - p) * 120).toFixed(1)}px,0) scale(${(0.7 + p * 0.3).toFixed(3)})`;
     art.current.style.opacity = p.toFixed(3);
+    setLevel(art.current.querySelector('canvas'), p);
   });
 
   const href = next ? `/${next.id}` : '/';
