@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { Callout, CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
+import { Callout, CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
 
 export default function AdvancedPage() {
   return (
@@ -7,8 +7,6 @@ export default function AdvancedPage() {
       <PageBody>
         <PageHead
           chapter="advanced"
-          art="graph"
-          eyebrow="Chapter 07"
           title="Advanced: GSAP, CSS timelines, Next.js, performance and fixes."
           lede="Once the plain version works, these are the next steps. Each section says when it is worth the extra weight."
         />
@@ -258,7 +256,7 @@ export default function AdvancedPage() {
             </div>
           </dl>
         </section>
-        <NextBar label="Next chapter" href="/launch" text="Chapter 08: Launch" />
+        <NextBand from="advanced" />
       </PageBody>
     </Page>
   );

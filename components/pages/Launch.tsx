@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import Checklist from '@/components/launch/Checklist';
-import { Cell, CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
+import { Cell, CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
 
 export default function LaunchPage() {
   return (
@@ -8,8 +8,6 @@ export default function LaunchPage() {
       <PageBody>
         <PageHead
           chapter="launch"
-          art="plume"
-          eyebrow="Chapter 08"
           title="Test it, fix it, publish it."
           lede="The last ten per cent is where a site stops feeling like a demo. Work through the checklist, then put the folder online."
         />
@@ -134,7 +132,7 @@ export default function LaunchPage() {
             </Row>
           </div>
         </section>
-        <NextBar label="Done" href="/" text="Back to the start" />
+        <NextBand from="launch" />
       </PageBody>
     </Page>
   );

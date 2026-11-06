@@ -14,7 +14,9 @@ export default function Checklist({ items }: { items: string[] }) {
   return (
     <>
       <div className="stick" id="checklist">
-        <span className="mono">01 · Checklist</span>
+        <h2 className="mono stick-h" tabIndex={-1}>
+          01 · Checklist
+        </h2>
         <span className="mono" aria-live="polite">
           {n} of {items.length} done
         </span>

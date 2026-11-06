@@ -3,7 +3,7 @@ import OpenInStackBlitz from '@/components/build/OpenInStackBlitz';
 import PromptFeed from '@/components/build/PromptFeed';
 import Scrollytelling from '@/components/build/Scrollytelling';
 import { northlight } from '@/lib/northlight';
-import { Callout, CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
+import { Callout, CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
 
 export default function BuildPage() {
   return (
@@ -11,8 +11,6 @@ export default function BuildPage() {
       <PageBody>
         <PageHead
           chapter="build"
-          art="scaffold"
-          eyebrow="Chapter 04"
           title="Build it, step by step."
           lede="Ten steps from an empty folder to a finished page. Each has the prompt to paste and, where it matters, the code you should expect back."
         />
@@ -243,7 +241,7 @@ export default function BuildPage() {
             <Callout>Not tested: Safari and Firefox, real touch devices, and screen readers. Test those yourself before publishing.</Callout>
           </div>
         </section>
-        <NextBar label="Next chapter" href="/motion" text="Chapter 05: Motion" />
+        <NextBand from="build" />
       </PageBody>
     </Page>
   );

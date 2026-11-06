@@ -11,6 +11,7 @@ import { useScroll } from '@/lib/useScroll';
 export function Statement({ text, dim }: { text: string; dim: string }) {
   const pin = useRef<HTMLElement>(null);
   const words = useRef<HTMLSpanElement[]>([]);
+  const hint = useRef<HTMLSpanElement>(null);
   const all = [...text.split(/\s+/).map((w) => [w, false] as const), ...dim.split(/\s+/).map((w) => [w, true] as const)];
 
   useScroll((_, vh) => {
@@ -18,6 +19,7 @@ export function Statement({ text, dim }: { text: string; dim: string }) {
     if (!el || prefersReducedMotion()) return;
     const r = el.getBoundingClientRect();
     const p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
+    if (hint.current) hint.current.style.opacity = clamp(1 - p * 8, 0, 1).toFixed(2);
     const n = words.current.length;
     words.current.forEach((w, i) => {
       w.style.opacity = (0.16 + 0.84 * clamp((p - (0.08 + (0.74 * i) / n)) / 0.05, 0, 1)).toFixed(2);
@@ -27,7 +29,6 @@ export function Statement({ text, dim }: { text: string; dim: string }) {
   return (
     <section className="pin" ref={pin}>
       <div className="wrap pin-in">
-        <div className="mono">The idea</div>
         <p className="statement">
           {all.map(([w, isDim], i) => (
             <span key={i}>
@@ -43,6 +44,9 @@ export function Statement({ text, dim }: { text: string; dim: string }) {
             </span>
           ))}
         </p>
+        <span className="pin-hint" ref={hint} aria-hidden="true">
+          Keep scrolling
+        </span>
       </div>
     </section>
   );

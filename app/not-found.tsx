@@ -7,10 +7,6 @@ export default function NotFound() {
   return (
     <div className="page enter">
       <div className="wrap pg">
-        <div className="eyebrow">
-          <i></i>
-          <span>404</span>
-        </div>
         <h1 className="pg-title">This page is not part of the tutorial.</h1>
         <p className="lede">The address may be from the old single-page version, where chapters lived after a # sign. Pick a chapter instead.</p>
         <div className="rows">

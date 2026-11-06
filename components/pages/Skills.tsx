@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { Callout, Cell, CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick, PlatformPanel, PlatformTabs } from '@/components/ui';
+import { Callout, Cell, CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick, PlatformPanel, PlatformTabs } from '@/components/ui';
 
 export default function SkillsPage() {
   return (
@@ -7,8 +7,6 @@ export default function SkillsPage() {
       <PageBody>
         <PageHead
           chapter="skills"
-          art="blocks"
-          eyebrow="Chapter 02"
           title="Skills: what they are, where to find them, how to install them."
           lede="A skill is a folder of instructions that your AI loads only when a task matches. It is the difference between asking for a nice website and getting your rules followed every time."
         />
@@ -292,7 +290,7 @@ export default function SkillsPage() {
             </Row>
           </div>
         </section>
-        <NextBar label="Next chapter" href="/prompting" text="Chapter 03: Prompting" />
+        <NextBand from="skills" />
       </PageBody>
     </Page>
   );

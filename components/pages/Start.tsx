@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { Callout, Cell, CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick, PlatformPanel, PlatformTabs } from '@/components/ui';
+import { Callout, Cell, CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick, PlatformPanel, PlatformTabs } from '@/components/ui';
 
 export default function StartPage() {
   return (
@@ -7,8 +7,6 @@ export default function StartPage() {
       <PageBody>
         <PageHead
           chapter="start"
-          art="tree"
-          eyebrow="Chapter 01"
           title="Choose your AI and set up your machine."
           lede="Everything in this tutorial works with Claude, Gemini or ChatGPT. The method is the same. Only the install commands and folder names change."
         />
@@ -140,7 +138,11 @@ export default function StartPage() {
         </section>
         <section className="sec">
           <Stick left="03 · Install your tool" right="Pick one" />
-          <div className="rv" style={{ marginBottom: '8px' } as CSSProperties}>
+          <p className="lede rv" style={{ marginTop: '0' } as CSSProperties}>
+            Install the one you already use or pay for. Every later chapter works the same with all three; only the install commands and folder names change,
+            and the site remembers your choice.
+          </p>
+          <div className="rv" style={{ margin: '20px 0 8px' } as CSSProperties}>
             <PlatformTabs />
           </div>
           <PlatformPanel p="claude">
@@ -227,7 +229,7 @@ export default function StartPage() {
             result yourself.
           </p>
         </section>
-        <NextBar label="Next chapter" href="/skills" text="Chapter 02: Skills" />
+        <NextBand from="start" />
       </PageBody>
     </Page>
   );

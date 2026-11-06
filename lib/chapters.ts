@@ -1,5 +1,6 @@
 /** Single source of truth for the chapter list. Routes, navigation, metadata, the sitemap and search all read from here. */
-export type Chapter = { id: string; n: string; title: string; nav: string; desc: string; summary: string };
+/** art names the particle shape drawn behind the chapter title and in the band that leads into it. */
+export type Chapter = { id: string; n: string; title: string; nav: string; desc: string; summary: string; art: string };
 
 export const chapters: Chapter[] = [
   {
@@ -9,6 +10,7 @@ export const chapters: Chapter[] = [
     nav: 'Start',
     desc: 'Tools and setup',
     summary: 'Choose Claude, Gemini or ChatGPT, install the tools, and set up a project folder.',
+    art: 'tree',
   },
   {
     id: 'skills',
@@ -17,6 +19,7 @@ export const chapters: Chapter[] = [
     nav: 'Skills',
     desc: 'Find, install, write',
     summary: 'What a skill is, where to find good ones, how to install them on each platform, and how to write your own.',
+    art: 'blocks',
   },
   {
     id: 'prompting',
@@ -25,6 +28,7 @@ export const chapters: Chapter[] = [
     nav: 'Prompts',
     desc: 'Brief the AI',
     summary: 'A five-part brief, a worked before and after, a project rules file and six steering patterns.',
+    art: 'text',
   },
   {
     id: 'build',
@@ -33,6 +37,7 @@ export const chapters: Chapter[] = [
     nav: 'Build',
     desc: 'Steps and full example',
     summary: 'Ten steps with the exact prompt for each, 24 more prompts, and a complete three-file example that was run and checked.',
+    art: 'scaffold',
   },
   {
     id: 'motion',
@@ -41,6 +46,7 @@ export const chapters: Chapter[] = [
     nav: 'Motion',
     desc: 'Nine techniques',
     summary: 'The nine scroll techniques that make a site feel cinematic, each with code you can paste.',
+    art: 'tunnel',
   },
   {
     id: 'playground',
@@ -49,6 +55,7 @@ export const chapters: Chapter[] = [
     nav: 'Playground',
     desc: 'Live experiments',
     summary: 'Four live experiments: smoothing, parallax speed, stagger timing and easing curves.',
+    art: 'field',
   },
   {
     id: 'advanced',
@@ -57,6 +64,7 @@ export const chapters: Chapter[] = [
     nav: 'Advanced',
     desc: 'GSAP, Next.js, fixes',
     summary: 'GSAP with Lenis, CSS scroll timelines, a Next.js version, performance rules, a fault table and a glossary.',
+    art: 'graph',
   },
   {
     id: 'launch',
@@ -65,6 +73,7 @@ export const chapters: Chapter[] = [
     nav: 'Launch',
     desc: 'Test and publish',
     summary: 'Test on three screen widths, fix what breaks, and publish the folder.',
+    art: 'plume',
   },
 ];
 

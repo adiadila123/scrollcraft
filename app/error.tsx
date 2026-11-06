@@ -8,10 +8,6 @@ export default function ChapterError({ error, reset }: { error: Error & { digest
   return (
     <div className="page">
       <div className="wrap pg">
-        <div className="eyebrow">
-          <i></i>
-          <span>Something broke</span>
-        </div>
         <h1 className="pg-title">This chapter failed to load.</h1>
         <p className="lede">It is a fault in the site, not in anything you did. Try again, or go back to the start.</p>
         <div className="ctas">

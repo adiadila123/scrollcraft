@@ -55,7 +55,8 @@ export default function Hero({ copy, foot }: { copy: ReactNode; foot: ReactNode 
     if (prefersReducedMotion() || y > vh * 1.3) return;
     if (canvas.current) canvas.current.style.transform = `translate3d(0,${(y * 0.3).toFixed(1)}px,0)`;
     const c = copyRef.current;
-    if (c) {
+    /* on phones the copy sits below the face and is still being read while the page scrolls, so it stays put */
+    if (c && window.innerWidth > 760) {
       c.style.transform = `translate3d(0,${(-y * 0.12).toFixed(1)}px,0)`;
       c.style.opacity = clamp(1 - y / (vh * 0.75), 0, 1).toFixed(3);
     }

@@ -29,13 +29,17 @@ export default function Scrollytelling({ stages }: { stages: Stage[] }) {
   return (
     <section className="sec">
       <div className="stick" id="the-loop">
-        <span className="mono">01 · The loop</span>
+        <h2 className="mono stick-h" tabIndex={-1}>
+          01 · The loop
+        </h2>
         <span className="mono" aria-live="polite">
           {stages[cur].name}
         </span>
       </div>
       <div className="sec-head">
-        <h2 style={{ maxWidth: '18ch' } as CSSProperties}>Every step runs the same four-part loop.</h2>
+        <h3 className="sec-h" style={{ maxWidth: '18ch' } as CSSProperties}>
+          Every step runs the same four-part loop.
+        </h3>
       </div>
       <div className="scrolly">
         <div className="scrolly-vis" aria-hidden="true">

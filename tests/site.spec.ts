@@ -149,7 +149,7 @@ test.describe('features', () => {
 
   test('reaching the end of a chapter records progress shown on the home page', async ({ page }) => {
     await page.goto('/start');
-    await page.locator('.nextbar').scrollIntoViewIfNeeded();
+    await page.locator('.next-band').scrollIntoViewIfNeeded();
     await page.waitForTimeout(300);
     await page.goto('/');
     await expect(page.getByText('1 of 8 chapters read')).toBeVisible();
@@ -187,18 +187,21 @@ test.describe('reduced motion', () => {
 });
 
 test.describe('phone', () => {
-  test('tab bar and More sheet', async ({ page, isMobile }) => {
+  test('course bar steps between chapters and opens every chapter', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'phones only');
     await page.goto('/advanced');
-    const more = page.getByRole('button', { name: 'More' });
-    await expect(more).toHaveAttribute('aria-current', 'page');
-    await more.click();
+    const bar = page.getByRole('navigation', { name: 'Course' });
+    await expect(bar.getByRole('link', { name: 'Previous: Playground' })).toHaveAttribute('href', '/playground');
+    await expect(bar.getByRole('link', { name: 'Next: Launch' })).toHaveAttribute('href', '/launch');
+    const all = bar.getByRole('button', { name: /Show all chapters/ });
+    await all.click();
     const sheet = page.getByRole('dialog', { name: 'All chapters' });
     await expect(sheet).toBeVisible();
+    await expect(sheet.getByRole('link', { name: /Advanced/ })).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(sheet).toBeHidden();
-    await expect(more).toBeFocused();
-    await more.click();
+    await expect(all).toBeFocused();
+    await all.click();
     await sheet.getByRole('link', { name: /Launch/ }).click();
     await expect(page).toHaveURL(/\/launch$/);
     await expect(sheet).toBeHidden();

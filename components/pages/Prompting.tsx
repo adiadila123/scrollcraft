@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
+import { CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
 
 export default function PromptingPage() {
   return (
@@ -7,8 +7,6 @@ export default function PromptingPage() {
       <PageBody>
         <PageHead
           chapter="prompting"
-          art="text"
-          eyebrow="Chapter 03"
           title="Prompting: how to brief an AI so the first draft is usable."
           lede="Most weak results come from a weak brief. This chapter gives you a template, a worked before and after, a project rules file and six patterns for steering the work."
         />
@@ -123,7 +121,7 @@ export default function PromptingPage() {
             </Row>
           </div>
         </section>
-        <NextBar label="Next chapter" href="/build" text="Chapter 04: Build" />
+        <NextBand from="prompting" />
       </PageBody>
     </Page>
   );

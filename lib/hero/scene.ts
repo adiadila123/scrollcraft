@@ -183,12 +183,28 @@ export function createHero(o: HeroOptions): () => void {
     camera.lookAt(0, -0.05, 0);
     camera.updateProjectionMatrix();
     U.uScale.value = renderer.domElement.height / (2 * Math.tan((camera.fov * Math.PI) / 360));
-    const off = Math.min(Math.max((asp - 1.05) * 1.1, 0), 0.9);
-    const portrait = Math.min(Math.max((0.95 - asp) / 0.4, 0), 1);
-    group.position.x = off;
-    group.position.y = portrait * 0.34 * dist * 0.3153;
+    if (w <= 760) {
+      /* phones: the hero is taller than the screen and the copy starts halfway down it, so the face is fitted
+         into the top half of the first screen, measured against the screen rather than the canvas */
+      const halfH = Math.tan((camera.fov * Math.PI) / 360) * dist;
+      const k = (2 * halfH) / h;
+      const vh = window.innerHeight;
+      group.scale.setScalar(Math.min(1, (0.36 * vh * k) / 2.3));
+      group.position.x = 0;
+      group.position.y = -0.05 + halfH - 0.225 * vh * k;
+    } else {
+      const off = Math.min(Math.max((asp - 1.05) * 1.1, 0), 0.9);
+      const portrait = Math.min(Math.max((0.95 - asp) / 0.4, 0), 1);
+      group.scale.setScalar(1);
+      group.position.x = off;
+      group.position.y = portrait * 0.34 * dist * 0.3153;
+    }
   };
   on('resize', resize);
+  /* the phone hero grows with its copy, so follow the element, not only the window */
+  const hostRo = new ResizeObserver(resize);
+  hostRo.observe(o.host);
+  offs.push(() => hostRo.disconnect());
   resize();
 
   /* formation: wait for the loader, then ease the particles home over FORM seconds */

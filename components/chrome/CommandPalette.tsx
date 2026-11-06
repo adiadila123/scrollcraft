@@ -120,9 +120,9 @@ export default function CommandPalette() {
           {index && !results.length && <li className="pal-empty mono">Nothing found</li>}
           {results.map((e, i) => (
             <li key={`${e.href}-${i}`} id={`pal-${i}`} role="option" aria-selected={i === sel} onMouseMove={() => setSel(i)} onClick={() => go(e)}>
-              <span className="mono">{e.kind === 'chapter' ? e.n : e.kind === 'prompt' ? 'Prompt' : e.chapter}</span>
-              <b>{e.title}</b>
-              {e.kind !== 'chapter' && e.text ? <em>{e.text}</em> : null}
+              <span className="mono">{e.kind === 'chapter' ? `Chapter ${Number(e.n)}` : e.kind === 'prompt' ? 'Prompt' : 'Section'}</span>
+              <b>{e.title.replace(/: prompt$/, '')}</b>
+              {e.kind === 'chapter' ? null : <em>{e.kind === 'prompt' ? `${e.chapter} · ${e.text}` : `In ${e.chapter}`}</em>}
             </li>
           ))}
         </ul>

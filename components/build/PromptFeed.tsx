@@ -41,11 +41,15 @@ export default function PromptFeed() {
   return (
     <section className="sec">
       <div className="stick" id="prompt-library">
-        <span className="mono">03 · Prompt library</span>
+        <h2 className="mono stick-h" tabIndex={-1}>
+          03 · Prompt library
+        </h2>
         <span className="mono">{count ? `${count} of ${prompts.length} loaded` : '0 loaded'}</span>
       </div>
       <div className="sec-head">
-        <h2 style={{ maxWidth: '20ch' } as CSSProperties}>Twenty-four prompts to copy.</h2>
+        <h3 className="sec-h" style={{ maxWidth: '20ch' } as CSSProperties}>
+          Twenty-four prompts to copy.
+        </h3>
         <p className="muted" style={{ maxWidth: '46ch' } as CSSProperties}>
           Replace anything in square brackets. More load as you scroll.
         </p>

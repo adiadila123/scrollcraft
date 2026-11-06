@@ -1,11 +1,10 @@
-import Link from 'next/link';
 import type { ReactNode } from 'react';
-import ParticleCanvas from '@/components/particles/ParticleCanvas';
-import { getChapter } from '@/lib/chapters';
+import ChapterHead from '@/components/chapter/ChapterHead';
+import ChapterRail from '@/components/chapter/ChapterRail';
+import { chapters, getChapter } from '@/lib/chapters';
 import { highlight } from '@/lib/highlight';
 import { readingMinutes } from '@/lib/reading';
 import { slugify } from '@/lib/slug.mjs';
-import ChapterDone from './ChapterDone';
 import CodeFrame from './CodeFrame';
 
 export { PlatformPanel, PlatformTabs } from './PlatformTabs';
@@ -64,56 +63,33 @@ export function Callout({ children }: { children: ReactNode }) {
 export function Stick({ left, right }: { left: string; right?: ReactNode }) {
   return (
     <div className="stick" id={slugify(left)}>
-      <span className="mono">{left}</span>
-      <span className="mono">{right}</span>
+      <h2 className="mono stick-h" tabIndex={-1}>
+        {left}
+      </h2>
+      {right ? <span className="mono">{right}</span> : null}
     </div>
   );
 }
 
-/** Link to the next chapter at the end of a page. Reaching it marks the current chapter as read. */
-export function NextBar({ label, href, text }: { label: string; href: string; text: string }) {
-  return (
-    <div className="nextbar rv">
-      <ChapterDone />
-      <span className="mono">{label}</span>
-      <Link className="btn" href={href} data-magnetic="">
-        {text} <span aria-hidden="true">→</span>
-      </Link>
-    </div>
-  );
-}
+/** The end of a chapter: a band that leads into the next one. */
+export { default as NextBand } from '@/components/chapter/NextBand';
 
-/** Particle canvas that decorates a chapter header. */
-export function ParticleArt({ kind }: { kind: string }) {
-  return <ParticleCanvas kind={kind} className="pg-art" />;
-}
-
-/** Canvas, eyebrow, title and lede at the top of a chapter. */
-export function PageHead({ chapter, art, eyebrow, title, lede }: { chapter?: string; art: string; eyebrow: string; title: ReactNode; lede: ReactNode }) {
-  const mins = chapter ? readingMinutes(chapter) : undefined;
-  return (
-    <>
-      <ParticleArt kind={art} />
-      <div className="eyebrow">
-        <i></i>
-        <span>{eyebrow}</span>
-        {mins ? <span className="eyebrow-meta">· {mins} min read</span> : null}
-      </div>
-      <h1 className="pg-title">{title}</h1>
-      <p className="lede">{lede}</p>
-    </>
-  );
+/** The opening screen of a chapter. Number, particle art and reading time come from lib/chapters.ts. */
+export function PageHead({ chapter, title, lede }: { chapter: string; title: ReactNode; lede: ReactNode }) {
+  const c = getChapter(chapter)!;
+  return <ChapterHead id={c.id} n={c.n} total={chapters.length} art={c.art} mins={readingMinutes(c.id)} title={title} lede={lede} />;
 }
 
 export function PageBody({ children }: { children: ReactNode }) {
   return <div className="wrap pg">{children}</div>;
 }
 
-/** One chapter view. The enter animation runs on mount, so it plays on every client-side navigation. */
+/** One chapter view, with its section rail. The enter animation runs on mount, so it plays on every client-side navigation. */
 export function Page({ route, children }: { route: string; children: ReactNode }) {
   const c = getChapter(route);
   return (
     <div className="page enter" data-route={route} aria-label={c ? `Chapter ${c.n}: ${c.title}` : undefined}>
+      {c ? <ChapterRail /> : null}
       {children}
     </div>
   );

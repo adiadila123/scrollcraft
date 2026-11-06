@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import HorizontalScroll from '@/components/motion/HorizontalScroll';
-import { Callout, CodeBlock, NextBar, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
+import { Callout, CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
 
 export default function MotionPage() {
   return (
@@ -8,15 +8,12 @@ export default function MotionPage() {
       <PageBody>
         <PageHead
           chapter="motion"
-          art="tunnel"
-          eyebrow="Chapter 05"
           title="The nine scroll techniques."
           lede="Nearly every cinematic site is a mix of these nine. This page is the reference, and the site you are reading uses all of them, so you can feel each one."
         />
         <HorizontalScroll
           head={
             <div className="sec-head" style={{ margin: '0' } as CSSProperties}>
-              <div className="mono">The nine, at a glance</div>
               <h2 style={{ maxWidth: '20ch' } as CSSProperties}>Keep scrolling. The cards move sideways.</h2>
             </div>
           }
@@ -228,7 +225,7 @@ export default function MotionPage() {
             </Callout>
           </div>
         </section>
-        <NextBar label="Next chapter" href="/playground" text="Chapter 06: Playground" />
+        <NextBand from="motion" />
       </PageBody>
     </Page>
   );

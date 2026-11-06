@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import { EasingLab, LerpLab, ParallaxLab, StaggerLab } from '@/components/playground/Labs';
-import { NextBar, Page, PageBody, PageHead, Stick } from '@/components/ui';
+import { NextBand, Page, PageBody, PageHead, Stick } from '@/components/ui';
 
 export default function PlaygroundPage() {
   return (
@@ -8,8 +8,6 @@ export default function PlaygroundPage() {
       <PageBody>
         <PageHead
           chapter="playground"
-          art="field"
-          eyebrow="Chapter 06"
           title="Playground: change the numbers and watch what happens."
           lede="Four small experiments. Each one shows how a single setting changes the feel of a scroll site, and prints the line of code to copy."
         />
@@ -36,7 +34,7 @@ export default function PlaygroundPage() {
           <Stick left="04 · Easing" right="Cubic Bezier" />
           <EasingLab />
         </section>
-        <NextBar label="Next chapter" href="/advanced" text="Chapter 07: Advanced" />
+        <NextBand from="playground" />
       </PageBody>
     </Page>
   );
