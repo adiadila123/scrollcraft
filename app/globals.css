@@ -577,14 +577,17 @@ h1.pg-title { max-width: 20ch; font-size: clamp(2.5rem, 5.4vw, 4.75rem); line-he
 .rail i b { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(var(--p, 0)); }
 .rail a[aria-current] i { width: 34px; }
 .rail a[aria-current] { color: var(--fg); }
-.rail span { font: 400 11px/1.2 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; padding: 5px 9px; background: rgba(0, 0, 0, 0.86); border: 1px solid var(--line); opacity: 0; translate: -6px 0; transition: opacity 0.25s, translate 0.35s var(--ease); pointer-events: none; }
+.rail span { font: 400 11px/1.2 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc((100vw - 1240px) / 2 - 76px); padding: 5px 9px; background: rgba(0, 0, 0, 0.86); border: 1px solid var(--line); opacity: 0; translate: -6px 0; transition: opacity 0.25s, translate 0.35s var(--ease); pointer-events: none; }
 .rail:hover span, .rail:focus-within span { opacity: 1; translate: 0 0; pointer-events: auto; }
 .rail a:hover, .rail a:focus-visible { color: var(--fg); }
 .rail a:focus-visible { outline: none; }
 .rail a:focus-visible span { border-color: var(--accent); }
-@media (min-width: 1560px) { .rail a[aria-current] span { opacity: 1; translate: 0 0; } }
+/* labels only where the margin beside the content can hold them; below that the marks alone, named for screen readers */
+@media (max-width: 1719px) { .rail span { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); } }
+@media (min-width: 1720px) { .rail a[aria-current] span { opacity: 1; translate: 0 0; } }
 .rail-bar { display: none; }
-@media (max-width: 1100px) {
+/* the rail needs an empty margin beside the content; narrower windows get a bar under the top menu */
+@media (max-width: 1439px) {
   .rail { display: none; }
   .rail-bar { position: fixed; left: 0; right: 0; top: var(--bar); z-index: 41; height: 2px; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 3px; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
   .rail-bar.on { opacity: 1; }
