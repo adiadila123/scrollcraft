@@ -3,6 +3,7 @@ import OpenInStackBlitz from '@/components/build/OpenInStackBlitz';
 import PromptFeed from '@/components/build/PromptFeed';
 import Scrollytelling from '@/components/build/Scrollytelling';
 import { northlight } from '@/lib/northlight';
+import ProjectFields from '@/components/ui/ProjectFields';
 import { Callout, CodeBlock, NextBand, Page, PageBody, PageHead, Row, Stick } from '@/components/ui';
 
 export default function BuildPage() {
@@ -45,6 +46,7 @@ export default function BuildPage() {
                 A good brief names the subject, the audience and the one thing a visitor should do at the end. Ask for the section list first, and approve it
                 before any code exists. Changing a list costs seconds. Changing finished code costs a lot more.
               </p>
+              <ProjectFields />
               <CodeBlock
                 lang="Prompt"
                 code={

@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import Slots from '@/components/ui/Slots';
 import CopyButton from '@/components/ui/CopyButton';
 import { prefersReducedMotion } from '@/lib/motion';
 import { prompts } from '@/lib/prompts';
@@ -51,7 +52,7 @@ export default function PromptFeed() {
           Twenty-four prompts to copy.
         </h3>
         <p className="muted" style={{ maxWidth: '46ch' } as CSSProperties}>
-          Replace anything in square brackets. More load as you scroll.
+          Prompts use the project you filled in at step 01. Replace anything else in square brackets. More load as you scroll.
         </p>
       </div>
       <ol className="feed">
@@ -78,7 +79,9 @@ function FeedItem({ n, topic, text }: { n: number; topic: string; text: string }
       <span className="mono">P{String(n).padStart(2, '0')}</span>
       <div>
         <div className="mono ft">{topic}</div>
-        <p>{text}</p>
+        <p>
+          <Slots text={text} />
+        </p>
         <CopyButton label="Copy prompt" from="prev" />
       </div>
     </li>

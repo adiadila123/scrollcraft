@@ -645,3 +645,14 @@ body:has(.rail-bar) .progress { display: none; }
 /* the chapter art and the next-chapter band bleed past the edges on purpose; clip them at the page so phones never
    widen the layout. clip, unlike hidden, makes no scroll container, so the sticky section labels keep working */
 .page { overflow-x: clip; }
+
+/* the reader's project, filled into prompt slots */
+.project { margin: 22px 0 6px; padding: 22px 22px 16px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.02); }
+.project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 24px; }
+.project input::placeholder { color: var(--subtle); }
+.project-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+.linkish { font: inherit; color: var(--fg); background: none; border: 0; padding: 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+.linkish:hover, .linkish:focus-visible { border-color: var(--accent); }
+.slot { color: var(--accent); }
+.slot.empty { color: inherit; border-bottom: 1px dashed var(--subtle); }
+@media (max-width: 760px) { .project-grid { grid-template-columns: 1fr; } .project { padding: 18px 16px 14px; } }

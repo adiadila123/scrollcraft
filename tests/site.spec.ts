@@ -153,7 +153,32 @@ test.describe('features', () => {
     await page.waitForTimeout(300);
     await page.goto('/');
     await expect(page.getByText('1 of 8 chapters read')).toBeVisible();
-    await expect(page.getByRole('link', { name: /Resume: 01 Start/ })).toHaveAttribute('href', '/start');
+    await expect(page.getByRole('link', { name: /Next: 02 Skills/ })).toHaveAttribute('href', '/skills');
+  });
+
+  test('the home page resumes at the section being read', async ({ page }) => {
+    await page.goto('/build');
+    await page.evaluate(() => scrollTo(0, document.getElementById('prompt-library')!.getBoundingClientRect().top + scrollY - 100));
+    await page.waitForTimeout(500);
+    await page.goto('/');
+    const resume = page.getByRole('link', { name: /Resume: 04 Build · Prompt library/ });
+    await expect(resume).toHaveAttribute('href', '/build#prompt-library');
+    await resume.click();
+    await expect(page).toHaveURL(/\/build#prompt-library$/);
+    await expect(page.locator('#prompt-library')).toBeInViewport();
+  });
+
+  test('the project fields fill every prompt and survive a reload', async ({ page }) => {
+    await page.goto('/build');
+    await page.getByLabel('Subject').fill('a night train');
+    await page.getByLabel('Audience').fill('winter travellers');
+    const brief = page.locator('.code pre').filter({ hasText: 'I want a minimalist' }).first();
+    await expect(brief).toContainText('about a night train for winter travellers. The visitor should finish by [one action].');
+    await page.reload();
+    await expect(page.getByLabel('Subject')).toHaveValue('a night train');
+    await page.locator('#prompt-library').scrollIntoViewIfNeeded();
+    await page.locator('.feed-end').scrollIntoViewIfNeeded();
+    await expect(page.locator('.feed .slot', { hasText: 'a night train' }).first()).toBeAttached();
   });
 
   test('playground sliders rewrite the code', async ({ page }) => {
