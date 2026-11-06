@@ -3,6 +3,9 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { useSmoothScroll } from '@/components/engine/SmoothScroll';
 import { clamp } from '@/lib/motion';
+import { usePathname } from 'next/navigation';
+import { routeOf } from '@/lib/chapters';
+import { markSection } from '@/lib/progress';
 import { useScroll } from '@/lib/useScroll';
 
 type Section = { id: string; label: string; el: HTMLElement; box: HTMLElement };
@@ -18,6 +21,13 @@ export default function ChapterRail() {
   const fills = useRef<(HTMLElement | null)[]>([]);
   const segs = useRef<(HTMLElement | null)[]>([]);
   const { lenis } = useSmoothScroll();
+  const route = routeOf(usePathname());
+
+  /* remember the section being read, so the home page can resume there */
+  useEffect(() => {
+    const s = sections[active];
+    if (s && route !== 'home') markSection(route, s.id, s.label);
+  }, [active, sections, route]);
 
   useEffect(() => {
     const found = Array.from(document.querySelectorAll<HTMLElement>('#content .stick[id]')).map((el) => ({

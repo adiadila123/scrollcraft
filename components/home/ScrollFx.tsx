@@ -100,17 +100,24 @@ export function ParallaxBand({ children }: { children: ReactNode }) {
 
 /** Shown under the hero once a visitor has opened a chapter: progress so far and a link back to where they were. */
 export function Resume() {
-  const { done, last } = useProgress();
+  const { done, last, at } = useProgress();
   const c = last ? getChapter(last) : undefined;
   if (!c) return null;
+  /* a finished chapter resumes at the next unread one; an unfinished one at the section you were reading */
+  const finished = done.includes(c.id);
+  const target = finished ? (chapters.find((x) => !done.includes(x.id) && x.n > c.n) ?? chapters.find((x) => !done.includes(x.id))) : c;
+  const section = !finished && at?.chapter === c.id ? at : undefined;
   return (
     <div className="resume">
       <span className="mono">
         {done.length} of {chapters.length} chapters read
       </span>
-      <Link className="ghost" href={`/${c.id}`}>
-        Resume: {c.n} {c.title} <span aria-hidden="true">→</span>
-      </Link>
+      {target ? (
+        <Link className="ghost" href={section ? `/${target.id}#${section.id}` : `/${target.id}`}>
+          {finished ? 'Next' : 'Resume'}: {target.n} {target.title}
+          {section ? <span className="resume-at"> · {section.label}</span> : null} <span aria-hidden="true">→</span>
+        </Link>
+      ) : null}
     </div>
   );
 }
