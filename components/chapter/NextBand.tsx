@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
 import ChapterDone from '@/components/ui/ChapterDone';
-import { setLevel } from '@/lib/particles/manager';
+import { rememberFlight, setLevel } from '@/lib/particles/manager';
 import { neighbours } from '@/lib/chapters';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useScroll } from '@/lib/useScroll';
@@ -46,7 +46,7 @@ export default function NextBand({ from }: { from: string }) {
         </h2>
         {next ? <p className="lede">{next.summary}</p> : null}
         <div className="ctas">
-          <Link className="btn" href={href} data-magnetic="">
+          <Link className="btn" href={href} data-magnetic="" onClick={() => rememberFlight(art.current?.querySelector('canvas'), next ? next.art : 'globe')}>
             {next ? `Chapter ${Number(next.n)}: ${next.title}` : 'Back to the start'} <span aria-hidden="true">→</span>
           </Link>
           {next ? (

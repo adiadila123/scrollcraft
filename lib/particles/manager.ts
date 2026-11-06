@@ -148,7 +148,8 @@ function setup() {
     { rootMargin: '120px' },
   );
   window.addEventListener('pointermove', onPointer, { passive: true });
-  t0 = performance.now();
+  /* the clock keeps running across pages, so a shape that flies from one page to the next arrives already formed */
+  if (!t0) t0 = performance.now();
   if (!prefersReducedMotion()) stopTick = subscribe(frame);
 }
 
@@ -159,6 +160,37 @@ function teardown() {
   window.removeEventListener('pointermove', onPointer);
   stopTick?.();
   stopTick = null;
+}
+
+/** Where a shape was drawn on screen (centre and size), so the next page can fly the same shape on from there. */
+const FLY = 'sc-fly';
+type Fly = { kind: string; x: number; y: number; s: number; at: number };
+
+export function rememberFlight(cv: HTMLCanvasElement | null | undefined, kind: string) {
+  if (!cv) return;
+  const r = cv.getBoundingClientRect();
+  const f: Fly = { kind, x: r.left + r.width / 2, y: r.top + r.height / 2, s: Math.min(r.width, r.height), at: Date.now() };
+  try {
+    sessionStorage.setItem(FLY, JSON.stringify(f));
+  } catch {}
+}
+
+/** Animates a canvas from the remembered position of the same shape to where it now sits. Runs once, within 3 seconds. */
+export function landFlight(cv: HTMLCanvasElement | null | undefined, kind: string) {
+  let f: Fly | null = null;
+  try {
+    f = JSON.parse(sessionStorage.getItem(FLY) ?? 'null');
+    sessionStorage.removeItem(FLY);
+  } catch {}
+  if (!cv || !f || f.kind !== kind || Date.now() - f.at > 3000 || prefersReducedMotion()) return;
+  const r = cv.getBoundingClientRect();
+  const s = Math.min(r.width, r.height);
+  if (!s) return;
+  const dx = f.x - (r.left + r.width / 2), dy = f.y - (r.top + r.height / 2), k = f.s / s;
+  cv.animate(
+    [{ transform: `translate(${dx}px, ${dy}px) scale(${k})` }, { transform: 'none' }],
+    { duration: 1100, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+  );
 }
 
 /** Tells the manager how visible a canvas is (its opacity), so faded-out backdrops cost little or nothing. */

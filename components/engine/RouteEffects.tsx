@@ -3,6 +3,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { chapterHref, getChapter, neighbours, routeOf } from '@/lib/chapters';
 import { finePointer, prefersReducedMotion } from '@/lib/motion';
+import { rememberFlight } from '@/lib/particles/manager';
 import { markVisited } from '@/lib/progress';
 import { useScroll } from '@/lib/useScroll';
 import { useSmoothScroll } from './SmoothScroll';
@@ -106,7 +107,11 @@ export default function RouteEffects() {
       if (e.key !== '[' && e.key !== ']') return;
       const { prev, next } = neighbours(route);
       const to = e.key === '[' ? (prev ? prev.id : route === 'home' ? null : 'home') : next?.id;
-      if (to) router.push(chapterHref(to));
+      if (!to) return;
+      /* stepping forward from the end band flies its shape on, as clicking the band's link does */
+      const cv = document.querySelector<HTMLCanvasElement>('.nb-art canvas');
+      if (e.key === ']' && next && cv && cv.getBoundingClientRect().top < innerHeight) rememberFlight(cv, next.art);
+      router.push(chapterHref(to));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);

@@ -1,8 +1,8 @@
 'use client';
-import { useRef, useSyncExternalStore, type ReactNode } from 'react';
+import { useEffect, useRef, useSyncExternalStore, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
-import { setLevel } from '@/lib/particles/manager';
+import { landFlight, setLevel } from '@/lib/particles/manager';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useProgress } from '@/lib/progress';
 import { useScroll } from '@/lib/useScroll';
@@ -36,6 +36,11 @@ export default function ChapterHead({
   const copy = useRef<HTMLDivElement>(null);
   const { done } = useProgress();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
+
+  /* arriving from the previous chapter's end band: its shape flies into place behind this title */
+  useEffect(() => {
+    if (hydrated) landFlight(artRef.current?.querySelector('canvas'), art);
+  }, [hydrated, art]);
 
   useScroll((y, vh) => {
     if (!head.current) return;
