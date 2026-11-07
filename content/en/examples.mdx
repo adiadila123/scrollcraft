@@ -1,0 +1,132 @@
+export const meta = {
+  title: "Three complete sites, taken apart.",
+  lede: "A product launch, a studio portfolio and an editorial long-read. Each runs below, with the techniques it uses, the prompts that rebuild it for your own project, and every line of code.",
+};
+
+<section className="sec">
+  <Stick left="01 · How to use this chapter" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Scroll the preview first">
+      <p>Each site runs in a frame. Scroll inside it, or open it full screen. Notice what moves, and how little: these are minimalist on purpose.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Then read how it is built">
+      <p>The techniques list says which pieces from Motion each site combines. Every site is three files, no libraries and no build step, so each line can be read on its own.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Rebuild it for your project">
+      <p>The prompts fill in your project from the fields below. Paste them in order and inspect after each one, as in Build.</p>
+      <ProjectFields />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="02 · Product launch" right="Orbit One" />
+  <p className="lede rv" style={{ marginTop: '0' }}>A launch page for a fictional speaker. The product turns as you scroll, then a sticky tour walks through what it does.</p>
+  <Example id="launch" name="Orbit One" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Techniques used" anchor="launch-techniques">
+      <p>Headline revealed line by line (Motion, recipe e). Frame-sequence scrub for the turning product (recipe c). Words lit at the pace of the scroll (technique 5). Sticky product tour (recipe a). A reading progress bar.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Why it feels cinematic" anchor="launch-why">
+      <p>One accent colour, used only for the progress bar, the button and the product’s single control. Every section does one thing and holds the screen for it. The product turns only while you scroll, so the reader directs the shot.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="launch-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={'Build a minimalist product launch page for [subject], for [audience], ending with one call to action: [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Sections: a hero headline revealed line by line, a pinned canvas section where scroll turns the product, one sentence whose words light up as you scroll, a sticky tour of three features, and a closing call to action. Dark background, one accent colour.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'Use one scroll listener that schedules one requestAnimationFrame. In it, compute progress through each pinned section from getBoundingClientRect, and redraw the canvas only when the frame number changes. Use IntersectionObserver for the feature tour, with a thin band in the middle of the screen.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'Check it: under prefers-reduced-motion the product stays on frame 0, every word is lit and the headline is visible at once. With JavaScript turned off, all text must be readable. Test at 375, 768 and 1440 px and tell me what you could not test.'}
+      />
+    </Row>
+    <Row cls="rv" num="4" title="Swap in real product frames" anchor="launch-real">
+      <p>The example draws its frames in code so it needs no files. With a 3D render or a turntable shoot, export the frames and draw images instead:</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={"const FRAMES = 120;\nconst frames = Array.from({ length: FRAMES }, (_, i) => {\n  const img = new Image();\n  img.src = `frames/${String(i + 1).padStart(3, '0')}.webp`;\n  return img;\n});\nfunction drawFrame(i) {\n  const img = frames[i];\n  if (!img.complete) return; // the next scroll event draws it\n  ctx.clearRect(0, 0, cv.width, cv.height);\n  const s = Math.min(cv.width / img.width, cv.height / img.height);\n  ctx.drawImage(img, (cv.width - img.width * s) / 2, (cv.height - img.height * s) / 2, img.width * s, img.height * s);\n}"}
+      />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="03 · Studio portfolio" right="Field Studio" />
+  <p className="lede rv" style={{ marginTop: '0' }}>A typographic portfolio for a fictional design studio. Large type, a drifting line of services, projects that open as they arrive, and a process told sideways.</p>
+  <Example id="portfolio" name="Field Studio" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Techniques used" anchor="portfolio-techniques">
+      <p>Headline revealed line by line (recipe e). Scroll-speed marquee (recipe d). Clip-path reveal with a slow counter-zoom (recipe b). Horizontal scroll in a pinned section (technique 8).</p>
+    </Row>
+    <Row cls="rv" num="2" title="Why it feels cinematic" anchor="portfolio-why">
+      <p>The type does the work, so motion stays small. Each project image opens like a shutter while the picture inside settles back from a slight zoom, which reads as a camera move. The process section changes direction, a cut that tells the reader a new part has started.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="portfolio-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={'Build a typographic portfolio for [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Light warm background, one sans-serif typeface, no accent colour. Sections: a three-line headline revealed line by line, a marquee of services that speeds up with the scroll, three projects whose images open with clip-path as they reach the middle of the screen, a pinned horizontal strip of five process steps, and a large contact link.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'Set clip-path only from JavaScript so images are fully visible without it. Size the horizontal section from the strip width on load and on resize. Do not start the marquee under prefers-reduced-motion. Then test at 375, 768 and 1440 px.'}
+      />
+    </Row>
+    <Row cls="rv" num="4" title="Use real project images" anchor="portfolio-real">
+      <p>Replace each generated artwork with an image that fills its frame. Keep the width and height attributes so the page does not jump while images load:</p>
+      <CodeBlock
+        lang="HTML"
+        code={'<figure class="clip">\n  <img class="art" src="work/tidewater.avif" alt="Tidewater ferry timetable poster"\n       width="1600" height="1200" loading="lazy" decoding="async">\n</figure>\n<!-- style.css: .art { object-fit: cover; } -->'}
+      />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="04 · Editorial long-read" right="The Long Way North" />
+  <p className="lede rv" style={{ marginTop: '0' }}>A fictional travel story. A layered cover, then a map that stays beside the text and draws the route day by day.</p>
+  <Example id="longread" name="The Long Way North" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Techniques used" anchor="longread-techniques">
+      <p>Parallax cover in three layers (technique 7). Paragraphs that arrive once (technique 3). Scrollytelling with a pinned map (technique 9). An SVG path drawn by the scroll with stroke-dashoffset. A reading progress bar.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Why it feels cinematic" anchor="longread-why">
+      <p>The text stays calm and readable, set in a serif at a comfortable measure. All the motion sits in the margin: the map draws as the reader moves, so the story and the route keep the same pace. The map says it is drawn for illustration, so nobody reads it as real data.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="longread-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={'Build an editorial long-read about [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. A full-screen cover with three parallax layers, a serif body at about 65 characters per line, and a section where an SVG map stays pinned on the left while five short chapters scroll on the right. Draw the route with stroke-dashoffset from scroll progress and light each stop as its chapter crosses the middle of the screen.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'On phones put the map above the text, smaller, and keep each chapter tall enough to read. Under prefers-reduced-motion draw the whole route at once and switch off the parallax. Label the map as illustrative unless I give you real coordinates.'}
+      />
+    </Row>
+    <Row cls="rv" num="4" title="Draw your own route" anchor="longread-real">
+      <p>Draw the path in any vector editor, export it as SVG and copy its d attribute. The script measures it, so any shape works:</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={"const route = document.querySelector('.route');\nconst length = route.getTotalLength();\nroute.style.strokeDasharray = length;\n// on scroll, with p from 0 to 1:\nroute.style.strokeDashoffset = length * (1 - p);"}
+      />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="05 · What all three share" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="One loop">
+      <p>A single scroll listener schedules one animation frame, and everything that follows the scroll updates there. Changes that happen once use IntersectionObserver instead.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Readable without the effects">
+      <p>Content is hidden only under a <code className="i">.js</code> class, and every effect has a still version for <code className="i">prefers-reduced-motion</code>.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Restraint">
+      <p>One typeface, one accent at most, and one idea per screen. The motion is there to pace the reading, not to decorate it.</p>
+    </Row>
+  </div>
+</section>

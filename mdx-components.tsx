@@ -5,7 +5,7 @@ import Scrollytelling from '@/components/build/Scrollytelling';
 import Checklist from '@/components/launch/Checklist';
 import HorizontalScroll from '@/components/motion/HorizontalScroll';
 import { EasingLab, LerpLab, ParallaxLab, StaggerLab } from '@/components/playground/Labs';
-import { Callout, Cell, CodeBlock, PlatformPanel, PlatformTabs, Row, Stick } from '@/components/ui';
+import { Callout, Cell, CodeBlock, Demo, Example, PlatformPanel, PlatformTabs, Row, Stick } from '@/components/ui';
 import ProjectFields from '@/components/ui/ProjectFields';
 
 /** Everything a chapter's MDX can use without importing it. Chapter text lives in content/<locale>/<chapter>.mdx. */
@@ -14,6 +14,8 @@ const components: MDXComponents = {
   Cell,
   Checklist,
   CodeBlock,
+  Demo,
+  Example,
   EasingLab,
   HorizontalScroll,
   LerpLab,

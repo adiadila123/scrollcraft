@@ -1,0 +1,132 @@
+export const meta = {
+  title: "Trei site-uri complete, desfăcute în piese.",
+  lede: "O lansare de produs, un portofoliu de studio și un articol lung. Fiecare rulează mai jos, cu tehnicile pe care le folosește, prompturile care îl refac pentru proiectul tău și fiecare linie de cod.",
+};
+
+<section className="sec">
+  <Stick left="01 · Cum folosești capitolul" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Derulează întâi previzualizarea">
+      <p>Fiecare site rulează într-un cadru. Derulează în el sau deschide-l pe tot ecranul. Observă ce se mișcă și cât de puțin: sunt minimaliste intenționat.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Apoi citește cum e construit">
+      <p>Lista de tehnici spune ce piese din Mișcare combină fiecare site. Fiecare site are trei fișiere, fără biblioteci și fără pas de build, așa că fiecare linie se poate citi singură.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Refă-l pentru proiectul tău">
+      <p>Prompturile se completează cu proiectul tău din câmpurile de mai jos. Lipește-le în ordine și verifică după fiecare, ca în Construcție.</p>
+      <ProjectFields />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="02 · Lansare de produs" right="Orbit One" />
+  <p className="lede rv" style={{ marginTop: '0' }}>O pagină de lansare pentru o boxă fictivă. Produsul se rotește când derulezi, apoi un tur fixat arată ce face.</p>
+  <Example id="launch" name="Orbit One" locale="ro" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Tehnici folosite" anchor="launch-techniques">
+      <p>Titlu dezvăluit rând cu rând (Mișcare, rețeta e). Secvență de cadre derulată pentru produsul care se rotește (rețeta c). Cuvinte aprinse în ritmul scrollului (tehnica 5). Tur de produs fixat (rețeta a). O bară de progres a lecturii.</p>
+    </Row>
+    <Row cls="rv" num="2" title="De ce pare un film" anchor="launch-why">
+      <p>O singură culoare de accent, folosită doar pentru bara de progres, buton și singurul control al produsului. Fiecare secțiune face un singur lucru și ține ecranul pentru el. Produsul se rotește doar cât derulezi, așa că cititorul regizează cadrul.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Prompturi ca să-l refaci" anchor="launch-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={'Construiește o pagină minimalistă de lansare pentru [subiect], pentru [public], care se încheie cu un singur îndemn: [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Secțiuni: un titlu dezvăluit rând cu rând, o secțiune fixată cu un canvas în care scrollul rotește produsul, o propoziție ale cărei cuvinte se aprind la scroll, un tur fixat cu trei funcții și un îndemn final. Fundal închis, o singură culoare de accent.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'Folosește un singur listener de scroll care programează un singur requestAnimationFrame. În el calculează progresul prin fiecare secțiune fixată din getBoundingClientRect și redesenează canvasul doar când se schimbă numărul cadrului. Pentru turul de funcții folosește IntersectionObserver, cu o bandă subțire în mijlocul ecranului.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'Verifică: cu prefers-reduced-motion produsul rămâne pe cadrul 0, toate cuvintele sunt aprinse și titlul apare imediat. Cu JavaScript oprit, tot textul trebuie să se poată citi. Testează la 375, 768 și 1440 px și spune-mi ce n-ai putut testa.'}
+      />
+    </Row>
+    <Row cls="rv" num="4" title="Pune cadre reale ale produsului" anchor="launch-real">
+      <p>Exemplul își desenează cadrele din cod, ca să nu aibă nevoie de fișiere. Dacă ai o randare 3D sau o filmare pe platou rotativ, exportă cadrele și desenează imagini:</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={"const FRAMES = 120;\nconst frames = Array.from({ length: FRAMES }, (_, i) => {\n  const img = new Image();\n  img.src = `frames/${String(i + 1).padStart(3, '0')}.webp`;\n  return img;\n});\nfunction drawFrame(i) {\n  const img = frames[i];\n  if (!img.complete) return; // următorul eveniment de scroll îl desenează\n  ctx.clearRect(0, 0, cv.width, cv.height);\n  const s = Math.min(cv.width / img.width, cv.height / img.height);\n  ctx.drawImage(img, (cv.width - img.width * s) / 2, (cv.height - img.height * s) / 2, img.width * s, img.height * s);\n}"}
+      />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="03 · Portofoliu de studio" right="Field Studio" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Un portofoliu tipografic pentru un studio de design fictiv. Litere mari, un rând de servicii care alunecă, proiecte care se deschid când ajung pe ecran și un proces povestit în lateral.</p>
+  <Example id="portfolio" name="Field Studio" locale="ro" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Tehnici folosite" anchor="portfolio-techniques">
+      <p>Titlu dezvăluit rând cu rând (rețeta e). Bandă de text după viteza scrollului (rețeta d). Dezvăluire cu clip-path și un zoom lent în sens invers (rețeta b). Scroll orizontal într-o secțiune fixată (tehnica 8).</p>
+    </Row>
+    <Row cls="rv" num="2" title="De ce pare un film" anchor="portfolio-why">
+      <p>Tipografia face treaba, așa că mișcarea rămâne mică. Fiecare imagine de proiect se deschide ca un obturator, în timp ce poza din ea revine dintr-un zoom ușor, ceea ce se citește ca o mișcare de cameră. Secțiunea de proces schimbă direcția, o tăietură care îi spune cititorului că a început o parte nouă.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Prompturi ca să-l refaci" anchor="portfolio-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={'Construiește un portofoliu tipografic pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Fundal deschis și cald, un singur font sans-serif, fără culoare de accent. Secțiuni: un titlu pe trei rânduri dezvăluit rând cu rând, o bandă de servicii care accelerează la scroll, trei proiecte ale căror imagini se deschid cu clip-path când ajung la mijlocul ecranului, o bandă orizontală fixată cu cinci pași de proces și un link mare de contact.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'Setează clip-path doar din JavaScript, ca imaginile să fie complet vizibile fără el. Calculează înălțimea secțiunii orizontale din lățimea benzii, la încărcare și la redimensionare. Nu porni banda de text cu prefers-reduced-motion. Apoi testează la 375, 768 și 1440 px.'}
+      />
+    </Row>
+    <Row cls="rv" num="4" title="Folosește imagini reale de proiect" anchor="portfolio-real">
+      <p>Înlocuiește fiecare imagine generată cu o fotografie care își umple cadrul. Păstrează atributele width și height, ca pagina să nu sară cât se încarcă imaginile:</p>
+      <CodeBlock
+        lang="HTML"
+        code={'<figure class="clip">\n  <img class="art" src="work/tidewater.avif" alt="Afișul cu orarul feribotului Tidewater"\n       width="1600" height="1200" loading="lazy" decoding="async">\n</figure>\n<!-- style.css: .art { object-fit: cover; } -->'}
+      />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="04 · Articol lung" right="The Long Way North" />
+  <p className="lede rv" style={{ marginTop: '0' }}>O poveste de călătorie fictivă. O copertă în straturi, apoi o hartă care stă lângă text și desenează traseul zi cu zi.</p>
+  <Example id="longread" name="The Long Way North" locale="ro" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Tehnici folosite" anchor="longread-techniques">
+      <p>Copertă cu parallax în trei straturi (tehnica 7). Paragrafe care apar o singură dată (tehnica 3). Scrollytelling cu o hartă fixată (tehnica 9). Un traseu SVG desenat de scroll cu stroke-dashoffset. O bară de progres a lecturii.</p>
+    </Row>
+    <Row cls="rv" num="2" title="De ce pare un film" anchor="longread-why">
+      <p>Textul rămâne calm și ușor de citit, cu un font serif la o lungime de rând comodă. Toată mișcarea stă pe margine: harta se desenează pe măsură ce cititorul înaintează, așa că povestea și traseul merg în același ritm. Harta spune că e desenată ca ilustrație, ca nimeni să n-o ia drept date reale.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Prompturi ca să-l refaci" anchor="longread-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={'Construiește un articol lung despre [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. O copertă pe tot ecranul cu trei straturi de parallax, text serif cu aproximativ 65 de caractere pe rând și o secțiune în care o hartă SVG rămâne fixată în stânga, în timp ce cinci capitole scurte se derulează în dreapta. Desenează traseul cu stroke-dashoffset din progresul scrollului și aprinde fiecare oprire când capitolul ei trece prin mijlocul ecranului.'}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={'Pe telefoane pune harta deasupra textului, mai mică, și păstrează fiecare capitol destul de înalt ca să poată fi citit. Cu prefers-reduced-motion desenează tot traseul dintr-odată și oprește parallaxul. Etichetează harta ca ilustrativă, dacă nu-ți dau coordonate reale.'}
+      />
+    </Row>
+    <Row cls="rv" num="4" title="Desenează-ți propriul traseu" anchor="longread-real">
+      <p>Desenează traseul în orice editor vectorial, exportă-l ca SVG și copiază-i atributul d. Scriptul îl măsoară, așa că orice formă merge:</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={"const route = document.querySelector('.route');\nconst length = route.getTotalLength();\nroute.style.strokeDasharray = length;\n// la scroll, cu p de la 0 la 1:\nroute.style.strokeDashoffset = length * (1 - p);"}
+      />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="05 · Ce au toate trei în comun" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="O singură buclă">
+      <p>Un singur listener de scroll programează un singur cadru de animație, iar tot ce urmează scrollul se actualizează acolo. Schimbările care se întâmplă o dată folosesc IntersectionObserver.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Se citește și fără efecte">
+      <p>Conținutul e ascuns doar sub o clasă <code className="i">.js</code>, iar fiecare efect are o variantă statică pentru <code className="i">prefers-reduced-motion</code>.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Reținere">
+      <p>Un singur font, cel mult un accent și o singură idee pe ecran. Mișcarea e acolo ca să dea ritm lecturii, nu ca s-o decoreze.</p>
+    </Row>
+  </div>
+</section>

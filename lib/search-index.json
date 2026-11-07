@@ -5,9 +5,10 @@
    "skills": 4,
    "prompting": 2,
    "build": 3,
-   "motion": 2,
+   "motion": 3,
    "playground": 1,
    "advanced": 3,
+   "examples": 3,
    "launch": 1
   },
   "ro": {
@@ -15,9 +16,10 @@
    "skills": 4,
    "prompting": 2,
    "build": 3,
-   "motion": 2,
+   "motion": 3,
    "playground": 1,
    "advanced": 3,
+   "examples": 3,
    "launch": 1
   }
  },
@@ -614,6 +616,48 @@
    {
     "kind": "section",
     "chapter": "Motion",
+    "href": "/motion#real-world-recipes",
+    "title": "Real-world recipes",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#sticky-product-tour",
+    "title": "Sticky product tour",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#clip-path-reveal",
+    "title": "Clip-path reveal",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#frame-sequence-scrub",
+    "title": "Frame-sequence scrub",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#scroll-speed-marquee",
+    "title": "Scroll-speed marquee",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#headline-revealed-line-by-line",
+    "title": "Headline revealed line by line",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
     "href": "/motion#choosing-and-combining",
     "title": "Choosing and combining",
     "text": ""
@@ -735,6 +779,216 @@
     "chapter": "Advanced",
     "href": "/advanced#glossary",
     "title": "Glossary",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#how-to-use-this-chapter",
+    "title": "How to use this chapter",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#scroll-the-preview-first",
+    "title": "Scroll the preview first",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#then-read-how-it-is-built",
+    "title": "Then read how it is built",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#rebuild-it-for-your-project",
+    "title": "Rebuild it for your project",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#product-launch",
+    "title": "Product launch",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#launch-techniques",
+    "title": "Techniques used",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#launch-why",
+    "title": "Why it feels cinematic",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#launch-prompts",
+    "title": "Prompts to rebuild it",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#launch-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Build a minimalist product launch page for [subject], for [audience], ending with one call to action: [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Sections: a hero headline revealed line by line, a pinned canvas section where scroll turns the product, one sentence whose words light up as you scroll, a sticky tour of three features, and a closing call to action. Dark background, one accent colour."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#launch-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Use one scroll listener that schedules one requestAnimationFrame. In it, compute progress through each pinned section from getBoundingClientRect, and redraw the canvas only when the frame number changes. Use IntersectionObserver for the feature tour, with a thin band in the middle of the screen."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#launch-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Check it: under prefers-reduced-motion the product stays on frame 0, every word is lit and the headline is visible at once. With JavaScript turned off, all text must be readable. Test at 375, 768 and 1440 px and tell me what you could not test."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#launch-real",
+    "title": "Swap in real product frames",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#studio-portfolio",
+    "title": "Studio portfolio",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#portfolio-techniques",
+    "title": "Techniques used",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#portfolio-why",
+    "title": "Why it feels cinematic",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#portfolio-prompts",
+    "title": "Prompts to rebuild it",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#portfolio-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Build a typographic portfolio for [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Light warm background, one sans-serif typeface, no accent colour. Sections: a three-line headline revealed line by line, a marquee of services that speeds up with the scroll, three projects whose images open with clip-path as they reach the middle of the screen, a pinned horizontal strip of five process steps, and a large contact link."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#portfolio-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Set clip-path only from JavaScript so images are fully visible without it. Size the horizontal section from the strip width on load and on resize. Do not start the marquee under prefers-reduced-motion. Then test at 375, 768 and 1440 px."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#portfolio-real",
+    "title": "Use real project images",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#editorial-long-read",
+    "title": "Editorial long-read",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#longread-techniques",
+    "title": "Techniques used",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#longread-why",
+    "title": "Why it feels cinematic",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#longread-prompts",
+    "title": "Prompts to rebuild it",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#longread-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Build an editorial long-read about [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. A full-screen cover with three parallax layers, a serif body at about 65 characters per line, and a section where an SVG map stays pinned on the left while five short chapters scroll on the right. Draw the route with stroke-dashoffset from scroll progress and light each stop as its chapter crosses the middle of the screen."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#longread-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "On phones put the map above the text, smaller, and keep each chapter tall enough to read. Under prefers-reduced-motion draw the whole route at once and switch off the parallax. Label the map as illustrative unless I give you real coordinates."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#longread-real",
+    "title": "Draw your own route",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#what-all-three-share",
+    "title": "What all three share",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#one-loop",
+    "title": "One loop",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#readable-without-the-effects",
+    "title": "Readable without the effects",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#restraint",
+    "title": "Restraint",
     "text": ""
    },
    {
@@ -1393,6 +1647,48 @@
    {
     "kind": "section",
     "chapter": "Mișcare",
+    "href": "/ro/motion#retete-din-proiecte-reale",
+    "title": "Rețete din proiecte reale",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#tur-de-produs-fixat",
+    "title": "Tur de produs fixat",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#dezvaluire-cu-clip-path",
+    "title": "Dezvăluire cu clip-path",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#secventa-de-cadre-derulata",
+    "title": "Secvență de cadre derulată",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#banda-de-text-dupa-viteza-scrollului",
+    "title": "Bandă de text după viteza scrollului",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#titlu-dezvaluit-rand-cu-rand",
+    "title": "Titlu dezvăluit rând cu rând",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
     "href": "/ro/motion#cum-alegi-si-combini",
     "title": "Cum alegi și combini",
     "text": ""
@@ -1514,6 +1810,216 @@
     "chapter": "Avansat",
     "href": "/ro/advanced#glosar",
     "title": "Glosar",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#cum-folosesti-capitolul",
+    "title": "Cum folosești capitolul",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#deruleaza-intai-previzualizarea",
+    "title": "Derulează întâi previzualizarea",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#apoi-citeste-cum-e-construit",
+    "title": "Apoi citește cum e construit",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#refa-l-pentru-proiectul-tau",
+    "title": "Refă-l pentru proiectul tău",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#lansare-de-produs",
+    "title": "Lansare de produs",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#launch-techniques",
+    "title": "Tehnici folosite",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#launch-why",
+    "title": "De ce pare un film",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#launch-prompts",
+    "title": "Prompturi ca să-l refaci",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#launch-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Construiește o pagină minimalistă de lansare pentru [subiect], pentru [public], care se încheie cu un singur îndemn: [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Secțiuni: un titlu dezvăluit rând cu rând, o secțiune fixată cu un canvas în care scrollul rotește produsul, o propoziție ale cărei cuvinte se aprind la scroll, un tur fixat cu trei funcții și un îndemn final. Fundal închis, o singură culoare de accent."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#launch-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Folosește un singur listener de scroll care programează un singur requestAnimationFrame. În el calculează progresul prin fiecare secțiune fixată din getBoundingClientRect și redesenează canvasul doar când se schimbă numărul cadrului. Pentru turul de funcții folosește IntersectionObserver, cu o bandă subțire în mijlocul ecranului."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#launch-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Verifică: cu prefers-reduced-motion produsul rămâne pe cadrul 0, toate cuvintele sunt aprinse și titlul apare imediat. Cu JavaScript oprit, tot textul trebuie să se poată citi. Testează la 375, 768 și 1440 px și spune-mi ce n-ai putut testa."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#launch-real",
+    "title": "Pune cadre reale ale produsului",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portofoliu-de-studio",
+    "title": "Portofoliu de studio",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-techniques",
+    "title": "Tehnici folosite",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-why",
+    "title": "De ce pare un film",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-prompts",
+    "title": "Prompturi ca să-l refaci",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Construiește un portofoliu tipografic pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Fundal deschis și cald, un singur font sans-serif, fără culoare de accent. Secțiuni: un titlu pe trei rânduri dezvăluit rând cu rând, o bandă de servicii care accelerează la scroll, trei proiecte ale căror imagini se deschid cu clip-path când ajung la mijlocul ecranului, o bandă orizontală fixată cu cinci pași de proces și un link mare de contact."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Setează clip-path doar din JavaScript, ca imaginile să fie complet vizibile fără el. Calculează înălțimea secțiunii orizontale din lățimea benzii, la încărcare și la redimensionare. Nu porni banda de text cu prefers-reduced-motion. Apoi testează la 375, 768 și 1440 px."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-real",
+    "title": "Folosește imagini reale de proiect",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#articol-lung",
+    "title": "Articol lung",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#longread-techniques",
+    "title": "Tehnici folosite",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#longread-why",
+    "title": "De ce pare un film",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#longread-prompts",
+    "title": "Prompturi ca să-l refaci",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#longread-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Construiește un articol lung despre [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. O copertă pe tot ecranul cu trei straturi de parallax, text serif cu aproximativ 65 de caractere pe rând și o secțiune în care o hartă SVG rămâne fixată în stânga, în timp ce cinci capitole scurte se derulează în dreapta. Desenează traseul cu stroke-dashoffset din progresul scrollului și aprinde fiecare oprire când capitolul ei trece prin mijlocul ecranului."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#longread-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Pe telefoane pune harta deasupra textului, mai mică, și păstrează fiecare capitol destul de înalt ca să poată fi citit. Cu prefers-reduced-motion desenează tot traseul dintr-odată și oprește parallaxul. Etichetează harta ca ilustrativă, dacă nu-ți dau coordonate reale."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#longread-real",
+    "title": "Desenează-ți propriul traseu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#ce-au-toate-trei-in-comun",
+    "title": "Ce au toate trei în comun",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#o-singura-bucla",
+    "title": "O singură buclă",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#se-citeste-si-fara-efecte",
+    "title": "Se citește și fără efecte",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#retinere",
+    "title": "Reținere",
     "text": ""
    },
    {

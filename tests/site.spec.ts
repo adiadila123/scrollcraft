@@ -203,7 +203,7 @@ test.describe('features', () => {
     await page.locator('.next-band').scrollIntoViewIfNeeded();
     await page.waitForTimeout(300);
     await page.goto('/');
-    await expect(page.getByText('1 of 8 chapters read')).toBeVisible();
+    await expect(page.getByText('1 of 9 chapters read')).toBeVisible();
     await expect(page.getByRole('link', { name: /Next: 02 Skills/ })).toHaveAttribute('href', '/skills');
   });
 
@@ -231,6 +231,42 @@ test.describe('features', () => {
     await page.locator('#prompt-library').scrollIntoViewIfNeeded();
     await page.locator('.feed-end').scrollIntoViewIfNeeded();
     await expect(page.locator('.feed .slot', { hasText: 'a night train' }).first()).toBeAttached();
+  });
+
+  test('live previews run beside their code, with a preview and code switch on phones', async ({ page, isMobile }) => {
+    await page.goto('/motion');
+    const demo = page.locator('.dm').first();
+    await demo.scrollIntoViewIfNeeded();
+    await expect(page.frameLocator('.dm iframe').first().locator('.label').first()).toHaveText('01 · Brief');
+    const stage = demo.locator('.dm-stage');
+    const code = demo.locator('.dm-code');
+    if (isMobile) {
+      await expect(demo.getByRole('button', { name: 'Preview' })).toHaveAttribute('aria-pressed', 'true');
+      await expect(code).toBeHidden();
+      await demo.getByRole('button', { name: 'CSS' }).click();
+      await expect(stage).toBeHidden();
+      await expect(code).toContainText('position: sticky');
+      await demo.getByRole('button', { name: 'Preview' }).click();
+      await expect(stage).toBeVisible();
+    } else {
+      await expect(stage).toBeVisible();
+      await expect(code).toContainText('<section>');
+      await demo.getByRole('button', { name: 'CSS' }).click();
+      await expect(stage).toBeVisible();
+      await expect(code).toContainText('position: sticky');
+    }
+  });
+
+  test('each example site runs, shows its full code and opens on StackBlitz', async ({ page }) => {
+    await page.goto('/examples');
+    const sites = page.locator('.dm-site');
+    await expect(sites).toHaveCount(3);
+    const first = sites.first();
+    await first.scrollIntoViewIfNeeded();
+    await expect(page.frameLocator('.dm-site iframe').first().locator('h1')).toContainText('Sound that');
+    await expect(first.getByRole('link', { name: /Full screen/ })).toHaveAttribute('href', '/examples/launch/index.html');
+    for (const f of ['index.html', 'style.css', 'app.js']) await expect(first.getByRole('button', { name: f })).toBeAttached();
+    await expect(page.locator('.sb-form').first().locator('input[name="project[files][app.js]"]')).toHaveAttribute('value', /requestAnimationFrame/);
   });
 
   test('playground sliders rewrite the code', async ({ page }) => {
@@ -269,7 +305,7 @@ test.describe('phone', () => {
     await page.goto('/advanced');
     const bar = page.getByRole('navigation', { name: 'Course' });
     await expect(bar.getByRole('link', { name: 'Previous: Playground' })).toHaveAttribute('href', '/playground');
-    await expect(bar.getByRole('link', { name: 'Next: Launch' })).toHaveAttribute('href', '/launch');
+    await expect(bar.getByRole('link', { name: 'Next: Examples' })).toHaveAttribute('href', '/examples');
     const all = bar.getByRole('button', { name: /Show all chapters/ });
     await all.click();
     const sheet = page.getByRole('dialog', { name: 'All chapters' });

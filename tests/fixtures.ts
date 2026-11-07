@@ -10,7 +10,12 @@ export const test = base.extend<{ consoleErrors: string[]; showLoader: boolean }
         if (m.type() === 'error') errors.push(m.text());
       });
       page.on('pageerror', (e) => errors.push(e.message));
-      if (!showLoader) await page.addInitScript(() => sessionStorage.setItem('sc-loaded', '1'));
+      if (!showLoader) await page.addInitScript(() => {
+        /* also runs inside the sandboxed preview frames, which have no storage */
+        try {
+          sessionStorage.setItem('sc-loaded', '1');
+        } catch {}
+      });
       await use(errors);
       expect(errors, 'console errors').toEqual([]);
     },
@@ -20,4 +25,4 @@ export const test = base.extend<{ consoleErrors: string[]; showLoader: boolean }
 
 export { expect };
 
-export const CHAPTERS = ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'advanced', 'launch'];
+export const CHAPTERS = ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'advanced', 'examples', 'launch'];

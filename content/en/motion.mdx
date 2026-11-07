@@ -71,58 +71,26 @@ export const meta = {
     <Row cls="rv sticky-k" num="1" title="Sticky positioning">
       <p>Section labels lock under the top bar and hand over to the next one.</p>
       <p className="tip">Use for chapter labels and long lists where context should stay visible.</p>
-      <CodeBlock
-        lang="CSS"
-        code={
-          '.section-label {\n  position: sticky; top: 64px; z-index: 12;\n  background: rgba(0,0,0,.8);\n  backdrop-filter: blur(12px);\n}\n/* The label must sit inside its section: the section ends, the label leaves. */'
-        }
-      />
     </Row>
+    <Demo id="sticky" name="Sticky positioning" />
     <Row cls="rv sticky-k" num="2" title="Scroll snap">
       <p>The view settles on defined panels. Safe on a horizontal strip, risky on the whole page.</p>
       <p className="tip">Do not combine y-axis snap with smooth scrolling or pinned sections. They fight each other.</p>
-      <CodeBlock
-        lang="CSS"
-        code={'.strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }\n.strip > * { flex: 0 0 80%; scroll-snap-align: start; }'}
-      />
-      <div className="snapdemo rv">
-        <div className="strip" tabIndex={0} aria-label="Snap demo: scroll sideways">
-          <div>One</div>
-          <div>Two</div>
-          <div>Three</div>
-          <div>Four</div>
-        </div>
-      </div>
     </Row>
+    <Demo id="snap" name="Scroll snap" />
     <Row cls="rv sticky-k" num="3" title="Scroll triggered">
       <p>Elements fade and rise once when they enter the viewport.</p>
       <p className="tip">Hide only under a .js class. Never hide content again when scrolling back up.</p>
-      <CodeBlock
-        lang="JavaScript"
-        code={
-          "const io = new IntersectionObserver((entries) => {\n  entries.forEach((e) => {\n    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }\n  });\n}, { threshold: 0.12 });\ndocument.querySelectorAll('.reveal').forEach((el) => io.observe(el));"
-        }
-      />
     </Row>
+    <Demo id="reveal" name="Scroll triggered" />
     <Row cls="rv sticky-k" num="4" title="Infinite scroll">
       <p>More content loads as you approach the end. A sentinel element at the bottom asks for the next batch.</p>
       <p className="tip">Cap the total or give a way past it, or the footer becomes unreachable.</p>
-      <CodeBlock
-        lang="JavaScript"
-        code={
-          "const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) loadBatch(); },\n  { rootMargin: '0px 0px 320px 0px' });\nio.observe(document.querySelector('#sentinel'));\n// after each batch: io.unobserve(sentinel); io.observe(sentinel);"
-        }
-      />
     </Row>
+    <Demo id="infinite" name="Infinite scroll" />
     <Row cls="rv sticky-k" num="5" title="Scroll driven">
       <p>A value follows the exact scroll position. Words light up, bars fill.</p>
       <p className="tip">Use for progress and for text you want read at the pace of the scroll.</p>
-      <CodeBlock
-        lang="JavaScript"
-        code={
-          "const bar = document.querySelector('.progress');\naddEventListener('scroll', () => {\n  const max = document.documentElement.scrollHeight - innerHeight;\n  bar.style.transform = `scaleX(${scrollY / max})`;\n}, { passive: true });"
-        }
-      />
       <CodeBlock
         lang="CSS only (check browser support first)"
         code={
@@ -130,43 +98,61 @@ export const meta = {
         }
       />
     </Row>
+    <Demo id="driven" name="Scroll driven" />
     <Row cls="rv sticky-k" num="6" title="Zoom on scroll">
       <p>An image scales up gradually while it crosses the screen.</p>
       <p className="tip">Animate transform only. Scaling width or height forces layout on every frame.</p>
-      <CodeBlock
-        lang="JavaScript"
-        code={
-          'const r = figure.getBoundingClientRect();\nconst p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height)));\nimg.style.transform = `scale(${1 + 0.6 * p})`;'
-        }
-      />
     </Row>
+    <Demo id="zoom" name="Zoom on scroll" />
     <Row cls="rv sticky-k" num="7" title="Parallax">
       <p>Background layers move more slowly than the foreground, which gives depth.</p>
       <p className="tip">Keep speeds between 0.15 and 0.5. Reduce, do not remove, the effect on phones.</p>
-      <CodeBlock
-        lang="JavaScript"
-        code={'layers.forEach((l) => {\n  l.style.transform = `translate3d(0, ${scrollY * (1 - l.dataset.speed)}px, 0)`;\n});'}
-      />
     </Row>
+    <Demo id="parallax" name="Parallax" />
     <Row cls="rv sticky-k" num="8" title="Horizontal scroll">
       <p>Vertical scroll moves a row of cards sideways inside a pinned section.</p>
       <p className="tip">Pin once per page. Set the wrapper height from the track width.</p>
-      <CodeBlock
-        lang="JavaScript"
-        code={
-          "const max = track.scrollWidth - pin.clientWidth;\nsection.style.height = (max + pin.offsetHeight) + 'px';\n// on scroll: translateX(-progress * max)"
-        }
-      />
     </Row>
+    <Demo id="horizontal" name="Horizontal scroll" />
     <Row cls="rv sticky-k" num="9" title="Scrollytelling">
       <p>A fixed scene stays put while text steps scroll past and change it.</p>
       <p className="tip">Stack the scene above the text on phones, and keep each step tall enough to read.</p>
-      <CodeBlock lang="CSS" code={'.scrolly-vis { position: sticky; top: 120px; }\n.step { min-height: 72vh; }'} />
     </Row>
+    <Demo id="scrolly" name="Scrollytelling" />
   </div>
 </section>
 <section className="sec">
-  <Stick left="02 · Choosing and combining" />
+  <Stick left="02 · Real-world recipes" right="5 recipes" />
+  <div className="rows steps-list">
+    <Row cls="rv sticky-k" num="a" title="Sticky product tour">
+      <p>A device stays pinned while feature blocks scroll past. The block crossing the middle of the screen decides what the device shows. Most product launch pages are built on this.</p>
+      <p className="tip">Watch a thin band in the middle of the screen with IntersectionObserver (rootMargin -45%) instead of measuring on every scroll event.</p>
+    </Row>
+    <Demo id="tour" name="Sticky product tour" />
+    <Row cls="rv sticky-k" num="b" title="Clip-path reveal">
+      <p>A case-study image opens from a small window to its full frame as it reaches the middle of the screen. A staple of studio portfolios.</p>
+      <p className="tip">Set the clip from JavaScript only, so the image is fully visible if the script never runs. clip-path: inset() is cheap to animate.</p>
+    </Row>
+    <Demo id="clip" name="Clip-path reveal" />
+    <Row cls="rv sticky-k" num="c" title="Frame-sequence scrub">
+      <p>The scroll position picks a frame and a canvas draws it. This is how product rotations on launch pages work. The preview draws its frames in code; a real site preloads image files.</p>
+      <p className="tip">Export 60 to 120 frames as WebP or AVIF, preload them before the section, and draw only when the frame number changes.</p>
+    </Row>
+    <Demo id="frames" name="Frame-sequence scrub" />
+    <Row cls="rv sticky-k" num="d" title="Scroll-speed marquee">
+      <p>A line of text drifts on its own, speeds up while the reader scrolls, then settles back. A common accent on agency sites.</p>
+      <p className="tip">Repeat the text so it wraps without a gap, and do not start it at all under reduced motion.</p>
+    </Row>
+    <Demo id="marquee" name="Scroll-speed marquee" />
+    <Row cls="rv sticky-k" num="e" title="Headline revealed line by line">
+      <p>Each line of a large headline slides up from behind a mask, one after another.</p>
+      <p className="tip">Break the lines by hand in the markup rather than measuring the text, so a late font cannot break the split.</p>
+    </Row>
+    <Demo id="lines" name="Headline revealed line by line" />
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Choosing and combining" />
   <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Table. Scroll sideways to see every column.">
     <table>
       <thead>

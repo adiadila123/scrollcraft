@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Field Studio · identity and motion</title>
+  <meta name="description" content="A fictional studio portfolio, built for the Scrollcraft tutorial.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top">Field Studio</a>
+    <nav><a href="#work">Work</a><a href="#contact">Contact</a></nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <h1 class="split">
+        <span class="line"><span>We design</span></span>
+        <span class="line"><span>quiet brands</span></span>
+        <span class="line"><span class="dim">that move.</span></span>
+      </h1>
+      <p class="meta"><span>Identity</span><span>Websites</span><span>Motion</span></p>
+    </section>
+
+    <!-- marquee: drifts on its own, speeds up with the scroll -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-row">Identity · Type · Web · Motion · Print · </div>
+    </div>
+
+    <section class="work" id="work">
+      <h2 class="label">Selected work</h2>
+      <!-- each project opens from a small window to its full frame -->
+      <article class="project">
+        <figure class="clip"><div class="art art-1"></div></figure>
+        <div class="project-text">
+          <h3>Tidewater</h3>
+          <p>Identity and website for a fictional ferry line.</p>
+        </div>
+      </article>
+      <article class="project">
+        <figure class="clip"><div class="art art-2"></div></figure>
+        <div class="project-text">
+          <h3>Common Ground</h3>
+          <p>Wayfinding for a fictional public library.</p>
+        </div>
+      </article>
+      <article class="project">
+        <figure class="clip"><div class="art art-3"></div></figure>
+        <div class="project-text">
+          <h3>Low Light</h3>
+          <p>Packaging for a fictional candle maker.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- horizontal gallery: vertical scroll moves the strip sideways while the section is pinned -->
+    <section class="hs" aria-label="Process, in five steps">
+      <div class="hs-pin">
+        <h2 class="label hs-label">Process</h2>
+        <div class="hs-track">
+          <div class="step"><span>01</span><h3>Listen</h3><p>A week of questions before any sketch.</p></div>
+          <div class="step"><span>02</span><h3>Reduce</h3><p>One idea, said as plainly as possible.</p></div>
+          <div class="step"><span>03</span><h3>Draw</h3><p>Type, mark and grid, on paper first.</p></div>
+          <div class="step"><span>04</span><h3>Move</h3><p>Motion rules, so the brand behaves the same everywhere.</p></div>
+          <div class="step"><span>05</span><h3>Hand over</h3><p>Files and a guide your team can use without us.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="label">Contact</p>
+      <a class="mail" href="mailto:hello@example.com">hello@example.com</a>
+    </section>
+  </main>
+
+  <footer class="foot">A fictional studio, built for the Scrollcraft tutorial.</footer>
+  <script src="app.js"></script>
+</body>
+</html>

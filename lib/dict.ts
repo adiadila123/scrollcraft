@@ -79,6 +79,17 @@ const en = {
     open: 'Open in StackBlitz',
     note: 'Runs in a new tab. Edit and see it update.',
   },
+  examples: {
+    full: 'Full screen',
+    description: 'A complete example from the Scrollcraft tutorial, chapter 08.',
+  },
+  demo: {
+    preview: 'Preview',
+    replay: 'Replay',
+    hint: 'Scroll inside',
+    title: (name: string) => `Live preview: ${name}`,
+    files: 'Code files',
+  },
   labs: {
     target: 'Scroll target. Use the arrow keys or click to move it.',
     lerp: 'Low values feel heavy and slow. High values feel close to normal scrolling. The documented default is 0.1.',
@@ -122,7 +133,7 @@ const en = {
     keepScrolling: 'Keep scrolling',
     zoomA: 'Every image on this site is particles',
     zoomB: 'Scroll to zoom',
-    eight: 'Eight chapters, in order.',
+    eight: 'Nine chapters, in order.',
     four: 'Four things at the end.',
     cells: [
       ['A working site', 'Smooth inertial scrolling, a parallax hero, reveals, one pinned moment and a mobile layout.'],
@@ -235,6 +246,17 @@ const ro: Dict = {
     open: 'Deschide în StackBlitz',
     note: 'Se deschide într-un tab nou. Editezi și vezi rezultatul imediat.',
   },
+  examples: {
+    full: 'Ecran complet',
+    description: 'Un exemplu complet din tutorialul Scrollcraft, capitolul 08.',
+  },
+  demo: {
+    preview: 'Rezultat',
+    replay: 'Din nou',
+    hint: 'Derulează aici',
+    title: (name) => `Previzualizare live: ${name}`,
+    files: 'Fișiere de cod',
+  },
   labs: {
     target: 'Țintă de scroll. Folosește săgețile sau dă clic ca s-o muți.',
     lerp: 'Valorile mici par grele și lente. Valorile mari par aproape de scrollul normal. Valoarea implicită documentată este 0.1.',
@@ -278,7 +300,7 @@ const ro: Dict = {
     keepScrolling: 'Continuă să derulezi',
     zoomA: 'Fiecare imagine de pe site e făcută din particule',
     zoomB: 'Derulează pentru zoom',
-    eight: 'Opt capitole, în ordine.',
+    eight: 'Nouă capitole, în ordine.',
     four: 'Patru lucruri la final.',
     cells: [
       ['Un site funcțional', 'Scroll lin cu inerție, un hero cu parallax, apariții, un moment fixat și o variantă pentru mobil.'],

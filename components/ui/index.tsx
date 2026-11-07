@@ -1,4 +1,7 @@
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import type { ReactNode } from 'react';
+import OpenInStackBlitz from '@/components/build/OpenInStackBlitz';
 import ChapterHead from '@/components/chapter/ChapterHead';
 import ChapterRail from '@/components/chapter/ChapterRail';
 import { chapters, getChapter } from '@/lib/chapters';
@@ -7,7 +10,9 @@ import type { Locale } from '@/lib/i18n';
 import { highlight } from '@/lib/highlight';
 import { readingMinutes } from '@/lib/reading';
 import { slugify } from '@/lib/slug.mjs';
+import { demoDocument, demos } from '@/lib/demos';
 import CodeFrame from './CodeFrame';
+import DemoView from './DemoView';
 
 export { PlatformPanel, PlatformTabs } from './PlatformTabs';
 export { CodeFrame };
@@ -29,6 +34,38 @@ export async function CodeBlock({ lang, code, codeId }: { lang: string; code: st
         </span>
       ))}
     </CodeFrame>
+  );
+}
+
+/** A live preview of one demo from lib/demos.ts beside its highlighted HTML, CSS and JavaScript. */
+export function Demo({ id, name, locale = 'en' }: { id: string; name: string; locale?: Locale }) {
+  const d = demos[id];
+  if (!d) throw new Error(`Unknown demo "${id}"`);
+  const files = [
+    { label: 'HTML', node: <CodeBlock lang="HTML" code={d.html} /> },
+    { label: 'CSS', node: <CodeBlock lang="CSS" code={d.css} /> },
+    ...(d.js ? [{ label: 'JS', node: <CodeBlock lang="JavaScript" code={d.js} /> }] : []),
+  ];
+  return <DemoView name={name} doc={demoDocument(d, dicts[locale].demo.hint)} files={files} />;
+}
+
+const SITE_FILES = ['index.html', 'style.css', 'app.js'];
+
+/** A complete example site from public/examples/<id>: running in a frame, every file readable, and editable on StackBlitz. */
+export async function Example({ id, name, locale = 'en' }: { id: string; name: string; locale?: Locale }) {
+  const dir = path.join(process.cwd(), 'public', 'examples', id);
+  const code = Object.fromEntries(await Promise.all(SITE_FILES.map(async (f) => [f, await readFile(path.join(dir, f), 'utf8')] as const)));
+  const t = dicts[locale].examples;
+  return (
+    <>
+      <DemoView
+        name={name}
+        src={`/examples/${id}/index.html`}
+        full={t.full}
+        files={SITE_FILES.map((f) => ({ label: f, node: <CodeBlock lang={f} code={code[f]} /> }))}
+      />
+      <OpenInStackBlitz locale={locale} files={code} title={name} description={t.description} />
+    </>
   );
 }
 

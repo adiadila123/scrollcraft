@@ -46,8 +46,8 @@ export const chapters: Chapter[] = [
     n: '05',
     title: 'Motion',
     nav: 'Motion',
-    desc: 'Nine techniques',
-    summary: 'The nine scroll techniques that make a site feel cinematic, each with code you can paste.',
+    desc: 'Techniques and recipes',
+    summary: 'The nine scroll techniques that make a site feel cinematic, and five recipes from real sites, each running live beside its code.',
     art: 'tunnel',
   },
   {
@@ -69,8 +69,17 @@ export const chapters: Chapter[] = [
     art: 'graph',
   },
   {
-    id: 'launch',
+    id: 'examples',
     n: '08',
+    title: 'Examples',
+    nav: 'Examples',
+    desc: 'Three complete sites',
+    summary: 'A product launch, a studio portfolio and an editorial long-read, each running live with its prompts and full code.',
+    art: 'lattice',
+  },
+  {
+    id: 'launch',
+    n: '09',
     title: 'Launch',
     nav: 'Launch',
     desc: 'Test and publish',
@@ -108,8 +117,8 @@ const ro: Record<string, Pick<Chapter, 'title' | 'nav' | 'desc' | 'summary'>> = 
   motion: {
     title: 'Mișcare',
     nav: 'Mișcare',
-    desc: 'Nouă tehnici',
-    summary: 'Cele nouă tehnici de scroll care dau senzația de film, fiecare cu cod pe care îl poți lipi.',
+    desc: 'Tehnici și rețete',
+    summary: 'Cele nouă tehnici de scroll care dau senzația de film și cinci rețete din site-uri reale, fiecare rulând live lângă codul ei.',
   },
   playground: {
     title: 'Laborator',
@@ -122,6 +131,12 @@ const ro: Record<string, Pick<Chapter, 'title' | 'nav' | 'desc' | 'summary'>> = 
     nav: 'Avansat',
     desc: 'GSAP, Next.js, reparații',
     summary: 'GSAP cu Lenis, timeline-uri de scroll în CSS, o versiune Next.js, reguli de performanță, un tabel de erori și un glosar.',
+  },
+  examples: {
+    title: 'Exemple',
+    nav: 'Exemple',
+    desc: 'Trei site-uri complete',
+    summary: 'O lansare de produs, un portofoliu de studio și un articol lung, fiecare rulând live, cu prompturile și codul complet.',
   },
   launch: {
     title: 'Lansare',
