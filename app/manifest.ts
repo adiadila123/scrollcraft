@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/chapters';
 
+/** Web app manifest: name, colours and icon for installing the site. */
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: SITE_NAME,

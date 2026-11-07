@@ -1,9 +1,6 @@
 /** The site's languages. English lives at the root, Romanian under /ro. */
 export type Locale = 'en' | 'ro';
 
-export const LOCALES: Locale[] = ['en', 'ro'];
-
-export const LANG_NAME: Record<Locale, string> = { en: 'English', ro: 'Română' };
 export const OG_LOCALE: Record<Locale, string> = { en: 'en_GB', ro: 'ro_RO' };
 
 export const localeOf = (pathname: string): Locale => (pathname === '/ro' || pathname.startsWith('/ro/') ? 'ro' : 'en');

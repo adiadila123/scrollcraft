@@ -1,76 +1,76 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Orbit One · a speaker that fills the room</title>
-  <meta name="description" content="A fictional product launch page, built for the Scrollcraft tutorial.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="nav">
-    <a class="brand" href="#top">Orbit</a>
-    <a class="buy" href="#order">Pre-order</a>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Orbit One · a speaker that fills the room</title>
+    <meta name="description" content="A fictional product launch page, built for the Scrollcraft tutorial." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="#top">Orbit</a>
+      <a class="buy" href="#order">Pre-order</a>
+    </header>
 
-  <main id="top">
-    <section class="hero">
-      <h1 class="split">
-        <span class="line"><span>Sound that</span></span>
-        <span class="line"><span>fills the room,</span></span>
-        <span class="line"><span>not the shelf.</span></span>
-      </h1>
-      <p class="sub">A small speaker that plays in every direction.</p>
-      <p class="cue" aria-hidden="true">Scroll</p>
-    </section>
+    <main id="top">
+      <section class="hero">
+        <h1 class="split">
+          <span class="line"><span>Sound that</span></span>
+          <span class="line"><span>fills the room,</span></span>
+          <span class="line"><span>not the shelf.</span></span>
+        </h1>
+        <p class="sub">A small speaker that plays in every direction.</p>
+        <p class="cue" aria-hidden="true">Scroll</p>
+      </section>
 
-    <!-- frame scrub: the canvas draws the product, the captions change with the scroll -->
-    <section class="spin" aria-label="The speaker, turning">
-      <div class="spin-pin">
-        <canvas class="spin-canvas" aria-hidden="true"></canvas>
-        <p class="spin-cap" data-at="0">Sound in every direction.</p>
-        <p class="spin-cap" data-at="0.34">A fabric shell over an aluminium core.</p>
-        <p class="spin-cap" data-at="0.67">One button. Nothing else to learn.</p>
-      </div>
-    </section>
+      <!-- frame scrub: the canvas draws the product, the captions change with the scroll -->
+      <section class="spin" aria-label="The speaker, turning">
+        <div class="spin-pin">
+          <canvas class="spin-canvas" aria-hidden="true"></canvas>
+          <p class="spin-cap" data-at="0">Sound in every direction.</p>
+          <p class="spin-cap" data-at="0.34">A fabric shell over an aluminium core.</p>
+          <p class="spin-cap" data-at="0.67">One button. Nothing else to learn.</p>
+        </div>
+      </section>
 
-    <section class="statement">
-      <p class="words">Put it in the middle of the table and forget where the front is. There isn't one.</p>
-    </section>
+      <section class="statement">
+        <p class="words">Put it in the middle of the table and forget where the front is. There isn't one.</p>
+      </section>
 
-    <!-- product tour: the device stays pinned, the feature crossing the middle sets the screen -->
-    <section class="tour">
-      <div class="tour-device" aria-hidden="true">
-        <div class="tour-screen" data-i="0"><span>Play</span></div>
-      </div>
-      <div class="tour-list">
-        <article class="feat">
-          <span class="num">01</span>
-          <h2>Play</h2>
-          <p>Press once to start the last thing you listened to.</p>
-        </article>
-        <article class="feat">
-          <span class="num">02</span>
-          <h2>Pair</h2>
-          <p>Hold the same button and your phone finds it.</p>
-        </article>
-        <article class="feat">
-          <span class="num">03</span>
-          <h2>Group</h2>
-          <p>Two of them share one song across two rooms.</p>
-        </article>
-      </div>
-    </section>
+      <!-- product tour: the device stays pinned, the feature crossing the middle sets the screen -->
+      <section class="tour">
+        <div class="tour-device" aria-hidden="true">
+          <div class="tour-screen" data-i="0"><span>Play</span></div>
+        </div>
+        <div class="tour-list">
+          <article class="feat">
+            <span class="num">01</span>
+            <h2>Play</h2>
+            <p>Press once to start the last thing you listened to.</p>
+          </article>
+          <article class="feat">
+            <span class="num">02</span>
+            <h2>Pair</h2>
+            <p>Hold the same button and your phone finds it.</p>
+          </article>
+          <article class="feat">
+            <span class="num">03</span>
+            <h2>Group</h2>
+            <p>Two of them share one song across two rooms.</p>
+          </article>
+        </div>
+      </section>
 
-    <section class="order" id="order">
-      <h2>Orbit One</h2>
-      <p>Three colours. Shipping when it is ready.</p>
-      <a class="btn" href="#top">Pre-order</a>
-    </section>
-  </main>
+      <section class="order" id="order">
+        <h2>Orbit One</h2>
+        <p>Three colours. Shipping when it is ready.</p>
+        <a class="btn" href="#top">Pre-order</a>
+      </section>
+    </main>
 
-  <footer class="foot">A fictional product, built for the Scrollcraft tutorial.</footer>
-  <div class="progress" aria-hidden="true"></div>
-  <script src="app.js"></script>
-</body>
+    <footer class="foot">A fictional product, built for the Scrollcraft tutorial.</footer>
+    <div class="progress" aria-hidden="true"></div>
+    <script src="app.js"></script>
+  </body>
 </html>

@@ -2,7 +2,7 @@
 import { persistentStore } from './store';
 
 /** Reading progress: which chapters were finished, which one was open last, and the section being read there. */
-export type Progress = { done: string[]; last?: string; at?: { chapter: string; id: string; label: string } };
+type Progress = { done: string[]; last?: string; at?: { chapter: string; id: string; label: string } };
 
 const store = persistentStore<Progress>('sc-progress', { done: [] });
 

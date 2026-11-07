@@ -40,7 +40,13 @@ export default function Topbar() {
           <span className="kbd-label">{t.nav.search}</span>
           <kbd aria-hidden="true">⌘K</kbd>
         </button>
-        <a className="lang" href={other} hrefLang={locale === 'en' ? 'ro' : 'en'} lang={locale === 'en' ? 'ro' : 'en'} aria-label={`${locale === 'en' ? 'RO' : 'EN'} · ${t.lang.switchLabel}`}>
+        <a
+          className="lang"
+          href={other}
+          hrefLang={locale === 'en' ? 'ro' : 'en'}
+          lang={locale === 'en' ? 'ro' : 'en'}
+          aria-label={`${locale === 'en' ? 'RO' : 'EN'} · ${t.lang.switchLabel}`}
+        >
           {locale === 'en' ? 'RO' : 'EN'}
         </a>
       </div>

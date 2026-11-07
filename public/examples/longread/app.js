@@ -39,7 +39,9 @@ function update() {
      under the map on phones. Checked every frame, so a fast fling or a jump never skips a day. */
   const line = innerHeight * (wide.matches ? 0.55 : 0.72);
   let i = -1;
-  heads.forEach((h, k) => { if (h.getBoundingClientRect().top < line) i = k; });
+  heads.forEach((h, k) => {
+    if (h.getBoundingClientRect().top < line) i = k;
+  });
   if (i !== active) {
     active = i;
     days.forEach((d, k) => d.classList.toggle('on', k === Math.max(0, i)));
@@ -57,11 +59,14 @@ addEventListener('resize', queue);
 update();
 
 /* paragraphs arrive once and stay */
-const revealIO = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('in');
-    revealIO.unobserve(e.target);
-  });
-}, { threshold: 0.15 });
+const revealIO = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      revealIO.unobserve(e.target);
+    });
+  },
+  { threshold: 0.15 },
+);
 document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));

@@ -1,3 +1,4 @@
+/* Social card for each Romanian chapter, rendered at build time from its title and summary. */
 import { chapterRoute } from '@/components/pages/Chapter';
 import { OG_SIZE } from '@/lib/og';
 

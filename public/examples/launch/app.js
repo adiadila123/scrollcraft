@@ -22,10 +22,13 @@ const FRAMES = 120;
 let frame = -1;
 
 function drawFrame(i) {
-  const w = cv.width, h = cv.height;
+  const w = cv.width,
+    h = cv.height;
   const a = (i / FRAMES) * Math.PI * 2;
-  const cx = w / 2, cy = h * 0.44;
-  const R = Math.min(w, h) * 0.17, H = R * 1.5;
+  const cx = w / 2,
+    cy = h * 0.44;
+  const R = Math.min(w, h) * 0.17,
+    H = R * 1.5;
   ctx.clearRect(0, 0, w, h);
   /* glow under the speaker */
   const g = ctx.createRadialGradient(cx, cy + H * 0.7, 0, cx, cy + H * 0.7, R * 2.6);
@@ -82,7 +85,11 @@ function sizeCanvas() {
 /* words light up at the pace of the scroll */
 const statement = document.querySelector('.statement');
 const words = statement.querySelector('.words');
-words.innerHTML = words.textContent.trim().split(/\s+/).map((w) => `<span>${w}</span>`).join(' ');
+words.innerHTML = words.textContent
+  .trim()
+  .split(/\s+/)
+  .map((w) => `<span>${w}</span>`)
+  .join(' ');
 const spans = [...words.children];
 
 const bar = document.querySelector('.progress');
@@ -99,7 +106,9 @@ function update() {
     drawFrame(i);
   }
   let cur = 0;
-  caps.forEach((c, k) => { if (p >= +c.dataset.at) cur = k; });
+  caps.forEach((c, k) => {
+    if (p >= +c.dataset.at) cur = k;
+  });
   caps.forEach((c, k) => c.classList.toggle('on', k === cur));
 
   const lit = Math.round(through(statement) * 1.25 * spans.length);
@@ -113,7 +122,10 @@ const queue = () => {
   }
 };
 addEventListener('scroll', queue, { passive: true });
-addEventListener('resize', () => { sizeCanvas(); queue(); });
+addEventListener('resize', () => {
+  sizeCanvas();
+  queue();
+});
 
 /* product tour: the active feature is the last one whose heading has passed a reading line, checked in the same
    frame as everything else. Fast flings and jumps can never skip one, and the lit text is always the text in view.
@@ -126,7 +138,9 @@ let active = -1;
 function updateTour() {
   const line = innerHeight * (wide.matches ? 0.55 : 0.7);
   let i = 0;
-  heads.forEach((h, k) => { if (h.getBoundingClientRect().top < line) i = k; });
+  heads.forEach((h, k) => {
+    if (h.getBoundingClientRect().top < line) i = k;
+  });
   if (i === active) return;
   active = i;
   feats.forEach((f, k) => f.classList.toggle('on', k === i));

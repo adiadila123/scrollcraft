@@ -79,7 +79,10 @@ const ro: Prompt[] = [
     topic: 'Structură',
     text: 'Creează index.html, style.css și app.js cu HTML, CSS și JavaScript simple, fără framework. Include un hero, trei secțiuni de conținut, un îndemn la acțiune și un footer scurt.',
   },
-  { topic: 'Structură', text: 'Folosește fundal negru, o singură culoare de accent și o pereche de fonturi Google. Definește fiecare culoare ca proprietate CSS personalizată.' },
+  {
+    topic: 'Structură',
+    text: 'Folosește fundal negru, o singură culoare de accent și o pereche de fonturi Google. Definește fiecare culoare ca proprietate CSS personalizată.',
+  },
   {
     topic: 'Scroll lin',
     text: 'Adaugă scroll lin cu Lenis de pe CDN-ul jsDelivr, condus de requestAnimationFrame. Nu îl porni când este setat prefers-reduced-motion.',
@@ -90,7 +93,10 @@ const ro: Prompt[] = [
     text: 'Fă fiecare secțiune să apară o singură dată când intră în ecran: opacitate și o ridicare de 24 px, decalate cu 80 ms între elementele vecine. Nu ascunde niciodată conținutul la loc când derulezi în sus.',
   },
   { topic: 'Apariții', text: 'Unele elemente rămân invizibile. Găsește fiecare .reveal care nu primește niciodată clasa visible și explică de ce.' },
-  { topic: 'Parallax', text: 'Dă hero-ului trei straturi de fundal cu valori data-speed de 0.2, 0.35 și 0.5. Oprește actualizarea după 1,3 înălțimi de ecran.' },
+  {
+    topic: 'Parallax',
+    text: 'Dă hero-ului trei straturi de fundal cu valori data-speed de 0.2, 0.35 și 0.5. Oprește actualizarea după 1,3 înălțimi de ecran.',
+  },
   {
     topic: 'Parallax',
     text: 'Pe un ecran lat de 375 px, parallaxul împinge textul hero-ului în afara ecranului. Redu deplasarea sub 768 px în loc să elimini efectul.',
@@ -103,7 +109,10 @@ const ro: Prompt[] = [
     topic: 'Scrollytelling',
     text: 'Construiește o secțiune de scrollytelling cu o imagine fixă în stânga care se schimbă după pasul activ și patru pași de text în dreapta. Sub 900 px pune-le una sub alta, cu imaginea fixă sus.',
   },
-  { topic: 'Condus de scroll', text: 'Aprinde cuvintele titlului unul câte unul pe măsură ce secțiunea derulează, folosind o secțiune fixată înaltă de 240vh.' },
+  {
+    topic: 'Condus de scroll',
+    text: 'Aprinde cuvintele titlului unul câte unul pe măsură ce secțiunea derulează, folosind o secțiune fixată înaltă de 240vh.',
+  },
   { topic: 'Zoom', text: 'Scalează imaginea de la 1 la 1,5 cât timp traversează ecranul. Folosește doar transform.' },
   {
     topic: '3D',
@@ -113,12 +122,18 @@ const ro: Prompt[] = [
     topic: '3D',
     text: 'Limitează pixel ratio la 2 și înjumătățește numărul de particule sub 768 px. Raportează frame rate-ul măsurat sau spune că nu l-ai putut măsura.',
   },
-  { topic: 'Mobil', text: 'Adaugă sub 760 px o bară de taburi jos în stil iOS, cu spațiere pentru safe area și un indicator care alunecă. Ascunde acolo meniul de sus.' },
+  {
+    topic: 'Mobil',
+    text: 'Adaugă sub 760 px o bară de taburi jos în stil iOS, cu spațiere pentru safe area și un indicator care alunecă. Ascunde acolo meniul de sus.',
+  },
   {
     topic: 'Accesibilitate',
     text: 'Adaugă un link de salt la conținut, stiluri de focus vizibile și aria-current pe elementul de meniu activ. Verifică că fiecare control merge de la tastatură.',
   },
-  { topic: 'Accesibilitate', text: 'Fă ca prefers-reduced-motion să oprească împreună parallaxul, mișcarea aparițiilor și scrollul lin, nu doar unul dintre ele.' },
+  {
+    topic: 'Accesibilitate',
+    text: 'Fă ca prefers-reduced-motion să oprească împreună parallaxul, mișcarea aparițiilor și scrollul lin, nu doar unul dintre ele.',
+  },
   {
     topic: 'Performanță',
     text: 'Listează cele mai grele trei lucruri din pagină după dimensiunea transferată și după timpul pe firul principal. Repară-l pe cel mai greu și măsoară din nou.',

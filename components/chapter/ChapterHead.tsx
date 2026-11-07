@@ -37,7 +37,11 @@ export default function ChapterHead({
   const copy = useRef<HTMLDivElement>(null);
   const { done } = useProgress();
   const { t } = useLocale();
-  const hydrated = useSyncExternalStore(noop, () => true, () => false);
+  const hydrated = useSyncExternalStore(
+    noop,
+    () => true,
+    () => false,
+  );
 
   /* arriving from the previous chapter's end band: its shape flies into place behind this title */
   useEffect(() => {

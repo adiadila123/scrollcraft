@@ -1,83 +1,89 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Long Way North · a coastal walk in five days</title>
-  <meta name="description" content="A fictional editorial long-read, built for the Scrollcraft tutorial.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="progress" aria-hidden="true"></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Long Way North · a coastal walk in five days</title>
+    <meta name="description" content="A fictional editorial long-read, built for the Scrollcraft tutorial." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true"></div>
 
-  <header class="cover">
-    <!-- parallax: the farther the layer, the more it moves with the reader, so it seems to drift by more slowly -->
-    <div class="layer sky" data-speed="0.5" aria-hidden="true"></div>
-    <div class="layer far" data-speed="0.3" aria-hidden="true"></div>
-    <div class="layer near" data-speed="0.1" aria-hidden="true"></div>
-    <div class="cover-text">
-      <p class="kicker">A long read · Fiction</p>
-      <h1>The Long Way North</h1>
-      <p class="standfirst">Five days on foot along a coast that does not want to be hurried.</p>
-    </div>
-  </header>
-
-  <main>
-    <p class="lead reveal">Nobody walks this coast for the view on the first day. The first day is rain, and a path that keeps losing its nerve at the edge of the fields. The view comes later, and only to people who kept going.</p>
-
-    <!-- scrollytelling: the map stays pinned, each day draws more of the route -->
-    <section class="journey">
-      <figure class="map" aria-hidden="true">
-        <svg viewBox="0 0 300 520">
-          <path class="coast" d="M40 510 C 60 440, 20 400, 50 350 S 30 260, 70 220 S 60 120, 110 90 S 170 20, 250 10" />
-          <path class="route-bg" d="M70 490 C 90 430, 60 390, 85 345 S 70 265, 105 230 S 100 140, 140 110 S 190 50, 240 40" />
-          <path class="route" d="M70 490 C 90 430, 60 390, 85 345 S 70 265, 105 230 S 100 140, 140 110 S 190 50, 240 40" />
-          <g class="stops">
-            <circle cx="70" cy="490" r="5" />
-            <circle cx="85" cy="345" r="5" />
-            <circle cx="105" cy="230" r="5" />
-            <circle cx="140" cy="110" r="5" />
-            <circle cx="240" cy="40" r="5" />
-          </g>
-        </svg>
-        <figcaption>Route drawn for illustration. Not to scale.</figcaption>
-      </figure>
-
-      <div class="days">
-        <article class="day">
-          <p class="day-n">Day one</p>
-          <h2>The harbour</h2>
-          <p>We left before the cafés opened. The harbour wall was the last straight line we would see for a while.</p>
-        </article>
-        <article class="day">
-          <p class="day-n">Day two</p>
-          <h2>The salt marsh</h2>
-          <p>The path turned into boardwalk and then into an opinion. We followed the posts and trusted the birds.</p>
-        </article>
-        <article class="day">
-          <p class="day-n">Day three</p>
-          <h2>The cliffs</h2>
-          <p>Up, for most of the morning. At the top the wind took every sentence and gave back only the vowels.</p>
-        </article>
-        <article class="day">
-          <p class="day-n">Day four</p>
-          <h2>The forest</h2>
-          <p>Quiet, after the cliffs. Moss on everything, and a stream that ran beside us like it was also late.</p>
-        </article>
-        <article class="day">
-          <p class="day-n">Day five</p>
-          <h2>The lighthouse</h2>
-          <p>We saw it an hour before we reached it. It did not get closer for most of that hour, and then it did.</p>
-        </article>
+    <header class="cover">
+      <!-- parallax: the farther the layer, the more it moves with the reader, so it seems to drift by more slowly -->
+      <div class="layer sky" data-speed="0.5" aria-hidden="true"></div>
+      <div class="layer far" data-speed="0.3" aria-hidden="true"></div>
+      <div class="layer near" data-speed="0.1" aria-hidden="true"></div>
+      <div class="cover-text">
+        <p class="kicker">A long read · Fiction</p>
+        <h1>The Long Way North</h1>
+        <p class="standfirst">Five days on foot along a coast that does not want to be hurried.</p>
       </div>
-    </section>
+    </header>
 
-    <blockquote class="pull reveal">“The view comes later, and only to people who kept going.”</blockquote>
+    <main>
+      <p class="lead reveal">
+        Nobody walks this coast for the view on the first day. The first day is rain, and a path that keeps losing its nerve at the edge of the fields. The view
+        comes later, and only to people who kept going.
+      </p>
 
-    <p class="reveal">At the lighthouse there was a bench, and on the bench there was nothing to do. We sat on it anyway, for longer than any of the days had taken to describe.</p>
-    <p class="end reveal">A fictional story, written for the Scrollcraft tutorial.</p>
-  </main>
+      <!-- scrollytelling: the map stays pinned, each day draws more of the route -->
+      <section class="journey">
+        <figure class="map" aria-hidden="true">
+          <svg viewBox="0 0 300 520">
+            <path class="coast" d="M40 510 C 60 440, 20 400, 50 350 S 30 260, 70 220 S 60 120, 110 90 S 170 20, 250 10" />
+            <path class="route-bg" d="M70 490 C 90 430, 60 390, 85 345 S 70 265, 105 230 S 100 140, 140 110 S 190 50, 240 40" />
+            <path class="route" d="M70 490 C 90 430, 60 390, 85 345 S 70 265, 105 230 S 100 140, 140 110 S 190 50, 240 40" />
+            <g class="stops">
+              <circle cx="70" cy="490" r="5" />
+              <circle cx="85" cy="345" r="5" />
+              <circle cx="105" cy="230" r="5" />
+              <circle cx="140" cy="110" r="5" />
+              <circle cx="240" cy="40" r="5" />
+            </g>
+          </svg>
+          <figcaption>Route drawn for illustration. Not to scale.</figcaption>
+        </figure>
 
-  <script src="app.js"></script>
-</body>
+        <div class="days">
+          <article class="day">
+            <p class="day-n">Day one</p>
+            <h2>The harbour</h2>
+            <p>We left before the cafés opened. The harbour wall was the last straight line we would see for a while.</p>
+          </article>
+          <article class="day">
+            <p class="day-n">Day two</p>
+            <h2>The salt marsh</h2>
+            <p>The path turned into boardwalk and then into an opinion. We followed the posts and trusted the birds.</p>
+          </article>
+          <article class="day">
+            <p class="day-n">Day three</p>
+            <h2>The cliffs</h2>
+            <p>Up, for most of the morning. At the top the wind took every sentence and gave back only the vowels.</p>
+          </article>
+          <article class="day">
+            <p class="day-n">Day four</p>
+            <h2>The forest</h2>
+            <p>Quiet, after the cliffs. Moss on everything, and a stream that ran beside us like it was also late.</p>
+          </article>
+          <article class="day">
+            <p class="day-n">Day five</p>
+            <h2>The lighthouse</h2>
+            <p>We saw it an hour before we reached it. It did not get closer for most of that hour, and then it did.</p>
+          </article>
+        </div>
+      </section>
+
+      <blockquote class="pull reveal">“The view comes later, and only to people who kept going.”</blockquote>
+
+      <p class="reveal">
+        At the lighthouse there was a bench, and on the bench there was nothing to do. We sat on it anyway, for longer than any of the days had taken to
+        describe.
+      </p>
+      <p class="end reveal">A fictional story, written for the Scrollcraft tutorial.</p>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
 </html>

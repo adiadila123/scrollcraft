@@ -6,3 +6,6 @@ test-results
 playwright-report
 *.tsbuildinfo
 .DS_Store
+
+# local design-tool state (detector ignores, critiques)
+.impeccable

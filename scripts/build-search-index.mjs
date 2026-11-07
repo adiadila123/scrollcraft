@@ -50,7 +50,13 @@ for (const [locale, prefix] of Object.entries(locales)) {
         out.push({ kind: 'section', chapter: names[id], href: `${prefix}/${id}#${anchor}`, title: section, text: '' });
       } else {
         const text = literal(m[3]);
-        out.push({ kind: 'prompt', chapter: names[id], href: `${prefix}/${id}${anchor ? `#${anchor}` : ''}`, title: section ? `${section}: prompt` : 'Prompt', text });
+        out.push({
+          kind: 'prompt',
+          chapter: names[id],
+          href: `${prefix}/${id}${anchor ? `#${anchor}` : ''}`,
+          title: section ? `${section}: prompt` : 'Prompt',
+          text,
+        });
       }
     }
     const prose = src

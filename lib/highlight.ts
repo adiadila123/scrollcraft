@@ -12,7 +12,7 @@ const LANGS: [RegExp, BundledLanguage][] = [
   [/\.md$|^template$/i, 'markdown'],
 ];
 
-export function grammarFor(label: string): BundledLanguage | null {
+function grammarFor(label: string): BundledLanguage | null {
   return LANGS.find(([re]) => re.test(label))?.[1] ?? null;
 }
 

@@ -11,7 +11,8 @@ const here = () => dicts[localeOf(location.pathname)];
 
 /** Longest the loader may hold the page, however slow the network. */
 const MAX_MS = 2500;
-export const LOADER_SEEN = 'sc-loaded';
+/** Session key that skips the loader once it has played; the BOOT script in Shell.tsx reads the same key. */
+const LOADER_SEEN = 'sc-loaded';
 
 /**
  * Intro counter shown once per session, on the home page only. The counter follows real milestones (fonts, the 3D library,

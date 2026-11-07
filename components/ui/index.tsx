@@ -16,7 +16,6 @@ import CodeFrame from './CodeFrame';
 import DemoView from './DemoView';
 
 export { PlatformPanel, PlatformTabs } from './PlatformTabs';
-export { CodeFrame };
 
 /** A copyable code block, syntax highlighted at build time. Prompts and plain text stay unstyled. */
 export async function CodeBlock({ lang, code, codeId }: { lang: string; code: string; codeId?: string }) {

@@ -24,8 +24,28 @@ import * as ro_start from '@/content/ro/start.mdx';
 export type ChapterContent = { default: ComponentType; meta: { title: string; lede: string } };
 
 const content: Record<Locale, Record<string, ChapterContent>> = {
-  en: { start: en_start, skills: en_skills, prompting: en_prompting, build: en_build, motion: en_motion, playground: en_playground, advanced: en_advanced, examples: en_examples, launch: en_launch },
-  ro: { start: ro_start, skills: ro_skills, prompting: ro_prompting, build: ro_build, motion: ro_motion, playground: ro_playground, advanced: ro_advanced, examples: ro_examples, launch: ro_launch },
+  en: {
+    start: en_start,
+    skills: en_skills,
+    prompting: en_prompting,
+    build: en_build,
+    motion: en_motion,
+    playground: en_playground,
+    advanced: en_advanced,
+    examples: en_examples,
+    launch: en_launch,
+  },
+  ro: {
+    start: ro_start,
+    skills: ro_skills,
+    prompting: ro_prompting,
+    build: ro_build,
+    motion: ro_motion,
+    playground: ro_playground,
+    advanced: ro_advanced,
+    examples: ro_examples,
+    launch: ro_launch,
+  },
 };
 
 export function chapterContent(id: string, locale: Locale): ChapterContent | undefined {

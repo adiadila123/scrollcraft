@@ -13,6 +13,12 @@ export function searchIndex(locale: Locale): SearchEntry[] {
   return [
     ...chapters.map((c) => ({ kind: 'chapter' as const, chapter: c.title, href: withLocale(locale, `/${c.id}`), title: c.title, text: c.summary, n: c.n })),
     ...((generated.entries as Record<Locale, SearchEntry[]>)[locale] ?? []),
-    ...prompts[locale].map((p) => ({ kind: 'prompt' as const, chapter: build.title, href: withLocale(locale, '/build#prompt-library'), title: `${p.topic}: prompt`, text: p.text })),
+    ...prompts[locale].map((p) => ({
+      kind: 'prompt' as const,
+      chapter: build.title,
+      href: withLocale(locale, '/build#prompt-library'),
+      title: `${p.topic}: prompt`,
+      text: p.text,
+    })),
   ];
 }

@@ -109,8 +109,7 @@ const en = {
     curve: (v: string) => `Easing curve cubic-bezier(${v})`,
     play: 'Play',
     presets: ['Reveal curve', 'Standard', 'Linear'],
-    easing:
-      'The reveal curve starts fast and settles gently, which is why the example site uses it. Linear motion looks mechanical on interface elements.',
+    easing: 'The reveal curve starts fast and settles gently, which is why the example site uses it. Linear motion looks mechanical on interface elements.',
   },
   home: {
     face: 'A head made of glowing white particles with blue eyes, assembling from particles behind it and reacting to the cursor',

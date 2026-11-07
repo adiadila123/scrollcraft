@@ -65,7 +65,8 @@ test.describe('romanian', () => {
     await page.getByRole('link', { name: 'Citește în română' }).first().click();
     await expect(page).toHaveURL(/\/ro\/build$/);
     await expect(page.locator('h1')).toHaveText('Construiește-l, pas cu pas.');
-    if (!isMobile) await expect(page.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name: 'Construcție' })).toHaveAttribute('aria-current', 'page');
+    if (!isMobile)
+      await expect(page.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name: 'Construcție' })).toHaveAttribute('aria-current', 'page');
     await page.getByRole('link', { name: 'Read in English' }).first().click();
     await expect(page).toHaveURL(/\/build$/);
   });
@@ -278,7 +279,11 @@ test.describe('features', () => {
 
   test('an example opens on its own screen, steps to the next one and goes back', async ({ page }) => {
     await page.goto('/examples');
-    await page.locator('.ex-ctas').first().getByRole('link', { name: /View full screen/ }).click();
+    await page
+      .locator('.ex-ctas')
+      .first()
+      .getByRole('link', { name: /View full screen/ })
+      .click();
     await expect(page).toHaveURL(/\/examples\/launch$/);
     await expect(page.locator('h1')).toContainText('Orbit One');
     await expect(page.frameLocator('.vw-frame').locator('h1')).toContainText('Sound that');

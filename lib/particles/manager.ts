@@ -186,11 +186,10 @@ export function landFlight(cv: HTMLCanvasElement | null | undefined, kind: strin
   const r = cv.getBoundingClientRect();
   const s = Math.min(r.width, r.height);
   if (!s) return;
-  const dx = f.x - (r.left + r.width / 2), dy = f.y - (r.top + r.height / 2), k = f.s / s;
-  cv.animate(
-    [{ transform: `translate(${dx}px, ${dy}px) scale(${k})` }, { transform: 'none' }],
-    { duration: 1100, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
-  );
+  const dx = f.x - (r.left + r.width / 2),
+    dy = f.y - (r.top + r.height / 2),
+    k = f.s / s;
+  cv.animate([{ transform: `translate(${dx}px, ${dy}px) scale(${k})` }, { transform: 'none' }], { duration: 1100, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
 }
 
 /** Tells the manager how visible a canvas is (its opacity), so faded-out backdrops cost little or nothing. */
@@ -204,7 +203,19 @@ export function register(cv: HTMLCanvasElement, kind: string): () => void {
   const ctx = cv.getContext('2d');
   if (!ctx) return () => {};
   if (!insts.size) setup();
-  const inst: Inst = { cv, kind, ctx, shape: kind === 'face' ? null : makeShape(kind), vis: false, ready: false, painted: false, dpr: 1, mx: 0, my: 0, level: 1 };
+  const inst: Inst = {
+    cv,
+    kind,
+    ctx,
+    shape: kind === 'face' ? null : makeShape(kind),
+    vis: false,
+    ready: false,
+    painted: false,
+    dpr: 1,
+    mx: 0,
+    my: 0,
+    level: 1,
+  };
   insts.set(cv, inst);
   ro!.observe(cv);
   io!.observe(cv);

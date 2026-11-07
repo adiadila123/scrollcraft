@@ -5,14 +5,14 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const ROOTS = ['components', 'lib', 'app'];
+const ROOTS = ['components', 'lib', 'app', 'content'];
 const SKIP = [/^https:\/\/stackblitz\.com\/run/, /localhost/];
 
 async function* files(dir) {
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
     if (e.isDirectory()) yield* files(p);
-    else if (/\.(tsx?|mjs)$/.test(e.name)) yield p;
+    else if (/\.(tsx?|mjs|mdx)$/.test(e.name)) yield p;
   }
 }
 

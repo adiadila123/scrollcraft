@@ -5,4 +5,3 @@ import { persistentStore } from './store';
 export type Project = { subject: string; audience: string; action: string };
 
 export const project = persistentStore<Project>('sc-project', { subject: '', audience: '', action: '' });
-

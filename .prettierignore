@@ -7,3 +7,7 @@ lib/search-index.json
 # Dense on purpose: the stylesheet and the particle maths read better one rule or statement per line.
 app/globals.css
 lib/particles/shapes.ts
+# MDX chapter text: Prettier wraps long JSX text over several lines, and MDX turns each wrapped line into an
+# extra paragraph. Text inside components stays on one line by hand (see README, Adding a chapter).
+content/**/*.mdx
+.impeccable

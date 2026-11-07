@@ -8,6 +8,7 @@ import { chapterHref, chaptersFor } from '@/lib/chapters';
 import { dicts } from '@/lib/dict';
 import type { Locale } from '@/lib/i18n';
 
+/** The home page in either language: loader, particle hero, the course outline and a resume link for returning readers. */
 export default function HomePage({ locale }: { locale: Locale }) {
   const t = dicts[locale].home;
   const start = chapterHref('start', locale);

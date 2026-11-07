@@ -5,6 +5,7 @@ import { withLocale } from '@/lib/i18n';
 
 export const metadata: Metadata = { alternates: { canonical: withLocale('ro', '/'), languages: alternates('/') } };
 
+/** The Romanian home page at /ro. */
 export default function Home() {
   return <HomePage locale="ro" />;
 }

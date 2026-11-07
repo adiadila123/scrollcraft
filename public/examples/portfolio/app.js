@@ -15,7 +15,8 @@ function revealClips() {
     if (r.bottom < 0 || r.top > innerHeight) return;
     const p = still ? 1 : clamp((innerHeight - r.top) / (innerHeight * 0.85), 0, 1);
     const e = 1 - (1 - p) ** 3;
-    const y = 18 * (1 - e), x = 24 * (1 - e);
+    const y = 18 * (1 - e),
+      x = 24 * (1 - e);
     fig.style.clipPath = `inset(${y}% ${x}% ${y}% ${x}%)`;
     fig.firstElementChild.style.transform = `scale(${(1.25 - 0.25 * e).toFixed(3)})`;
   });
@@ -48,18 +49,27 @@ const queue = () => {
   }
 };
 addEventListener('scroll', queue, { passive: true });
-addEventListener('resize', () => { measure(); queue(); });
+addEventListener('resize', () => {
+  measure();
+  queue();
+});
 measure();
 update();
 
 /* marquee: a steady drift plus a boost from scroll speed that fades out. The text is repeated so it wraps without a gap. */
 const row = document.querySelector('.marquee-row');
-row.textContent = row.textContent.repeat(6);
-let x = 0, boost = 0, lastY = scrollY;
-addEventListener('scroll', () => {
-  boost = Math.min(60, boost + Math.abs(scrollY - lastY) * 0.3);
+row.textContent = `${row.textContent.trim()} `.repeat(6);
+let x = 0,
+  boost = 0,
   lastY = scrollY;
-}, { passive: true });
+addEventListener(
+  'scroll',
+  () => {
+    boost = Math.min(60, boost + Math.abs(scrollY - lastY) * 0.3);
+    lastY = scrollY;
+  },
+  { passive: true },
+);
 function drift() {
   boost *= 0.92;
   x -= 0.5 + boost * 0.12;

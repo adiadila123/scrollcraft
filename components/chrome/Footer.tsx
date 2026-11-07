@@ -4,6 +4,7 @@ import { dicts } from '@/lib/dict';
 import { withLocale, type Locale } from '@/lib/i18n';
 import BackToTop from './BackToTop';
 
+/** The footer: every chapter, the official docs the tutorial relies on, the language switch and back to top. */
 type Ext = { href: string; label: string };
 const docs: Ext[] = [
   { href: 'https://code.claude.com/docs/en/skills', label: 'Claude Code skills' },
@@ -41,7 +42,12 @@ export default function Footer({ locale }: { locale: Locale }) {
               Scrollcraft
             </Link>
             <p>{t.blurb}</p>
-            <a className="f-lang" href={withLocale(locale === 'en' ? 'ro' : 'en', '/')} hrefLang={locale === 'en' ? 'ro' : 'en'} lang={locale === 'en' ? 'ro' : 'en'}>
+            <a
+              className="f-lang"
+              href={withLocale(locale === 'en' ? 'ro' : 'en', '/')}
+              hrefLang={locale === 'en' ? 'ro' : 'en'}
+              lang={locale === 'en' ? 'ro' : 'en'}
+            >
               {dicts[locale].lang.switchTo}
             </a>
           </div>

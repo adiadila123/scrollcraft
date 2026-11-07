@@ -7,6 +7,7 @@ export const alt = `Scrollcraft: ${t.title}`;
 export const size = OG_SIZE;
 export const contentType = 'image/png';
 
+/** The Romanian home page social card, rendered at build time. */
 export default function Image() {
   return ogImage({ tag: t.tag, kicker: t.kicker, title: t.title, sub: t.sub });
 }

@@ -35,12 +35,15 @@ export default function DemoView({
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        setLive(true);
-        io.disconnect();
-      }
-    }, { rootMargin: '400px 0px' });
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setLive(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: '400px 0px' },
+    );
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -80,10 +83,10 @@ export default function DemoView({
         </div>
       </div>
       <div className="dm-body">
-        <div className="dm-stage">
-          {live ? <iframe key={run} title={t.demo.title(name)} src={src} srcDoc={doc} sandbox="allow-scripts" /> : null}
+        <div className="dm-stage">{live ? <iframe key={run} title={t.demo.title(name)} src={src} srcDoc={doc} sandbox="allow-scripts" /> : null}</div>
+        <div className="dm-code" data-lenis-prevent="">
+          {files[file].node}
         </div>
-        <div className="dm-code" data-lenis-prevent="">{files[file].node}</div>
       </div>
     </figure>
   );

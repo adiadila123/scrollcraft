@@ -5,7 +5,7 @@
 export type DemoSource = { html: string; css: string; js?: string };
 
 /** Shared look for every preview, so the snippets stay about the technique. Not shown in the code tabs. */
-export const DEMO_BASE = `*,*::before,*::after{box-sizing:border-box}
+const DEMO_BASE = `*,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;background:#000;color:#eaf0f4;font:400 15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 .hint{position:fixed;left:10px;bottom:10px;z-index:99;padding:6px 8px;background:rgba(0,0,0,.75);font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:#7f8c95;pointer-events:none}`;
 
