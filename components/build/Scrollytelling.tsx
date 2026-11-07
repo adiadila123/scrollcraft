@@ -1,12 +1,14 @@
 'use client';
 import { useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
+import { useLocale } from '@/lib/useLocale';
 import { useScroll } from '@/lib/useScroll';
 
 export type Stage = { name: string; text: string; art: string; extra?: ReactNode };
 
 /** Technique 9: a sticky scene on one side changes with the text step nearest the reading line. */
-export default function Scrollytelling({ stages }: { stages: Stage[] }) {
+export default function Scrollytelling({ stages, heading, title }: { stages: Stage[]; heading: string; title: string }) {
+  const t = useLocale().t.loop;
   const [cur, setCur] = useState(0);
   const steps = useRef<(HTMLElement | null)[]>([]);
 
@@ -30,7 +32,7 @@ export default function Scrollytelling({ stages }: { stages: Stage[] }) {
     <section className="sec">
       <div className="stick" id="the-loop">
         <h2 className="mono stick-h" tabIndex={-1}>
-          01 · The loop
+          {heading}
         </h2>
         <span className="mono" aria-live="polite">
           {stages[cur].name}
@@ -38,7 +40,7 @@ export default function Scrollytelling({ stages }: { stages: Stage[] }) {
       </div>
       <div className="sec-head">
         <h3 className="sec-h" style={{ maxWidth: '18ch' } as CSSProperties}>
-          Every step runs the same four-part loop.
+          {title}
         </h3>
       </div>
       <div className="scrolly">
@@ -46,7 +48,7 @@ export default function Scrollytelling({ stages }: { stages: Stage[] }) {
           {stages.map((s, i) => (
             <div className="vpanel" key={s.name} hidden={i !== cur}>
               <div className="vlabel mono">
-                Stage {String(i + 1).padStart(2, '0')} · {s.name}
+                {t.stage} {String(i + 1).padStart(2, '0')} · {s.name}
               </div>
               <ParticleCanvas kind={s.art} />
               {s.extra}

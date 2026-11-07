@@ -4,29 +4,30 @@ import Hero from '@/components/home/Hero';
 import Loader from '@/components/home/Loader';
 import { ParallaxBand, Resume, Statement, ZoomFigure } from '@/components/home/ScrollFx';
 import { Cell, Page, Row } from '@/components/ui';
-import { chapters } from '@/lib/chapters';
+import { chapterHref, chaptersFor } from '@/lib/chapters';
+import { dicts } from '@/lib/dict';
+import type { Locale } from '@/lib/i18n';
 
-export default function HomePage() {
+export default function HomePage({ locale }: { locale: Locale }) {
+  const t = dicts[locale].home;
+  const start = chapterHref('start', locale);
   return (
-    <Page route="home">
+    <Page route="home" locale={locale}>
       <Loader />
       <Hero
         copy={
           <>
             <h1>
-              <span>Build a cinematic</span>
-              <span>website with AI.</span>
+              <span>{t.titleA}</span>
+              <span>{t.titleB}</span>
             </h1>
-            <p className="lede">
-              A free tutorial: from an empty folder to a published site, with Claude, Gemini or ChatGPT. Which skills to use, where to find them, how to install
-              them, and the prompts and code for every step.
-            </p>
+            <p className="lede">{t.lede}</p>
             <div className="ctas">
-              <Link className="btn" href="/start" data-magnetic="">
-                Start the tutorial <span aria-hidden="true">→</span>
+              <Link className="btn" href={start} data-magnetic="">
+                {t.start} <span aria-hidden="true">→</span>
               </Link>{' '}
-              <Link className="ghost" href="/motion">
-                See the nine scroll techniques
+              <Link className="ghost" href={chapterHref('motion', locale)}>
+                {t.techniques}
               </Link>
             </div>
             <Resume />
@@ -34,24 +35,21 @@ export default function HomePage() {
         }
         foot={
           <>
-            <div>Claude, Gemini, ChatGPT</div>
-            <div>Skills explained</div>
-            <div>Prompts and code</div>
+            {t.foot.map((f) => (
+              <div key={f}>{f}</div>
+            ))}
           </>
         }
       />
-      <Statement
-        text="A cinematic site is not a bigger budget. It is pacing. The scroll becomes the camera and the page becomes the set."
-        dim="You direct. The AI builds, and you check every frame."
-      />
+      <Statement text={t.statement} dim={t.statementDim} />
       <ZoomFigure />
       <section className="wrap sec rows-sec">
         <div className="sec-head rv">
-          <h2 style={{ maxWidth: '18ch' } as CSSProperties}>Eight chapters, in order.</h2>
+          <h2 style={{ maxWidth: '18ch' } as CSSProperties}>{t.eight}</h2>
         </div>
         <div className="rows">
-          {chapters.map((c) => (
-            <Row key={c.id} cls="rv" num={c.n} title={<Link href={`/${c.id}`}>{c.title}</Link>}>
+          {chaptersFor(locale).map((c) => (
+            <Row key={c.id} cls="rv" num={c.n} title={<Link href={chapterHref(c.id, locale)}>{c.title}</Link>}>
               <p>{c.summary}</p>
             </Row>
           ))}
@@ -59,28 +57,21 @@ export default function HomePage() {
       </section>
       <section className="wrap sec rv">
         <div className="sec-head">
-          <h2 style={{ maxWidth: '20ch' } as CSSProperties}>Four things at the end.</h2>
+          <h2 style={{ maxWidth: '20ch' } as CSSProperties}>{t.four}</h2>
         </div>
         <div className="cells">
-          <Cell mono="01" title="A working site">
-            <p>Smooth inertial scrolling, a parallax hero, reveals, one pinned moment and a mobile layout.</p>
-          </Cell>
-          <Cell mono="02" title="Your own skill">
-            <p>A reusable cinematic-scroll skill you can install in Claude, Gemini or Codex.</p>
-          </Cell>
-          <Cell mono="03" title="A prompt library">
-            <p>Twenty-four prompts for briefing, building, fixing and reviewing.</p>
-          </Cell>
-          <Cell mono="04" title="A launch checklist">
-            <p>Twelve checks to run before anyone else sees the page.</p>
-          </Cell>
+          {t.cells.map(([title, text], i) => (
+            <Cell key={title} mono={String(i + 1).padStart(2, '0')} title={title}>
+              <p>{text}</p>
+            </Cell>
+          ))}
         </div>
       </section>
       <ParallaxBand>
         <div className="wrap band rv">
-          <h2 style={{ maxWidth: '16ch' } as CSSProperties}>Open an empty folder.</h2>
-          <Link className="btn" href="/start" data-magnetic="">
-            Start the tutorial <span aria-hidden="true">→</span>
+          <h2 style={{ maxWidth: '16ch' } as CSSProperties}>{t.closing}</h2>
+          <Link className="btn" href={start} data-magnetic="">
+            {t.start} <span aria-hidden="true">→</span>
           </Link>
         </div>
       </ParallaxBand>

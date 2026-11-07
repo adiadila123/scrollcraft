@@ -1,0 +1,192 @@
+export const meta = {
+  title: "Skilluri: ce sunt, unde le găsești, cum le instalezi.",
+  lede: "Un skill e un folder cu instrucțiuni pe care AI-ul îl încarcă doar când sarcina se potrivește. E diferența dintre a cere un site frumos și a-ți vedea regulile respectate de fiecare dată.",
+};
+
+<section className="sec">
+  <Stick left="01 · Ce este un skill" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Un folder cu un singur fișier obligatoriu">
+      <p>Un skill e un folder cu numele skillului. Singurul fișier obligatoriu e <code className="i">SKILL.md</code>. Folderele opționale conțin referințe, șabloane și scripturi.</p>
+      <CodeBlock
+        lang="text"
+        code={
+          'cinematic-scroll/\n├── SKILL.md          obligatoriu: nume, descriere, instrucțiuni\n├── references/       opțional: note mai lungi, citite doar la nevoie\n├── assets/           opțional: șabloane și fișiere de copiat\n└── scripts/          opțional: cod pe care AI-ul îl poate rula'
+        }
+      />
+    </Row>
+    <Row cls="rv" num="b" title="Descrierea decide când se încarcă">
+      <p>AI-ul citește întâi numele și descrierea fiecărui skill și încarcă instrucțiunile complete doar când cererea ta se potrivește. O descriere vagă înseamnă că skillul nu pornește niciodată. Spune ce face și când să fie folosit, cu cuvintele pe care chiar le-ai scrie.</p>
+    </Row>
+    <Row cls="rv" num="c" title="E un format deschis">
+      <p>Skillurile urmează{' '}<a className="ext" href="https://agentskills.io/specification" target="_blank" rel="noopener">specificația Agent Skills</a>. Numele folosește litere mici, cifre și cratime (cel mult 64 de caractere) și trebuie să fie identic cu numele folderului. Descrierea poate avea până la 1.024 de caractere. Claude, Gemini CLI și Codex citesc toate această structură.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Unde găsești skilluri" right="Citește-le înainte să le instalezi" />
+  <div className="cells rv">
+    <Cell title="Repository-ul Anthropic">
+      <p>Exemple funcționale pe care le poți citi și copia, printre ele brand-guidelines, internal-comms, pdf și skill-creator.{' '}<a className="ext" href="https://github.com/anthropics/skills" target="_blank" rel="noopener">github.com/anthropics/skills</a></p>
+    </Cell>
+    <Cell title="Marketplace-ul de pluginuri Claude">
+      <p>În Claude Code, adaugi marketplace-ul oficial și instalezi din el. Comenzile sunt în secțiunea de instalare de mai jos.</p>
+    </Cell>
+    <Cell title="skills.sh">
+      <p>Un director făcut de Vercel, cu clasament, teme, agenți compatibili și o secțiune de audituri. Oferă și instalatorul npx skills.{' '}<a className="ext" href="https://www.skills.sh" target="_blank" rel="noopener">skills.sh</a></p>
+    </Cell>
+    <Cell title="Autorii de biblioteci">
+      <p>GSAP își publică propriile skilluri pentru pluginurile de animație.{' '}<a className="ext" href="https://github.com/greensock/gsap-skills" target="_blank" rel="noopener">github.com/greensock/gsap-skills</a></p>
+    </Cell>
+    <Cell title="Al tău">
+      <p>Cel mai de încredere skill e cel care îți conține regulile. Ultima secțiune a capitolului îți dă unul complet de copiat.</p>
+    </Cell>
+  </div>
+  <div style={{ marginTop: '28px' }} className="rv">
+    <Callout>Un skill poate conține scripturi pe care AI-ul le rulează pe calculatorul tău. Deschide SKILL.md și orice fișier din <code className="i">scripts/</code> înainte să instalezi un skill de la cineva pe care nu-l cunoști. Preferă repository-urile oficiale și autorii cu istoric, iar un număr mare de instalări înseamnă popularitate, nu dovadă de siguranță.</Callout>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Instalează un skill" right="Pe platformă" />
+  <div className="rv" style={{ marginBottom: '8px' }}>
+    <PlatformTabs />
+  </div>
+  <PlatformPanel p="claude">
+    <div className="rows" style={{ marginTop: '20px' }}>
+      <Row cls="rv" num="A" title="Claude Code: copiezi un folder">
+        <p>Pune folderul skillului în folderul tău personal de skilluri ca să-l folosești în orice proiect, sau în proiect ca să-l împarți cu echipa. Claude Code urmărește aceste foldere, deci nu trebuie repornit.</p>
+        <CodeBlock
+          lang="bash"
+          code={
+            '# personal\ncp -r cinematic-scroll ~/.claude/skills/\n# doar în proiect\nmkdir -p .claude/skills && cp -r cinematic-scroll .claude/skills/'
+          }
+        />
+        <p>Îl rulezi cu <code className="i">/cinematic-scroll</code> sau descrii o sarcină care se potrivește cu descrierea lui.</p>
+      </Row>
+      <Row cls="rv" num="B" title="Claude Code: din marketplace">
+        <p>Pluginurile conțin skilluri. Adaugi o dată un marketplace, instalezi ce vrei, apoi reîncarci.</p>
+        <CodeBlock
+          lang="în Claude Code"
+          code={'/plugin marketplace add anthropics/claude-plugins-official\n/plugin install skill-creator@claude-plugins-official\n/reload-plugins'}
+        />
+      </Row>
+      <Row cls="rv" num="C" title="claude.ai: încarci o arhivă zip">
+        <p>Activează execuția de cod și crearea de fișiere, deschide secțiunea Skills din setări (documentația actuală o numește Customize, apoi Skills), alege Upload skill și selectează o arhivă zip. Arhiva trebuie să conțină chiar folderul skillului la primul nivel, iar numele folderului trebuie să fie identic cu numele skillului. Disponibil pe abonamentele Pro, Max, Team și Enterprise.</p>
+        <CodeBlock
+          lang="bash"
+          code={'zip -r cinematic-scroll.zip cinematic-scroll/\nunzip -l cinematic-scroll.zip   # fiecare rând trebuie să înceapă cu cinematic-scroll/'}
+        />
+      </Row>
+    </div>
+    <p className="muted">Surse:{' '}<a className="ext" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Skilluri în Claude Code</a>,{' '}<a className="ext" href="https://support.claude.com/en/articles/12512180-using-skills-in-claude" target="_blank" rel="noopener">Folosirea skillurilor în Claude</a>,{' '}<a className="ext" href="https://claude.com/docs/skills/how-to" target="_blank" rel="noopener">Crearea skillurilor proprii</a></p>
+  </PlatformPanel>
+  <PlatformPanel p="gemini">
+    <div className="rows" style={{ marginTop: '20px' }}>
+      <Row cls="rv" num="A" title="Copiezi un folder">
+        <p>Gemini CLI citește skillurile din folderul tău personal sau din proiect. Merge și aliasul <code className="i">.agents/skills/</code>, care are prioritate față de <code className="i">.gemini/skills/</code> în același nivel.</p>
+        <CodeBlock
+          lang="bash"
+          code={
+            '# personal\ncp -r cinematic-scroll ~/.gemini/skills/\n# doar în proiect\nmkdir -p .gemini/skills && cp -r cinematic-scroll .gemini/skills/'
+          }
+        />
+      </Row>
+      <Row cls="rv" num="B" title="Instalezi din Git">
+        <p>Instalează un skill direct dintr-un repository, apoi verifică dacă Gemini îl vede.</p>
+        <CodeBlock lang="bash" code={'gemini skills install <git-url> --consent'} />
+        <CodeBlock lang="în Gemini CLI" code={'/skills list\n/skills reload\n/skills disable <name>'} />
+        <p>Prima dată când rulează o sarcină potrivită, Gemini îți cere confirmarea înainte să încarce skillul.</p>
+      </Row>
+    </div>
+    <p className="muted">Sursă: un ghid independent,{' '}<a className="ext" href="https://dev.to/skillgild/how-to-add-skills-to-gemini-cli-12o0" target="_blank" rel="noopener">How to add skills to Gemini CLI</a>. Comenzile se pot schimba, așa că rulează <code className="i">/skills list</code> ca să confirmi.</p>
+  </PlatformPanel>
+  <PlatformPanel p="chatgpt">
+    <div className="rows" style={{ marginTop: '20px' }}>
+      <Row cls="rv" num="A" title="Codex CLI: copiezi un folder">
+        <p>Codex caută în proiect, în rădăcina repository-ului și în folderul tău personal. Pornește o sesiune nouă după instalare.</p>
+        <CodeBlock
+          lang="bash"
+          code={
+            '# personal\nmkdir -p ~/.agents/skills && cp -r cinematic-scroll ~/.agents/skills/\n# doar în proiect\nmkdir -p .agents/skills && cp -r cinematic-scroll .agents/skills/'
+          }
+        />
+        <p>Îl rulezi cu <code className="i">$cinematic-scroll</code> sau descrii sarcina. Codex vine și cu <code className="i">$skill-creator</code> și{' '}<code className="i">$skill-installer</code>.</p>
+      </Row>
+      <Row cls="rv" num="B" title="Site-ul ChatGPT: îi ceri să construiască unul">
+        <p>Începe un chat cu „Construiește-mi un skill care…” și descrie sarcina, datele de intrare, pașii, formatul rezultatului și verificările de calitate. ChatGPT schițează skillul într-un panou, tu îl rafinezi și apeși Install. Mai târziu îl folosești lăsându-l pe ChatGPT să-l aleagă sau menționându-l cu @. În beta, proprietarii de workspace activează skillurile din setările workspace-ului.</p>
+      </Row>
+    </div>
+    <p className="muted">Surse:{' '}<a className="ext" href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">OpenAI, Build skills</a>,{' '}<a className="ext" href="https://academy.openai.com/public/resources/skills" target="_blank" rel="noopener">OpenAI Academy, Skills</a>.</p>
+  </PlatformPanel>
+  <div className="rows" style={{ marginTop: '36px' }}>
+    <Row cls="rv" num="Oricare" title="Un singur instalator pentru mulți agenți">
+      <p>Unealta npx skills descarcă un skill și îl leagă în folderul potrivit pentru agentul ales. Printre cei peste 27 de agenți compatibili sunt Claude Code, Gemini CLI, Codex, GitHub Copilot și Cursor.</p>
+      <CodeBlock
+        lang="bash"
+        code={
+          '# toate skillurile dintr-un repository\nnpx skills add vercel-labs/agent-skills\n# un singur skill\nnpx skills add vercel-labs/agent-skills --skill frontend-design\n# pentru un singur agent\nnpx skills add vercel-labs/agent-skills -a codex\nnpx skills list'
+        }
+      />
+      <p>Sursă: o prezentare independentă a CLI-ului Vercel skills. Verifică documentația proiectului pentru opțiunile actuale.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Skillurile pentru un site cinematic" right="Ce să cauți" />
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Tabel. Derulează în lateral ca să vezi toate coloanele.">
+    <table>
+      <thead>
+        <tr>
+          <th>Rol</th>
+          <th>Ce să cauți</th>
+          <th>De ce ajută</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Direcție de design</td>
+          <td>frontend design, UI design</td>
+          <td>Îndepărtează tipografia, culorile și layoutul de valorile implicite ale șabloanelor.</td>
+        </tr>
+        <tr>
+          <td>Rețeta de scroll</td>
+          <td>cinematic scroll, scrollytelling, parallax</td>
+          <td>Conține regulile pentru scroll lin, apariții și parallax, plus ce să eviți.</td>
+        </tr>
+        <tr>
+          <td>Biblioteca de animație</td>
+          <td>GSAP, ScrollTrigger</td>
+          <td>Folosirea corectă a pluginurilor. GSAP și pluginurile lui sunt gratuite din 2025, vezi pagina de licență.</td>
+        </tr>
+        <tr>
+          <td>3D sau particule</td>
+          <td>three.js, shaders, WebGL</td>
+          <td>Configurarea scenei, puncte, shadere, interacțiune și performanță.</td>
+        </tr>
+        <tr>
+          <td>Calitate</td>
+          <td>accessibility review, skill creator</td>
+          <td>Verifică contrastul și folosirea de la tastatură și testează că propriul skill chiar pornește.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p className="muted rv" style={{ marginTop: '20px', maxWidth: '62ch' }}>Chiar acest site a fost construit cu trei skilluri din setup-ul autorului: un skill artifact-design pentru regulile de layout și temă, un skill motion-design pentru principiile de easing și spring, și un skill cinematic-scroll-website pentru regulile Lenis, de apariție și de parallax. Este posibil ca aceste nume să nu existe în catalogul tău. Caută pe skills.sh cuvintele din tabel.</p>
+</section>
+<section className="sec">
+  <Stick left="05 · Scrie-ți propriul skill" right="Copiază acest fișier" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Dacă nu găsești un skill în care să ai încredere, scrie unul. Acesta e un skill complet pentru scroll cinematic. Salvează-l ca{' '}<code className="i">cinematic-scroll/SKILL.md</code>, apoi instalează folderul cu oricare metodă de mai sus.</p>
+  <div className="rv">
+    <CodeBlock
+      lang="SKILL.md"
+      code={
+        '---\nname: cinematic-scroll\ndescription: Construiește sau verifică un site modern și minimalist cu scroll cinematic: scroll lin cu inerție, hero cu parallax, apariții la scroll și un moment fixat. Folosește-l când utilizatorul cere un site cinematic, cu scrollytelling, parallax sau scroll lin.\n---\n\n# Scroll cinematic\n\n## Reguli\n1. Folosește Lenis pentru scroll lin și condu-l din requestAnimationFrame.\n2. Hero-ul are două sau trei straturi de fundal cu data-speed între 0.15 și 0.5.\n3. Fiecare secțiune de după hero stă în fluxul normal al documentului.\n4. Conținutul apare o singură dată, cu opacitate și un translateY mic, când intră în ecran.\n5. Cel mult o secțiune fixată pe pagină: scroll orizontal sau scrollytelling.\n6. Nu folosi niciodată scroll-snap-type: y mandatory sau slide-uri pe tot ecranul.\n7. Respectă prefers-reduced-motion: fără scroll lin, fără parallax, fără mișcare la apariție.\n8. Nu inventa niciodată statistici, testimoniale sau logouri de clienți.\n\n## Proces\n1. Cere subiectul, publicul și acțiunea pe care trebuie s-o facă vizitatorul.\n2. Propune lista de secțiuni și așteaptă aprobarea înainte să scrii cod.\n3. Construiește cu HTML, CSS și JavaScript simple, în trei fișiere, dacă nu ți se spune altfel.\n4. Servește prin HTTP, apoi verifică lățimile de 375, 768 și 1440 px.\n5. Raportează ce ai testat și ce nu.'
+      }
+    />
+  </div>
+  <div className="rows" style={{ marginTop: '28px' }}>
+    <Row cls="rv" num="Test" title="Verifică dacă se încarcă">
+      <p>Întreabă AI-ul „Ce skilluri ai?” sau folosește <code className="i">/skills list</code> în Gemini CLI. Apoi trimite o cerere care ar trebui să-l pornească, de exemplu „Construiește un site cu scroll lin și hero cu parallax”. Dacă nu pornește, rescrie descrierea cu cuvintele pe care le-ai folosit.</p>
+    </Row>
+  </div>
+</section>

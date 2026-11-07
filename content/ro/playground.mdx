@@ -1,0 +1,23 @@
+export const meta = {
+  title: "Laborator: schimbă numerele și vezi ce se întâmplă.",
+  lede: "Patru experimente mici. Fiecare arată cum o singură setare schimbă senzația unui site cu scroll și afișează rândul de cod de copiat.",
+};
+
+<section className="sec">
+  <Stick left="01 · Netezire" right="Lerp în Lenis" />
+  <p className="lede rv" style={{ marginTop: '0' }}>La fiecare cadru, Lenis mută pagina o fracțiune din drumul până unde ai derulat. Fracțiunea aceea e <code className="i">lerp</code>. Dă clic sau trage pe bară ca să setezi o țintă.</p>
+  <LerpLab />
+</section>
+<section className="sec">
+  <Stick left="02 · Parallax" right="Viteza stratului" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Derulează în casetă. Punctele urmează formula din exemplu: <code className="i">translateY = scroll × (1 − speed)</code>.</p>
+  <ParallaxLab />
+</section>
+<section className="sec">
+  <Stick left="03 · Decalaj" right="Ritmul aparițiilor" />
+  <StaggerLab />
+</section>
+<section className="sec">
+  <Stick left="04 · Easing" right="Cubic Bezier" />
+  <EasingLab />
+</section>

@@ -1,16 +1,22 @@
 'use client';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { boot } from '@/lib/boot';
+import { dicts, type Dict } from '@/lib/dict';
+import { localeOf } from '@/lib/i18n';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useScroll } from '@/lib/useScroll';
+import { useLocale } from '@/lib/useLocale';
 
-const label = (pct: number) => (pct >= 100 ? 'Presence ready' : `Assembling ${String(pct).padStart(3, '0')}%`);
+const label = (t: Dict, pct: number) => (pct >= 100 ? t.home.ready : t.home.assembling(String(pct).padStart(3, '0')));
+/* inside effects, read the language straight from the address: it never changes within one document */
+const here = () => dicts[localeOf(location.pathname)];
 
 /**
  * The particle head. three.js and the scene load after hydration, so the copy paints first and other pages never
  * download the 3D library. If WebGL is missing, a still version of the face is shown instead.
  */
 export default function Hero({ copy, foot }: { copy: ReactNode; foot: ReactNode }) {
+  const { t } = useLocale();
   const host = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
@@ -31,7 +37,7 @@ export default function Hero({ copy, foot }: { copy: ReactNode; foot: ReactNode 
           reduced: prefersReducedMotion(),
           canStart: () => boot.get().loaderDone,
           onProgress: (pct) => {
-            if (stateRef.current) stateRef.current.textContent = label(pct);
+            if (stateRef.current) stateRef.current.textContent = label(here(), pct);
           },
           onReady: () => boot.set({ hero: true }),
           onError: (msg) => {
@@ -41,7 +47,7 @@ export default function Hero({ copy, foot }: { copy: ReactNode; foot: ReactNode 
         });
       })
       .catch(() => {
-        setError('The 3D scene could not be loaded.');
+        setError(here().home.sceneError);
         boot.set({ failed: true });
       });
     return () => {
@@ -64,11 +70,7 @@ export default function Hero({ copy, foot }: { copy: ReactNode; foot: ReactNode 
 
   return (
     <section className="hero" ref={host}>
-      <canvas
-        id="stage"
-        ref={canvas}
-        aria-label="A head made of glowing white particles with blue eyes, assembling from particles behind it and reacting to the cursor"
-      ></canvas>
+      <canvas id="stage" ref={canvas} aria-label={t.home.face}></canvas>
       <div className="scrim"></div>
       <div className="inner">
         <div className="copy" ref={copyRef}>
@@ -77,7 +79,7 @@ export default function Hero({ copy, foot }: { copy: ReactNode; foot: ReactNode 
         <div className="foot-row">
           {foot}
           <div className="state" ref={stateRef} aria-hidden="true">
-            {label(0)}
+            {label(t, 0)}
           </div>
         </div>
       </div>

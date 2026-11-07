@@ -29,11 +29,61 @@ test.describe('routes', () => {
     await expect(page.locator('h1')).toHaveText(/Build it, step by step/);
   });
 
-  test('sitemap lists every chapter and social images render', async ({ request }) => {
+  test('sitemap lists every chapter in both languages and social images render', async ({ page, request }) => {
     const xml = await (await request.get('/sitemap.xml')).text();
-    for (const c of CHAPTERS) expect(xml).toContain(`/${c}</loc>`);
-    const og = await request.get('/build/opengraph-image');
-    expect(og.headers()['content-type']).toBe('image/png');
+    for (const c of CHAPTERS) {
+      expect(xml).toContain(`/${c}</loc>`);
+      expect(xml).toContain(`/ro/${c}</loc>`);
+    }
+    for (const path of ['/build', '/ro/build']) {
+      await page.goto(path);
+      const src = await page.locator('meta[property="og:image"]').first().getAttribute('content');
+      const og = await request.get(new URL(src!).pathname);
+      expect(og.headers()['content-type']).toBe('image/png');
+    }
+  });
+});
+
+test.describe('romanian', () => {
+  for (const path of ['/ro', ...CHAPTERS.map((c) => `/ro/${c}`)]) {
+    test(`${path} is in Romanian and passes axe`, async ({ page }) => {
+      const res = await page.goto(path);
+      expect(res?.status()).toBe(200);
+      await expect(page.locator('html')).toHaveAttribute('lang', 'ro');
+      await expect(page.locator('h1').first()).toBeVisible();
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`${path}$`));
+      const en = path.replace(/^\/ro/, '');
+      await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', en ? new RegExp(`${en}$`) : /^https?:\/\/[^/]+\/?$/);
+      const axe = await new AxeBuilder({ page }).disableRules(['color-contrast']).analyze();
+      const serious = axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
+      expect(serious.map((v) => `${v.id}: ${v.nodes.length} × ${v.help}`)).toEqual([]);
+    });
+  }
+
+  test('the language switch opens the same page in the other language', async ({ page, isMobile }) => {
+    await page.goto('/build');
+    await page.getByRole('link', { name: 'Citește în română' }).first().click();
+    await expect(page).toHaveURL(/\/ro\/build$/);
+    await expect(page.locator('h1')).toHaveText('Construiește-l, pas cu pas.');
+    if (!isMobile) await expect(page.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name: 'Construcție' })).toHaveAttribute('aria-current', 'page');
+    await page.getByRole('link', { name: 'Read in English' }).first().click();
+    await expect(page).toHaveURL(/\/build$/);
+  });
+
+  test('unknown Romanian chapters get the Romanian 404', async ({ page, consoleErrors }) => {
+    const res = await page.goto('/ro/nimic');
+    expect(res?.status()).toBe(404);
+    await expect(page.locator('h1')).toHaveText(/nu face parte din tutorial/);
+    consoleErrors.splice(0, consoleErrors.length, ...consoleErrors.filter((e) => !e.includes('status of 404')));
+  });
+
+  test('Romanian prompts fill in the project and search finds Romanian sections', async ({ page }) => {
+    await page.goto('/ro/build');
+    await page.getByLabel('Subiect').fill('un tren de noapte');
+    await expect(page.locator('.code pre').filter({ hasText: 'Vreau un site minimalist' }).first()).toContainText('despre un tren de noapte pentru [public]');
+    await page.keyboard.press('ControlOrMeta+k');
+    await page.getByRole('combobox').fill('glosar');
+    await expect(page.getByRole('option').first()).toContainText('Glosar');
   });
 });
 
@@ -80,7 +130,8 @@ test.describe('navigation', () => {
     await input.fill('art director');
     await expect(page.getByRole('option').first()).toBeVisible();
     await page.keyboard.press('Enter');
-    await expect(page).toHaveURL(/\/(build|prompting)/);
+    /* Build is the heaviest page; under a full parallel run its navigation can take longer than the default wait */
+    await expect(page).toHaveURL(/\/(build|prompting)/, { timeout: 15_000 });
     await expect(page.getByRole('dialog', { name: 'Search the tutorial' })).toBeHidden();
   });
 
@@ -159,7 +210,8 @@ test.describe('features', () => {
   test('the home page resumes at the section being read', async ({ page }) => {
     await page.goto('/build');
     await page.evaluate(() => scrollTo(0, document.getElementById('prompt-library')!.getBoundingClientRect().top + scrollY - 100));
-    await page.waitForTimeout(500);
+    /* wait until the rail has recorded the section, rather than for a fixed time */
+    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('sc-progress') ?? '{}').at?.id)).toBe('prompt-library');
     await page.goto('/');
     const resume = page.getByRole('link', { name: /Resume: 04 Build · Prompt library/ });
     await expect(resume).toHaveAttribute('href', '/build#prompt-library');

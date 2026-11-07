@@ -1,0 +1,216 @@
+export const meta = {
+  title: "Cele nouă tehnici de scroll.",
+  lede: "Aproape orice site cinematic e un amestec din aceste nouă. Pagina e referința, iar site-ul pe care îl citești le folosește pe toate, ca să le poți simți pe fiecare.",
+};
+
+<HorizontalScroll
+  head={
+    <div className="sec-head" style={{ margin: '0' }}>
+      <h2 style={{ maxWidth: '20ch' }}>Continuă să derulezi. Cardurile se mișcă în lateral.</h2>
+    </div>
+  }
+>
+  <div className="hcard">
+    <span className="mono">1</span>
+    <h3>Poziționare sticky</h3>
+    <p>Etichetele secțiunilor se fixează sub bara de sus și îi predau locul următoarei.</p>
+    <span className="mono live">Vezi: Skilluri, Construcție</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">2</span>
+    <h3>Scroll snap</h3>
+    <p>Vederea se oprește pe panouri definite. Sigur pe o bandă orizontală, riscant pe toată pagina.</p>
+    <span className="mono live">Vezi: demo mai jos</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">3</span>
+    <h3>Declanșat de scroll</h3>
+    <p>Elementele apar și se ridică o singură dată când intră în ecran.</p>
+    <span className="mono live">Vezi: fiecare pagină</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">4</span>
+    <h3>Scroll infinit</h3>
+    <p>Se încarcă mai mult conținut când te apropii de final. Un element santinelă de jos cere următorul lot.</p>
+    <span className="mono live">Vezi: Construcție, biblioteca de prompturi</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">5</span>
+    <h3>Condus de scroll</h3>
+    <p>O valoare urmează exact poziția scrollului. Cuvintele se aprind, barele se umplu.</p>
+    <span className="mono live">Vezi: Acasă, declarația și bara de sus</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">6</span>
+    <h3>Zoom la scroll</h3>
+    <p>O imagine crește treptat cât timp traversează ecranul.</p>
+    <span className="mono live">Vezi: Acasă, capul din particule</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">7</span>
+    <h3>Parallax</h3>
+    <p>Straturile de fundal se mișcă mai încet decât prim-planul, ceea ce dă adâncime.</p>
+    <span className="mono live">Vezi: hero-ul de pe Acasă și banda finală</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">8</span>
+    <h3>Scroll orizontal</h3>
+    <p>Scrollul vertical mută un rând de carduri în lateral, într-o secțiune fixată.</p>
+    <span className="mono live">Vezi: aici, cele nouă carduri</span>
+  </div>
+  <div className="hcard">
+    <span className="mono">9</span>
+    <h3>Scrollytelling</h3>
+    <p>O scenă fixă stă pe loc în timp ce pașii de text trec pe lângă ea și o schimbă.</p>
+    <span className="mono live">Vezi: Construcție, bucla în patru etape</span>
+  </div>
+</HorizontalScroll>
+<section className="sec">
+  <Stick left="01 · Fiecare tehnică, cu cod" right="9 tehnici" />
+  <div className="rows steps-list">
+    <Row cls="rv sticky-k" num="1" title="Poziționare sticky">
+      <p>Etichetele secțiunilor se fixează sub bara de sus și îi predau locul următoarei.</p>
+      <p className="tip">Folosește-o pentru etichete de capitol și liste lungi, unde contextul trebuie să rămână vizibil.</p>
+      <CodeBlock
+        lang="CSS"
+        code={
+          '.section-label {\n  position: sticky; top: 64px; z-index: 12;\n  background: rgba(0,0,0,.8);\n  backdrop-filter: blur(12px);\n}\n/* Eticheta trebuie să stea în secțiunea ei: secțiunea se termină, eticheta pleacă. */'
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="2" title="Scroll snap">
+      <p>Vederea se oprește pe panouri definite. Sigur pe o bandă orizontală, riscant pe toată pagina.</p>
+      <p className="tip">Nu combina snap pe axa y cu scroll lin sau cu secțiuni fixate. Se bat cap în cap.</p>
+      <CodeBlock
+        lang="CSS"
+        code={'.strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }\n.strip > * { flex: 0 0 80%; scroll-snap-align: start; }'}
+      />
+      <div className="snapdemo rv">
+        <div className="strip" tabIndex={0} aria-label="Demo de snap: derulează în lateral">
+          <div>Unu</div>
+          <div>Doi</div>
+          <div>Trei</div>
+          <div>Patru</div>
+        </div>
+      </div>
+    </Row>
+    <Row cls="rv sticky-k" num="3" title="Declanșat de scroll">
+      <p>Elementele apar și se ridică o singură dată când intră în ecran.</p>
+      <p className="tip">Ascunde doar sub o clasă .js. Nu ascunde niciodată conținutul la loc când derulezi înapoi în sus.</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={
+          "const io = new IntersectionObserver((entries) => {\n  entries.forEach((e) => {\n    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }\n  });\n}, { threshold: 0.12 });\ndocument.querySelectorAll('.reveal').forEach((el) => io.observe(el));"
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="4" title="Scroll infinit">
+      <p>Se încarcă mai mult conținut când te apropii de final. Un element santinelă de jos cere următorul lot.</p>
+      <p className="tip">Limitează totalul sau oferă o cale de a trece de el, altfel nu mai ajungi la footer.</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={
+          "const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) loadBatch(); },\n  { rootMargin: '0px 0px 320px 0px' });\nio.observe(document.querySelector('#sentinel'));\n// după fiecare lot: io.unobserve(sentinel); io.observe(sentinel);"
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="5" title="Condus de scroll">
+      <p>O valoare urmează exact poziția scrollului. Cuvintele se aprind, barele se umplu.</p>
+      <p className="tip">Folosește-l pentru progres și pentru text pe care vrei să-l citească în ritmul scrollului.</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={
+          "const bar = document.querySelector('.progress');\naddEventListener('scroll', () => {\n  const max = document.documentElement.scrollHeight - innerHeight;\n  bar.style.transform = `scaleX(${scrollY / max})`;\n}, { passive: true });"
+        }
+      />
+      <CodeBlock
+        lang="Doar CSS (verifică întâi suportul în browsere)"
+        code={
+          '.progress { transform-origin: 0 50%; animation: grow linear both; animation-timeline: scroll(root); }\n@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }'
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="6" title="Zoom la scroll">
+      <p>O imagine crește treptat cât timp traversează ecranul.</p>
+      <p className="tip">Animă doar transform. Scalarea lățimii sau înălțimii forțează recalcularea layoutului la fiecare cadru.</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={
+          'const r = figure.getBoundingClientRect();\nconst p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height)));\nimg.style.transform = `scale(${1 + 0.6 * p})`;'
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="7" title="Parallax">
+      <p>Straturile de fundal se mișcă mai încet decât prim-planul, ceea ce dă adâncime.</p>
+      <p className="tip">Ține vitezele între 0.15 și 0.5. Pe telefoane redu efectul, nu-l elimina.</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={'layers.forEach((l) => {\n  l.style.transform = `translate3d(0, ${scrollY * (1 - l.dataset.speed)}px, 0)`;\n});'}
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="8" title="Scroll orizontal">
+      <p>Scrollul vertical mută un rând de carduri în lateral, într-o secțiune fixată.</p>
+      <p className="tip">Fixează o singură dată pe pagină. Setează înălțimea containerului din lățimea pistei.</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={
+          "const max = track.scrollWidth - pin.clientWidth;\nsection.style.height = (max + pin.offsetHeight) + 'px';\n// la scroll: translateX(-progress * max)"
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="9" title="Scrollytelling">
+      <p>O scenă fixă stă pe loc în timp ce pașii de text trec pe lângă ea și o schimbă.</p>
+      <p className="tip">Pe telefoane pune scena deasupra textului și fă fiecare pas destul de înalt cât să poată fi citit.</p>
+      <CodeBlock lang="CSS" code={'.scrolly-vis { position: sticky; top: 120px; }\n.step { min-height: 72vh; }'} />
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Cum alegi și combini" />
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Tabel. Derulează în lateral ca să vezi toate coloanele.">
+    <table>
+      <thead>
+        <tr>
+          <th>Vrei</th>
+          <th>Folosește</th>
+          <th>Evită</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adâncime în primul ecran</td>
+          <td>Parallax</td>
+          <td>Viteze peste 0.6</td>
+        </tr>
+        <tr>
+          <td>Conținut care apare elegant</td>
+          <td>Apariții declanșate de scroll</td>
+          <td>Reascunderea la scroll în sus</td>
+        </tr>
+        <tr>
+          <td>O explicație ghidată</td>
+          <td>Scrollytelling sau cuvinte conduse de scroll</td>
+          <td>Mai mult de o secțiune fixată pe pagină</td>
+        </tr>
+        <tr>
+          <td>O galerie de funcții</td>
+          <td>Scroll orizontal</td>
+          <td>Mai puțin de patru carduri, nu merită fixarea</td>
+        </tr>
+        <tr>
+          <td>O listă fără sfârșit</td>
+          <td>Scroll infinit cu limită</td>
+          <td>Un footer la care nu mai ajungi</td>
+        </tr>
+        <tr>
+          <td>Mișcare lină, care pare scumpă</td>
+          <td>Lenis</td>
+          <td>Scroll snap pe toată pagina</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style={{ marginTop: '28px' }} className="rv">
+    <Callout>Reduced motion face parte din design. Când e setat <code className="i">prefers-reduced-motion</code>, oprește împreună scrollul lin, parallaxul și mișcarea aparițiilor. Un fade poate rămâne.</Callout>
+  </div>
+</section>

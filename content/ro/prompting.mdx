@@ -1,0 +1,104 @@
+export const meta = {
+  title: "Prompturi: cum îi dai un brief AI-ului ca prima variantă să fie utilizabilă.",
+  lede: "Cele mai multe rezultate slabe vin dintr-un brief slab. Capitolul îți dă un șablon, un exemplu înainte și după, un fișier cu regulile proiectului și șase tipare pentru a ghida munca.",
+};
+
+<section className="sec">
+  <Stick left="01 · Anatomia" right="Cinci părți" />
+  <div className="rows">
+    <Row cls="rv sticky-k" num="Scop" title="Spune ce există la final">
+      <p>O propoziție care numește lucrul și pentru cine e. „Un site de o pagină pentru un studio fictiv” e un scop. „Ceva tare” nu e.</p>
+    </Row>
+    <Row cls="rv sticky-k" num="Context" title="Dă-i faptele pe care nu le poate ghici">
+      <p>Numele fișierelor, tema, bibliotecile pe care le-ai ales deja și ce nu intră în proiect. Altfel asistentul alege în locul tău.</p>
+    </Row>
+    <Row cls="rv sticky-k" num="Limite" title="Stabilește limitele">
+      <p>Versiunile exacte ale bibliotecilor, ce proprietăți pot fi animate, regula pentru reduced motion, browserele care contează. Limitele sunt cel mai ieftin mod de a evita refacerea muncii.</p>
+    </Row>
+    <Row cls="rv sticky-k" num="Rezultat" title="Numește formatul">
+      <p>„Cele trei fișiere, nimic altceva” oprește o explicație lungă de care nu ai nevoie. Când sarcina e mare, cere întâi un plan scurt.</p>
+    </Row>
+    <Row cls="rv sticky-k" num="Verificare" title="Cere dovezi">
+      <p>Încheie cu „listează ce ai testat și ce n-ai putut testa”. Golurile devin vizibile în loc să rămână ascunse.</p>
+    </Row>
+  </div>
+  <div className="rv">
+    <CodeBlock
+      lang="Șablon"
+      code={
+        'Scop: [ce există la final, pentru cine]\nContext: [fișiere, temă, biblioteci, ce intră în proiect]\nConstruiește, în ordine: [listă numerotată]\nLimite: [versiuni, proprietăți permise, reduced motion, browsere]\nRezultat: [format]. Apoi listează ce ai testat și ce n-ai putut testa.'
+      }
+    />
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Înainte și după" right="Aceeași cerere" />
+  <div className="rows">
+    <Row cls="rv" num="Slab" title="Brief vag">
+      <CodeBlock lang="Prompt" code={'Fă-mi un site tare cu scroll și animații.'} />
+      <p>Vei primi o pagină generică, probabil cu o bibliotecă grea, un gradient și efecte pe care nu le-a cerut nimeni. Apoi pierzi mai multe runde desfăcând alegeri.</p>
+    </Row>
+    <Row cls="rv" num="Puternic" title="Brief precis">
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Scop: un site de o pagină pentru un studio fictiv numit Northlight, construit cu HTML, CSS și JavaScript simple.\n\nContext: e un exemplu didactic. Cele trei fișiere sunt index.html, style.css și app.js. Temă întunecată, o singură culoare de accent.\n\nConstruiește, în această ordine:\n1. Un hero cu două straturi de parallax (vitezele 0.2 și 0.4).\n2. O propoziție care se aprinde cuvânt cu cuvânt pe măsură ce derulez printr-o secțiune fixată.\n3. Trei carduri care apar de jos când intră în ecran, o singură dată.\n4. O galerie orizontală fixată, cu cinci panouri.\n\nLimite: Lenis 1.1.18 de pe jsDelivr pentru scroll lin. Doar transform și opacity. Reduced motion oprește tot.\n\nRezultat: cele trei fișiere, nimic altceva. Apoi listează ce ai testat și ce n-ai putut testa.'
+        }
+      />
+      <p>Fiecare decizie ambiguă e lămurită. Rezultatul poate fi verificat față de listă, punct cu punct.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Fișierul de reguli" right="Scrie-l o dată" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Pune regulile care nu se schimbă niciodată într-un fișier pe care unealta îl citește la începutul fiecărei sesiuni, ca să nu le mai repeți. Claude Code citește{' '}<code className="i">CLAUDE.md</code>, Gemini CLI citește <code className="i">GEMINI.md</code>, iar Codex citește <code className="i">AGENTS.md</code>. Numele fișierelor și regulile de încărcare se pot schimba, așa că verifică pagina actuală a uneltei tale înainte să te bazezi pe ele.</p>
+  <div className="rv">
+    <CodeBlock
+      lang="CLAUDE.md"
+      code={
+        '# Northlight\n\nSite static: index.html, style.css, app.js. Fără pas de build.\n\n## Reguli\n- JavaScript simplu. Bibliotecile vin de pe jsDelivr, fixate pe o versiune exactă.\n- Animă doar transform și opacity.\n- Fiecare mișcare are o variantă pentru prefers-reduced-motion.\n- Testează cu `python3 -m http.server 8000`. Nu deschide niciodată fișierul direct.\n- Nu inventa texte, statistici, citate sau logouri de clienți.\n\n## Gata înseamnă\n- Nicio eroare în consolă la lățimi de 375, 768 și 1440 px.\n- Listezi verificările pe care le-ai rulat și pe cele pe care n-ai putut să le rulezi.'
+      }
+    />
+  </div>
+  <p className="muted rv" style={{ maxWidth: '60ch' }}>Ține-l scurt. Regulile lungi sau contradictorii sunt ignorate mai des decât cele scurte și concrete.</p>
+</section>
+<section className="sec">
+  <Stick left="04 · Șase tipare" right="Copiază și adaptează" />
+  <div className="rows">
+    <Row cls="rv" num="Plan" title="Planul înaintea codului">
+      <p>Pentru orice depășește câteva rânduri, cere planul și aprobă-l mai întâi.</p>
+      <CodeBlock lang="Prompt" code={'Nu scrie încă cod. Listează fișierele pe care le vei schimba, ordinea și riscurile. Așteaptă aprobarea mea.'} />
+    </Row>
+    <Row cls="rv" num="Mic" title="O schimbare pe rând">
+      <p>Cererile mari și combinate ascund ce schimbare a stricat pagina.</p>
+      <CodeBlock lang="Prompt" code={'Fă doar această schimbare: [schimbare]. Nu atinge nimic altceva. Spune-mi ce rânduri ai editat.'} />
+    </Row>
+    <Row cls="rv" num="Arată" title="Cere dovezi" anchor="show-the-evidence">
+      <p>Întreabă ce s-a rulat, nu dacă merge.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={'Deschide pagina la 375 px și la 1440 px. Raportează erorile din consolă cuvânt cu cuvânt și numește fiecare element care iese din pagină.'}
+      />
+    </Row>
+    <Row cls="rv" num="Critică" title="Verifică precum un sceptic">
+      <p>O a doua trecere, cu alt rol, prinde ce i-a scăpat primei.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Verifică pagina ca un recenzent ostil. Listează cele cinci puncte cele mai slabe: performanță, accesibilitate, mișcări care pot provoca disconfort și orice pare inventat.'
+        }
+      />
+    </Row>
+    <Row cls="rv" num="Explică" title="Pune-l să te învețe">
+      <p>Tu vei întreține acest cod, așa că cere motivele.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={'Explică pe înțelesul tuturor cum funcționează calculul de parallax, cu un exemplu numeric. Apoi spune ce s-ar strica dacă viteza ar fi 0.9.'}
+      />
+    </Row>
+    <Row cls="rv" num="Înapoi" title="Păstrează o cale de întoarcere">
+      <p>Fă un commit sau copiază folderul înaintea fiecărui pas mare. Dacă o schimbare iese prost, revino și rescrie promptul în loc să cârpești peste.</p>
+      <CodeBlock lang="bash" code={'git init\ngit add -A && git commit -m "working hero"'} />
+    </Row>
+  </div>
+</section>

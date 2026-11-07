@@ -5,6 +5,7 @@ import { chapterHref, getChapter, neighbours, routeOf } from '@/lib/chapters';
 import { finePointer, prefersReducedMotion } from '@/lib/motion';
 import { rememberFlight } from '@/lib/particles/manager';
 import { markVisited } from '@/lib/progress';
+import { localeOf } from '@/lib/i18n';
 import { useScroll } from '@/lib/useScroll';
 import { useSmoothScroll } from './SmoothScroll';
 
@@ -105,13 +106,14 @@ export default function RouteEffects() {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey || typing(document.activeElement)) return;
       if (e.key !== '[' && e.key !== ']') return;
-      const { prev, next } = neighbours(route);
+      const locale = localeOf(location.pathname);
+      const { prev, next } = neighbours(route, locale);
       const to = e.key === '[' ? (prev ? prev.id : route === 'home' ? null : 'home') : next?.id;
       if (!to) return;
       /* stepping forward from the end band flies its shape on, as clicking the band's link does */
       const cv = document.querySelector<HTMLCanvasElement>('.nb-art canvas');
       if (e.key === ']' && next && cv && cv.getBoundingClientRect().top < innerHeight) rememberFlight(cv, next.art);
-      router.push(chapterHref(to));
+      router.push(chapterHref(to, locale));
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);

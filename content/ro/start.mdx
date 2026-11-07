@@ -1,0 +1,138 @@
+export const meta = {
+  title: "Alege-ți AI-ul și pregătește-ți calculatorul.",
+  lede: "Tot ce e în acest tutorial merge cu Claude, Gemini sau ChatGPT. Metoda e aceeași. Se schimbă doar comenzile de instalare și numele folderelor.",
+};
+
+<section className="sec">
+  <Stick left="01 · De ce ai nevoie" right="5 lucruri" />
+  <div className="cells rv">
+    <Cell title="Un terminal">
+      <p>Terminal pe macOS, PowerShell pe Windows sau orice shell pe Linux. Dacă n-ai deschis niciodată unul, două minute de căutare pentru sistemul tău de operare sunt de ajuns.</p>
+    </Cell>
+    <Cell title="Un editor de cod">
+      <p>VS Code e o alegere gratuită. Merge orice editor care poate deschide un folder.</p>
+    </Cell>
+    <Cell title="Node.js">
+      <p>Îți dă npm și npx, cu care se instalează majoritatea skillurilor și uneltelor din linia de comandă. Descarcă versiunea LTS de pe nodejs.org.</p>
+    </Cell>
+    <Cell title="Un browser actual">
+      <p>Chrome, Safari sau Firefox, ca să testezi pagina pe desktop și într-o fereastră de mărimea unui telefon.</p>
+    </Cell>
+    <Cell title="Un cont de AI">
+      <p>Claude, Gemini sau ChatGPT. Verifică pe pagina fiecărui produs ce abonament include unealta pe care o vrei, pentru că abonamentele se schimbă.</p>
+    </Cell>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Cele trei, comparate" right="Verificat în documentația oficială" />
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Tabel. Derulează în lateral ca să vezi toate coloanele.">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Claude</th>
+          <th>Gemini</th>
+          <th>ChatGPT și Codex</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aplicația de chat</td>
+          <td>claude.ai (skilluri pe abonamentele Pro, Max, Team și Enterprise)</td>
+          <td>gemini.google.com</td>
+          <td>ChatGPT (skillurile sunt în beta și depind de workspace)</td>
+        </tr>
+        <tr>
+          <td>Unealta din linia de comandă</td>
+          <td>Claude Code</td>
+          <td>Gemini CLI</td>
+          <td>Codex CLI</td>
+        </tr>
+        <tr>
+          <td>Instalare</td>
+          <td><code className="i">curl -fsSL https://claude.ai/install.sh | bash</code></td>
+          <td><code className="i">npm install -g @google/gemini-cli</code></td>
+          <td><code className="i">npm install -g @openai/codex</code></td>
+        </tr>
+        <tr>
+          <td>Pornire</td>
+          <td><code className="i">claude</code></td>
+          <td><code className="i">gemini</code></td>
+          <td><code className="i">codex</code></td>
+        </tr>
+        <tr>
+          <td>Folderul personal de skilluri</td>
+          <td><code className="i">~/.claude/skills/</code></td>
+          <td><code className="i">~/.gemini/skills/</code></td>
+          <td><code className="i">~/.agents/skills/</code></td>
+        </tr>
+        <tr>
+          <td>Folderul de skilluri al proiectului</td>
+          <td><code className="i">.claude/skills/</code></td>
+          <td><code className="i">.gemini/skills/</code></td>
+          <td><code className="i">.agents/skills/</code></td>
+        </tr>
+        <tr>
+          <td>Rulezi un skill</td>
+          <td><code className="i">/skill-name</code> sau doar descrii sarcina</td>
+          <td>Descrii sarcina. Listezi skillurile cu <code className="i">/skills list</code></td>
+          <td><code className="i">$skill-name</code> sau descrii sarcina</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style={{ marginTop: '28px' }} className="rv">
+    <Callout>Două lucruri s-au schimbat recent. Pagina Gemini CLI spune că utilizatorii fără abonament plătit și cei cu Google One au trecut la Antigravity CLI pe 18 iunie 2026, așa că verifică ce unealtă trebuie să folosească contul tău. Skillurile din ChatGPT sunt în beta și le activează proprietarii de workspace. Confirmă mereu în{' '}<a className="ext" href="https://geminicli.com/docs/get-started" target="_blank" rel="noopener">documentația Gemini CLI</a>{' '}și în{' '}<a className="ext" href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">documentația OpenAI despre skilluri</a>.</Callout>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Instalează-ți unealta" right="Alege una" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Instalează-o pe cea pe care deja o folosești sau o plătești. Toate capitolele următoare merg la fel cu oricare dintre ele; se schimbă doar comenzile de instalare și numele folderelor, iar site-ul îți ține minte alegerea.</p>
+  <div className="rv" style={{ margin: '20px 0 8px' }}>
+    <PlatformTabs />
+  </div>
+  <PlatformPanel p="claude">
+    <p className="muted" style={{ maxWidth: '60ch', marginTop: '20px' }}>Claude Code e unealta din linia de comandă. Are nevoie de un abonament Claude sau de un cont Anthropic Console. Există și o aplicație desktop și o extensie pentru VS Code, ambele de pe aceeași pagină.</p>
+    <CodeBlock lang="macOS, Linux, WSL" code={'curl -fsSL https://claude.ai/install.sh | bash'} />
+    <CodeBlock lang="Windows PowerShell" code={'irm https://claude.ai/install.ps1 | iex'} />
+    <CodeBlock lang="Homebrew sau WinGet" code={'brew install --cask claude-code\nwinget install Anthropic.ClaudeCode'} />
+    <p className="muted" style={{ maxWidth: '60ch' }}>Deschide un terminal nou, verifică instalarea și pornește unealta într-un folder de proiect. Prima dată îți cere să te autentifici.</p>
+    <CodeBlock lang="bash" code={'claude --version\ncd your-project\nclaude'} />
+    <p className="muted">Sursă:{' '}<a className="ext" href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener">Prezentarea Claude Code</a></p>
+  </PlatformPanel>
+  <PlatformPanel p="gemini">
+    <p className="muted" style={{ maxWidth: '60ch', marginTop: '20px' }}>Gemini CLI se instalează prin npm, deci trebuie să ai mai întâi Node.js.</p>
+    <CodeBlock lang="bash" code={'npm install -g @google/gemini-cli\ngemini'} />
+    <p className="muted" style={{ maxWidth: '60ch' }}>Când te întreabă cum vrei să te autentifici, alege „Sign in with Google” și urmează pașii din browser.</p>
+    <p className="muted">Sursă:{' '}<a className="ext" href="https://geminicli.com/docs/get-started" target="_blank" rel="noopener">Primii pași cu Gemini CLI</a></p>
+  </PlatformPanel>
+  <PlatformPanel p="chatgpt">
+    <p className="muted" style={{ maxWidth: '60ch', marginTop: '20px' }}>Codex CLI e unealta OpenAI din linia de comandă. Folosește o singură metodă de instalare, pentru că a doua copie poate pune o versiune mai veche prima în PATH.</p>
+    <CodeBlock lang="macOS, Linux" code={'curl -fsSL https://chatgpt.com/codex/install.sh | sh'} />
+    <CodeBlock lang="Alternative" code={'brew install --cask codex\nnpm install -g @openai/codex'} />
+    <CodeBlock lang="Autentificare și pornire" code={'codex login\ncodex --version\ncodex'} />
+    <p className="muted" style={{ maxWidth: '60ch' }}>Dacă folosești doar site-ul ChatGPT, skillurile merg altfel: îi ceri lui ChatGPT să construiască unul și apeși Install. Capitolul 02 explică.</p>
+    <p className="muted">Surse:{' '}<a className="ext" href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">OpenAI, Build skills</a>{' '}și un ghid de instalare independent care citează aceleași comenzi. Comenzile se pot schimba, așa că verifică pagina oficială.</p>
+  </PlatformPanel>
+</section>
+<section className="sec">
+  <Stick left="04 · Creează folderul proiectului" right="2 minute" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Creează-l">
+      <p>Fă un folder gol și trei fișiere. HTML, CSS și JavaScript simple sunt de ajuns. Nu ai nevoie de framework sau de un pas de build.</p>
+      <CodeBlock lang="macOS, Linux" code={'mkdir cinematic-site\ncd cinematic-site\ntouch index.html style.css app.js'} />
+      <CodeBlock lang="Windows PowerShell" code={'mkdir cinematic-site\ncd cinematic-site\nni index.html, style.css, app.js'} />
+    </Row>
+    <Row cls="rv" num="b" title="Servește-l">
+      <p>Pornește un server web local și deschide adresa pe care o afișează. Nu da dublu-clic pe fișierul HTML. Browserele tratează altfel o pagină file://, iar bibliotecile de scroll și apelurile fetch pot funcționa greșit acolo.</p>
+      <CodeBlock lang="bash" code={'python3 -m http.server 8000\n# Windows: py -m http.server 8000\n# apoi deschide http://localhost:8000'} />
+    </Row>
+    <Row cls="rv" num="c" title="Pornește AI-ul în el">
+      <p>Rulează unealta AI din acest folder, ca să-ți vadă și să-ți editeze fișierele: <code className="i">claude</code>, <code className="i">gemini</code> sau{' '}<code className="i">codex</code>. Pe site-ul ChatGPT, încarcă în schimb cele trei fișiere.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Pe care s-o alegi?" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Folosește-o pe cea pe care deja o plătești sau o cunoști. Skillurile sunt foldere simple cu un fișier SKILL.md, iar același format e citit de Claude Code, Gemini CLI și Codex. Ce înveți în capitolul 02 se aplică la toate. Modelele diferă totuși ca gust și ca atenție cu care își verifică propria muncă, așa că uită-te tu la fiecare rezultat.</p>
+</section>

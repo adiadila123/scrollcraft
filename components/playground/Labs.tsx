@@ -1,4 +1,5 @@
 'use client';
+import { useLocale } from '@/lib/useLocale';
 import { useEffect, useRef, useState, type PointerEvent as RPointerEvent } from 'react';
 import CodeFrame from '@/components/ui/CodeFrame';
 import { prefersReducedMotion } from '@/lib/motion';
@@ -39,6 +40,7 @@ function Slider({
 
 /** 01: Lenis lerp. The blue marker eases towards the target by a fraction of the distance each frame. */
 export function LerpLab() {
+  const t = useLocale().t.labs;
   const [lerp, setLerp] = useState(0.1);
   const lerpRef = useRef(lerp);
   useEffect(() => {
@@ -94,7 +96,7 @@ export function LerpLab() {
         ref={bar}
         role="slider"
         tabIndex={0}
-        aria-label="Scroll target. Use the arrow keys or click to move it."
+        aria-label={t.target}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={targetPct}
@@ -116,13 +118,14 @@ export function LerpLab() {
       </div>
       <Slider label="lerp" value={lerp} min={0.02} max={0.5} step={0.01} onChange={setLerp} />
       <CodeFrame lang="Code" code={`new Lenis({ lerp: ${short(lerp)} })`} />
-      <p className="muted">Low values feel heavy and slow. High values feel close to normal scrolling. The documented default is 0.1.</p>
+      <p className="muted">{t.lerp}</p>
     </div>
   );
 }
 
 /** 02: parallax speed inside a scrollable box. */
 export function ParallaxLab() {
+  const t = useLocale().t.labs;
   const [speed, setSpeed] = useState(0.4);
   const box = useRef<HTMLDivElement>(null),
     dots = useRef<HTMLDivElement>(null);
@@ -134,24 +137,22 @@ export function ParallaxLab() {
 
   return (
     <div className="lab rv">
-      <div className="plx-box" ref={box} onScroll={() => apply()} tabIndex={0} aria-label="Scrollable parallax demo" data-lenis-prevent="">
+      <div className="plx-box" ref={box} onScroll={() => apply()} tabIndex={0} aria-label={t.box} data-lenis-prevent="">
         <div className="plx-inner">
           <div className="plx-dots" ref={dots}></div>
-          <div className="plx-text">Scroll this box</div>
+          <div className="plx-text">{t.boxText}</div>
         </div>
       </div>
-      <Slider label="speed" value={speed} min={0} max={1} step={0.05} onChange={setSpeed} />
+      <Slider label={t.speed} value={speed} min={0} max={1} step={0.05} onChange={setSpeed} />
       <CodeFrame lang="Code" code={`layer.style.transform = 'translate3d(0,' + (y * (1 - ${short(speed)})) + 'px,0)'`} />
-      <p className="muted">
-        Speed 1 moves with the page and shows no depth. Speed 0 stays pinned to the page. Values between 0.15 and 0.5 read as depth. Past about 0.6 it tends to
-        look like a fault.
-      </p>
+      <p className="muted">{t.parallax}</p>
     </div>
   );
 }
 
 /** 03: stagger timing. Replays when it first scrolls into view and on demand. */
 export function StaggerLab() {
+  const t = useLocale().t.labs;
   const [ms, setMs] = useState(100);
   const [on, setOn] = useState(false);
   const stag = useRef<HTMLDivElement>(null);
@@ -183,13 +184,13 @@ export function StaggerLab() {
         ))}
       </div>
       <div className="ctl-row">
-        <Slider label="delay per item" value={ms} min={0} max={300} step={10} onChange={setMs} unit="ms" digits={0} />{' '}
+        <Slider label={t.delay} value={ms} min={0} max={300} step={10} onChange={setMs} unit="ms" digits={0} />{' '}
         <button className="btn" type="button" onClick={play}>
-          Replay
+          {t.replay}
         </button>
       </div>
       <CodeFrame lang="CSS" code={`.reveal { transition-delay: calc(var(--d) * ${ms}ms); }`} />
-      <p className="muted">Short delays read as one movement. Long delays read as a list being counted out. Keep the whole sequence under about a second.</p>
+      <p className="muted">{t.stagger}</p>
     </div>
   );
 }
@@ -202,6 +203,7 @@ const PRESETS: [string, number[]][] = [
 
 /** 04: cubic Bezier easing, drawn on a canvas and played on a dot. */
 export function EasingLab() {
+  const t = useLocale().t.labs;
   const [v, setV] = useState([0.2, 0.7, 0.2, 1]);
   const cv = useRef<HTMLCanvasElement>(null),
     dot = useRef<HTMLElement>(null);
@@ -260,7 +262,7 @@ export function EasingLab() {
 
   return (
     <div className="lab rv">
-      <canvas id="ezc" ref={cv} width="320" height="320" role="img" aria-label={`Easing curve cubic-bezier(${v.map(fmt).join(', ')})`}></canvas>
+      <canvas id="ezc" ref={cv} width="320" height="320" role="img" aria-label={t.curve(v.map(fmt).join(', '))}></canvas>
       <div className="ez-track">
         <i ref={dot}></i>
       </div>
@@ -271,9 +273,9 @@ export function EasingLab() {
       </div>
       <div className="ctl-row">
         <button className="btn" type="button" onClick={() => playWith(v)}>
-          Play
+          {t.play}
         </button>
-        {PRESETS.map(([name, p]) => (
+        {PRESETS.map(([name, p], i) => (
           <button
             key={name}
             className="ghost"
@@ -283,14 +285,12 @@ export function EasingLab() {
               playWith(p);
             }}
           >
-            {name}
+            {t.presets[i]}
           </button>
         ))}
       </div>
       <CodeFrame lang="CSS" code={`transition: transform .9s cubic-bezier(${v.map(fmt).join(', ')});`} />
-      <p className="muted">
-        The reveal curve starts fast and settles gently, which is why the example site uses it. Linear motion looks mechanical on interface elements.
-      </p>
+      <p className="muted">{t.easing}</p>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { routeOf } from '@/lib/chapters';
 import { markSection } from '@/lib/progress';
 import { useScroll } from '@/lib/useScroll';
+import { useLocale } from '@/lib/useLocale';
 
 type Section = { id: string; label: string; el: HTMLElement; box: HTMLElement };
 
@@ -22,6 +23,7 @@ export default function ChapterRail() {
   const segs = useRef<(HTMLElement | null)[]>([]);
   const { lenis } = useSmoothScroll();
   const route = routeOf(usePathname());
+  const { t } = useLocale();
 
   /* remember the section being read, so the home page can resume there */
   useEffect(() => {
@@ -77,7 +79,7 @@ export default function ChapterRail() {
   // Portalled to <body>: the page wrapper is transformed during route transitions, which would turn `fixed` into `absolute`.
   return createPortal(
     <>
-      <nav className={shown ? 'rail on' : 'rail'} aria-label="Sections in this chapter">
+      <nav className={shown ? 'rail on' : 'rail'} aria-label={t.chapter.rail}>
         <ol>
           {sections.map((s, i) => (
             <li key={s.id}>

@@ -1,0 +1,203 @@
+import { northlight } from '@/lib/northlight';
+
+export const meta = {
+  title: "Construiește-l, pas cu pas.",
+  lede: "Zece pași de la un folder gol la o pagină terminată. Fiecare are promptul de lipit și, unde contează, codul pe care ar trebui să-l primești înapoi.",
+};
+
+<Scrollytelling
+  heading="01 · Bucla"
+  title="Fiecare pas trece prin aceeași buclă în patru părți."
+  stages={[
+    {
+      name: 'Brief',
+      art: 'wave',
+      text: 'Spui ce vrei, pentru cine e și ce trebuie să facă vizitatorul. Numești limitele: culori, fonturi, fără framework-uri.',
+    },
+    { name: 'Generare', art: 'net', text: 'Lași AI-ul să scrie câte o bucată pe rând. Bucățile mici sunt ușor de verificat și ușor de anulat.' },
+    {
+      name: 'Inspecție',
+      art: 'stream',
+      text: 'Deschizi pagina. O derulezi, o micșorezi, treci prin ea cu Tab. Îi ceri AI-ului să spună ce n-a testat și te uiți tu la partea aceea.',
+      extra: (
+        <div className="typed">
+          <div>{'>'} Captură de ecran la 375 px.</div>
+          <div>{'>'} Textul hero-ului acoperă butonul.</div>
+          <div>{'>'} Repară, apoi uită-te din nou.</div>
+        </div>
+      ),
+    },
+    { name: 'Rafinare', art: 'rings', text: 'Descrii problema pe care ai văzut-o, nu reparația pe care ți-o imaginezi. Apoi inspectezi din nou.' },
+  ]}
+/>
+<section className="sec">
+  <Stick left="02 · Zece pași" right="De la folder gol la pagină terminată" />
+  <div className="rows steps-list">
+    <Row cls="rv sticky-k" num="01" title="Dă-i AI-ului un brief">
+      <p>Un brief bun numește subiectul, publicul și singurul lucru pe care vizitatorul trebuie să-l facă la final. Cere întâi lista de secțiuni și aprob-o înainte să existe cod. O listă se schimbă în câteva secunde. Codul terminat costă mult mai mult.</p>
+      <ProjectFields />
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Vreau un site minimalist cu scroll cinematic despre [subiect] pentru [public]. Vizitatorul ar trebui să termine prin [o acțiune]. Propune secțiunile, câte un rând fiecare, și așteaptă aprobarea mea înainte să scrii cod.'
+        }
+      />
+      <p>Ar trebui să vezi: o listă scurtă, încă fără cod.</p>
+    </Row>
+    <Row cls="rv sticky-k" num="02" title="Generează scheletul">
+      <p>Cere trei fișiere și numește limitele. Limitele sunt cele care împiedică rezultatul să arate ca orice alt șablon.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Creează index.html, style.css și app.js cu HTML, CSS și JavaScript simple, fără framework. Fundal negru, o culoare de accent, o pereche de fonturi Google. Definește toate culorile ca proprietăți CSS personalizate. Include un hero, trei secțiuni de conținut, un îndemn la acțiune și un footer scurt.'
+        }
+      />
+      <p>Reîncarcă pagina din serverul local. Ar trebui să vezi o pagină completă, dar fără animații.</p>
+    </Row>
+    <Row cls="rv sticky-k" num="03" title="Adaugă scroll lin">
+      <p>Lenis dă paginii inerție, așa că rotița alunecă în loc să sară în trepte. Are nevoie de doctype: fără{' '}<code className="i">{'<'}!doctype html{'>'}</code>{' '}browserul intră în quirks mode și Lenis nu face nimic, fără vreo eroare. Exact asta s-a întâmplat la testarea acestui site.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Adaugă scroll lin cu Lenis de pe CDN-ul jsDelivr, fixat pe lenis@1.1.18 și condus de requestAnimationFrame. Nu îl porni când este setat prefers-reduced-motion.'
+        }
+      />
+      <CodeBlock lang="HTML" code={'<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>'} />
+      <CodeBlock
+        lang="app.js"
+        code={
+          "const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;\nif (!reduced && typeof Lenis !== 'undefined') {\n  const lenis = new Lenis({ duration: 1.2, smoothWheel: true });\n  const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };\n  requestAnimationFrame(raf);\n}"
+        }
+      />
+      <CodeBlock lang="style.css" code={'html.lenis, html.lenis body { height: auto; }\n.lenis.lenis-smooth { scroll-behavior: auto !important; }'} />
+    </Row>
+    <Row cls="rv sticky-k" num="04" title="Apariții la scroll">
+      <p>Secțiunile ar trebui să apară când ajungi la ele, nu toate la încărcarea paginii. Ascunde elementele doar când există JavaScript, ca nimic să nu rămână invizibil dacă scriptul eșuează.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Fă fiecare element .reveal să apară o singură dată când intră în ecran: opacitate și o ridicare de 24 px, decalate cu 80 ms între elementele vecine. Adaugă starea ascunsă doar sub o clasă .js pe elementul html.'
+        }
+      />
+      <CodeBlock
+        lang="app.js"
+        code={
+          "document.documentElement.classList.add('js');\nconst io = new IntersectionObserver((entries) => {\n  entries.forEach((e) => {\n    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }\n  });\n}, { threshold: 0.12 });\ndocument.querySelectorAll('.reveal').forEach((el) => io.observe(el));"
+        }
+      />
+      <CodeBlock
+        lang="style.css"
+        code={
+          '.js .reveal { opacity: 0; transform: translateY(24px);\n  transition: opacity 1s, transform 1s cubic-bezier(.2,.7,.2,1); }\n.js .reveal.in { opacity: 1; transform: none; }'
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="05" title="Dă adâncime hero-ului">
+      <p>Parallax înseamnă că straturile de fundal se mișcă mai încet decât prim-planul. Vitezele între 0.15 și 0.5 se citesc ca adâncime. Peste aproximativ 0.6 arată ca o eroare.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Dă hero-ului trei straturi de fundal cu data-speed 0.2, 0.35 și 0.5, mutate cu translate3d la scroll. Oprește actualizarea după 1,3 înălțimi de ecran. Sub 768 px redu deplasările în loc să le elimini.'
+        }
+      />
+      <CodeBlock
+        lang="app.js"
+        code={
+          "const layers = [...document.querySelectorAll('[data-speed]')];\naddEventListener('scroll', () => {\n  const y = scrollY;\n  if (y > innerHeight * 1.3) return;\n  layers.forEach((l) => {\n    l.style.transform = `translate3d(0, ${y * (1 - l.dataset.speed)}px, 0)`;\n  });\n}, { passive: true });"
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="06" title="Adaugă un moment fixat">
+      <p>Fixează cel mult o dată pe pagină. Alegerea clasică e o galerie cu scroll orizontal: scrollul vertical mută un rând de carduri în lateral, cât timp secțiunea stă pe loc. Înălțimea containerului e surplusul pistei plus un ecran.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Transformă cele șase carduri cu funcții într-o singură secțiune fixată cu scroll orizontal. Setează înălțimea containerului din lățimea pistei, după încărcarea fonturilor și la redimensionare, ca distanța de scroll să fie egală cu surplusul.'
+        }
+      />
+      <CodeBlock
+        lang="app.js"
+        code={
+          "const hs = document.querySelector('.hs'), pin = hs.querySelector('.hs-pin'), track = hs.querySelector('.hs-track');\nlet max = 0;\nconst measure = () => {\n  max = Math.max(0, track.scrollWidth - pin.clientWidth);\n  hs.style.height = (max + pin.offsetHeight) + 'px';\n};\naddEventListener('resize', measure); measure();\naddEventListener('scroll', () => {\n  const p = Math.min(1, Math.max(0, (64 - hs.getBoundingClientRect().top) / max));\n  track.style.transform = `translate3d(${-p * max}px, 0, 0)`;\n}, { passive: true });"
+        }
+      />
+      <CodeBlock
+        lang="style.css"
+        code={
+          '.hs-pin { position: sticky; top: 64px; height: calc(100vh - 64px); overflow: hidden; }\n.hs-track { display: flex; width: max-content; }'
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="07" title="Spune o poveste cu scrollytelling">
+      <p>Imaginea stă fixă în timp ce pașii de text trec pe lângă ea, și se schimbă după pasul activ. Scrollytellingul acestui site e bucla în patru etape de la începutul capitolului.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Construiește o secțiune de scrollytelling: o imagine fixă în stânga care se schimbă după pasul activ și patru pași de text în dreapta. Pe ecrane sub 900 px, pune-le una sub alta, cu imaginea fixă sus.'
+        }
+      />
+      <CodeBlock
+        lang="style.css"
+        code={
+          '.scrolly { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: start; }\n.scrolly-vis { position: sticky; top: 120px; height: 60vh; }\n.step { min-height: 72vh; opacity: .3; transition: opacity .5s; }\n.step.on { opacity: 1; }'
+        }
+      />
+      <CodeBlock
+        lang="app.js"
+        code={
+          "const steps = [...document.querySelectorAll('.step')];\naddEventListener('scroll', () => {\n  let best = 0, bd = Infinity;\n  steps.forEach((s, i) => {\n    const r = s.getBoundingClientRect();\n    const d = Math.abs(r.top + r.height / 2 - innerHeight / 2);\n    if (d < bd) { bd = d; best = i; }\n  });\n  steps.forEach((s, i) => s.classList.toggle('on', i === best));\n  showVisual(best);\n}, { passive: true });"
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="08" title="Adaugă un hero cu particule sau 3D">
+      <p>Opțional și mai greu decât tot ce e mai sus. Costă dimensiune de descărcare și baterie pe telefoane. Întreabă care e costul înainte să accepți. Limitează pixel ratio, oprește randarea când nu e pe ecran și redu numărul de particule pe ecrane mici.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Adaugă un hero cu particule Three.js din buildul cdnjs fixat pe o versiune exactă. Ia punctele dintr-o imagine desenată pe un canvas. Limitează pixel ratio la 2, înjumătățește numărul sub 768 px și oprește randarea când hero-ul nu e pe ecran. Spune-mi ce n-ai putut testa.'
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="09" title="Verificare pe telefon și accesibilitate">
+      <p>Verifică trei lățimi: 375, 768 și 1440 px. Apoi activează reduced motion. Trebuie să oprească scrollul lin, parallaxul și mișcarea aparițiilor, nu doar una dintre ele.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Verifică pagina la 375, 768 și 1440 px și listează orice se suprapune, e tăiat sau nu se poate citi. Fă ca prefers-reduced-motion să oprească scrollul lin, parallaxul și mișcarea aparițiilor. Adaugă un link de salt la conținut, stiluri de focus vizibile și aria-current pe elementul de meniu activ.'
+        }
+      />
+    </Row>
+    <Row cls="rv sticky-k" num="10" title="Verifică precum un director artistic">
+      <p>Cere o evaluare dură, repară cele mai grave trei probleme, apoi evaluează din nou. Două runde bat un prompt lung.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={
+          'Fii un director artistic exigent. Notează pagina de la 1 la 10 pentru ierarhie, ritm și lizibilitate pe mobil. Listează cele mai grave trei probleme și unde sunt, repară-le și notează din nou. Spune ce verificări n-ai putut rula.'
+        }
+      />
+    </Row>
+  </div>
+</section>
+<PromptFeed />
+<section className="sec">
+  <Stick left="04 · Exemplu complet" right="Northlight, trei fișiere" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Acesta e un site terminat și funcțional pe care îl poți rula acum. A fost deschis într-o fereastră Chromium fără interfață și derulat de sus până jos: clasa de scroll lin s-a aplicat, straturile de parallax s-au mișcat, toate cele douăzeci de cuvinte s-au aprins, toate cele șase apariții au pornit, galeria s-a deplasat pe toată lățimea ei, iar consola a rămas goală. Salvează cele trei fișiere într-un folder și servește-l cu <code className="i">python3 -m http.server 8000</code>.</p>
+  <OpenInStackBlitz locale="ro" />
+  <div className="rows">
+    <Row cls="rv" num="index.html" title="Structura">
+      <p>Șase secțiuni în fluxul normal. Doar secțiunea cu cuvinte și galeria sunt fixate.</p>
+      <CodeBlock lang="index.html" code={northlight['index.html']} />
+    </Row>
+    <Row cls="rv" num="style.css" title="Aspect și layout">
+      <p>Tokenurile de culoare sunt sus. Secțiunile fixate folosesc <code className="i">position: sticky</code> într-un părinte mai înalt, așa că browserul face fixarea.</p>
+      <CodeBlock lang="style.css" code={northlight['style.css']} />
+    </Row>
+    <Row cls="rv" num="app.js" title="Comportament">
+      <p>Scroll lin, apariții, cuvinte conduse de scroll, parallax și galeria, în aproximativ șaptezeci de rânduri. Un singur handler de scroll face calculele.</p>
+      <CodeBlock lang="app.js" code={northlight['app.js']} />
+    </Row>
+  </div>
+  <div className="rv">
+    <Callout>Netestat: Safari și Firefox, dispozitive tactile reale și cititoare de ecran. Testează-le tu înainte să publici.</Callout>
+  </div>
+</section>

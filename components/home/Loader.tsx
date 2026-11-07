@@ -1,7 +1,13 @@
 'use client';
+import { dicts } from '@/lib/dict';
+import { localeOf } from '@/lib/i18n';
+import { useLocale } from '@/lib/useLocale';
 import { useEffect, useRef } from 'react';
 import { boot } from '@/lib/boot';
 import { prefersReducedMotion } from '@/lib/motion';
+
+/* inside effects, read the language straight from the address: it never changes within one document */
+const here = () => dicts[localeOf(location.pathname)];
 
 /** Longest the loader may hold the page, however slow the network. */
 const MAX_MS = 2500;
@@ -12,6 +18,7 @@ export const LOADER_SEEN = 'sc-loaded';
  * the particles) and gives up after MAX_MS. A script in the document head hides it before first paint on later visits.
  */
 export default function Loader() {
+  const t = useLocale().t.home.loader;
   const el = useRef<HTMLDivElement>(null);
   const num = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLElement>(null);
@@ -38,7 +45,7 @@ export default function Loader() {
       closing = true;
       num.current!.textContent = '100';
       bar.current!.style.transform = 'scaleX(1)';
-      lab.current!.textContent = 'Ready';
+      lab.current!.textContent = here().home.loader.ready;
       try {
         sessionStorage.setItem(LOADER_SEEN, '1');
       } catch {}
@@ -68,7 +75,8 @@ export default function Loader() {
       const threeOk = b.three || b.failed;
       const heroOk = b.hero || b.failed;
       const target = 10 + (fontsOk ? 25 : 0) + (threeOk ? 30 : 0) + (heroOk ? 35 : 0);
-      lab.current!.textContent = !fontsOk ? 'Loading fonts' : !threeOk ? 'Loading the 3D library' : !heroOk ? 'Building particles' : 'Ready';
+      const L = here().home.loader;
+      lab.current!.textContent = !fontsOk ? L.fonts : !threeOk ? L.three : !heroOk ? L.particles : L.ready;
       shown += (target - shown) * (reduced ? 1 : 0.2);
       if (target - shown < 0.6) shown = target;
       num.current!.textContent = String(Math.round(shown)).padStart(3, '0');
@@ -87,17 +95,17 @@ export default function Loader() {
   }, []);
 
   return (
-    <div className="loader" ref={el} role="status" aria-live="polite" aria-label="Loading Scrollcraft">
+    <div className="loader" ref={el} role="status" aria-live="polite" aria-label={t.label}>
       <div className="ld-top mono">
         <span>Scrollcraft</span>
-        <span>Free tutorial</span>
+        <span>{t.tag}</span>
       </div>
       <div className="ld-mid">
         <div className="ld-num" ref={num} aria-hidden="true">
           000
         </div>
         <div className="ld-label mono" ref={lab}>
-          Loading fonts
+          {t.fonts}
         </div>
       </div>
       <div className="ld-rule" aria-hidden="true">
@@ -109,7 +117,7 @@ export default function Loader() {
         </span>
       </div>
       <div className="ld-bot mono">
-        <span>Scroll to begin</span>
+        <span>{t.scroll}</span>
         <span className="ld-dot" aria-hidden="true"></span>
       </div>
     </div>

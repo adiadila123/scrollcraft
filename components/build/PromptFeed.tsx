@@ -3,12 +3,16 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Slots from '@/components/ui/Slots';
 import CopyButton from '@/components/ui/CopyButton';
 import { prefersReducedMotion } from '@/lib/motion';
-import { prompts } from '@/lib/prompts';
+import { prompts as all } from '@/lib/prompts';
+import { useLocale } from '@/lib/useLocale';
 
 const BATCH = 6;
 
 /** Technique 4: an infinite list. A sentinel below the last item asks for the next batch as it comes into range. */
 export default function PromptFeed() {
+  const { locale, t: d } = useLocale();
+  const t = d.feed;
+  const prompts = all[locale];
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const end = useRef<HTMLDivElement>(null);
@@ -37,22 +41,22 @@ export default function PromptFeed() {
     );
     io.observe(end.current!);
     return () => io.disconnect();
-  }, [count, done, loading]);
+  }, [count, done, loading, prompts.length]);
 
   return (
     <section className="sec">
       <div className="stick" id="prompt-library">
         <h2 className="mono stick-h" tabIndex={-1}>
-          03 · Prompt library
+          {t.heading}
         </h2>
-        <span className="mono">{count ? `${count} of ${prompts.length} loaded` : '0 loaded'}</span>
+        <span className="mono">{t.loaded(count, prompts.length)}</span>
       </div>
       <div className="sec-head">
         <h3 className="sec-h" style={{ maxWidth: '20ch' } as CSSProperties}>
-          Twenty-four prompts to copy.
+          {t.title}
         </h3>
         <p className="muted" style={{ maxWidth: '46ch' } as CSSProperties}>
-          Prompts use the project you filled in at step 01. Replace anything else in square brackets. More load as you scroll.
+          {t.note}
         </p>
       </div>
       <ol className="feed">
@@ -62,7 +66,7 @@ export default function PromptFeed() {
       </ol>
       <div className={done ? 'feed-end mono' : 'feed-end mono busy'} ref={end} aria-live="polite">
         <span className="spin"></span>
-        <span>{done ? 'End of the sample list' : 'Loading more'}</span>
+        <span>{done ? t.end : t.more}</span>
       </div>
     </section>
   );
@@ -82,7 +86,7 @@ function FeedItem({ n, topic, text }: { n: number; topic: string; text: string }
         <p>
           <Slots text={text} />
         </p>
-        <CopyButton label="Copy prompt" from="prev" />
+        <CopyButton prompt from="prev" />
       </div>
     </li>
   );

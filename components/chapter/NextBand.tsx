@@ -4,7 +4,8 @@ import { useRef } from 'react';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
 import ChapterDone from '@/components/ui/ChapterDone';
 import { rememberFlight, setLevel } from '@/lib/particles/manager';
-import { neighbours } from '@/lib/chapters';
+import { chapterHref, neighbours } from '@/lib/chapters';
+import { useLocale } from '@/lib/useLocale';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useScroll } from '@/lib/useScroll';
 
@@ -15,7 +16,9 @@ import { useScroll } from '@/lib/useScroll';
 export default function NextBand({ from }: { from: string }) {
   const band = useRef<HTMLElement>(null);
   const art = useRef<HTMLDivElement>(null);
-  const next = neighbours(from).next;
+  const { locale, t: d } = useLocale();
+  const t = d.chapter;
+  const next = neighbours(from, locale).next;
 
   useScroll((_, vh) => {
     const el = band.current;
@@ -27,7 +30,7 @@ export default function NextBand({ from }: { from: string }) {
     setLevel(art.current.querySelector('canvas'), p);
   });
 
-  const href = next ? `/${next.id}` : '/';
+  const href = chapterHref(next ? next.id : 'home', locale);
   return (
     <section className="next-band" ref={band} aria-labelledby="next-band-title">
       <ChapterDone />
@@ -38,20 +41,20 @@ export default function NextBand({ from }: { from: string }) {
         <h2 id="next-band-title">
           {next ? (
             <>
-              <span className="nb-next">Next</span> {next.title}
+              <span className="nb-next">{t.next}</span> {next.title}
             </>
           ) : (
-            'Back to the start'
+            t.backToStart
           )}
         </h2>
         {next ? <p className="lede">{next.summary}</p> : null}
         <div className="ctas">
           <Link className="btn" href={href} data-magnetic="" onClick={() => rememberFlight(art.current?.querySelector('canvas'), next ? next.art : 'globe')}>
-            {next ? `Chapter ${Number(next.n)}: ${next.title}` : 'Back to the start'} <span aria-hidden="true">→</span>
+            {next ? t.link(Number(next.n), next.title) : t.backToStart} <span aria-hidden="true">→</span>
           </Link>
           {next ? (
             <span className="nb-key">
-              or press <kbd>]</kbd>
+              {t.orPress} <kbd>]</kbd>
             </span>
           ) : null}
         </div>

@@ -29,12 +29,11 @@ push and pull request, and a weekly workflow checks the external links.
 ## Structure
 
     app/
-      layout.tsx            fonts (next/font, self-hosted), metadata, chrome, smooth scrolling
-      page.tsx              home
-      [chapter]/page.tsx    the eight chapters, prerendered; unknown paths are a 404
+      (en)/ (ro)/ro/        one root layout per language (its own <html lang>); home and [chapter] routes in each
+      global-not-found.tsx  the 404 for addresses that match neither language
       */opengraph-image.tsx social cards, generated at build time
       sitemap.ts robots.ts manifest.ts icon.svg not-found.tsx error.tsx
-    content/en/             the text of each chapter, one MDX file each; mdx-components.tsx lists what MDX can use
+    content/en/ content/ro/ the text of each chapter, one MDX file per language; mdx-components.tsx lists what MDX can use
     components/
       pages/                Home, and Chapter (opening + MDX body + next-chapter band)
       ui/                   CodeBlock (Shiki, build time), Row, Stick, PageHead, PlatformTabs, CopyButton…
@@ -57,7 +56,9 @@ push and pull request, and a weekly workflow checks the external links.
 
 1. Add an entry to `lib/chapters.ts`.
 2. Write `content/en/your-chapter.mdx`: `export const meta = { title, lede }`, then the sections, using the components in `mdx-components.tsx`. Keep text that wraps inside a component on one line, or MDX wraps it in an extra paragraph.
-3. Import it in `lib/content.ts`.
+3. Write the Romanian version as `content/ro/your-chapter.mdx`, add its titles to `lib/chapters.ts`, and import both in `lib/content.ts`.
+
+Interface text (navigation, buttons, labels) lives in `lib/dict.ts`; the Romanian object must have every key the English one has, so TypeScript catches a missing translation.
 
 The route, navigation, sitemap, social card, reading time and search entries follow automatically.
 

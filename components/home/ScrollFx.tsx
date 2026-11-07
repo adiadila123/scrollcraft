@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { useRef, type ReactNode } from 'react';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
-import { chapters, getChapter } from '@/lib/chapters';
+import { chapterHref, chaptersFor, getChapter } from '@/lib/chapters';
+import { useLocale } from '@/lib/useLocale';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useProgress } from '@/lib/progress';
 import { useScroll } from '@/lib/useScroll';
@@ -12,6 +13,7 @@ export function Statement({ text, dim }: { text: string; dim: string }) {
   const pin = useRef<HTMLElement>(null);
   const words = useRef<HTMLSpanElement[]>([]);
   const hint = useRef<HTMLSpanElement>(null);
+  const { t } = useLocale();
   const all = [...text.split(/\s+/).map((w) => [w, false] as const), ...dim.split(/\s+/).map((w) => [w, true] as const)];
 
   useScroll((_, vh) => {
@@ -45,7 +47,7 @@ export function Statement({ text, dim }: { text: string; dim: string }) {
           ))}
         </p>
         <span className="pin-hint" ref={hint} aria-hidden="true">
-          Keep scrolling
+          {t.home.keepScrolling}
         </span>
       </div>
     </section>
@@ -55,6 +57,7 @@ export function Statement({ text, dim }: { text: string; dim: string }) {
 /** Technique 6: the particle face scales up while it crosses the viewport. */
 export function ZoomFigure() {
   const fig = useRef<HTMLElement>(null);
+  const { t } = useLocale();
   useScroll((_, vh) => {
     const el = fig.current;
     if (!el || prefersReducedMotion()) return;
@@ -66,10 +69,10 @@ export function ZoomFigure() {
   return (
     <section className="wrap sec zoomsec">
       <figure className="zoom" ref={fig}>
-        <ParticleCanvas kind="face" label="A head made of white particles with blue eyes, shown close up" />
+        <ParticleCanvas kind="face" label={t.home.faceClose} />
         <figcaption>
-          <span className="mono">Every image on this site is particles</span>
-          <span className="mono">Scroll to zoom</span>
+          <span className="mono">{t.home.zoomA}</span>
+          <span className="mono">{t.home.zoomB}</span>
         </figcaption>
       </figure>
     </section>
@@ -101,7 +104,9 @@ export function ParallaxBand({ children }: { children: ReactNode }) {
 /** Shown under the hero once a visitor has opened a chapter: progress so far and a link back to where they were. */
 export function Resume() {
   const { done, last, at } = useProgress();
-  const c = last ? getChapter(last) : undefined;
+  const { locale, t } = useLocale();
+  const chapters = chaptersFor(locale);
+  const c = last ? getChapter(last, locale) : undefined;
   if (!c) return null;
   /* a finished chapter resumes at the next unread one; an unfinished one at the section you were reading */
   const finished = done.includes(c.id);
@@ -109,12 +114,10 @@ export function Resume() {
   const section = !finished && at?.chapter === c.id ? at : undefined;
   return (
     <div className="resume">
-      <span className="mono">
-        {done.length} of {chapters.length} chapters read
-      </span>
+      <span className="mono">{t.home.chaptersRead(done.length, chapters.length)}</span>
       {target ? (
-        <Link className="ghost" href={section ? `/${target.id}#${section.id}` : `/${target.id}`}>
-          {finished ? 'Next' : 'Resume'}: {target.n} {target.title}
+        <Link className="ghost" href={section ? `${chapterHref(target.id, locale)}#${section.id}` : chapterHref(target.id, locale)}>
+          {finished ? t.home.next : t.home.resume}: {target.n} {target.title}
           {section ? <span className="resume-at"> · {section.label}</span> : null} <span aria-hidden="true">→</span>
         </Link>
       ) : null}

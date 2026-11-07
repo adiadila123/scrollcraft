@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { chapters } from '@/lib/chapters';
+import { chapterHref, chaptersFor } from '@/lib/chapters';
+import { dicts } from '@/lib/dict';
+import { withLocale, type Locale } from '@/lib/i18n';
 import BackToTop from './BackToTop';
 
 type Ext = { href: string; label: string };
@@ -28,37 +30,38 @@ function Column({ title, links }: { title: string; links: Ext[] }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ locale }: { locale: Locale }) {
+  const t = dicts[locale].footer;
   return (
     <footer>
       <div className="wrap">
         <div className="f-top">
           <div>
-            <Link className="mark" href="/">
+            <Link className="mark" href={chapterHref('home', locale)}>
               Scrollcraft
             </Link>
-            <p>
-              A free tutorial on building a cinematic scroll website with Claude, Gemini or ChatGPT. Commands were checked against official documentation in
-              November 2026. Check the linked pages before you rely on them.
-            </p>
+            <p>{t.blurb}</p>
+            <a className="f-lang" href={withLocale(locale === 'en' ? 'ro' : 'en', '/')} hrefLang={locale === 'en' ? 'ro' : 'en'} lang={locale === 'en' ? 'ro' : 'en'}>
+              {dicts[locale].lang.switchTo}
+            </a>
           </div>
           <div className="f-col">
-            <div className="mono">Chapters</div>
-            {chapters.map((c) => (
-              <Link key={c.id} href={`/${c.id}`}>
+            <div className="mono">{t.chapters}</div>
+            {chaptersFor(locale).map((c) => (
+              <Link key={c.id} href={chapterHref(c.id, locale)}>
                 {c.n} {c.title}
               </Link>
             ))}
           </div>
-          <Column title="Official docs" links={docs} />
-          <Column title="Find skills" links={finds} />
+          <Column title={t.docs} links={docs} />
+          <Column title={t.finds} links={finds} />
         </div>
         <div className="bigmark" aria-hidden="true">
           Scrollcraft
         </div>
         <div className="f-bot">
-          <span>© 2026 Scrollcraft. A free tutorial.</span>
-          <BackToTop />
+          <span>{t.rights}</span>
+          <BackToTop label={t.top} />
         </div>
       </div>
     </footer>

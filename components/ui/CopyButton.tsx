@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import { useLocale } from '@/lib/useLocale';
 
 async function copy(text: string) {
   try {
@@ -20,7 +21,8 @@ async function copy(text: string) {
  * Copies the text of the code block it sits in, or of the element just before it (prompt cards).
  * Reading the DOM at click time keeps it correct when the playground rewrites the code.
  */
-export default function CopyButton({ label = 'Copy', from = 'block' }: { label?: string; from?: 'block' | 'prev' }) {
+export default function CopyButton({ prompt = false, from = 'block' }: { prompt?: boolean; from?: 'block' | 'prev' }) {
+  const t = useLocale().t.copy;
   const ref = useRef<HTMLButtonElement>(null);
   const [state, setState] = useState<'idle' | 'done' | 'failed'>('idle');
   const timer = useRef(0);
@@ -41,7 +43,7 @@ export default function CopyButton({ label = 'Copy', from = 'block' }: { label?:
 
   return (
     <button ref={ref} className="cpy" type="button" onClick={onClick} aria-live="polite">
-      {state === 'done' ? 'Copied' : state === 'failed' ? 'Select and copy' : label}
+      {state === 'done' ? t.copied : state === 'failed' ? t.failed : prompt ? t.prompt : t.copy}
     </button>
   );
 }

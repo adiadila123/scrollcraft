@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og';
 export const OG_SIZE = { width: 1200, height: 630 };
 
 /** The social card shared by the home page and every chapter: black, hairline rules, one accent. */
-export function ogImage({ kicker, title, sub }: { kicker: string; title: string; sub: string }) {
+export function ogImage({ tag, kicker, title, sub }: { tag: string; kicker: string; title: string; sub: string }) {
   return new ImageResponse(
     <div
       style={{
@@ -20,7 +20,7 @@ export function ogImage({ kicker, title, sub }: { kicker: string; title: string;
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 22, letterSpacing: 7, color: '#7f8c95' }}>
         <span>SCROLLCRAFT</span>
-        <span>FREE TUTORIAL</span>
+        <span>{tag.toUpperCase()}</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 24, letterSpacing: 6, color: '#5cc8ff' }}>

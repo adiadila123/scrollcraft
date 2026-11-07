@@ -1,37 +1,35 @@
 'use client';
 import { project, type Project } from '@/lib/project';
+import { useLocale } from '@/lib/useLocale';
 
-const FIELDS: { key: keyof Project; label: string; hint: string }[] = [
-  { key: 'subject', label: 'Subject', hint: 'a night train across Norway' },
-  { key: 'audience', label: 'Audience', hint: 'people planning a winter trip' },
-  { key: 'action', label: 'The one action', hint: 'booking a seat' },
-];
+const FIELDS: (keyof Project)[] = ['subject', 'audience', 'action'];
 
 /** Three fields for the reader's project. Every prompt on the site fills them in, and they are remembered. */
 export default function ProjectFields() {
   const p = project.use();
+  const t = useLocale().t.project;
   const empty = !p.subject && !p.audience && !p.action;
   return (
-    <form className="project" onSubmit={(e) => e.preventDefault()} aria-label="Your project">
+    <form className="project" onSubmit={(e) => e.preventDefault()} aria-label={t.label}>
       <div className="project-grid">
         {FIELDS.map((f) => (
-          <label key={f.key}>
-            {f.label}
+          <label key={f}>
+            {t[f]}
             <input
               type="text"
-              value={p[f.key]}
-              placeholder={f.hint}
+              value={p[f]}
+              placeholder={t.hints[f]}
               autoComplete="off"
-              onChange={(e) => project.set({ ...project.get(), [f.key]: e.target.value })}
+              onChange={(e) => project.set({ ...project.get(), [f]: e.target.value })}
             />
           </label>
         ))}
       </div>
       <p className="project-note">
-        {empty ? 'Fill these in and every prompt in the tutorial uses them.' : 'Every prompt in the tutorial now uses these. They stay in this browser.'}{' '}
+        {empty ? t.empty : t.filled}{' '}
         {empty ? null : (
           <button type="button" className="linkish" onClick={() => project.set({ subject: '', audience: '', action: '' })}>
-            Clear
+            {t.clear}
           </button>
         )}
       </p>

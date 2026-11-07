@@ -1,3 +1,5 @@
+import { stripLocale, withLocale, type Locale } from './i18n';
+
 /** Single source of truth for the chapter list. Routes, navigation, metadata, the sitemap and search all read from here. */
 /** art names the particle shape drawn behind the chapter title and in the band that leads into it. */
 export type Chapter = { id: string; n: string; title: string; nav: string; desc: string; summary: string; art: string };
@@ -77,24 +79,79 @@ export const chapters: Chapter[] = [
   },
 ];
 
-/** The four chapters shown as tabs on a phone. The rest sit behind More. */
-export const tabIds = ['start', 'skills', 'build', 'motion'];
+/** Romanian titles and descriptions; ids, numbers and art stay the same in every language. */
+const ro: Record<string, Pick<Chapter, 'title' | 'nav' | 'desc' | 'summary'>> = {
+  start: {
+    title: 'Început',
+    nav: 'Început',
+    desc: 'Unelte și instalare',
+    summary: 'Alegi Claude, Gemini sau ChatGPT, instalezi uneltele și pregătești un folder de proiect.',
+  },
+  skills: {
+    title: 'Skilluri',
+    nav: 'Skilluri',
+    desc: 'Găsești, instalezi, scrii',
+    summary: 'Ce este un skill, unde găsești skilluri bune, cum le instalezi pe fiecare platformă și cum îți scrii propriul skill.',
+  },
+  prompting: {
+    title: 'Prompturi',
+    nav: 'Prompturi',
+    desc: 'Brief pentru AI',
+    summary: 'Un brief în cinci părți, un exemplu înainte și după, un fișier cu regulile proiectului și șase tipare de ghidare.',
+  },
+  build: {
+    title: 'Construcție',
+    nav: 'Construcție',
+    desc: 'Pași și exemplu complet',
+    summary: 'Zece pași cu promptul exact pentru fiecare, încă 24 de prompturi și un exemplu complet din trei fișiere, rulat și verificat.',
+  },
+  motion: {
+    title: 'Mișcare',
+    nav: 'Mișcare',
+    desc: 'Nouă tehnici',
+    summary: 'Cele nouă tehnici de scroll care dau senzația de film, fiecare cu cod pe care îl poți lipi.',
+  },
+  playground: {
+    title: 'Laborator',
+    nav: 'Laborator',
+    desc: 'Experimente live',
+    summary: 'Patru experimente live: netezirea scrollului, viteza parallax, decalajul apariției și curbele de easing.',
+  },
+  advanced: {
+    title: 'Avansat',
+    nav: 'Avansat',
+    desc: 'GSAP, Next.js, reparații',
+    summary: 'GSAP cu Lenis, timeline-uri de scroll în CSS, o versiune Next.js, reguli de performanță, un tabel de erori și un glosar.',
+  },
+  launch: {
+    title: 'Lansare',
+    nav: 'Lansare',
+    desc: 'Testezi și publici',
+    summary: 'Testezi pe trei lățimi de ecran, repari ce se strică și publici folderul.',
+  },
+};
+
+const byLocale: Record<Locale, Chapter[]> = { en: chapters, ro: chapters.map((c) => ({ ...c, ...ro[c.id] })) };
+
+/** The chapter list in a language. */
+export const chaptersFor = (locale: Locale = 'en') => byLocale[locale];
 
 export const SITE_NAME = 'Scrollcraft';
 export const SITE_DESCRIPTION = 'A free tutorial on building a cinematic scroll website with Claude, Gemini or ChatGPT.';
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
 
-export const chapterHref = (id: string) => (id === 'home' ? '/' : `/${id}`);
-export const getChapter = (id: string) => chapters.find((c) => c.id === id);
+export const chapterHref = (id: string, locale: Locale = 'en') => withLocale(locale, id === 'home' ? '/' : `/${id}`);
+export const getChapter = (id: string, locale: Locale = 'en') => byLocale[locale].find((c) => c.id === id);
 
-/** The chapter id for a pathname, or 'home'. */
+/** The chapter id for a pathname in any language, or 'home'. */
 export function routeOf(pathname: string): string {
-  const id = pathname.split('/')[1] || 'home';
+  const id = stripLocale(pathname).split('/')[1] || 'home';
   return getChapter(id) ? id : 'home';
 }
 
-export function neighbours(id: string): { prev?: Chapter; next?: Chapter } {
-  const i = chapters.findIndex((c) => c.id === id);
-  if (i < 0) return { next: chapters[0] };
-  return { prev: chapters[i - 1], next: chapters[i + 1] };
+export function neighbours(id: string, locale: Locale = 'en'): { prev?: Chapter; next?: Chapter } {
+  const list = byLocale[locale];
+  const i = list.findIndex((c) => c.id === id);
+  if (i < 0) return { next: list[0] };
+  return { prev: list[i - 1], next: list[i + 1] };
 }

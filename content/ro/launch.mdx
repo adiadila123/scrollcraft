@@ -1,0 +1,74 @@
+export const meta = {
+  title: "Testează, repară, publică.",
+  lede: "Ultimele zece procente sunt cele în care un site nu mai pare un demo. Treci prin lista de verificare, apoi pune folderul online.",
+};
+
+<section className="sec">
+  <Checklist
+    items={[
+      'Site-ul rulează de pe un server local, nu din file://',
+      'Consola browserului nu arată erori',
+      'L-am verificat la lățimi de 375, 768 și 1440 px',
+      'Nimic nu se suprapune și nu e tăiat într-o fereastră cât un telefon',
+      'Fiecare element cu apariție devine vizibil când ajung la el',
+      'Reduced motion oprește scrollul lin, parallaxul și mișcarea aparițiilor',
+      'Totul merge doar de la tastatură, cu focus vizibil',
+      'Textul are un contrast de cel puțin 4,5 la 1',
+      'Imaginile sunt comprimate și folosesc cel mult două familii de fonturi',
+      'Nu există statistici, citate sau logouri de clienți inventate',
+      'Fiecare bibliotecă externă e fixată pe o versiune exactă',
+      'Am rulat Lighthouse în Chrome DevTools și am notat scorurile',
+    ]}
+  />
+  <p className="muted" style={{ marginTop: '20px', maxWidth: '56ch' }}>Bifele se salvează doar în acest browser, așa că se pot pierde într-o fereastră privată.</p>
+</section>
+<section className="sec">
+  <Stick left="02 · Cere dovezi" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Nu accepta „testat”">
+      <p>Uneltele AI raportează uneori verificări pe care nu le-au rulat. Întreabă ce s-a rulat, la ce lățimi și ce s-a sărit. Apoi deschide pagina și uită-te tu.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={'Listează fiecare verificare pe care chiar ai rulat-o, cu lățimea sau unealta folosită. Listează fiecare verificare pe care n-ai putut-o rula și de ce.'}
+      />
+    </Row>
+    <Row cls="rv" num="b" title="Măsoară, apoi repară">
+      <p>În Chrome DevTools, tabul Lighthouse dă scoruri de performanță și accesibilitate. Repară întâi cea mai mare problemă și rulează din nou. Tabul Performance arată ce blochează firul principal în timp ce derulezi.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Greșeli frecvente">
+      <p>Fișierul deschis direct în loc de printr-un server. Doctype lipsă, care strică Lenis. Scroll snap pe toată pagina împreună cu scroll lin. Deplasări de parallax care împing textul hero-ului în afara ecranului pe telefon. <code className="i">will-change</code> pe fiecare element. Conținut ascuns din CSS pe care niciun script nu-l mai arată. <code className="i">overflow: hidden</code> pe html sau body, care poate lăsa două contexte de scroll.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Publică folderul" right="Orice găzduire statică" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Rezultatul sunt trei fișiere statice, deci orice găzduire statică îl poate servi. Verifică pe pagina fiecărui serviciu limitele și prețurile actuale.</p>
+  <div className="cells rv" style={{ marginTop: '28px' }}>
+    <Cell title="Netlify">
+      <p>Trage folderul pe pagina Netlify Drop sau publică din linia de comandă.</p>
+    </Cell>
+    <Cell title="Vercel">
+      <p>Rulează comanda de mai jos în folder și urmează întrebările.</p>
+    </Cell>
+    <Cell title="GitHub Pages">
+      <p>Urcă folderul într-un repository, apoi activează Pages din setările repository-ului.</p>
+    </Cell>
+    <Cell title="Cloudflare Pages">
+      <p>Încarcă folderul din dashboard sau conectează un repository.</p>
+    </Cell>
+  </div>
+  <div className="rv">
+    <CodeBlock lang="bash" code={'npx vercel'} />
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Mergi mai departe" right="Documentație oficială" />
+  <div className="rows">
+    <Row cls="rv" num="Docs" title="Unde e documentată fiecare piesă">
+      <p><a className="ext" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Skilluri în Claude Code</a>,{' '}<a className="ext" href="https://claude.com/docs/skills/how-to" target="_blank" rel="noopener">crearea skillurilor proprii</a>,{' '}<a className="ext" href="https://geminicli.com/docs/get-started" target="_blank" rel="noopener">Gemini CLI</a>,{' '}<a className="ext" href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">skilluri OpenAI</a>,{' '}<a className="ext" href="https://agentskills.io/specification" target="_blank" rel="noopener">specificația Agent Skills</a>.</p>
+    </Row>
+    <Row cls="rv" num="Cod" title="Bibliotecile folosite aici">
+      <p><a className="ext" href="https://github.com/darkroomengineering/lenis" target="_blank" rel="noopener">Lenis</a>{' '}pentru scroll lin,{' '}<a className="ext" href="https://gsap.com/docs/v3/Plugins/ScrollTrigger/" target="_blank" rel="noopener">GSAP ScrollTrigger</a>{' '}pentru animații legate de scroll și fixate, și{' '}<a className="ext" href="https://threejs.org" target="_blank" rel="noopener">three.js</a>{' '}pentru capul din particule. GSAP a devenit gratuit pentru uz comercial în 2025, conform{' '}<a className="ext" href="https://webflow.com/blog/gsap-becomes-free" target="_blank" rel="noopener">anunțului Webflow</a>.</p>
+    </Row>
+  </div>
+</section>

@@ -5,6 +5,7 @@ import ParticleCanvas from '@/components/particles/ParticleCanvas';
 import { landFlight, setLevel } from '@/lib/particles/manager';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useProgress } from '@/lib/progress';
+import { useLocale } from '@/lib/useLocale';
 import { useScroll } from '@/lib/useScroll';
 
 const noop = () => () => {};
@@ -35,6 +36,7 @@ export default function ChapterHead({
   const artRef = useRef<HTMLDivElement>(null);
   const copy = useRef<HTMLDivElement>(null);
   const { done } = useProgress();
+  const { t } = useLocale();
   const hydrated = useSyncExternalStore(noop, () => true, () => false);
 
   /* arriving from the previous chapter's end band: its shape flies into place behind this title */
@@ -50,7 +52,8 @@ export default function ChapterHead({
     if (artRef.current) {
       const end = document.querySelector('.next-band')?.getBoundingClientRect().top ?? Infinity;
       const leave = clamp((end - vh * 0.15) / (vh * 0.6), 0, 1);
-      const o = (1 - p * 0.82) * leave;
+      /* behind the sections it is a backdrop: dimmer on phones, where the text column sits right over it */
+      const o = (1 - p * (innerWidth <= 760 ? 0.9 : 0.82)) * leave;
       artRef.current.style.opacity = o.toFixed(3);
       setLevel(artRef.current.querySelector('canvas'), o);
       if (!still) artRef.current.style.transform = `scale(${(1 + p * 0.25).toFixed(3)})`;
@@ -77,11 +80,9 @@ export default function ChapterHead({
         <h1 className="pg-title">{title}</h1>
         <p className="lede">{lede}</p>
         <p className="pg-meta">
-          <span>
-            Chapter {Number(n)} of {total}
-          </span>
-          {mins ? <span>{mins} min read</span> : null}
-          {done.includes(id) ? <span className="pg-done">Read</span> : null}
+          <span>{t.chapter.of(Number(n), total)}</span>
+          {mins ? <span>{t.chapter.minutes(mins)}</span> : null}
+          {done.includes(id) ? <span className="pg-done">{t.chapter.read}</span> : null}
         </p>
       </div>
     </header>

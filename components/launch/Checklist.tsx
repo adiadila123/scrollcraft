@@ -1,5 +1,6 @@
 'use client';
 import { persistentStore } from '@/lib/store';
+import { useLocale } from '@/lib/useLocale';
 
 /** Ticks are saved in the browser as 1s and 0s, so the list survives a reload. */
 const ticks = persistentStore<number[]>('sc-checks', []);
@@ -7,6 +8,7 @@ const ticks = persistentStore<number[]>('sc-checks', []);
 /** The launch checklist. */
 export default function Checklist({ items }: { items: string[] }) {
   const saved = ticks.use();
+  const t = useLocale().t.checklist;
   const checked = items.map((_, i) => !!saved[i]);
   const toggle = (i: number) => ticks.set(checked.map((v, j) => ((j === i ? !v : v) ? 1 : 0)));
   const n = checked.filter(Boolean).length;
@@ -15,10 +17,10 @@ export default function Checklist({ items }: { items: string[] }) {
     <>
       <div className="stick" id="checklist">
         <h2 className="mono stick-h" tabIndex={-1}>
-          01 · Checklist
+          {t.heading}
         </h2>
         <span className="mono" aria-live="polite">
-          {n} of {items.length} done
+          {t.done(n, items.length)}
         </span>
       </div>
       <ul className="checklist rv">

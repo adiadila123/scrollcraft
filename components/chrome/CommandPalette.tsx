@@ -1,7 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import type { Locale } from '@/lib/i18n';
 import type { SearchEntry } from '@/lib/search';
+import { useLocale } from '@/lib/useLocale';
 
 const OPEN = 'sc:palette';
 /** Opens the search palette from anywhere, for example the search button in the top bar. */
@@ -23,7 +25,11 @@ export default function CommandPalette() {
   const router = useRouter();
   const dialog = useRef<HTMLDialogElement>(null);
   const list = useRef<HTMLUListElement>(null);
+  const { locale, t: d } = useLocale();
+  const t = d.palette;
+  /* the index is built for one language; switching language loads a new document, so this never goes stale */
   const [index, setIndex] = useState<SearchEntry[] | null>(null);
+  const lang = useRef<Locale>(locale);
   const [q, setQ] = useState('');
   const [sel, setSel] = useState(0);
 
@@ -34,7 +40,7 @@ export default function CommandPalette() {
       setQ('');
       setSel(0);
       d.showModal();
-      if (!index) import('@/lib/search').then((m) => setIndex(m.searchIndex));
+      if (!index) import('@/lib/search').then((m) => setIndex(m.searchIndex(lang.current)));
     };
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -94,7 +100,7 @@ export default function CommandPalette() {
     <dialog
       className="palette"
       ref={dialog}
-      aria-label="Search the tutorial"
+      aria-label={t.label}
       onClick={(e) => {
         if (e.target === dialog.current) dialog.current.close();
       }}
@@ -102,7 +108,7 @@ export default function CommandPalette() {
       <div className="pal-in">
         <input
           type="search"
-          placeholder="Search chapters, sections and prompts"
+          placeholder={t.placeholder}
           value={q}
           onChange={(e) => {
             setQ(e.target.value);
@@ -116,21 +122,20 @@ export default function CommandPalette() {
           autoFocus
         />
         <ul id="pal-list" role="listbox" ref={list} data-lenis-prevent="">
-          {!index && <li className="pal-empty mono">Loading</li>}
-          {index && !results.length && <li className="pal-empty mono">Nothing found</li>}
+          {!index && <li className="pal-empty mono">{t.loading}</li>}
+          {index && !results.length && <li className="pal-empty mono">{t.empty}</li>}
           {results.map((e, i) => (
             <li key={`${e.href}-${i}`} id={`pal-${i}`} role="option" aria-selected={i === sel} onMouseMove={() => setSel(i)} onClick={() => go(e)}>
-              <span className="mono">{e.kind === 'chapter' ? `Chapter ${Number(e.n)}` : e.kind === 'prompt' ? 'Prompt' : 'Section'}</span>
+              <span className="mono">{e.kind === 'chapter' ? t.chapter(Number(e.n)) : e.kind === 'prompt' ? t.prompt : t.section}</span>
               <b>{e.title.replace(/: prompt$/, '')}</b>
-              {e.kind === 'chapter' ? null : <em>{e.kind === 'prompt' ? `${e.chapter} · ${e.text}` : `In ${e.chapter}`}</em>}
+              {e.kind === 'chapter' ? null : <em>{e.kind === 'prompt' ? `${e.chapter} · ${e.text}` : t.inChapter(e.chapter)}</em>}
             </li>
           ))}
         </ul>
         <div className="pal-foot mono" aria-hidden="true">
-          <span>↑↓ to move</span>
-          <span>Enter to open</span>
-          <span>Esc to close</span>
-          <span>[ ] previous and next chapter</span>
+          {t.keys.map((k) => (
+            <span key={k}>{k}</span>
+          ))}
         </div>
       </div>
     </dialog>

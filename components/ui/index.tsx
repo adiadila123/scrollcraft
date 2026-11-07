@@ -2,6 +2,8 @@ import type { ReactNode } from 'react';
 import ChapterHead from '@/components/chapter/ChapterHead';
 import ChapterRail from '@/components/chapter/ChapterRail';
 import { chapters, getChapter } from '@/lib/chapters';
+import { dicts } from '@/lib/dict';
+import type { Locale } from '@/lib/i18n';
 import { highlight } from '@/lib/highlight';
 import { readingMinutes } from '@/lib/reading';
 import { slugify } from '@/lib/slug.mjs';
@@ -75,9 +77,9 @@ export function Stick({ left, right }: { left: string; right?: ReactNode }) {
 export { default as NextBand } from '@/components/chapter/NextBand';
 
 /** The opening screen of a chapter. Number, particle art and reading time come from lib/chapters.ts. */
-export function PageHead({ chapter, title, lede }: { chapter: string; title: ReactNode; lede: ReactNode }) {
-  const c = getChapter(chapter)!;
-  return <ChapterHead id={c.id} n={c.n} total={chapters.length} art={c.art} mins={readingMinutes(c.id)} title={title} lede={lede} />;
+export function PageHead({ chapter, locale = 'en', title, lede }: { chapter: string; locale?: Locale; title: ReactNode; lede: ReactNode }) {
+  const c = getChapter(chapter, locale)!;
+  return <ChapterHead id={c.id} n={c.n} total={chapters.length} art={c.art} mins={readingMinutes(c.id, locale)} title={title} lede={lede} />;
 }
 
 export function PageBody({ children }: { children: ReactNode }) {
@@ -85,10 +87,10 @@ export function PageBody({ children }: { children: ReactNode }) {
 }
 
 /** One chapter view, with its section rail. The enter animation runs on mount, so it plays on every client-side navigation. */
-export function Page({ route, children }: { route: string; children: ReactNode }) {
-  const c = getChapter(route);
+export function Page({ route, locale = 'en', children }: { route: string; locale?: Locale; children: ReactNode }) {
+  const c = getChapter(route, locale);
   return (
-    <div className="page enter" data-route={route} aria-label={c ? `Chapter ${c.n}: ${c.title}` : undefined}>
+    <div className="page enter" data-route={route} aria-label={c ? dicts[locale].chapter.link(Number(c.n), c.title) : undefined}>
       {c ? <ChapterRail /> : null}
       {children}
     </div>
