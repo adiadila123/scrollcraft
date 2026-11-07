@@ -125,8 +125,8 @@ export const meta = {
   <Stick left="02 · Rețete din proiecte reale" right="5 rețete" />
   <div className="rows steps-list">
     <Row cls="rv sticky-k" num="a" title="Tur de produs fixat">
-      <p>Un dispozitiv rămâne fixat cât timp blocurile cu funcții trec pe lângă el. Blocul care traversează mijlocul ecranului decide ce arată dispozitivul. Pe asta se construiesc majoritatea paginilor de lansare de produs.</p>
-      <p className="tip">Urmărește o bandă subțire din mijlocul ecranului cu IntersectionObserver (rootMargin -45%) în loc să măsori la fiecare eveniment de scroll.</p>
+      <p>Un dispozitiv rămâne fixat cât timp blocurile cu funcții trec pe lângă el. Funcția citită în acel moment decide ce arată dispozitivul. Pe asta se construiesc majoritatea paginilor de lansare de produs.</p>
+      <p className="tip">Aprinde ultima funcție al cărei titlu a trecut de o linie de citire, verificată în cadrul de scroll, ca un scroll rapid să nu sară niciuna. Urmărește titlul, nu tot blocul, ca textul aprins să fie cel de pe ecran. Pe telefoane pune linia chiar sub dispozitivul fixat.</p>
     </Row>
     <Demo id="tour" name="Tur de produs fixat" locale="ro" />
     <Row cls="rv sticky-k" num="b" title="Dezvăluire cu clip-path">

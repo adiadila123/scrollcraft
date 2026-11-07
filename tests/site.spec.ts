@@ -70,6 +70,13 @@ test.describe('romanian', () => {
     await expect(page).toHaveURL(/\/build$/);
   });
 
+  test('Romanian example viewer is in Romanian', async ({ page }) => {
+    await page.goto('/ro/examples/longread');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ro');
+    await expect(page.getByRole('link', { name: 'Înapoi la capitol' })).toHaveAttribute('href', '/ro/examples#site-longread');
+    await expect(page.getByRole('link', { name: 'Exemplul anterior: Field Studio' })).toHaveAttribute('href', '/ro/examples/portfolio');
+  });
+
   test('unknown Romanian chapters get the Romanian 404', async ({ page, consoleErrors }) => {
     const res = await page.goto('/ro/nimic');
     expect(res?.status()).toBe(404);
@@ -264,9 +271,32 @@ test.describe('features', () => {
     const first = sites.first();
     await first.scrollIntoViewIfNeeded();
     await expect(page.frameLocator('.dm-site iframe').first().locator('h1')).toContainText('Sound that');
-    await expect(first.getByRole('link', { name: /Full screen/ })).toHaveAttribute('href', '/examples/launch/index.html');
+    await expect(first.getByRole('link', { name: /View full screen/ })).toHaveAttribute('href', '/examples/launch');
     for (const f of ['index.html', 'style.css', 'app.js']) await expect(first.getByRole('button', { name: f })).toBeAttached();
     await expect(page.locator('.sb-form').first().locator('input[name="project[files][app.js]"]')).toHaveAttribute('value', /requestAnimationFrame/);
+  });
+
+  test('an example opens on its own screen, steps to the next one and goes back', async ({ page }) => {
+    await page.goto('/examples');
+    await page.locator('.ex-ctas').first().getByRole('link', { name: /View full screen/ }).click();
+    await expect(page).toHaveURL(/\/examples\/launch$/);
+    await expect(page.locator('h1')).toContainText('Orbit One');
+    await expect(page.frameLocator('.vw-frame').locator('h1')).toContainText('Sound that');
+    await page.getByRole('link', { name: 'Next example: Field Studio' }).click();
+    await expect(page).toHaveURL(/\/examples\/portfolio$/);
+    await expect(page.frameLocator('.vw-frame').locator('h1')).toContainText('We design');
+    await page.getByRole('link', { name: 'Back to the chapter' }).click();
+    await expect(page).toHaveURL(/\/examples#site-portfolio$/);
+    await expect(page.locator('#site-portfolio')).toBeInViewport();
+  });
+
+  test('every chapter ends with a way back and a way forward', async ({ page }) => {
+    await page.goto('/motion');
+    const band = page.locator('.next-band');
+    await expect(band.getByRole('link', { name: 'Back Build', exact: true })).toHaveAttribute('href', '/build');
+    await expect(band.getByRole('link', { name: /Chapter 6: Playground/ })).toHaveAttribute('href', '/playground');
+    await page.goto('/start');
+    await expect(page.locator('.next-band').getByRole('link', { name: /^Back/ })).toHaveCount(0);
   });
 
   test('playground sliders rewrite the code', async ({ page }) => {

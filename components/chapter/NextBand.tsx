@@ -11,14 +11,15 @@ import { useScroll } from '@/lib/useScroll';
 
 /**
  * The end of a chapter is the start of the next one: its particle shape rises into view as you arrive,
- * with its title and summary. The last chapter leads back to the beginning. Reaching it marks the chapter as read.
+ * with its title and summary. The last chapter leads back to the beginning, and every chapter after the first also offers
+ * a way back to the one before. Reaching it marks the chapter as read.
  */
 export default function NextBand({ from }: { from: string }) {
   const band = useRef<HTMLElement>(null);
   const art = useRef<HTMLDivElement>(null);
   const { locale, t: d } = useLocale();
   const t = d.chapter;
-  const next = neighbours(from, locale).next;
+  const { prev, next } = neighbours(from, locale);
 
   useScroll((_, vh) => {
     const el = band.current;
@@ -52,9 +53,15 @@ export default function NextBand({ from }: { from: string }) {
           <Link className="btn" href={href} data-magnetic="" onClick={() => rememberFlight(art.current?.querySelector('canvas'), next ? next.art : 'globe')}>
             {next ? t.link(Number(next.n), next.title) : t.backToStart} <span aria-hidden="true">→</span>
           </Link>
-          {next ? (
+          {prev ? (
+            <Link className="btn btn-ghost" href={chapterHref(prev.id, locale)}>
+              <span aria-hidden="true">←</span> {t.back}
+              <span className="nb-prev">{prev.title}</span>
+            </Link>
+          ) : null}
+          {prev || next ? (
             <span className="nb-key">
-              {t.orPress} <kbd>]</kbd>
+              {t.orPress} {prev ? <kbd>[</kbd> : null} {next ? <kbd>]</kbd> : null}
             </span>
           ) : null}
         </div>

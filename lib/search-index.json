@@ -8,7 +8,7 @@
    "motion": 3,
    "playground": 1,
    "advanced": 3,
-   "examples": 3,
+   "examples": 4,
    "launch": 1
   },
   "ro": {
@@ -842,14 +842,14 @@
     "chapter": "Examples",
     "href": "/examples#launch-prompts",
     "title": "Prompts to rebuild it: prompt",
-    "text": "Build a minimalist product launch page for [subject], for [audience], ending with one call to action: [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Sections: a hero headline revealed line by line, a pinned canvas section where scroll turns the product, one sentence whose words light up as you scroll, a sticky tour of three features, and a closing call to action. Dark background, one accent colour."
+    "text": "Build a minimalist product launch page for [subject], for [audience], ending with one call to action: [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Sections: a hero headline revealed line by line, a pinned canvas section where scroll turns the product, one sentence whose words light up as you scroll, a sticky tour of three features, and a closing call to action. Dark background, one accent colour. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries."
    },
    {
     "kind": "prompt",
     "chapter": "Examples",
     "href": "/examples#launch-prompts",
     "title": "Prompts to rebuild it: prompt",
-    "text": "Use one scroll listener that schedules one requestAnimationFrame. In it, compute progress through each pinned section from getBoundingClientRect, and redraw the canvas only when the frame number changes. Use IntersectionObserver for the feature tour, with a thin band in the middle of the screen."
+    "text": "Use one scroll listener that schedules one requestAnimationFrame. In it, compute progress through each pinned section from getBoundingClientRect, and redraw the canvas only when the frame number changes. For the feature tour, light the last feature whose heading has passed a reading line, in the same frame: the middle of the screen, or just under the device on phones."
    },
    {
     "kind": "prompt",
@@ -898,7 +898,7 @@
     "chapter": "Examples",
     "href": "/examples#portfolio-prompts",
     "title": "Prompts to rebuild it: prompt",
-    "text": "Build a typographic portfolio for [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Light warm background, one sans-serif typeface, no accent colour. Sections: a three-line headline revealed line by line, a marquee of services that speeds up with the scroll, three projects whose images open with clip-path as they reach the middle of the screen, a pinned horizontal strip of five process steps, and a large contact link."
+    "text": "Build a typographic portfolio for [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Light warm background, one sans-serif typeface, no accent colour. Sections: a three-line headline revealed line by line, a marquee of services that speeds up with the scroll, three projects whose images open with clip-path as they reach the middle of the screen, a pinned horizontal strip of five process steps, and a large contact link. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries."
    },
    {
     "kind": "prompt",
@@ -947,7 +947,7 @@
     "chapter": "Examples",
     "href": "/examples#longread-prompts",
     "title": "Prompts to rebuild it: prompt",
-    "text": "Build an editorial long-read about [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. A full-screen cover with three parallax layers, a serif body at about 65 characters per line, and a section where an SVG map stays pinned on the left while five short chapters scroll on the right. Draw the route with stroke-dashoffset from scroll progress and light each stop as its chapter crosses the middle of the screen."
+    "text": "Build an editorial long-read about [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. A full-screen cover with three parallax layers, a serif body at about 65 characters per line, and a section where an SVG map stays pinned on the left while five short chapters scroll on the right. Draw the route with stroke-dashoffset from scroll progress and light each stop as its chapter crosses the middle of the screen. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries."
    },
    {
     "kind": "prompt",
@@ -989,6 +989,13 @@
     "chapter": "Examples",
     "href": "/examples#restraint",
     "title": "Restraint",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#mobile-first",
+    "title": "Mobile first",
     "text": ""
    },
    {
@@ -1873,14 +1880,14 @@
     "chapter": "Exemple",
     "href": "/ro/examples#launch-prompts",
     "title": "Prompturi ca să-l refaci: prompt",
-    "text": "Construiește o pagină minimalistă de lansare pentru [subiect], pentru [public], care se încheie cu un singur îndemn: [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Secțiuni: un titlu dezvăluit rând cu rând, o secțiune fixată cu un canvas în care scrollul rotește produsul, o propoziție ale cărei cuvinte se aprind la scroll, un tur fixat cu trei funcții și un îndemn final. Fundal închis, o singură culoare de accent."
+    "text": "Construiește o pagină minimalistă de lansare pentru [subiect], pentru [public], care se încheie cu un singur îndemn: [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Secțiuni: un titlu dezvăluit rând cu rând, o secțiune fixată cu un canvas în care scrollul rotește produsul, o propoziție ale cărei cuvinte se aprind la scroll, un tur fixat cu trei funcții și un îndemn final. Fundal închis, o singură culoare de accent. Scrie CSS-ul întâi pentru telefon: layoutul de telefon ca bază, ecranele mai late adăugate cu query-uri min-width."
    },
    {
     "kind": "prompt",
     "chapter": "Exemple",
     "href": "/ro/examples#launch-prompts",
     "title": "Prompturi ca să-l refaci: prompt",
-    "text": "Folosește un singur listener de scroll care programează un singur requestAnimationFrame. În el calculează progresul prin fiecare secțiune fixată din getBoundingClientRect și redesenează canvasul doar când se schimbă numărul cadrului. Pentru turul de funcții folosește IntersectionObserver, cu o bandă subțire în mijlocul ecranului."
+    "text": "Folosește un singur listener de scroll care programează un singur requestAnimationFrame. În el calculează progresul prin fiecare secțiune fixată din getBoundingClientRect și redesenează canvasul doar când se schimbă numărul cadrului. Pentru turul de funcții aprinde, în același cadru, ultima funcție al cărei titlu a trecut de o linie de citire: mijlocul ecranului sau chiar sub dispozitiv pe telefoane."
    },
    {
     "kind": "prompt",
@@ -1929,7 +1936,7 @@
     "chapter": "Exemple",
     "href": "/ro/examples#portfolio-prompts",
     "title": "Prompturi ca să-l refaci: prompt",
-    "text": "Construiește un portofoliu tipografic pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Fundal deschis și cald, un singur font sans-serif, fără culoare de accent. Secțiuni: un titlu pe trei rânduri dezvăluit rând cu rând, o bandă de servicii care accelerează la scroll, trei proiecte ale căror imagini se deschid cu clip-path când ajung la mijlocul ecranului, o bandă orizontală fixată cu cinci pași de proces și un link mare de contact."
+    "text": "Construiește un portofoliu tipografic pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Fundal deschis și cald, un singur font sans-serif, fără culoare de accent. Secțiuni: un titlu pe trei rânduri dezvăluit rând cu rând, o bandă de servicii care accelerează la scroll, trei proiecte ale căror imagini se deschid cu clip-path când ajung la mijlocul ecranului, o bandă orizontală fixată cu cinci pași de proces și un link mare de contact. Scrie CSS-ul întâi pentru telefon: layoutul de telefon ca bază, ecranele mai late adăugate cu query-uri min-width."
    },
    {
     "kind": "prompt",
@@ -1978,7 +1985,7 @@
     "chapter": "Exemple",
     "href": "/ro/examples#longread-prompts",
     "title": "Prompturi ca să-l refaci: prompt",
-    "text": "Construiește un articol lung despre [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. O copertă pe tot ecranul cu trei straturi de parallax, text serif cu aproximativ 65 de caractere pe rând și o secțiune în care o hartă SVG rămâne fixată în stânga, în timp ce cinci capitole scurte se derulează în dreapta. Desenează traseul cu stroke-dashoffset din progresul scrollului și aprinde fiecare oprire când capitolul ei trece prin mijlocul ecranului."
+    "text": "Construiește un articol lung despre [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. O copertă pe tot ecranul cu trei straturi de parallax, text serif cu aproximativ 65 de caractere pe rând și o secțiune în care o hartă SVG rămâne fixată în stânga, în timp ce cinci capitole scurte se derulează în dreapta. Desenează traseul cu stroke-dashoffset din progresul scrollului și aprinde fiecare oprire când capitolul ei trece prin mijlocul ecranului. Scrie CSS-ul întâi pentru telefon: layoutul de telefon ca bază, ecranele mai late adăugate cu query-uri min-width."
    },
    {
     "kind": "prompt",
@@ -2020,6 +2027,13 @@
     "chapter": "Exemple",
     "href": "/ro/examples#retinere",
     "title": "Reținere",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#intai-telefonul",
+    "title": "Întâi telefonul",
     "text": ""
    },
    {

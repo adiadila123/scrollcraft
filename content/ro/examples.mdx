@@ -7,7 +7,7 @@ export const meta = {
   <Stick left="01 · Cum folosești capitolul" />
   <div className="rows">
     <Row cls="rv" num="a" title="Derulează întâi previzualizarea">
-      <p>Fiecare site rulează într-un cadru. Derulează în el sau deschide-l pe tot ecranul. Observă ce se mișcă și cât de puțin: sunt minimaliste intenționat.</p>
+      <p>Fiecare site rulează într-un cadru. Derulează în el sau apasă Vezi pe tot ecranul ca să-l deschizi separat, cu un buton Înapoi care te aduce aici. Observă ce se mișcă și cât de puțin: sunt minimaliste intenționat.</p>
     </Row>
     <Row cls="rv" num="b" title="Apoi citește cum e construit">
       <p>Lista de tehnici spune ce piese din Mișcare combină fiecare site. Fiecare site are trei fișiere, fără biblioteci și fără pas de build, așa că fiecare linie se poate citi singură.</p>
@@ -33,11 +33,11 @@ export const meta = {
     <Row cls="rv" num="3" title="Prompturi ca să-l refaci" anchor="launch-prompts">
       <CodeBlock
         lang="Prompt"
-        code={'Construiește o pagină minimalistă de lansare pentru [subiect], pentru [public], care se încheie cu un singur îndemn: [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Secțiuni: un titlu dezvăluit rând cu rând, o secțiune fixată cu un canvas în care scrollul rotește produsul, o propoziție ale cărei cuvinte se aprind la scroll, un tur fixat cu trei funcții și un îndemn final. Fundal închis, o singură culoare de accent.'}
+        code={'Construiește o pagină minimalistă de lansare pentru [subiect], pentru [public], care se încheie cu un singur îndemn: [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Secțiuni: un titlu dezvăluit rând cu rând, o secțiune fixată cu un canvas în care scrollul rotește produsul, o propoziție ale cărei cuvinte se aprind la scroll, un tur fixat cu trei funcții și un îndemn final. Fundal închis, o singură culoare de accent. Scrie CSS-ul întâi pentru telefon: layoutul de telefon ca bază, ecranele mai late adăugate cu query-uri min-width.'}
       />
       <CodeBlock
         lang="Prompt"
-        code={'Folosește un singur listener de scroll care programează un singur requestAnimationFrame. În el calculează progresul prin fiecare secțiune fixată din getBoundingClientRect și redesenează canvasul doar când se schimbă numărul cadrului. Pentru turul de funcții folosește IntersectionObserver, cu o bandă subțire în mijlocul ecranului.'}
+        code={'Folosește un singur listener de scroll care programează un singur requestAnimationFrame. În el calculează progresul prin fiecare secțiune fixată din getBoundingClientRect și redesenează canvasul doar când se schimbă numărul cadrului. Pentru turul de funcții aprinde, în același cadru, ultima funcție al cărei titlu a trecut de o linie de citire: mijlocul ecranului sau chiar sub dispozitiv pe telefoane.'}
       />
       <CodeBlock
         lang="Prompt"
@@ -68,7 +68,7 @@ export const meta = {
     <Row cls="rv" num="3" title="Prompturi ca să-l refaci" anchor="portfolio-prompts">
       <CodeBlock
         lang="Prompt"
-        code={'Construiește un portofoliu tipografic pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Fundal deschis și cald, un singur font sans-serif, fără culoare de accent. Secțiuni: un titlu pe trei rânduri dezvăluit rând cu rând, o bandă de servicii care accelerează la scroll, trei proiecte ale căror imagini se deschid cu clip-path când ajung la mijlocul ecranului, o bandă orizontală fixată cu cinci pași de proces și un link mare de contact.'}
+        code={'Construiește un portofoliu tipografic pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. Fundal deschis și cald, un singur font sans-serif, fără culoare de accent. Secțiuni: un titlu pe trei rânduri dezvăluit rând cu rând, o bandă de servicii care accelerează la scroll, trei proiecte ale căror imagini se deschid cu clip-path când ajung la mijlocul ecranului, o bandă orizontală fixată cu cinci pași de proces și un link mare de contact. Scrie CSS-ul întâi pentru telefon: layoutul de telefon ca bază, ecranele mai late adăugate cu query-uri min-width.'}
       />
       <CodeBlock
         lang="Prompt"
@@ -99,7 +99,7 @@ export const meta = {
     <Row cls="rv" num="3" title="Prompturi ca să-l refaci" anchor="longread-prompts">
       <CodeBlock
         lang="Prompt"
-        code={'Construiește un articol lung despre [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. O copertă pe tot ecranul cu trei straturi de parallax, text serif cu aproximativ 65 de caractere pe rând și o secțiune în care o hartă SVG rămâne fixată în stânga, în timp ce cinci capitole scurte se derulează în dreapta. Desenează traseul cu stroke-dashoffset din progresul scrollului și aprinde fiecare oprire când capitolul ei trece prin mijlocul ecranului.'}
+        code={'Construiește un articol lung despre [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript simplu, în trei fișiere, fără biblioteci. O copertă pe tot ecranul cu trei straturi de parallax, text serif cu aproximativ 65 de caractere pe rând și o secțiune în care o hartă SVG rămâne fixată în stânga, în timp ce cinci capitole scurte se derulează în dreapta. Desenează traseul cu stroke-dashoffset din progresul scrollului și aprinde fiecare oprire când capitolul ei trece prin mijlocul ecranului. Scrie CSS-ul întâi pentru telefon: layoutul de telefon ca bază, ecranele mai late adăugate cu query-uri min-width.'}
       />
       <CodeBlock
         lang="Prompt"
@@ -127,6 +127,13 @@ export const meta = {
     </Row>
     <Row cls="rv" num="c" title="Reținere">
       <p>Un singur font, cel mult un accent și o singură idee pe ecran. Mișcarea e acolo ca să dea ritm lecturii, nu ca s-o decoreze.</p>
+    </Row>
+    <Row cls="rv" num="d" title="Întâi telefonul">
+      <p>Fiecare foaie de stil începe cu telefonul: o singură coloană, dispozitivul sau harta fixată deasupra și mai mică, iar banda care declanșează schimbările coborâtă în spațiul rămas pentru text. Ecranele mai late adaugă așezarea pe două coloane într-un query <code className="i">min-width</code>, așa că telefonul nu moștenește niciodată un layout de desktop pe care trebuie să-l anuleze.</p>
+      <CodeBlock
+        lang="CSS"
+        code={'/* telefoane: scena deasupra, textul se derulează sub ea */\n.tour { display: grid; }\n.tour-device { position: sticky; top: 60px; height: 46svh; }\n\n/* ecranele late adaugă a doua coloană */\n@media (min-width: 761px) {\n  .tour { grid-template-columns: 1fr 1fr; }\n  .tour-device { top: 0; height: 100svh; }\n}'}
+      />
     </Row>
   </div>
 </section>

@@ -47,6 +47,7 @@ const en = {
     read: 'Read',
     rail: 'Sections in this chapter',
     next: 'Next',
+    back: 'Back',
     backToStart: 'Back to the start',
     link: (n: number, t: string) => `Chapter ${n}: ${t}`,
     orPress: 'or press',
@@ -80,7 +81,11 @@ const en = {
     note: 'Runs in a new tab. Edit and see it update.',
   },
   examples: {
-    full: 'Full screen',
+    full: 'View full screen',
+    back: 'Back to the chapter',
+    of: (n: number, t: number) => `Example ${n} of ${t}`,
+    prev: (name: string) => `Previous example: ${name}`,
+    next: (name: string) => `Next example: ${name}`,
     description: 'A complete example from the Scrollcraft tutorial, chapter 08.',
   },
   demo: {
@@ -214,6 +219,7 @@ const ro: Dict = {
     read: 'Citit',
     rail: 'Secțiunile capitolului',
     next: 'Urmează',
+    back: 'Înapoi',
     backToStart: 'Înapoi la început',
     link: (n, t) => `Capitolul ${n}: ${t}`,
     orPress: 'sau apasă',
@@ -247,7 +253,11 @@ const ro: Dict = {
     note: 'Se deschide într-un tab nou. Editezi și vezi rezultatul imediat.',
   },
   examples: {
-    full: 'Ecran complet',
+    full: 'Vezi pe tot ecranul',
+    back: 'Înapoi la capitol',
+    of: (n, t) => `Exemplul ${n} din ${t}`,
+    prev: (name) => `Exemplul anterior: ${name}`,
+    next: (name) => `Exemplul următor: ${name}`,
     description: 'Un exemplu complet din tutorialul Scrollcraft, capitolul 08.',
   },
   demo: {

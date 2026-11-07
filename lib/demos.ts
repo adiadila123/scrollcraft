@@ -228,21 +228,30 @@ measure(); update();`,
     <p class="step">Refine: describe what you saw.</p>
   </div>
 </section>`,
-    css: `.scrolly { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 16px; }
-.vis { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; }
-.shape { width: 110px; height: 110px; border: 1px solid #5cc8ff; transition: border-radius .6s, transform .6s, background .6s; }
-.step { min-height: 80vh; display: flex; align-items: center; margin: 0; opacity: .25; transition: opacity .4s; }
+    css: `/* phones first: the scene on top, the steps scroll under it */
+.scrolly { display: grid; padding: 0 16px; }
+.vis { position: sticky; top: 0; z-index: 1; height: 42vh; display: grid; place-items: center; background: #000; }
+.shape { width: 80px; height: 80px; border: 1px solid #5cc8ff; transition: border-radius .6s, transform .6s, background .6s; }
+.step { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0; opacity: .25; transition: opacity .4s; }
 .step.on { opacity: 1; }
+@media (min-width: 600px) {
+  .scrolly { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .vis { height: 100vh; background: none; }
+  .shape { width: 110px; height: 110px; }
+  .step { justify-content: flex-start; text-align: left; }
+}
 .shape[data-i="1"] { border-radius: 50%; }
 .shape[data-i="2"] { transform: rotate(45deg) scale(.8); }
 .shape[data-i="3"] { border-radius: 50%; background: rgba(92,200,255,.2); }`,
     js: `const steps = [...document.querySelectorAll('.step')];
 const shape = document.querySelector('.shape');
 function update() {
+  /* the reading line: the middle of the screen, or of the space under the scene on phones */
+  const line = innerWidth < 600 ? innerHeight * 0.66 : innerHeight / 2;
   let best = 0, bd = Infinity;
   steps.forEach((s, i) => {
     const r = s.getBoundingClientRect();
-    const d = Math.abs(r.top + r.height / 2 - innerHeight / 2);
+    const d = Math.abs(r.top + r.height / 2 - line);
     if (d < bd) { bd = d; best = i; }
   });
   steps.forEach((s, i) => s.classList.toggle('on', i === best));
@@ -274,30 +283,46 @@ update();`,
     </article>
   </div>
 </section>`,
-    css: `.tour { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 20px; }
-.device { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; }
-.screen { width: 140px; aspect-ratio: 9 / 19; border-radius: 24px; border: 1px solid #3a444b;
+    css: `/* phones first: the device on top, the features scroll under it */
+.tour { display: grid; padding: 0 20px; }
+.device { position: sticky; top: 0; z-index: 1; height: 44vh; display: grid; place-items: center; background: #000; }
+.screen { width: 84px; aspect-ratio: 9 / 19; border-radius: 16px; border: 1px solid #3a444b;
   display: grid; place-items: center; font-size: 18px; transition: background .5s; }
 .screen[data-i="0"] { background: linear-gradient(160deg, #0b2a3a, #000); }
 .screen[data-i="1"] { background: linear-gradient(160deg, #2a1b3d, #000); }
 .screen[data-i="2"] { background: linear-gradient(160deg, #13331f, #000); }
-article { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; opacity: .3; transition: opacity .4s; }
+article { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; opacity: .3; transition: opacity .4s; }
 article.on { opacity: 1; }
 h3 { margin: 0 0 6px; font-weight: 400; font-size: 24px; }
-p { margin: 0; color: #9aa7b0; }`,
+p { margin: 0; color: #9aa7b0; max-width: 26ch; }
+@media (min-width: 600px) {
+  .tour { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .device { height: 100vh; background: none; }
+  .screen { width: 140px; }
+  article { min-height: 90vh; align-items: flex-start; text-align: left; }
+}`,
     js: `const items = [...document.querySelectorAll('article')];
+const heads = items.map((a) => a.querySelector('h3'));
 const screen = document.querySelector('.screen');
-/* the feature crossing the middle of the screen drives the device */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (!e.isIntersecting) return;
-    const i = items.indexOf(e.target);
-    items.forEach((a, j) => a.classList.toggle('on', i === j));
-    screen.dataset.i = i;
-    screen.innerHTML = '<b>' + e.target.querySelector('h3').textContent + '</b>';
-  });
-}, { rootMargin: '-45% 0px -45% 0px' });
-items.forEach((a) => io.observe(a));`,
+let active = -1;
+/* the active feature is the last one whose heading has passed a reading line: the middle of the screen,
+   or just under the device on phones. Checked every frame, so a fast fling never skips one. */
+let queued = false;
+function update() {
+  queued = false;
+  const line = innerHeight * (innerWidth < 600 ? 0.7 : 0.55);
+  let i = 0;
+  heads.forEach((h, k) => { if (h.getBoundingClientRect().top < line) i = k; });
+  if (i === active) return;
+  active = i;
+  items.forEach((a, k) => a.classList.toggle('on', k === i));
+  screen.dataset.i = i;
+  screen.innerHTML = '<b>' + heads[i].textContent + '</b>';
+}
+addEventListener('scroll', () => {
+  if (!queued) { queued = true; requestAnimationFrame(update); }
+}, { passive: true });
+update();`,
   },
 
   clip: {

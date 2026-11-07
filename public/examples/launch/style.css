@@ -43,13 +43,14 @@ a { color: inherit; }
 .js .words span.lit { opacity: 1; }
 
 /* product tour */
-.tour { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6vw; padding: 0 clamp(20px, 6vw, 96px); }
-.tour-device { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; }
-.tour-screen { width: min(240px, 50vw); aspect-ratio: 9 / 19; border-radius: 36px; border: 1px solid #2c3338; display: grid; place-items: center; font-size: 24px; font-weight: 300; background: radial-gradient(circle at 50% 30%, #3a1d0b, #050608 70%); transition: background .6s; }
+/* phones: the device sits on top, the features scroll underneath it */
+.tour { display: grid; padding: 0 clamp(20px, 6vw, 96px); }
+.tour-device { position: sticky; top: 60px; z-index: 1; height: 46svh; display: grid; place-items: center; background: var(--bg); }
+.tour-screen { width: 120px; aspect-ratio: 9 / 19; border-radius: 22px; border: 1px solid #2c3338; display: grid; place-items: center; font-size: 18px; font-weight: 300; background: radial-gradient(circle at 50% 30%, #3a1d0b, #050608 70%); transition: background .6s; }
 .tour-screen[data-i="1"] { background: radial-gradient(circle at 50% 30%, #0b2a3a, #050608 70%); }
 .tour-screen[data-i="2"] { background: radial-gradient(circle at 50% 30%, #1d2a12, #050608 70%); }
 .tour-screen span { transition: opacity .3s; }
-.feat { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: .4; transition: opacity .5s; }
+.feat { min-height: 70svh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 12px; opacity: .4; transition: opacity .5s; }
 .feat.on { opacity: 1; }
 .num { color: var(--accent); font-size: 13px; letter-spacing: .2em; }
 .feat h2 { font-weight: 300; font-size: clamp(34px, 4.6vw, 60px); letter-spacing: -.035em; }
@@ -65,11 +66,12 @@ a { color: inherit; }
 
 .progress { position: fixed; inset: 0 0 auto; height: 2px; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); z-index: 11; }
 
-@media (max-width: 760px) {
-  .tour { grid-template-columns: 1fr; }
-  .tour-device { height: 46svh; top: 60px; z-index: 1; background: var(--bg); }
-  .tour-screen { width: 120px; border-radius: 22px; font-size: 18px; }
-  .feat { min-height: 70svh; text-align: center; align-items: center; }
+/* larger screens: the device and the features side by side */
+@media (min-width: 761px) {
+  .tour { grid-template-columns: 1fr 1fr; gap: 0 6vw; }
+  .tour-device { top: 0; height: 100svh; background: none; }
+  .tour-screen { width: min(240px, 50vw); border-radius: 36px; font-size: 24px; }
+  .feat { min-height: 100svh; align-items: flex-start; text-align: left; }
 }
 
 @media (prefers-reduced-motion: reduce) {

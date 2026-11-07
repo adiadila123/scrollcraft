@@ -1,5 +1,4 @@
-/* Orbit One: one scroll loop drives the progress bar, the frame scrub and the lit words.
-   Reveals and the product tour use IntersectionObserver, so they cost nothing between changes. */
+/* Orbit One: one scroll loop drives the progress bar, the frame scrub, the lit words and the product tour. */
 document.documentElement.classList.add('js');
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -105,6 +104,7 @@ function update() {
 
   const lit = Math.round(through(statement) * 1.25 * spans.length);
   spans.forEach((s, k) => s.classList.toggle('lit', still || k < lit));
+  updateTour();
 }
 const queue = () => {
   if (!queued) {
@@ -114,20 +114,25 @@ const queue = () => {
 };
 addEventListener('scroll', queue, { passive: true });
 addEventListener('resize', () => { sizeCanvas(); queue(); });
+
+/* product tour: the active feature is the last one whose heading has passed a reading line, checked in the same
+   frame as everything else. Fast flings and jumps can never skip one, and the lit text is always the text in view.
+   On phones the device sits on top, so the line sits just under it. */
+const feats = [...document.querySelectorAll('.feat')];
+const heads = feats.map((f) => f.querySelector('h2'));
+const screen = document.querySelector('.tour-screen');
+const wide = matchMedia('(min-width: 761px)');
+let active = -1;
+function updateTour() {
+  const line = innerHeight * (wide.matches ? 0.55 : 0.7);
+  let i = 0;
+  heads.forEach((h, k) => { if (h.getBoundingClientRect().top < line) i = k; });
+  if (i === active) return;
+  active = i;
+  feats.forEach((f, k) => f.classList.toggle('on', k === i));
+  screen.dataset.i = i;
+  screen.firstElementChild.textContent = heads[i].textContent;
+}
+
 sizeCanvas();
 update();
-
-/* product tour: the feature crossing a thin band in the middle of the screen sets the device.
-   On phones the device sits on top, so the band moves down into the part of the screen left for text. */
-const feats = [...document.querySelectorAll('.feat')];
-const screen = document.querySelector('.tour-screen');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (!e.isIntersecting) return;
-    const i = feats.indexOf(e.target);
-    feats.forEach((f, k) => f.classList.toggle('on', k === i));
-    screen.dataset.i = i;
-    screen.firstElementChild.textContent = e.target.querySelector('h2').textContent;
-  });
-}, { rootMargin: matchMedia('(max-width: 760px)').matches ? '-68% 0px -22% 0px' : '-45% 0px -45% 0px' });
-feats.forEach((f) => io.observe(f));

@@ -1,12 +1,13 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import OpenInStackBlitz from '@/components/build/OpenInStackBlitz';
 import ChapterHead from '@/components/chapter/ChapterHead';
 import ChapterRail from '@/components/chapter/ChapterRail';
 import { chapters, getChapter } from '@/lib/chapters';
 import { dicts } from '@/lib/dict';
-import type { Locale } from '@/lib/i18n';
+import { withLocale, type Locale } from '@/lib/i18n';
 import { highlight } from '@/lib/highlight';
 import { readingMinutes } from '@/lib/reading';
 import { slugify } from '@/lib/slug.mjs';
@@ -59,12 +60,19 @@ export async function Example({ id, name, locale = 'en' }: { id: string; name: s
   return (
     <>
       <DemoView
+        id={`site-${id}`}
         name={name}
         src={`/examples/${id}/index.html`}
         full={t.full}
+        fullHref={withLocale(locale, `/examples/${id}`)}
         files={SITE_FILES.map((f) => ({ label: f, node: <CodeBlock lang={f} code={code[f]} /> }))}
       />
-      <OpenInStackBlitz locale={locale} files={code} title={name} description={t.description} />
+      <div className="ex-ctas">
+        <Link className="btn" href={withLocale(locale, `/examples/${id}`)} data-magnetic="">
+          {t.full} <span aria-hidden="true">→</span>
+        </Link>
+        <OpenInStackBlitz locale={locale} files={code} title={name} description={t.description} quiet />
+      </div>
     </>
   );
 }

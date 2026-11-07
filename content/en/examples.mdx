@@ -7,7 +7,7 @@ export const meta = {
   <Stick left="01 · How to use this chapter" />
   <div className="rows">
     <Row cls="rv" num="a" title="Scroll the preview first">
-      <p>Each site runs in a frame. Scroll inside it, or open it full screen. Notice what moves, and how little: these are minimalist on purpose.</p>
+      <p>Each site runs in a frame. Scroll inside it, or press View full screen to open it on its own screen, with a Back button to return here. Notice what moves, and how little: these are minimalist on purpose.</p>
     </Row>
     <Row cls="rv" num="b" title="Then read how it is built">
       <p>The techniques list says which pieces from Motion each site combines. Every site is three files, no libraries and no build step, so each line can be read on its own.</p>
@@ -33,11 +33,11 @@ export const meta = {
     <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="launch-prompts">
       <CodeBlock
         lang="Prompt"
-        code={'Build a minimalist product launch page for [subject], for [audience], ending with one call to action: [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Sections: a hero headline revealed line by line, a pinned canvas section where scroll turns the product, one sentence whose words light up as you scroll, a sticky tour of three features, and a closing call to action. Dark background, one accent colour.'}
+        code={'Build a minimalist product launch page for [subject], for [audience], ending with one call to action: [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Sections: a hero headline revealed line by line, a pinned canvas section where scroll turns the product, one sentence whose words light up as you scroll, a sticky tour of three features, and a closing call to action. Dark background, one accent colour. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries.'}
       />
       <CodeBlock
         lang="Prompt"
-        code={'Use one scroll listener that schedules one requestAnimationFrame. In it, compute progress through each pinned section from getBoundingClientRect, and redraw the canvas only when the frame number changes. Use IntersectionObserver for the feature tour, with a thin band in the middle of the screen.'}
+        code={'Use one scroll listener that schedules one requestAnimationFrame. In it, compute progress through each pinned section from getBoundingClientRect, and redraw the canvas only when the frame number changes. For the feature tour, light the last feature whose heading has passed a reading line, in the same frame: the middle of the screen, or just under the device on phones.'}
       />
       <CodeBlock
         lang="Prompt"
@@ -68,7 +68,7 @@ export const meta = {
     <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="portfolio-prompts">
       <CodeBlock
         lang="Prompt"
-        code={'Build a typographic portfolio for [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Light warm background, one sans-serif typeface, no accent colour. Sections: a three-line headline revealed line by line, a marquee of services that speeds up with the scroll, three projects whose images open with clip-path as they reach the middle of the screen, a pinned horizontal strip of five process steps, and a large contact link.'}
+        code={'Build a typographic portfolio for [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Light warm background, one sans-serif typeface, no accent colour. Sections: a three-line headline revealed line by line, a marquee of services that speeds up with the scroll, three projects whose images open with clip-path as they reach the middle of the screen, a pinned horizontal strip of five process steps, and a large contact link. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries.'}
       />
       <CodeBlock
         lang="Prompt"
@@ -99,7 +99,7 @@ export const meta = {
     <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="longread-prompts">
       <CodeBlock
         lang="Prompt"
-        code={'Build an editorial long-read about [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. A full-screen cover with three parallax layers, a serif body at about 65 characters per line, and a section where an SVG map stays pinned on the left while five short chapters scroll on the right. Draw the route with stroke-dashoffset from scroll progress and light each stop as its chapter crosses the middle of the screen.'}
+        code={'Build an editorial long-read about [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. A full-screen cover with three parallax layers, a serif body at about 65 characters per line, and a section where an SVG map stays pinned on the left while five short chapters scroll on the right. Draw the route with stroke-dashoffset from scroll progress and light each stop as its chapter crosses the middle of the screen. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries.'}
       />
       <CodeBlock
         lang="Prompt"
@@ -127,6 +127,13 @@ export const meta = {
     </Row>
     <Row cls="rv" num="c" title="Restraint">
       <p>One typeface, one accent at most, and one idea per screen. The motion is there to pace the reading, not to decorate it.</p>
+    </Row>
+    <Row cls="rv" num="d" title="Mobile first">
+      <p>Each stylesheet starts with the phone: one column, the pinned device or map on top and smaller, and the trigger band moved down into the space left for text. Wider screens add the side-by-side layout in a <code className="i">min-width</code> query, so the phone never inherits a desktop layout it has to undo.</p>
+      <CodeBlock
+        lang="CSS"
+        code={'/* phones: the scene on top, the text scrolls under it */\n.tour { display: grid; }\n.tour-device { position: sticky; top: 60px; height: 46svh; }\n\n/* wider screens add the second column */\n@media (min-width: 761px) {\n  .tour { grid-template-columns: 1fr 1fr; }\n  .tour-device { top: 0; height: 100svh; }\n}'}
+      />
     </Row>
   </div>
 </section>

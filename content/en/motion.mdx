@@ -125,8 +125,8 @@ export const meta = {
   <Stick left="02 · Real-world recipes" right="5 recipes" />
   <div className="rows steps-list">
     <Row cls="rv sticky-k" num="a" title="Sticky product tour">
-      <p>A device stays pinned while feature blocks scroll past. The block crossing the middle of the screen decides what the device shows. Most product launch pages are built on this.</p>
-      <p className="tip">Watch a thin band in the middle of the screen with IntersectionObserver (rootMargin -45%) instead of measuring on every scroll event.</p>
+      <p>A device stays pinned while feature blocks scroll past. The feature being read decides what the device shows. Most product launch pages are built on this.</p>
+      <p className="tip">Light the last feature whose heading has passed a reading line, checked in the scroll frame, so a fast fling never skips one. Watch the heading, not the whole block, so the lit text is the text in view. On phones, put the line just under the pinned device.</p>
     </Row>
     <Demo id="tour" name="Sticky product tour" />
     <Row cls="rv sticky-k" num="b" title="Clip-path reveal">

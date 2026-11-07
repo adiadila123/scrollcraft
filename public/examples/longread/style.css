@@ -34,16 +34,17 @@ main > p { max-width: 34em; margin: 0 auto 1.4em; color: #d8d2c6; }
 .js .reveal.in { opacity: 1; transform: none; }
 
 /* the journey: map pinned on the left, days scroll on the right */
-.journey { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6vw; margin: 120px 0; }
-.map { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; align-content: center; gap: 14px; }
-.map svg { width: min(100%, 340px); height: auto; max-height: 76svh; overflow: visible; }
+/* phones: the map sits on top, the days scroll underneath it */
+.journey { display: grid; margin: 120px 0; }
+.map { position: sticky; top: 0; z-index: 1; height: 44svh; display: grid; place-items: center; align-content: center; gap: 14px; background: linear-gradient(var(--bg) 85%, transparent); }
+.map svg { width: min(100%, 340px); height: auto; max-height: 34svh; overflow: visible; }
 .coast { fill: none; stroke: #2f3a3d; stroke-width: 40; stroke-linecap: round; opacity: .55; }
 .route-bg { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 3 6; }
 .route { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
 .stops circle { fill: var(--bg); stroke: var(--muted); stroke-width: 1.5; transition: fill .4s, stroke .4s; }
 .stops circle.on { fill: var(--accent); stroke: var(--accent); }
-.map figcaption { font: 400 12px/1.4 system-ui, sans-serif; color: var(--muted); text-align: center; }
-.day { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: .4; transition: opacity .5s; }
+.map figcaption { display: none; font: 400 12px/1.4 system-ui, sans-serif; color: var(--muted); text-align: center; }
+.day { min-height: 80svh; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: .4; transition: opacity .5s; }
 .day.on { opacity: 1; }
 .day-n { font: 500 12px/1 system-ui, sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
 .day h2 { font-weight: 400; font-size: clamp(32px, 4vw, 52px); letter-spacing: -.02em; line-height: 1.05; }
@@ -52,12 +53,13 @@ main > p { max-width: 34em; margin: 0 auto 1.4em; color: #d8d2c6; }
 .pull { max-width: 18em; margin: 80px auto 100px; font-size: clamp(30px, 4.4vw, 56px); line-height: 1.15; letter-spacing: -.02em; text-align: center; }
 .end { color: var(--muted) !important; font: 400 13px/1.5 system-ui, sans-serif; text-align: center; padding: 60px 0 80px; border-top: 1px solid var(--line); }
 
-@media (max-width: 760px) {
-  .journey { grid-template-columns: 1fr; gap: 0; }
-  .map { top: 0; height: 44svh; z-index: 1; background: linear-gradient(var(--bg) 85%, transparent); }
-  .map svg { max-height: 34svh; }
-  .map figcaption { display: none; }
-  .day { min-height: 80svh; }
+/* larger screens: the map pinned on the left, the days on the right */
+@media (min-width: 761px) {
+  .journey { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6vw; }
+  .map { height: 100svh; background: none; }
+  .map svg { max-height: 76svh; }
+  .map figcaption { display: block; }
+  .day { min-height: 100svh; }
 }
 
 @media (prefers-reduced-motion: reduce) {

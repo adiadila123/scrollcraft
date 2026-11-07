@@ -1,5 +1,5 @@
-/* The Long Way North: one scroll loop for the progress bar, the cover parallax and the route drawing.
-   Reveals and the active day use IntersectionObserver. */
+/* The Long Way North: one scroll loop for the progress bar, the cover parallax, the route drawing and the
+   active day. Paragraph reveals use IntersectionObserver, since they happen once. */
 document.documentElement.classList.add('js');
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -8,6 +8,11 @@ const bar = document.querySelector('.progress');
 const layers = [...document.querySelectorAll('[data-speed]')];
 const journey = document.querySelector('.journey');
 const route = document.querySelector('.route');
+const days = [...document.querySelectorAll('.day')];
+const heads = days.map((d) => d.querySelector('h2'));
+const stops = [...document.querySelectorAll('.stops circle')];
+const wide = matchMedia('(min-width: 761px)');
+let active = -1;
 const length = route.getTotalLength();
 route.style.strokeDasharray = `${length}`;
 route.style.strokeDashoffset = `${length}`;
@@ -29,6 +34,17 @@ function update() {
   const r = journey.getBoundingClientRect();
   const p = still ? 1 : clamp((innerHeight * 0.5 - r.top) / (r.height - innerHeight * 0.5), 0, 1);
   route.style.strokeDashoffset = `${(length * (1 - p)).toFixed(1)}`;
+
+  /* the active day is the last one whose heading has passed a reading line: the middle of the screen, or just
+     under the map on phones. Checked every frame, so a fast fling or a jump never skips a day. */
+  const line = innerHeight * (wide.matches ? 0.55 : 0.72);
+  let i = -1;
+  heads.forEach((h, k) => { if (h.getBoundingClientRect().top < line) i = k; });
+  if (i !== active) {
+    active = i;
+    days.forEach((d, k) => d.classList.toggle('on', k === Math.max(0, i)));
+    stops.forEach((s, k) => s.classList.toggle('on', k <= i));
+  }
 }
 const queue = () => {
   if (!queued) {
@@ -39,20 +55,6 @@ const queue = () => {
 addEventListener('scroll', queue, { passive: true });
 addEventListener('resize', queue);
 update();
-
-/* the day crossing the middle of the screen lights its stop on the map */
-const days = [...document.querySelectorAll('.day')];
-const stops = [...document.querySelectorAll('.stops circle')];
-const band = matchMedia('(max-width: 760px)').matches ? '-68% 0px -22% 0px' : '-45% 0px -45% 0px';
-const dayIO = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (!e.isIntersecting) return;
-    const i = days.indexOf(e.target);
-    days.forEach((d, k) => d.classList.toggle('on', k === i));
-    stops.forEach((s, k) => s.classList.toggle('on', k <= i));
-  });
-}, { rootMargin: band });
-days.forEach((d) => dayIO.observe(d));
 
 /* paragraphs arrive once and stay */
 const revealIO = new IntersectionObserver((entries) => {

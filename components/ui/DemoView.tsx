@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useLocale } from '@/lib/useLocale';
 
@@ -7,17 +8,21 @@ import { useLocale } from '@/lib/useLocale';
  * Narrow: one pane, and the first tab switches back to the preview. The page only loads when it comes near the screen.
  */
 export default function DemoView({
+  id,
   name,
   doc,
   src,
   full,
+  fullHref,
   files,
 }: {
+  id?: string;
   name: string;
   doc?: string;
   src?: string;
-  /** label for a link that opens src in a new tab */
+  /** label and address of a link that shows the site on its own screen */
   full?: string;
+  fullHref?: string;
   files: { label: string; node: ReactNode }[];
 }) {
   const { t } = useLocale();
@@ -41,7 +46,7 @@ export default function DemoView({
   }, []);
 
   return (
-    <figure className={src ? 'dm dm-site' : 'dm'} ref={root} data-view={code ? 'code' : 'preview'}>
+    <figure id={id} className={src ? 'dm dm-site' : 'dm'} ref={root} data-view={code ? 'code' : 'preview'}>
       <div className="dm-bar">
         <div className="dm-tabs" role="group" aria-label={t.demo.files}>
           <button type="button" className="dm-tab dm-ptab" aria-pressed={!code} onClick={() => setCode(false)}>
@@ -64,10 +69,10 @@ export default function DemoView({
           ))}
         </div>
         <div className="dm-actions">
-          {src && full ? (
-            <a className="dm-replay" href={src} target="_blank" rel="noopener">
-              {full} <span aria-hidden="true">↗</span>
-            </a>
+          {full && fullHref ? (
+            <Link className="dm-replay dm-full" href={fullHref}>
+              {full} <span aria-hidden="true">→</span>
+            </Link>
           ) : null}
           <button type="button" className="dm-replay" onClick={() => setRun((n) => n + 1)}>
             {t.demo.replay} <span aria-hidden="true">↻</span>
