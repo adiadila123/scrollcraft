@@ -6,6 +6,22 @@
   --accent: #e6b45c;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+/* minimal scrollbars: thin, no track, a quiet thumb */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(233, 228, 218, 0.26) transparent;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(233, 228, 218, 0.26);
+  border-radius: 3px;
+}
 *,
 *::before,
 *::after {

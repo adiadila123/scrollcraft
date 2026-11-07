@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import ParticleCanvas from '@/components/particles/ParticleCanvas';
 import ChapterDone from '@/components/ui/ChapterDone';
 import { rememberFlight, setLevel } from '@/lib/particles/manager';
-import { chapterHref, neighbours } from '@/lib/chapters';
+import { chapterHref, chaptersFor, neighbours } from '@/lib/chapters';
 import { useLocale } from '@/lib/useLocale';
 import { clamp, prefersReducedMotion } from '@/lib/motion';
 import { useScroll } from '@/lib/useScroll';
@@ -49,22 +49,46 @@ export default function NextBand({ from }: { from: string }) {
           )}
         </h2>
         {next ? <p className="lede">{next.summary}</p> : null}
-        <div className="ctas">
-          <Link className="btn" href={href} data-magnetic="" onClick={() => rememberFlight(art.current?.querySelector('canvas'), next ? next.art : 'globe')}>
-            {next ? t.link(Number(next.n), next.title) : t.backToStart} <span aria-hidden="true">→</span>
-          </Link>
+        {/* previous on the left, next on the right; each says which way it goes and which chapter it opens */}
+        <nav className="pager" aria-label={t.pager}>
           {prev ? (
-            <Link className="btn btn-ghost" href={chapterHref(prev.id, locale)}>
-              <span aria-hidden="true">←</span> {t.back}
-              <span className="nb-prev">{prev.title}</span>
+            <Link className="pager-link pager-prev" href={chapterHref(prev.id, locale)}>
+              <span className="pager-dir">
+                <span aria-hidden="true">←</span> {t.previous}
+              </span>
+              <span className="pager-title">
+                {prev.n} {prev.title}
+              </span>
             </Link>
           ) : null}
-          {prev || next ? (
-            <span className="nb-key">
-              {t.orPress} {prev ? <kbd>[</kbd> : null} {next ? <kbd>]</kbd> : null}
+          <Link
+            className="pager-link pager-next"
+            href={href}
+            data-magnetic=""
+            onClick={() => rememberFlight(art.current?.querySelector('canvas'), next ? next.art : 'globe')}
+          >
+            <span className="pager-dir">
+              {next ? t.next : t.backToStart} <span aria-hidden="true">→</span>
             </span>
-          ) : null}
-        </div>
+            <span className="pager-title">{next ? `${next.n} ${next.title}` : `01 ${chaptersFor(locale)[0].title}`}</span>
+          </Link>
+        </nav>
+        {prev || next ? (
+          <p className="nb-key">
+            {t.keys}{' '}
+            {prev ? (
+              <>
+                <kbd>[</kbd> {t.previousShort}
+              </>
+            ) : null}
+            {prev && next ? ' · ' : null}
+            {next ? (
+              <>
+                <kbd>]</kbd> {t.nextShort}
+              </>
+            ) : null}
+          </p>
+        ) : null}
       </div>
     </section>
   );

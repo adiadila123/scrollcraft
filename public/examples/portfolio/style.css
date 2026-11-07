@@ -5,6 +5,22 @@
   --line: #d6d3cc;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
+/* minimal scrollbars: thin, no track, a quiet thumb */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 20, 20, 0.28) transparent;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 20, 20, 0.28);
+  border-radius: 3px;
+}
 *,
 *::before,
 *::after {

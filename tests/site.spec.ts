@@ -298,10 +298,11 @@ test.describe('features', () => {
   test('every chapter ends with a way back and a way forward', async ({ page }) => {
     await page.goto('/motion');
     const band = page.locator('.next-band');
-    await expect(band.getByRole('link', { name: 'Back Build', exact: true })).toHaveAttribute('href', '/build');
-    await expect(band.getByRole('link', { name: /Chapter 6: Playground/ })).toHaveAttribute('href', '/playground');
+    await expect(band.getByRole('link', { name: 'Previous 04 Build', exact: true })).toHaveAttribute('href', '/build');
+    await expect(band.getByRole('link', { name: 'Next 06 Playground', exact: true })).toHaveAttribute('href', '/playground');
     await page.goto('/start');
-    await expect(page.locator('.next-band').getByRole('link', { name: /^Back/ })).toHaveCount(0);
+    await expect(page.locator('.next-band').getByRole('link', { name: /^Previous/ })).toHaveCount(0);
+    await expect(page.locator('.nb-key')).toHaveText(/\] next chapter/);
   });
 
   test('playground sliders rewrite the code', async ({ page }) => {
