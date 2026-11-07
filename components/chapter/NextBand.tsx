@@ -54,7 +54,10 @@ export default function NextBand({ from }: { from: string }) {
           {prev ? (
             <Link className="pager-link pager-prev" href={chapterHref(prev.id, locale)}>
               <span className="pager-dir">
-                <span aria-hidden="true">←</span> {t.previous}
+                <span className="pager-arrow" aria-hidden="true">
+                  ←
+                </span>{' '}
+                {t.previous}
               </span>
               <span className="pager-title">
                 {prev.n} {prev.title}
@@ -64,11 +67,14 @@ export default function NextBand({ from }: { from: string }) {
           <Link
             className="pager-link pager-next"
             href={href}
-            data-magnetic=""
+
             onClick={() => rememberFlight(art.current?.querySelector('canvas'), next ? next.art : 'globe')}
           >
             <span className="pager-dir">
-              {next ? t.next : t.backToStart} <span aria-hidden="true">→</span>
+              {next ? t.next : t.backToStart}{' '}
+              <span className="pager-arrow" aria-hidden="true">
+                →
+              </span>
             </span>
             <span className="pager-title">{next ? `${next.n} ${next.title}` : `01 ${chaptersFor(locale)[0].title}`}</span>
           </Link>

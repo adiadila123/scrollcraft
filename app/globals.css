@@ -727,15 +727,20 @@ a.dm-replay { display: inline-flex; align-items: center; text-decoration: none; 
 
 /* end-of-chapter pager: previous on the left, next on the right; on phones next comes first, it is the main action */
 .pager { display: grid; grid-template-columns: 1fr; gap: 10px; width: 100%; max-width: 36rem; }
-.pager-link { display: grid; gap: 6px; padding: 16px 18px; min-height: 64px; text-decoration: none; border: 1px solid var(--line); color: var(--fg); transition: border-color 0.2s, background 0.2s, color 0.2s; }
+.pager-link { display: grid; gap: 6px; padding: 16px 18px; min-height: 64px; text-decoration: none; border: 1px solid var(--line); color: var(--fg); transition: border-color 0.3s var(--ease), background 0.3s var(--ease); }
 .pager-dir { font: 500 11px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
 .pager-title { font: 400 1.05rem/1.2 var(--sans); }
 .pager-next { order: -1; background: var(--fg); border-color: var(--fg); color: #000; }
 .pager-next .pager-dir { color: #3c4247; }
-.pager-next .pager-dir span, .pager-prev .pager-dir span { font-size: 13px; }
-.pager-prev:hover, .pager-prev:focus-visible { border-color: var(--fg); }
+/* the only motion: the arrow steps 3px the way it points, and the surface shifts one shade */
+.pager-arrow { display: inline-block; font-size: 13px; transition: transform 0.3s var(--ease); }
+.pager-prev:hover, .pager-prev:focus-visible { border-color: #3a4146; }
 .pager-prev:hover .pager-dir, .pager-prev:focus-visible .pager-dir { color: var(--fg); }
-.pager-next:hover, .pager-next:focus-visible { background: var(--accent); border-color: var(--accent); }
+.pager-next:hover, .pager-next:focus-visible { background: #fff; border-color: #fff; }
+.pager-next:hover .pager-arrow, .pager-next:focus-visible .pager-arrow { transform: translateX(3px); }
+.pager-prev:hover .pager-arrow, .pager-prev:focus-visible .pager-arrow { transform: translateX(-3px); }
+.pager-link:active { transform: translateY(1px); }
+@media (prefers-reduced-motion: reduce) { .pager-arrow, .pager-link { transition: none; } .pager-link:active, .pager-link .pager-arrow { transform: none !important; } }
 .pager-next { text-align: right; }
 .pager-next:only-child { text-align: left; }
 @media (min-width: 761px) {
