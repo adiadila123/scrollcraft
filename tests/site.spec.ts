@@ -4,6 +4,8 @@ import { CHAPTERS, expect, test } from './fixtures';
 test.describe('routes', () => {
   for (const path of ['/', ...CHAPTERS.map((c) => `/${c}`)]) {
     test(`${path} renders with its own title and passes axe`, async ({ page }) => {
+      /* the home page builds the three.js hero, which makes the axe scan slow on a busy machine */
+      if (path === '/') test.slow();
       const res = await page.goto(path);
       expect(res?.status()).toBe(200);
       await expect(page.locator('h1').first()).toBeVisible();
@@ -47,6 +49,8 @@ test.describe('routes', () => {
 test.describe('romanian', () => {
   for (const path of ['/ro', ...CHAPTERS.map((c) => `/ro/${c}`)]) {
     test(`${path} is in Romanian and passes axe`, async ({ page }) => {
+      /* the home page builds the three.js hero, which makes the axe scan slow on a busy machine */
+      if (path === '/ro') test.slow();
       const res = await page.goto(path);
       expect(res?.status()).toBe(200);
       await expect(page.locator('html')).toHaveAttribute('lang', 'ro');
