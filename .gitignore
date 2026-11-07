@@ -9,3 +9,5 @@ playwright-report
 
 # local design-tool state (detector ignores, critiques)
 .impeccable
+.vercel
+.env*
