@@ -43,7 +43,7 @@ main > p { max-width: 34em; margin: 0 auto 1.4em; color: #d8d2c6; }
 .stops circle { fill: var(--bg); stroke: var(--muted); stroke-width: 1.5; transition: fill .4s, stroke .4s; }
 .stops circle.on { fill: var(--accent); stroke: var(--accent); }
 .map figcaption { font: 400 12px/1.4 system-ui, sans-serif; color: var(--muted); text-align: center; }
-.day { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: .3; transition: opacity .5s; }
+.day { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: .4; transition: opacity .5s; }
 .day.on { opacity: 1; }
 .day-n { font: 500 12px/1 system-ui, sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
 .day h2 { font-weight: 400; font-size: clamp(32px, 4vw, 52px); letter-spacing: -.02em; line-height: 1.05; }

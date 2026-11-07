@@ -1,7 +1,7 @@
 :root {
   --bg: #efede8;
   --fg: #141414;
-  --muted: #6b6a66;
+  --muted: #5c5b57;
   --line: #d6d3cc;
   --ease: cubic-bezier(.2, .7, .2, 1);
 }

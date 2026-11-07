@@ -19,7 +19,6 @@ a { color: inherit; }
 
 /* hero */
 .hero { min-height: 100svh; display: grid; align-content: center; gap: 22px; padding: 120px clamp(20px, 6vw, 96px) 80px; }
-.eyebrow { color: var(--accent); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; }
 .split { font-weight: 300; font-size: clamp(44px, 9vw, 128px); line-height: .95; letter-spacing: -.045em; }
 .line { display: block; overflow: hidden; padding-bottom: .04em; }
 .line > span { display: block; }
@@ -50,7 +49,7 @@ a { color: inherit; }
 .tour-screen[data-i="1"] { background: radial-gradient(circle at 50% 30%, #0b2a3a, #050608 70%); }
 .tour-screen[data-i="2"] { background: radial-gradient(circle at 50% 30%, #1d2a12, #050608 70%); }
 .tour-screen span { transition: opacity .3s; }
-.feat { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: .25; transition: opacity .5s; }
+.feat { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 12px; opacity: .4; transition: opacity .5s; }
 .feat.on { opacity: 1; }
 .num { color: var(--accent); font-size: 13px; letter-spacing: .2em; }
 .feat h2 { font-weight: 300; font-size: clamp(34px, 4.6vw, 60px); letter-spacing: -.035em; }
