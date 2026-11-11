@@ -15,7 +15,11 @@ export default function HorizontalScroll({ head, children }: { head: ReactNode; 
   const max = useRef(0);
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
+    /* with reduced motion the track is a plain sideways-scrolling strip, so keyboard users must be able to reach it */
+    if (prefersReducedMotion()) {
+      track.current?.setAttribute('tabindex', '0');
+      return;
+    }
     let alive = true;
     const measure = () => {
       /* fonts.ready can resolve after the page has been left, when the refs are already null */

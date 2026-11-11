@@ -328,9 +328,9 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .line > span,
-  .spin-cap,
-  .feat {
+  html.js:not(.motion-on) .line > span,
+  html:not(.motion-on) .spin-cap,
+  html:not(.motion-on) .feat {
     transition: none;
     transform: none;
   }

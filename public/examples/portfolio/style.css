@@ -280,7 +280,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .line > span {
+  html.js:not(.motion-on) .line > span {
     transition: none;
     transform: none;
   }

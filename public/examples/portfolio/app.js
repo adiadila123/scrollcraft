@@ -1,7 +1,11 @@
 /* Field Studio: one scroll loop for the clip reveals and the horizontal gallery,
    one animation loop for the marquee, which keeps drifting when the page is still. */
 document.documentElement.classList.add('js');
-const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* reduced motion is respected, unless the page was opened with ?motion=on: the tutorial adds it when the reader
+   has turned animations on although their device asks for less motion */
+const motionOn = new URLSearchParams(location.search).get('motion') === 'on';
+if (motionOn) document.documentElement.classList.add('motion-on');
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches && !motionOn;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 requestAnimationFrame(() => document.querySelector('.split').classList.add('in'));

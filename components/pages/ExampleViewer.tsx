@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { alternates } from '@/components/chrome/Shell';
+import ExampleFrame from '@/components/pages/ExampleFrame';
 import { chapterHref } from '@/lib/chapters';
 import { dicts } from '@/lib/dict';
 import { exampleSites, getExampleSite } from '@/lib/examples';
@@ -67,7 +68,7 @@ export function exampleRoute(locale: Locale) {
             )}
           </nav>
         </header>
-        <iframe key={s.id} className="vw-frame" src={`/examples/${s.id}/index.html`} title={dicts[locale].demo.title(s.name)} sandbox="allow-scripts" />
+        <ExampleFrame key={s.id} src={`/examples/${s.id}/index.html`} title={dicts[locale].demo.title(s.name)} />
       </div>
     );
   }

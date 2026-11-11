@@ -260,9 +260,9 @@ footer { border-top: 1px solid var(--line); margin-top: 40px; overflow: hidden; 
 }
 @media (max-height: 640px) and (min-width: 761px) { .hero .lede { display: none; } }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .js .rv, .js .fi { opacity: 1; transform: none; }
-  .typed div { width: 36ch; max-width: 100%; }
+  html:not(.motion-on) *, html:not(.motion-on) *::before, html:not(.motion-on) *::after { animation: none !important; transition: none !important; }
+  html.js:not(.motion-on) .rv, html.js:not(.motion-on) .fi { opacity: 1; transform: none; }
+  html:not(.motion-on) .typed div { width: 36ch; max-width: 100%; }
 }
 #fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--muted); z-index: 4; }
 
@@ -347,15 +347,15 @@ html.snap-on { scroll-snap-type: y proximity; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
-  html.snap-on { scroll-snap-type: none; }
-  .pin { height: auto; }
-  .pin-in { position: static; height: auto; padding-block: 120px 0; }
-  .w { opacity: 1; }
-  .hs { height: auto !important; }
-  .hs-pin { position: static; height: auto; overflow: visible; }
-  .hs-track { width: auto; overflow-x: auto; scroll-snap-type: x mandatory; }
-  .hcard { scroll-snap-align: start; }
-  .hs-prog { display: none; }
+  html.snap-on:not(.motion-on) { scroll-snap-type: none; }
+  html:not(.motion-on) .pin { height: auto; }
+  html:not(.motion-on) .pin-in { position: static; height: auto; padding-block: 120px 0; }
+  html:not(.motion-on) .w { opacity: 1; }
+  html:not(.motion-on) .hs { height: auto !important; }
+  html:not(.motion-on) .hs-pin { position: static; height: auto; overflow: visible; }
+  html:not(.motion-on) .hs-track { width: auto; overflow-x: auto; scroll-snap-type: x mandatory; }
+  html:not(.motion-on) .hcard { scroll-snap-align: start; }
+  html:not(.motion-on) .hs-prog { display: none; }
 }
 
 [hidden] { display: none !important; }
@@ -472,7 +472,7 @@ button.tab { background: none; border: 0; padding: 0; cursor: pointer; font-fami
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 @keyframes shfade { from { opacity: 0; } }
 @keyframes shup { from { transform: translateY(100%); } }
-@media (prefers-reduced-motion: reduce) { .sheet-bg, .sheet-card { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html:not(.motion-on) .sheet-bg, html:not(.motion-on) .sheet-card { animation: none; } }
 
 /* ---------- loader ---------- */
 html.loading { overflow: hidden; }
@@ -491,7 +491,7 @@ html.loading { overflow: hidden; }
 .ld-ticks b:nth-child(5n+1) { height: 14px; margin-top: -2px; }
 .ld-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent, #5cc8ff); align-self: center; animation: lddrop 1.4s cubic-bezier(.5, 0, .2, 1) infinite; }
 @keyframes lddrop { 0% { transform: translateY(-6px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .loader { transition: opacity .25s; } .loader.out { transform: none; opacity: 0; } .ld-dot { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html:not(.motion-on) .loader { transition: opacity .25s; } html:not(.motion-on) .loader.out { transform: none; opacity: 0; } html:not(.motion-on) .ld-dot { animation: none; } }
 
 /* ---------- Next.js additions ---------- */
 #content:focus { outline: none; }
@@ -535,7 +535,7 @@ html.ld-skip .loader { display: none; }
 .pal-empty { padding: 18px 14px; }
 .pal-foot { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 12px 20px; border-top: 1px solid var(--line); font-size: 10px; color: var(--subtle); }
 @media (max-width: 760px) { .pal-foot { display: none; } .palette { margin-top: 10vh; } }
-@media (prefers-reduced-motion: reduce) { .palette[open] { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html:not(.motion-on) .palette[open] { animation: none; } }
 /* phones: the search label stays for screen readers, only the icon shows */
 @media (max-width: 760px) { .kbd-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } }
 .tablewrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -612,7 +612,7 @@ body:has(.rail-bar) .progress { display: none; }
   .nb-art canvas { left: 0; width: 100%; height: 70%; }
   .nb-key { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .nb-art { opacity: 0.9; } }
+@media (prefers-reduced-motion: reduce) { html:not(.motion-on) .nb-art { opacity: 0.9; } }
 
 /* home statement */
 .pin-hint { font: 400 11px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
@@ -740,7 +740,7 @@ a.dm-replay { display: inline-flex; align-items: center; text-decoration: none; 
 .pager-next:hover .pager-arrow, .pager-next:focus-visible .pager-arrow { transform: translateX(3px); }
 .pager-prev:hover .pager-arrow, .pager-prev:focus-visible .pager-arrow { transform: translateX(-3px); }
 .pager-link:active { transform: translateY(1px); }
-@media (prefers-reduced-motion: reduce) { .pager-arrow, .pager-link { transition: none; } .pager-link:active, .pager-link .pager-arrow { transform: none !important; } }
+@media (prefers-reduced-motion: reduce) { html:not(.motion-on) .pager-arrow, html:not(.motion-on) .pager-link { transition: none; } html:not(.motion-on) .pager-link:active, html:not(.motion-on) .pager-link .pager-arrow { transform: none !important; } }
 .pager-next { text-align: right; }
 .pager-next:only-child { text-align: left; }
 @media (min-width: 761px) {
@@ -771,3 +771,19 @@ a.dm-replay { display: inline-flex; align-items: center; text-decoration: none; 
 /* secondary button, beside a primary one */
 .btn-ghost { color: var(--fg); background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
 .btn-ghost:hover, .btn-ghost:focus-visible { color: #000; background: var(--fg); box-shadow: none; }
+
+/* ---------- motion notice: only on devices that ask for less motion ---------- */
+.motion-notice { position: fixed; left: 16px; right: 16px; bottom: calc(88px + env(safe-area-inset-bottom, 0px)); z-index: 45; display: grid; gap: 12px; padding: 14px 16px; background: rgba(0, 0, 0, 0.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--line); font-size: 14px; line-height: 1.45; }
+.motion-notice p { margin: 0; color: var(--body, var(--muted)); }
+.mn-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.mn-on, .mn-off { min-height: 40px; padding: 0 14px; font: 500 13px/1 var(--sans); cursor: pointer; border-radius: 2px; }
+.mn-on { color: #000; background: var(--fg); border: 1px solid var(--fg); }
+.mn-off { color: var(--fg); background: transparent; border: 1px solid var(--line); }
+.mn-on:hover, .mn-on:focus-visible { background: #fff; }
+.mn-off:hover, .mn-off:focus-visible { border-color: #3a4146; }
+@media (min-width: 761px) {
+  .motion-notice { left: 24px; right: auto; bottom: 24px; max-width: 380px; }
+}
+.motion-switch { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+.motion-switch button { padding: 0; background: none; border: 0; border-bottom: 1px solid var(--line); color: var(--fg); font: inherit; cursor: pointer; }
+.motion-switch button:hover, .motion-switch button:focus-visible { border-color: var(--accent); }

@@ -1,7 +1,36 @@
 export const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
-export function prefersReducedMotion(): boolean {
+/** localStorage key for the reader's choice when their device asks for less motion: 'on' or 'off'. */
+export const MOTION_KEY = 'sc-motion';
+
+/** The device or browser asks for less motion (on many lab and remote-desktop machines this is set by policy). */
+export function systemReducedMotion(): boolean {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/** The reader's answer to the notice shown when the device asks for less motion, or null if not answered yet. */
+export function motionChoice(): 'on' | 'off' | null {
+  try {
+    const v = localStorage.getItem(MOTION_KEY);
+    return v === 'on' || v === 'off' ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+/** The device asks for less motion, and the reader turned animations on anyway. */
+export const motionOverride = () => systemReducedMotion() && motionChoice() === 'on';
+
+/**
+ * Pages shown in frames cannot read the reader's choice, so it is passed in. A preview's source has its
+ * reduced-motion query made impossible to match (in its CSS and its scripts alike); an example site gets ?motion=on.
+ */
+export const withMotion = (doc: string) => doc.replaceAll('(prefers-reduced-motion: reduce)', '(prefers-reduced-motion: reduce) and (scripting: none)');
+export const withMotionParam = (src: string) => `${src}?motion=on`;
+
+/** Reduced motion is respected unless the reader turned animations back on themselves. */
+export function prefersReducedMotion(): boolean {
+  return systemReducedMotion() && motionChoice() !== 'on';
 }
 
 export function finePointer(): boolean {

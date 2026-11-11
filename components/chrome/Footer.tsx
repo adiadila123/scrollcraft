@@ -3,6 +3,7 @@ import { chapterHref, chaptersFor } from '@/lib/chapters';
 import { dicts } from '@/lib/dict';
 import { withLocale, type Locale } from '@/lib/i18n';
 import BackToTop from './BackToTop';
+import { MotionSwitch } from './MotionNotice';
 
 /** The footer: every chapter, the official docs the tutorial relies on, the language switch and back to top. */
 type Ext = { href: string; label: string };
@@ -50,6 +51,7 @@ export default function Footer({ locale }: { locale: Locale }) {
             >
               {dicts[locale].lang.switchTo}
             </a>
+            <MotionSwitch />
           </div>
           <div className="f-col">
             <div className="mono">{t.chapters}</div>

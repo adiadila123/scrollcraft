@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { motionOverride, withMotion, withMotionParam } from '@/lib/motion';
 import { useLocale } from '@/lib/useLocale';
 
 /**
@@ -83,11 +84,17 @@ export default function DemoView({
         </div>
       </div>
       <div className="dm-body">
-        <div className="dm-stage">{live ? <iframe key={run} title={t.demo.title(name)} src={src} srcDoc={doc} sandbox="allow-scripts" /> : null}</div>
+        <div className="dm-stage">{live ? <Frame key={run} title={t.demo.title(name)} src={src} doc={doc} /> : null}</div>
         <div className="dm-code" data-lenis-prevent="">
           {files[file].node}
         </div>
       </div>
     </figure>
   );
+}
+
+/** The preview frame. It only mounts on the client, so it can pass on the reader's choice to keep animations on. */
+function Frame({ title, src, doc }: { title: string; src?: string; doc?: string }) {
+  const on = motionOverride();
+  return <iframe title={title} src={src && on ? withMotionParam(src) : src} srcDoc={doc && on ? withMotion(doc) : doc} sandbox="allow-scripts" />;
 }

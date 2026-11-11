@@ -1,7 +1,11 @@
 /* The Long Way North: one scroll loop for the progress bar, the cover parallax, the route drawing and the
    active day. Paragraph reveals use IntersectionObserver, since they happen once. */
 document.documentElement.classList.add('js');
-const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* reduced motion is respected, unless the page was opened with ?motion=on: the tutorial adds it when the reader
+   has turned animations on although their device asks for less motion */
+const motionOn = new URLSearchParams(location.search).get('motion') === 'on';
+if (motionOn) document.documentElement.classList.add('motion-on');
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches && !motionOn;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 const bar = document.querySelector('.progress');

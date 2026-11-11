@@ -337,6 +337,46 @@ test.describe('reduced motion', () => {
     await expect(page.locator('.rv').first()).toHaveCSS('opacity', '1');
     await expect(page.locator('html')).not.toHaveClass(/lenis/);
   });
+
+  test('a notice offers to turn animations on, and the footer can turn them off again', async ({ page }) => {
+    await page.goto('/motion');
+    const notice = page.getByRole('complementary', { name: 'Animations' });
+    await expect(notice).toContainText('this device asks for less motion');
+    const axe = await new AxeBuilder({ page }).disableRules(['color-contrast']).analyze();
+    expect(axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id)).toEqual([]);
+
+    await notice.getByRole('button', { name: 'Turn them on' }).click();
+    await expect(page.locator('html')).toHaveClass(/lenis/);
+    await expect(page.locator('html')).toHaveClass(/motion-on/);
+    await expect(notice).toBeHidden();
+    /* the live previews get the choice too: their reduced-motion query can no longer match */
+    const demo = page.locator('#scroll-triggered + .dm');
+    await demo.scrollIntoViewIfNeeded();
+    await expect(demo.locator('iframe')).toHaveAttribute('srcdoc', /\(prefers-reduced-motion: reduce\) and \(scripting: none\)/);
+
+    const sw = page.locator('.motion-switch');
+    await expect(sw).toContainText('Animations: on');
+    await sw.getByRole('button', { name: 'Turn off' }).click();
+    await expect(page.locator('html')).not.toHaveClass(/lenis/);
+    await expect(page.locator('.motion-switch')).toContainText('Animations: off');
+    await expect(notice).toBeHidden();
+  });
+
+  test('keeping animations off hides the notice for good', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Keep them off' }).click();
+    await expect(page.getByRole('complementary', { name: 'Animations' })).toBeHidden();
+    await page.reload();
+    await expect(page.locator('h1').first()).toBeVisible();
+    await expect(page.getByRole('complementary', { name: 'Animations' })).toBeHidden();
+  });
+});
+
+test('devices that allow motion never see the animations notice or switch', async ({ page }) => {
+  await page.goto('/motion');
+  await expect(page.locator('html')).toHaveClass(/lenis/);
+  await expect(page.locator('.motion-notice')).toHaveCount(0);
+  await expect(page.locator('.motion-switch')).toHaveCount(0);
 });
 
 test.describe('phone', () => {

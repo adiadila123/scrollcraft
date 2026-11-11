@@ -276,7 +276,7 @@ main > p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .reveal {
+  html.js:not(.motion-on) .reveal {
     transition: none;
     transform: none;
     opacity: 1;

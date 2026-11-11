@@ -7,6 +7,7 @@ import type { ReactNode } from 'react';
 import CommandPalette from '@/components/chrome/CommandPalette';
 import Footer from '@/components/chrome/Footer';
 import MobileNav from '@/components/chrome/MobileNav';
+import MotionNotice from '@/components/chrome/MotionNotice';
 import Topbar from '@/components/chrome/Topbar';
 import RouteEffects from '@/components/engine/RouteEffects';
 import { SmoothScroll } from '@/components/engine/SmoothScroll';
@@ -35,10 +36,11 @@ export const alternates = (path: string) => ({ en: path, ro: withLocale('ro', pa
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#000000', colorScheme: 'dark' };
 
 /*
- * Runs before first paint: turns on the reveal styles (content stays visible without JavaScript)
- * and skips the intro loader for the rest of the session once it has played.
+ * Runs before first paint: turns on the reveal styles (content stays visible without JavaScript),
+ * skips the intro loader for the rest of the session once it has played, and marks pages where the reader turned
+ * animations on although their device asks for less motion (the reduced-motion CSS skips html.motion-on).
  */
-const BOOT = `document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sc-loaded'))document.documentElement.classList.add('ld-skip')}catch(e){}`;
+const BOOT = `document.documentElement.classList.add('js');try{if(sessionStorage.getItem('sc-loaded'))document.documentElement.classList.add('ld-skip');if(localStorage.getItem('sc-motion')==='on')document.documentElement.classList.add('motion-on')}catch(e){}`;
 
 /** The document for one language: fonts, chrome, smooth scrolling. Each language group's root layout renders it. */
 export default function Shell({ locale, children }: { locale: Locale; children: ReactNode }) {
@@ -61,6 +63,7 @@ export default function Shell({ locale, children }: { locale: Locale; children: 
           </main>
           <Footer locale={locale} />
           <CommandPalette />
+          <MotionNotice />
         </SmoothScroll>
         {/* the analytics endpoints only exist on Vercel, so other hosts skip the scripts instead of logging 404s */}
         {process.env.VERCEL ? (

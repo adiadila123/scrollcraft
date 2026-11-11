@@ -1,6 +1,10 @@
 /* Orbit One: one scroll loop drives the progress bar, the frame scrub, the lit words and the product tour. */
 document.documentElement.classList.add('js');
-const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* reduced motion is respected, unless the page was opened with ?motion=on: the tutorial adds it when the reader
+   has turned animations on although their device asks for less motion */
+const motionOn = new URLSearchParams(location.search).get('motion') === 'on';
+if (motionOn) document.documentElement.classList.add('motion-on');
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches && !motionOn;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /* how far the reader is through a tall section, 0 at its top and 1 when its end reaches the bottom of the screen */
 const through = (el) => {

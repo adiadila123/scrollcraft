@@ -91,6 +91,16 @@ const en = {
     next: (name: string) => `Next example: ${name}`,
     description: 'A complete example from the Scrollcraft tutorial, chapter 08.',
   },
+  motion: {
+    notice: 'Animations are off because this device asks for less motion.',
+    turnOn: 'Turn them on',
+    keepOff: 'Keep them off',
+    label: 'Animations',
+    on: 'on',
+    off: 'off',
+    switchOn: 'Turn on',
+    switchOff: 'Turn off',
+  },
   demo: {
     preview: 'Preview',
     replay: 'Replay',
@@ -264,6 +274,16 @@ const ro: Dict = {
     prev: (name) => `Exemplul anterior: ${name}`,
     next: (name) => `Exemplul următor: ${name}`,
     description: 'Un exemplu complet din tutorialul Scrollcraft, capitolul 08.',
+  },
+  motion: {
+    notice: 'Animațiile sunt oprite pentru că acest dispozitiv cere mai puțină mișcare.',
+    turnOn: 'Pornește-le',
+    keepOff: 'Lasă-le oprite',
+    label: 'Animații',
+    on: 'pornite',
+    off: 'oprite',
+    switchOn: 'Pornește',
+    switchOff: 'Oprește',
   },
   demo: {
     preview: 'Rezultat',

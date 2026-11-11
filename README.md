@@ -115,3 +115,7 @@ environment variables to the production URL.
 - Reading progress, the chosen platform and the checklist live in `localStorage`. Nothing leaves the browser.
 - Vercel Analytics and Speed Insights load only when deployed on Vercel.
 - `prefers-reduced-motion` turns off smooth scrolling, parallax, reveals and the hero formation together.
+- On devices that ask for less motion (common on lab and remote-desktop machines), a notice offers to turn the
+  animations back on. The choice is stored in `localStorage` (`sc-motion`), marks the page with `html.motion-on`
+  (the reduced-motion CSS skips it) and is passed into the live previews and example sites. A footer switch,
+  shown only on those devices, changes it back. Elsewhere neither appears.
