@@ -14,6 +14,8 @@ const en = {
     course: 'Course',
     home: 'Home',
     chapters: 'Chapters',
+    /** headings for the four groups of chapters (Chapter.level 1 to 4) */
+    levels: ['Level 1 · Foundations', 'Level 2 · Motion', 'Level 3 · Production', 'Appendix'],
     allChapters: 'All chapters',
     read: 'Read',
     previous: (t: string) => `Previous: ${t}`,
@@ -36,6 +38,8 @@ const en = {
     blurb:
       'A free tutorial on building a cinematic scroll website with Claude, Gemini or ChatGPT. Commands were checked against official documentation in November 2026. Check the linked pages before you rely on them.',
     chapters: 'Chapters',
+    /** headings for the four groups of chapters (Chapter.level 1 to 4) */
+    levels: ['Level 1 · Foundations', 'Level 2 · Motion', 'Level 3 · Production', 'Appendix'],
     docs: 'Official docs',
     finds: 'Find skills',
     rights: '© 2026 Scrollcraft. A free tutorial.',
@@ -150,7 +154,7 @@ const en = {
     keepScrolling: 'Keep scrolling',
     zoomA: 'Every image on this site is particles',
     zoomB: 'Scroll to zoom',
-    eight: 'Eleven chapters, in order.',
+    eight: 'Fifteen chapters in three levels.',
     four: 'Four things at the end.',
     cells: [
       ['A working site', 'Smooth inertial scrolling, a parallax hero, reveals, one pinned moment and a mobile layout.'],
@@ -198,6 +202,7 @@ const ro: Dict = {
     course: 'Curs',
     home: 'Acasă',
     chapters: 'Capitole',
+    levels: ['Nivelul 1 · Fundamente', 'Nivelul 2 · Mișcare', 'Nivelul 3 · Producție', 'Anexă'],
     allChapters: 'Toate capitolele',
     read: 'Citit',
     previous: (t) => `Înapoi: ${t}`,
@@ -220,6 +225,7 @@ const ro: Dict = {
     blurb:
       'Un tutorial gratuit despre cum construiești un site cinematic cu scroll, folosind Claude, Gemini sau ChatGPT. Comenzile au fost verificate în documentația oficială în noiembrie 2026. Verifică paginile din linkuri înainte să te bazezi pe ele.',
     chapters: 'Capitole',
+    levels: ['Nivelul 1 · Fundamente', 'Nivelul 2 · Mișcare', 'Nivelul 3 · Producție', 'Anexă'],
     docs: 'Documentație oficială',
     finds: 'Unde găsești skilluri',
     rights: '© 2026 Scrollcraft. Un tutorial gratuit.',
@@ -335,7 +341,7 @@ const ro: Dict = {
     keepScrolling: 'Continuă să derulezi',
     zoomA: 'Fiecare imagine de pe site e făcută din particule',
     zoomB: 'Derulează pentru zoom',
-    eight: 'Unsprezece capitole, în ordine.',
+    eight: 'Cincisprezece capitole, pe trei niveluri.',
     four: 'Patru lucruri la final.',
     cells: [
       ['Un site funcțional', 'Scroll lin cu inerție, un hero cu parallax, apariții, un moment fixat și o variantă pentru mobil.'],

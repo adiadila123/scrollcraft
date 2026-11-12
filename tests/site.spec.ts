@@ -190,8 +190,8 @@ test.describe('features', () => {
     await expect(page.getByRole('tab', { name: 'Gemini' })).toHaveAttribute('aria-selected', 'true');
   });
 
-  test('the launch checklist survives a reload', async ({ page }) => {
-    await page.goto('/launch');
+  test('the release checklist survives a reload', async ({ page }) => {
+    await page.goto('/testing');
     await page.getByRole('checkbox').first().check();
     await expect(page.getByText('1 of 12 done')).toBeVisible();
     await page.reload();
@@ -215,7 +215,7 @@ test.describe('features', () => {
     await page.locator('.next-band').scrollIntoViewIfNeeded();
     await page.waitForTimeout(300);
     await page.goto('/');
-    await expect(page.getByText('1 of 11 chapters read')).toBeVisible();
+    await expect(page.getByText('1 of 15 chapters read')).toBeVisible();
     await expect(page.getByRole('link', { name: /Next: 02 Skills/ })).toHaveAttribute('href', '/skills');
   });
 
@@ -291,6 +291,26 @@ test.describe('features', () => {
       }
     }
     expect(cdn, 'requests to the CDN').toEqual([]);
+  });
+
+  test('the old Advanced address leads to Architecture, in both languages', async ({ page }) => {
+    await page.goto('/advanced');
+    await expect(page).toHaveURL(/\/architecture$/);
+    await page.goto('/ro/advanced');
+    await expect(page).toHaveURL(/\/ro\/architecture$/);
+  });
+
+  test('the performance preview stops its loop once it is off screen', async ({ page }) => {
+    await page.goto('/performance');
+    const demo = page.locator('.dm').first();
+    await demo.scrollIntoViewIfNeeded();
+    const frame = demo.locator('iframe').contentFrame();
+    await expect(frame.locator('.meter span')).toHaveText('running');
+    await frame.locator('body').evaluate(() => scrollTo(0, document.body.scrollHeight));
+    await expect(frame.locator('.meter span')).toHaveText('paused');
+    const drawn = await frame.locator('.meter b').textContent();
+    await page.waitForTimeout(400);
+    await expect(frame.locator('.meter b')).toHaveText(drawn!);
   });
 
   test('each example site runs, shows its full code and opens on StackBlitz', async ({ page }) => {
@@ -406,21 +426,22 @@ test('devices that allow motion never see the animations notice or switch', asyn
 test.describe('phone', () => {
   test('course bar steps between chapters and opens every chapter', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'phones only');
-    await page.goto('/advanced');
+    await page.goto('/architecture');
     const bar = page.getByRole('navigation', { name: 'Course' });
-    await expect(bar.getByRole('link', { name: 'Previous: Examples' })).toHaveAttribute('href', '/examples');
-    await expect(bar.getByRole('link', { name: 'Next: Launch' })).toHaveAttribute('href', '/launch');
+    await expect(bar.getByRole('link', { name: 'Previous: Design systems' })).toHaveAttribute('href', '/design');
+    await expect(bar.getByRole('link', { name: 'Next: Performance' })).toHaveAttribute('href', '/performance');
     const all = bar.getByRole('button', { name: /Show all chapters/ });
     await all.click();
     const sheet = page.getByRole('dialog', { name: 'All chapters' });
     await expect(sheet).toBeVisible();
-    await expect(sheet.getByRole('link', { name: /Advanced/ })).toBeFocused();
+    await expect(sheet.getByRole('link', { name: /Architecture/ })).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(sheet).toBeHidden();
     await expect(all).toBeFocused();
     await all.click();
-    await sheet.getByRole('link', { name: /Launch/ }).click();
-    await expect(page).toHaveURL(/\/launch$/);
+    await expect(sheet.getByText('Level 3 · Production')).toBeVisible();
+    await sheet.getByRole('link', { name: /Reference/ }).click();
+    await expect(page).toHaveURL(/\/reference$/);
     await expect(sheet).toBeHidden();
   });
 });

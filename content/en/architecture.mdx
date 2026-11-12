@@ -1,0 +1,93 @@
+export const meta = {
+  title: "Architecture: structure that holds as the site grows.",
+  lede: "A one-page site can live in three files. Once it has many sections, routes or people working on it, a few structural decisions keep it fast and easy to change.",
+};
+
+<section className="sec">
+  <Stick left="01 · Choosing a stack" right="Plain, GSAP, Next.js, Flask" />
+  <p className="lede rv" style={{ marginTop: '0' }}>For a scroll site the stack matters less than the discipline. Start plain. Add a library when a specific problem asks for it.</p>
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Table. Scroll sideways to see every column.">
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Use it when</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Plain HTML, CSS, JS</td>
+          <td>One page or a few pages, a portfolio, a landing page, this tutorial’s project</td>
+          <td>You manage the file structure and repeated markup yourself</td>
+        </tr>
+        <tr>
+          <td>Vanilla plus GSAP</td>
+          <td>Many scrubbed or pinned timelines that must stay in sync</td>
+          <td>One more library to load and learn</td>
+        </tr>
+        <tr>
+          <td>Next.js with React</td>
+          <td>Many routes, shared components, a CMS, server rendering for search</td>
+          <td>A build step, a server or host that supports it, and effects that must clean up on unmount</td>
+        </tr>
+        <tr>
+          <td>Flask</td>
+          <td>You need a backend: a contact form, a database, an API</td>
+          <td>It does not animate anything. It serves the page and handles data</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Folder structure" right="Plain and Next.js" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Split by what changes together">
+      <p>Sections change with the content, motion components change with the design, and the loop almost never changes. Keep each in its own place.</p>
+      <CodeBlock lang="Structure" code={"Plain site\n  index.html\n  style.css            tokens first, then sections in page order\n  app.js               one loop, one function per effect\n  assets/              images, video, fonts\n\nNext.js\n  app/                 routes and layouts (server components)\n  components/\n    sections/          one file per section of the page\n    motion/            Reveal, Pin, Parallax: small client components\n  lib/\n    ticker.ts          the single animation loop\n  content/             text and data, kept out of the components\n  public/              images, video, fonts"} />
+    </Row>
+    <Row cls="rv" num="b" title="Keep content out of components">
+      <p>Text, image paths and lists of features live in data files or a CMS. The components only decide how they look and move, and the site can gain a second language without touching them.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · One loop for the whole site" right="requestAnimationFrame" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Why one">
+      <p>Ten effects with ten loops each read the scroll position and each write styles, in an order nobody controls. One loop reads once and updates everything in the same frame, and it can stop when the tab is hidden.</p>
+      <CodeBlock lang="ticker.js" code={"// ticker.js: one requestAnimationFrame loop for the whole site\nconst jobs = new Set();\nlet raf = 0;\n\nfunction frame(time) {\n  for (const job of jobs) job(time);\n  raf = jobs.size ? requestAnimationFrame(frame) : 0;\n}\n\n/** Run fn every frame. Returns a function that stops it. */\nexport function onFrame(fn) {\n  jobs.add(fn);\n  if (!raf && !document.hidden) raf = requestAnimationFrame(frame);\n  return () => jobs.delete(fn);\n}\n\n// stop drawing while the tab is hidden, start again when it comes back\ndocument.addEventListener('visibilitychange', () => {\n  if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }\n  else if (jobs.size && !raf) raf = requestAnimationFrame(frame);\n});"} />
+    </Row>
+    <Row cls="rv" num="b" title="Lenis and GSAP share it">
+      <p>If the site uses GSAP, its ticker is the loop: drive Lenis from <code className="i">gsap.ticker</code> as shown in the GSAP chapter, and add your own effects to the same ticker.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Next.js and React" right="Same effects, with cleanup" />
+  <p className="lede rv" style={{ marginTop: '0' }}>In React the effects move into <code className="i">useEffect</code>, and everything you start has to be stopped on unmount. In the Next.js App Router the component needs <code className="i">‘use client’</code> because it touches the browser. This sketch was not run here; install{' '}<code className="i">lenis</code> and <code className="i">gsap</code> with npm and test it in your project.</p>
+  <div className="rv">
+    <CodeBlock
+      lang="tsx"
+      code={
+        "// components/Cinematic.tsx\n'use client';\nimport { useEffect, useRef, type ReactNode } from 'react';\nimport Lenis from 'lenis';\nimport gsap from 'gsap';\nimport { ScrollTrigger } from 'gsap/ScrollTrigger';\n\ngsap.registerPlugin(ScrollTrigger);\n\nexport default function Cinematic({ children }: { children: ReactNode }) {\n  const root = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;\n    if (reduced) return;\n\n    const lenis = new Lenis({ lerp: 0.1 });\n    const tick = (time: number) => lenis.raf(time * 1000);\n    lenis.on('scroll', ScrollTrigger.update);\n    gsap.ticker.add(tick);\n    gsap.ticker.lagSmoothing(0);\n\n    const ctx = gsap.context(() => {\n      gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {\n        gsap.from(el, {\n          y: 28, opacity: 0, duration: 0.9, ease: 'power3.out',\n          scrollTrigger: { trigger: el, start: 'top 85%', once: true }\n        });\n      });\n    }, root);\n\n    return () => {\n      ctx.revert();\n      gsap.ticker.remove(tick);\n      lenis.destroy();\n    };\n  }, []);\n\n  return <div ref={root}>{children}</div>;\n}"
+      }
+    />
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Progressive enhancement" right="Works without the effects" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Content first">
+      <p>The page must read in full with JavaScript off, a script blocked, or animations disabled by the system. Effects are added on top; they never hold content hostage.</p>
+      <CodeBlock lang="index.html" code={"<!-- the class is added before the page paints, only when JavaScript runs -->\n<script>document.documentElement.classList.add('js');</script>\n\n<style>\n  /* content is hidden only when a script is there to reveal it */\n  .js .reveal { opacity: 0; transform: translateY(24px); }\n  .js .reveal.in { opacity: 1; transform: none; transition: opacity .6s, transform .6s; }\n</style>"} />
+    </Row>
+    <Row cls="rv" num="b" title="Server first in Next.js">
+      <p>Keep sections as server components and wrap only the moving parts in small client components such as <code className="i">&lt;Reveal&gt;</code>. Less JavaScript reaches the phone, and the text is in the HTML for search engines.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Clean up">
+      <p>Every listener, observer, loop and ScrollTrigger you create is removed when its component leaves the page. In React that is the function returned from <code className="i">useEffect</code>, or <code className="i">useGSAP</code> which does it for you.</p>
+    </Row>
+  </div>
+</section>

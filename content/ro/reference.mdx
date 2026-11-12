@@ -1,0 +1,134 @@
+export const meta = {
+  title: "Referință: probleme și termeni.",
+  lede: "Revino aici când se strică ceva sau un cuvânt nu-ți e cunoscut. Fiecare problemă are cauza probabilă și o reparație; fiecare termen are o definiție de un rând.",
+};
+
+<section className="sec">
+  <Stick left="01 · Depanare" right="Simptom, cauză, reparație" />
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Tabel. Derulează în lateral ca să vezi toate coloanele.">
+    <table>
+      <thead>
+        <tr>
+          <th>Simptom</th>
+          <th>Cauza probabilă</th>
+          <th>Reparație</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Scrollul lin nu face nimic</td>
+          <td>Lipsește doctype, deci browserul e în quirks mode</td>
+          <td>Începe fișierul cu{' '}<code className="i">{'<'}!doctype html{'>'}</code></td>
+        </tr>
+        <tr>
+          <td>Două bare de scroll sau un salt</td>
+          <td><code className="i">overflow: hidden</code> pe html sau body</td>
+          <td>Folosește <code className="i">overflow-x: clip</code> pe body</td>
+        </tr>
+        <tr>
+          <td>Secțiunea sticky nu se fixează</td>
+          <td>Un părinte are overflow setat</td>
+          <td>Elimină-l sau folosește <code className="i">clip</code></td>
+        </tr>
+        <tr>
+          <td>Galeria se termină prea devreme sau prea târziu</td>
+          <td>Lățimea a fost măsurată înainte să se încarce fonturile</td>
+          <td>Măsoară din nou în <code className="i">document.fonts.ready</code> și la redimensionare</td>
+        </tr>
+        <tr>
+          <td>Conținutul rămâne invizibil</td>
+          <td>Nume de clasă greșit sau prag prea mare pentru un element înalt</td>
+          <td>Verifică clasa, coboară pragul</td>
+        </tr>
+        <tr>
+          <td>Linkurile ancoră sar</td>
+          <td>Saltul nativ se bate cu Lenis</td>
+          <td>Apelează <code className="i">lenis.scrollTo(target)</code></td>
+        </tr>
+        <tr>
+          <td>Pozițiile declanșatoarelor sunt greșite</td>
+          <td>Imaginile s-au încărcat după ce GSAP a măsurat</td>
+          <td>Apelează <code className="i">ScrollTrigger.refresh()</code> la încărcare</td>
+        </tr>
+        <tr>
+          <td>Sacadat pe telefon</td>
+          <td>Se animă top, left sau width</td>
+          <td>Animă doar transform și opacity</td>
+        </tr>
+        <tr>
+          <td>Textul hero-ului iese din ecran</td>
+          <td>Deplasare de parallax prea mare pe lățimi mici</td>
+          <td>Coboară viteza sau marginea stratului pe ecrane înguste</td>
+        </tr>
+        <tr>
+          <td>Secțiunea fixată sare sau lasă un gol</td>
+          <td>Un părinte cu transform sau filtru, sau două fixări pe același element</td>
+          <td>Fixează o singură secțiune o dată, în afara părinților transformați</td>
+        </tr>
+        <tr>
+          <td>Un canvas WebGL gol</td>
+          <td>Calculatorul nu are WebGL sau rendererul a fost creat de două ori</td>
+          <td>Creează-l o singură dată într-un <code className="i">try</code> și arată o variantă de rezervă</td>
+        </tr>
+        <tr>
+          <td>Animațiile nu pornesc pe un anumit calculator</td>
+          <td>Sistemul cere mișcare redusă</td>
+          <td>Verifică setarea; respect-o și oferă o opțiune de pornire</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Glosar" right="Doisprezece termeni" />
+  <dl className="glossary rv">
+    <div className="gl">
+      <dt className="mono">Lerp</dt>
+      <dd>Interpolare liniară. La fiecare cadru, te muți o fracțiune fixă din distanța rămasă până la țintă.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Easing</dt>
+      <dd>Curba care stabilește cât de repede se mișcă ceva în fiecare punct al traseului.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Fixare</dt>
+      <dd>Ținerea unui element pe loc în timp ce pagina derulează pe lângă el. În CSS, de obicei position: sticky.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Scrub</dt>
+      <dd>Legarea progresului unei animații de poziția scrollului, în loc de timp.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Parallax</dt>
+      <dd>Straturi care se mișcă la viteze diferite, pe care ochiul le citește ca adâncime.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Quirks mode</dt>
+      <dd>Un mod vechi de randare pe care browserul îl folosește când lipsește doctype.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Layout thrash</dt>
+      <dd>Citirea valorilor de layout și scrierea stilurilor într-o buclă, ceea ce forțează recalculări repetate.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Strat compozitat</dt>
+      <dd>Un strat pe care placa video îl poate muta fără să refacă layoutul sau desenarea. De obicei, schimbările de transform și opacity se încadrează aici.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Design token</dt>
+      <dd>O valoare cu nume, precum o culoare, o mărime sau o durată, pe care o citește fiecare componentă în locul unui număr brut.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Shader</dt>
+      <dd>Un program mic care rulează pe placa video, o dată pentru fiecare vârf sau pentru fiecare pixel.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Core Web Vitals</dt>
+      <dd>Trei măsuri ale felului în care se simte o pagină: încărcarea (LCP), reacția (INP) și stabilitatea vizuală (CLS).</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Îmbunătățire progresivă</dt>
+      <dd>Construiești pagina astfel încât să meargă complet fără scripturi sau efecte, apoi le adaugi deasupra.</dd>
+    </div>
+  </dl>
+</section>

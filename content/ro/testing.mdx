@@ -1,0 +1,100 @@
+export const meta = {
+  title: "Testare și QA: dovedește că merge.",
+  lede: "Un site cu scroll poate arăta perfect pe laptopul tău și se poate strica pe un telefon, cu un cititor de ecran sau cu mișcarea oprită. Verifică o dată de mână, apoi lasă testele să verifice la fiecare schimbare.",
+};
+
+<section className="sec">
+  <Stick left="01 · Lista pentru lansare" right="Bifează pe parcurs" />
+  <Checklist
+    items={[
+      'Site-ul rulează de pe un server local, nu din file://',
+      'Consola browserului nu arată erori',
+      'L-am verificat la lățimi de 375, 768 și 1440 px',
+      'Nimic nu se suprapune și nu e tăiat într-o fereastră cât un telefon',
+      'Fiecare element cu apariție devine vizibil când ajung la el',
+      'Reduced motion oprește scrollul lin, parallaxul și mișcarea aparițiilor',
+      'Totul merge doar de la tastatură, cu focus vizibil',
+      'Textul are un contrast de cel puțin 4,5 la 1',
+      'Imaginile sunt comprimate și folosesc cel mult două familii de fonturi',
+      'Nu există statistici, citate sau logouri de clienți inventate',
+      'Fiecare bibliotecă externă e fixată pe o versiune exactă',
+      'Am rulat Lighthouse în Chrome DevTools și am notat scorurile',
+    ]}
+  />
+  <p className="muted" style={{ marginTop: '20px', maxWidth: '56ch' }}>Bifele se salvează doar în acest browser, așa că se pot pierde într-o fereastră privată.</p>
+</section>
+<section className="sec">
+  <Stick left="02 · Cere dovezi" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Nu accepta „testat”">
+      <p>Uneltele AI raportează uneori verificări pe care nu le-au rulat. Întreabă ce s-a rulat, la ce lățimi și ce s-a sărit. Apoi deschide pagina și uită-te tu.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={'Listează fiecare verificare pe care chiar ai rulat-o, cu lățimea sau unealta folosită. Listează fiecare verificare pe care n-ai putut-o rula și de ce.'}
+      />
+    </Row>
+    <Row cls="rv" num="b" title="Măsoară, apoi repară">
+      <p>În Chrome DevTools, tabul Lighthouse dă scoruri de performanță și accesibilitate. Repară întâi cea mai mare problemă și rulează din nou. Tabul Performance arată ce blochează firul principal în timp ce derulezi.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Greșeli frecvente">
+      <p>Fișierul deschis direct în loc de printr-un server. Doctype lipsă, care strică Lenis. Scroll snap pe toată pagina împreună cu scroll lin. Deplasări de parallax care împing textul hero-ului în afara ecranului pe telefon. <code className="i">will-change</code> pe fiecare element. Conținut ascuns din CSS pe care niciun script nu-l mai arată. <code className="i">overflow: hidden</code> pe html sau body, care poate lăsa două contexte de scroll.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Teste în browser" right="Playwright" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Instalează">
+      <p>Playwright conduce browsere reale, Chromium, Firefox și WebKit, la dimensiuni de desktop și de telefon.</p>
+      <CodeBlock lang="bash" code={"npm init playwright@latest"} />
+    </Row>
+    <Row cls="rv" num="b" title="Două dimensiuni de ecran">
+      <CodeBlock lang="playwright.config.ts" code={"// playwright.config.ts\nimport { defineConfig, devices } from '@playwright/test';\n\nexport default defineConfig({\n  testDir: 'tests',\n  projects: [\n    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },\n    { name: 'phone', use: { ...devices['Pixel 7'] } },\n  ],\n  // servește folderul cât rulează testele\n  webServer: { command: 'npx serve -l 3000 .', url: 'http://localhost:3000' },\n  use: { baseURL: 'http://localhost:3000' },\n});"} />
+    </Row>
+    <Row cls="rv" num="c" title="Trei teste de care are nevoie orice site cu scroll">
+      <p>Nicio eroare la încărcare, fiecare element ascuns arătat când ajungi la el și o pagină care se citește și cu mișcarea redusă.</p>
+      <CodeBlock lang="site.spec.ts" code={"// tests/site.spec.ts\nimport { test, expect } from '@playwright/test';\n\ntest('se încarcă fără erori în consolă', async ({ page }) => {\n  const errors: string[] = [];\n  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));\n  page.on('pageerror', (e) => errors.push(e.message));\n  await page.goto('/');\n  await expect(page.locator('h1')).toBeVisible();\n  expect(errors).toEqual([]);\n});\n\ntest('fiecare apariție devine vizibilă când ajungi la ea', async ({ page }) => {\n  await page.goto('/');\n  for (const el of await page.locator('.reveal').all()) {\n    await el.scrollIntoViewIfNeeded();\n    await expect(el).toHaveClass(/\\bin\\b/);\n  }\n});\n\ntest('mișcare redusă: conținutul se vede fără efecte de scroll', async ({ page }) => {\n  await page.emulateMedia({ reducedMotion: 'reduce' });\n  await page.goto('/');\n  await expect(page.locator('.reveal').first()).toHaveCSS('transform', 'none');\n});"} />
+      <p className="tip">Rulează-le cu <code className="i">npx playwright test</code>. Adaugă <code className="i">--ui</code> ca să urmărești fiecare pas într-un browser.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Audit de accesibilitate" right="axe" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Verificări automate">
+      <p>axe prinde etichete lipsă, contrast slab, roluri greșite și capcane de focus. Găsește cam o treime din problemele reale, deci completează testul cu tastatura, nu îl înlocuiește.</p>
+      <CodeBlock lang="bash" code={"npm install -D @axe-core/playwright"} />
+      <CodeBlock lang="a11y.spec.ts" code={"// tests/a11y.spec.ts\nimport { test, expect } from '@playwright/test';\nimport AxeBuilder from '@axe-core/playwright';\n\ntest('nicio problemă de accesibilitate', async ({ page }) => {\n  await page.goto('/');\n  const results = await new AxeBuilder({ page }).analyze();\n  expect(results.violations).toEqual([]);\n});"} />
+    </Row>
+    <Row cls="rv" num="b" title="De mână">
+      <p>Treci cu Tab prin toată pagina: focusul se vede mereu, ordinea are sens, nimic nu se blochează într-o secțiune fixată. Apoi pornește VoiceOver sau NVDA și ascultă primul ecran.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Comparații de capturi" right="Prinzi schimbările vizuale" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Compară cu o imagine salvată">
+      <p>Prima rulare salvează o captură; rulările următoare pică atunci când pagina arată altfel. Oprește animațiile, ca imaginea să fie aceeași de fiecare dată.</p>
+      <CodeBlock lang="site.spec.ts" code={"test('hero-ul arată ca data trecută', async ({ page }) => {\n  await page.goto('/');\n  // animațiile sunt oprite la final, ca imaginea să fie stabilă\n  await expect(page).toHaveScreenshot('hero.png', { animations: 'disabled' });\n});"} />
+      <p className="tip">Actualizează intenționat imaginile salvate cu <code className="i">npx playwright test --update-snapshots</code>, după ce te-ai uitat la diferență.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="06 · Dispozitive reale" right="Ce nu pot simți testele" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Un iPhone cu Safari">
+      <p>Bara de adresă care se redimensionează, <code className="i">100vh</code> față de <code className="i">100svh</code> și scrollul cu inerție se poartă altfel decât în Chrome.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Un telefon Android de gamă medie">
+      <p>Dispozitivul pe care îl folosesc de fapt cei mai mulți vizitatori. Dacă scrollul sacadează aici, sacadează pentru ei.</p>
+    </Row>
+    <Row cls="rv" num="3" title="O rotiță de mouse și un trackpad">
+      <p>Rotița sare în trepte, trackpadul alunecă. Scrollul lin și scenele derulate trebuie să se simtă bine cu amândouă.</p>
+    </Row>
+    <Row cls="rv" num="4" title="Tastatură și mișcare redusă">
+      <p>Space, Page Down și săgețile trebuie să deruleze. Pornește mișcarea redusă din setările sistemului și citește toată pagina o dată.</p>
+    </Row>
+  </div>
+</section>

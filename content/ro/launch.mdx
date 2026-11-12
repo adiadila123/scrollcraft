@@ -1,47 +1,10 @@
 export const meta = {
-  title: "Testează, repară, publică.",
-  lede: "Ultimele zece procente sunt cele în care un site nu mai pare un demo. Treci prin lista de verificare, apoi pune folderul online.",
+  title: "Producție și lansare: publică și ține-l sănătos.",
+  lede: "Publicarea durează câteva minute. Ce o face profesionistă e tot ce e în jur: un domeniu, metadate, verificări care rulează la fiecare schimbare și cineva care are grijă de site după lansare.",
 };
 
 <section className="sec">
-  <Checklist
-    items={[
-      'Site-ul rulează de pe un server local, nu din file://',
-      'Consola browserului nu arată erori',
-      'L-am verificat la lățimi de 375, 768 și 1440 px',
-      'Nimic nu se suprapune și nu e tăiat într-o fereastră cât un telefon',
-      'Fiecare element cu apariție devine vizibil când ajung la el',
-      'Reduced motion oprește scrollul lin, parallaxul și mișcarea aparițiilor',
-      'Totul merge doar de la tastatură, cu focus vizibil',
-      'Textul are un contrast de cel puțin 4,5 la 1',
-      'Imaginile sunt comprimate și folosesc cel mult două familii de fonturi',
-      'Nu există statistici, citate sau logouri de clienți inventate',
-      'Fiecare bibliotecă externă e fixată pe o versiune exactă',
-      'Am rulat Lighthouse în Chrome DevTools și am notat scorurile',
-    ]}
-  />
-  <p className="muted" style={{ marginTop: '20px', maxWidth: '56ch' }}>Bifele se salvează doar în acest browser, așa că se pot pierde într-o fereastră privată.</p>
-</section>
-<section className="sec">
-  <Stick left="02 · Cere dovezi" />
-  <div className="rows">
-    <Row cls="rv" num="a" title="Nu accepta „testat”">
-      <p>Uneltele AI raportează uneori verificări pe care nu le-au rulat. Întreabă ce s-a rulat, la ce lățimi și ce s-a sărit. Apoi deschide pagina și uită-te tu.</p>
-      <CodeBlock
-        lang="Prompt"
-        code={'Listează fiecare verificare pe care chiar ai rulat-o, cu lățimea sau unealta folosită. Listează fiecare verificare pe care n-ai putut-o rula și de ce.'}
-      />
-    </Row>
-    <Row cls="rv" num="b" title="Măsoară, apoi repară">
-      <p>În Chrome DevTools, tabul Lighthouse dă scoruri de performanță și accesibilitate. Repară întâi cea mai mare problemă și rulează din nou. Tabul Performance arată ce blochează firul principal în timp ce derulezi.</p>
-    </Row>
-    <Row cls="rv" num="c" title="Greșeli frecvente">
-      <p>Fișierul deschis direct în loc de printr-un server. Doctype lipsă, care strică Lenis. Scroll snap pe toată pagina împreună cu scroll lin. Deplasări de parallax care împing textul hero-ului în afara ecranului pe telefon. <code className="i">will-change</code> pe fiecare element. Conținut ascuns din CSS pe care niciun script nu-l mai arată. <code className="i">overflow: hidden</code> pe html sau body, care poate lăsa două contexte de scroll.</p>
-    </Row>
-  </div>
-</section>
-<section className="sec">
-  <Stick left="03 · Publică folderul" right="Orice găzduire statică" />
+  <Stick left="01 · Publică folderul" right="Orice găzduire statică" />
   <p className="lede rv" style={{ marginTop: '0' }}>Rezultatul sunt trei fișiere statice, deci orice găzduire statică îl poate servi. Verifică pe pagina fiecărui serviciu limitele și prețurile actuale.</p>
   <div className="cells rv" style={{ marginTop: '28px' }}>
     <Cell title="Netlify">
@@ -62,7 +25,60 @@ export const meta = {
   </div>
 </section>
 <section className="sec">
-  <Stick left="04 · Mergi mai departe" right="Documentație oficială" />
+  <Stick left="02 · Publică o aplicație Next.js" right="Vercel" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Leagă repository-ul">
+      <p>Importă repository-ul în Vercel. Fiecare push pe ramura principală ajunge în producție, iar fiecare altă ramură primește propria adresă de previzualizare, ca să verifici înainte de merge.</p>
+      <CodeBlock lang="bash" code={"npx vercel          # o previzualizare\nnpx vercel --prod   # producție"} />
+    </Row>
+    <Row cls="rv" num="b" title="Variabile de mediu">
+      <p>Setează-le în setările proiectului, separat pentru previzualizare și producție. Doar variabilele care încep cu <code className="i">NEXT_PUBLIC_</code> ajung în browser; ține cheile și secretele fără acest prefix.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Domeniu și metadate" right="Găsit și distribuit" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Un domeniu">
+      <p>Adaugă domeniul în panoul găzduirii și creează înregistrările DNS pe care ți le arată. Certificatele HTTPS se emit automat.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Head-ul paginii">
+      <p>Un titlu și o descriere pentru rezultatele căutării, o adresă canonică și o imagine Open Graph pentru cardul afișat când linkul e distribuit.</p>
+      <CodeBlock lang="index.html" code={"<html lang=\"ro\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Aurora: sound that fills the room</title>\n  <meta name=\"description\" content=\"A small speaker that plays in every direction.\">\n  <link rel=\"canonical\" href=\"https://example.com/\">\n\n  <!-- cardul afișat când linkul e distribuit -->\n  <meta property=\"og:title\" content=\"Aurora\">\n  <meta property=\"og:description\" content=\"A small speaker that plays in every direction.\">\n  <meta property=\"og:image\" content=\"https://example.com/og.jpg\">\n  <meta name=\"twitter:card\" content=\"summary_large_image\">\n</head>"} />
+    </Row>
+    <Row cls="rv" num="c" title="Sitemap și robots">
+      <p>Un <code className="i">sitemap.xml</code> listează fiecare pagină; <code className="i">robots.txt</code> trimite la el. Next.js le generează pe amândouă din <code className="i">app/sitemap.ts</code> și <code className="i">app/robots.ts</code>.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Automatizează verificările" right="CI" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="La fiecare push">
+      <p>Un workflow rulează lint, build-ul și testele în browser din capitolul anterior. O schimbare care strică site-ul nu ajunge niciodată neobservată în producție.</p>
+      <CodeBlock lang="ci.yml" code={"# .github/workflows/ci.yml: fiecare push și pull request e verificat\nname: CI\non: [push, pull_request]\njobs:\n  check:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with: { node-version: 22, cache: npm }\n      - run: npm ci\n      - run: npm run lint\n      - run: npm run build\n      - run: npx playwright install --with-deps chromium\n      - run: npx playwright test"} />
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · După lansare" right="Ține-l sănătos" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Urmărește erorile">
+      <p>În primele zile, uită-te în logurile găzduirii sau adaugă un instrument de urmărire a erorilor. Vizitatorii găsesc combinațiile pe care nu le-ai testat.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Măsoară discret">
+      <p>Folosește analytics care respectă intimitatea sau deloc. Un banner de cookie-uri pe un site cinematic strică prima impresie.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Actualizează după program">
+      <p>O dată pe lună: actualizezi dependențele, rulezi testele, compari capturile. Bibliotecile încărcate de pe un CDN rămân fixate pe o versiune exactă.</p>
+    </Row>
+    <Row cls="rv" num="4" title="Treci din nou prin listă">
+      <p>Înaintea fiecărei schimbări mai mari, parcurge încă o dată lista pentru lansare din capitolul Testare.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="06 · Mergi mai departe" right="Documentație oficială" />
   <div className="rows">
     <Row cls="rv" num="Docs" title="Unde e documentată fiecare piesă">
       <p><a className="ext" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Skilluri în Claude Code</a>,{' '}<a className="ext" href="https://claude.com/docs/skills/how-to" target="_blank" rel="noopener">crearea skillurilor proprii</a>,{' '}<a className="ext" href="https://geminicli.com/docs/get-started" target="_blank" rel="noopener">Gemini CLI</a>,{' '}<a className="ext" href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">skilluri OpenAI</a>,{' '}<a className="ext" href="https://agentskills.io/specification" target="_blank" rel="noopener">specificația Agent Skills</a>.</p>

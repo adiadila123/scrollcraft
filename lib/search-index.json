@@ -10,8 +10,12 @@
    "gsap": 2,
    "webgl": 2,
    "examples": 4,
-   "advanced": 3,
-   "launch": 1
+   "design": 2,
+   "architecture": 2,
+   "performance": 2,
+   "testing": 2,
+   "launch": 2,
+   "reference": 2
   },
   "ro": {
    "start": 2,
@@ -23,8 +27,12 @@
    "gsap": 2,
    "webgl": 2,
    "examples": 3,
-   "advanced": 3,
-   "launch": 1
+   "design": 2,
+   "architecture": 2,
+   "performance": 2,
+   "testing": 2,
+   "launch": 1,
+   "reference": 2
   }
  },
  "entries": {
@@ -1123,142 +1131,674 @@
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#choosing-a-stack",
+    "chapter": "Design systems",
+    "href": "/design#tokens",
+    "title": "Tokens",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#colour",
+    "title": "Colour",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#type",
+    "title": "Type",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#space",
+    "title": "Space",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#motion",
+    "title": "Motion",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#tokens-live",
+    "title": "Tokens, live",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#a-page-built-only-from-tokens",
+    "title": "A page built only from tokens",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#components-read-tokens",
+    "title": "Components read tokens",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#one-rule",
+    "title": "One rule",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#variants-through-attributes",
+    "title": "Variants through attributes",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#with-tailwind",
+    "title": "With Tailwind",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#a-design-file-for-the-ai",
+    "title": "A design file for the AI",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#write-the-decisions-down",
+    "title": "Write the decisions down",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#point-the-ai-at-it",
+    "title": "Point the AI at it",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/design#point-the-ai-at-it",
+    "title": "Point the AI at it: prompt",
+    "text": "Read DESIGN.md and the :root tokens in style.css before you change anything. Use only those tokens. If you need a new value, propose the token first and wait for my answer."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#audit-drift",
+    "title": "Audit drift",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/design#audit-drift",
+    "title": "Audit drift: prompt",
+    "text": "List every raw colour, font size, gap and duration in the CSS that does not come from a token. For each one, say which token it should use or propose a new one."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#stay-minimal",
+    "title": "Stay minimal",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#one-accent",
+    "title": "One accent",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#two-families-at-most",
+    "title": "Two families at most",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#one-curve-for-most-movement",
+    "title": "One curve for most movement",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#space-before-decoration",
+    "title": "Space before decoration",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#choosing-a-stack",
     "title": "Choosing a stack",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#next-js-and-react",
+    "chapter": "Architecture",
+    "href": "/architecture#folder-structure",
+    "title": "Folder structure",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#split-by-what-changes-together",
+    "title": "Split by what changes together",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#keep-content-out-of-components",
+    "title": "Keep content out of components",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#one-loop-for-the-whole-site",
+    "title": "One loop for the whole site",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#why-one",
+    "title": "Why one",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#lenis-and-gsap-share-it",
+    "title": "Lenis and GSAP share it",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#next-js-and-react",
     "title": "Next.js and React",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#performance-and-access",
+    "chapter": "Architecture",
+    "href": "/architecture#progressive-enhancement",
+    "title": "Progressive enhancement",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#content-first",
+    "title": "Content first",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#server-first-in-next-js",
+    "title": "Server first in Next.js",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#clean-up",
+    "title": "Clean up",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#what-to-measure",
+    "title": "What to measure",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#largest-contentful-paint",
+    "title": "Largest Contentful Paint",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#interaction-to-next-paint",
+    "title": "Interaction to Next Paint",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#cumulative-layout-shift",
+    "title": "Cumulative Layout Shift",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#performance-and-access",
     "title": "Performance and access",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#animate-transform-and-opacity",
+    "chapter": "Performance",
+    "href": "/performance#animate-transform-and-opacity",
     "title": "Animate transform and opacity",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#read-then-write",
+    "chapter": "Performance",
+    "href": "/performance#read-then-write",
     "title": "Read, then write",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#use-will-change-sparingly",
+    "chapter": "Performance",
+    "href": "/performance#use-will-change-sparingly",
     "title": "Use will-change sparingly",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#do-nothing-off-screen",
+    "chapter": "Performance",
+    "href": "/performance#do-nothing-off-screen",
     "title": "Do nothing off screen",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#respect-reduced-motion",
+    "chapter": "Performance",
+    "href": "/performance#respect-reduced-motion",
     "title": "Respect reduced motion",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#keep-the-keyboard-working",
+    "chapter": "Performance",
+    "href": "/performance#keep-the-keyboard-working",
     "title": "Keep the keyboard working",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#troubleshooting",
-    "title": "Troubleshooting",
+    "chapter": "Performance",
+    "href": "/performance#only-work-on-screen",
+    "title": "Only work on screen",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#glossary",
-    "title": "Glossary",
+    "chapter": "Performance",
+    "href": "/performance#stop-what-nobody-can-see",
+    "title": "Stop what nobody can see",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Launch",
-    "href": "/launch#ask-for-evidence",
+    "chapter": "Performance",
+    "href": "/performance#a-budget",
+    "title": "A budget",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#images-and-video-in-html",
+    "title": "Images and video in HTML",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#one-variable-font-preloaded",
+    "title": "One variable font, preloaded",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#measure",
+    "title": "Measure",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#lighthouse",
+    "title": "Lighthouse",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#the-performance-panel",
+    "title": "The Performance panel",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#a-real-phone",
+    "title": "A real phone",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#ask-for-evidence",
+    "title": "Ask for evidence",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Performance",
+    "href": "/performance#ask-for-evidence",
+    "title": "Ask for evidence: prompt",
+    "text": "Run Lighthouse in mobile mode and give me LCP, INP or TBT, and CLS. List the three biggest opportunities with the file and line each one comes from. Do not change anything yet."
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#release-checklist",
+    "title": "Release checklist",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#ask-for-evidence",
     "title": "Ask for evidence",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Launch",
-    "href": "/launch#do-not-accept-tested",
+    "chapter": "Testing and QA",
+    "href": "/testing#do-not-accept-tested",
     "title": "Do not accept “tested”",
     "text": ""
    },
    {
     "kind": "prompt",
-    "chapter": "Launch",
-    "href": "/launch#do-not-accept-tested",
+    "chapter": "Testing and QA",
+    "href": "/testing#do-not-accept-tested",
     "title": "Do not accept “tested”: prompt",
     "text": "List every check you actually ran, with the width or tool you used. List every check you could not run and why."
    },
    {
     "kind": "section",
-    "chapter": "Launch",
-    "href": "/launch#measure-then-fix",
+    "chapter": "Testing and QA",
+    "href": "/testing#measure-then-fix",
     "title": "Measure, then fix",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Launch",
-    "href": "/launch#common-mistakes",
+    "chapter": "Testing and QA",
+    "href": "/testing#common-mistakes",
     "title": "Common mistakes",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Launch",
+    "chapter": "Testing and QA",
+    "href": "/testing#browser-tests",
+    "title": "Browser tests",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#install",
+    "title": "Install",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#two-screen-sizes",
+    "title": "Two screen sizes",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#three-tests-every-scroll-site-needs",
+    "title": "Three tests every scroll site needs",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#accessibility-audit",
+    "title": "Accessibility audit",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#automated-checks",
+    "title": "Automated checks",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#by-hand",
+    "title": "By hand",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#screenshot-comparisons",
+    "title": "Screenshot comparisons",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#compare-against-a-saved-picture",
+    "title": "Compare against a saved picture",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#real-devices",
+    "title": "Real devices",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#an-iphone-with-safari",
+    "title": "An iPhone with Safari",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#a-mid-range-android-phone",
+    "title": "A mid-range Android phone",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#a-mouse-wheel-and-a-trackpad",
+    "title": "A mouse wheel and a trackpad",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#keyboard-and-reduced-motion",
+    "title": "Keyboard and reduced motion",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
     "href": "/launch#publish-the-folder",
     "title": "Publish the folder",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Launch",
+    "chapter": "Production and launch",
+    "href": "/launch#publish-a-next-js-app",
+    "title": "Publish a Next.js app",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#connect-the-repository",
+    "title": "Connect the repository",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#environment-variables",
+    "title": "Environment variables",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#domain-and-metadata",
+    "title": "Domain and metadata",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#a-domain",
+    "title": "A domain",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#the-head-of-the-page",
+    "title": "The head of the page",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#sitemap-and-robots",
+    "title": "Sitemap and robots",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#automate-the-checks",
+    "title": "Automate the checks",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#on-every-push",
+    "title": "On every push",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#after-launch",
+    "title": "After launch",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#watch-errors",
+    "title": "Watch errors",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#measure-gently",
+    "title": "Measure gently",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#update-on-a-schedule",
+    "title": "Update on a schedule",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#run-the-checklist-again",
+    "title": "Run the checklist again",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
     "href": "/launch#keep-going",
     "title": "Keep going",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Launch",
+    "chapter": "Production and launch",
     "href": "/launch#where-each-piece-is-documented",
     "title": "Where each piece is documented",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Launch",
+    "chapter": "Production and launch",
     "href": "/launch#libraries-used-here",
     "title": "Libraries used here",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Reference",
+    "href": "/reference#troubleshooting",
+    "title": "Troubleshooting",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Reference",
+    "href": "/reference#glossary",
+    "title": "Glossary",
     "text": ""
    }
   ],
@@ -2357,142 +2897,674 @@
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#cum-alegi-tehnologiile",
+    "chapter": "Design systems",
+    "href": "/ro/design#tokenuri",
+    "title": "Tokenuri",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#culoare",
+    "title": "Culoare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#tipografie",
+    "title": "Tipografie",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#spatiu",
+    "title": "Spațiu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#miscare",
+    "title": "Mișcare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#tokenuri-live",
+    "title": "Tokenuri, live",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#o-pagina-construita-doar-din-tokenuri",
+    "title": "O pagină construită doar din tokenuri",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#componentele-citesc-tokenuri",
+    "title": "Componentele citesc tokenuri",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#o-singura-regula",
+    "title": "O singură regulă",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#variante-prin-atribute",
+    "title": "Variante prin atribute",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#cu-tailwind",
+    "title": "Cu Tailwind",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#un-fisier-de-design-pentru-ai",
+    "title": "Un fișier de design pentru AI",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#scrie-deciziile",
+    "title": "Scrie deciziile",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#trimite-ai-ul-la-el",
+    "title": "Trimite AI-ul la el",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/ro/design#trimite-ai-ul-la-el",
+    "title": "Trimite AI-ul la el: prompt",
+    "text": "Citește DESIGN.md și tokenurile din :root din style.css înainte să schimbi ceva. Folosește doar acele tokenuri. Dacă îți trebuie o valoare nouă, propune întâi tokenul și așteaptă răspunsul meu."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#verifica-abaterile",
+    "title": "Verifică abaterile",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/ro/design#verifica-abaterile",
+    "title": "Verifică abaterile: prompt",
+    "text": "Listează fiecare culoare, mărime de font, spațiu și durată din CSS care nu vine dintr-un token. Pentru fiecare, spune ce token ar trebui să folosească sau propune unul nou."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#ramai-minimalist",
+    "title": "Rămâi minimalist",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#un-singur-accent",
+    "title": "Un singur accent",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#cel-mult-doua-familii",
+    "title": "Cel mult două familii",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#o-curba-pentru-aproape-toata-miscarea",
+    "title": "O curbă pentru aproape toată mișcarea",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#spatiu-inainte-de-decor",
+    "title": "Spațiu înainte de decor",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#cum-alegi-tehnologiile",
     "title": "Cum alegi tehnologiile",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#next-js-si-react",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#structura-folderelor",
+    "title": "Structura folderelor",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#imparte-dupa-ce-se-schimba-impreuna",
+    "title": "Împarte după ce se schimbă împreună",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#tine-continutul-in-afara-componentelor",
+    "title": "Ține conținutul în afara componentelor",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#o-bucla-pentru-tot-site-ul",
+    "title": "O buclă pentru tot site-ul",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#de-ce-una-singura",
+    "title": "De ce una singură",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#lenis-si-gsap-o-impart",
+    "title": "Lenis și GSAP o împart",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#next-js-si-react",
     "title": "Next.js și React",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#performanta-si-accesibilitate",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#imbunatatire-progresiva",
+    "title": "Îmbunătățire progresivă",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#intai-continutul",
+    "title": "Întâi conținutul",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#intai-serverul-in-next-js",
+    "title": "Întâi serverul, în Next.js",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#curata",
+    "title": "Curăță",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#ce-masori",
+    "title": "Ce măsori",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#largest-contentful-paint",
+    "title": "Largest Contentful Paint",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#interaction-to-next-paint",
+    "title": "Interaction to Next Paint",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#cumulative-layout-shift",
+    "title": "Cumulative Layout Shift",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#performanta-si-accesibilitate",
     "title": "Performanță și accesibilitate",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#anima-transform-si-opacity",
+    "chapter": "Performanță",
+    "href": "/ro/performance#anima-transform-si-opacity",
     "title": "Animă transform și opacity",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#intai-citesti-apoi-scrii",
+    "chapter": "Performanță",
+    "href": "/ro/performance#intai-citesti-apoi-scrii",
     "title": "Întâi citești, apoi scrii",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#foloseste-will-change-cu-masura",
+    "chapter": "Performanță",
+    "href": "/ro/performance#foloseste-will-change-cu-masura",
     "title": "Folosește will-change cu măsură",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#nu-face-nimic-in-afara-ecranului",
+    "chapter": "Performanță",
+    "href": "/ro/performance#nu-face-nimic-in-afara-ecranului",
     "title": "Nu face nimic în afara ecranului",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#respecta-reduced-motion",
+    "chapter": "Performanță",
+    "href": "/ro/performance#respecta-reduced-motion",
     "title": "Respectă reduced motion",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#pastreaza-tastatura-functionala",
+    "chapter": "Performanță",
+    "href": "/ro/performance#pastreaza-tastatura-functionala",
     "title": "Păstrează tastatura funcțională",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#depanare",
-    "title": "Depanare",
+    "chapter": "Performanță",
+    "href": "/ro/performance#lucreaza-doar-pe-ecran",
+    "title": "Lucrează doar pe ecran",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#glosar",
-    "title": "Glosar",
+    "chapter": "Performanță",
+    "href": "/ro/performance#opreste-ce-nu-vede-nimeni",
+    "title": "Oprește ce nu vede nimeni",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
-    "href": "/ro/launch#cere-dovezi",
+    "chapter": "Performanță",
+    "href": "/ro/performance#un-buget",
+    "title": "Un buget",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#imagini-si-video-in-html",
+    "title": "Imagini și video în HTML",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#un-singur-font-variabil-preincarcat",
+    "title": "Un singur font variabil, preîncărcat",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#masoara",
+    "title": "Măsoară",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#lighthouse",
+    "title": "Lighthouse",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#panoul-performance",
+    "title": "Panoul Performance",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#un-telefon-real",
+    "title": "Un telefon real",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#cere-dovezi",
+    "title": "Cere dovezi",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Performanță",
+    "href": "/ro/performance#cere-dovezi",
+    "title": "Cere dovezi: prompt",
+    "text": "Rulează Lighthouse în modul mobil și dă-mi LCP, INP sau TBT și CLS. Listează cele mai mari trei oportunități, cu fișierul și rândul din care vine fiecare. Nu schimba nimic încă."
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#lista-pentru-lansare",
+    "title": "Lista pentru lansare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#cere-dovezi",
     "title": "Cere dovezi",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
-    "href": "/ro/launch#nu-accepta-testat",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#nu-accepta-testat",
     "title": "Nu accepta „testat”",
     "text": ""
    },
    {
     "kind": "prompt",
-    "chapter": "Lansare",
-    "href": "/ro/launch#nu-accepta-testat",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#nu-accepta-testat",
     "title": "Nu accepta „testat”: prompt",
     "text": "Listează fiecare verificare pe care chiar ai rulat-o, cu lățimea sau unealta folosită. Listează fiecare verificare pe care n-ai putut-o rula și de ce."
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
-    "href": "/ro/launch#masoara-apoi-repara",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#masoara-apoi-repara",
     "title": "Măsoară, apoi repară",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
-    "href": "/ro/launch#greseli-frecvente",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#greseli-frecvente",
     "title": "Greșeli frecvente",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#teste-in-browser",
+    "title": "Teste în browser",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#instaleaza",
+    "title": "Instalează",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#doua-dimensiuni-de-ecran",
+    "title": "Două dimensiuni de ecran",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#trei-teste-de-care-are-nevoie-orice-site-cu-scroll",
+    "title": "Trei teste de care are nevoie orice site cu scroll",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#audit-de-accesibilitate",
+    "title": "Audit de accesibilitate",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#verificari-automate",
+    "title": "Verificări automate",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#de-mana",
+    "title": "De mână",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#comparatii-de-capturi",
+    "title": "Comparații de capturi",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#compara-cu-o-imagine-salvata",
+    "title": "Compară cu o imagine salvată",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#dispozitive-reale",
+    "title": "Dispozitive reale",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#un-iphone-cu-safari",
+    "title": "Un iPhone cu Safari",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#un-telefon-android-de-gama-medie",
+    "title": "Un telefon Android de gamă medie",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#o-rotita-de-mouse-si-un-trackpad",
+    "title": "O rotiță de mouse și un trackpad",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#tastatura-si-miscare-redusa",
+    "title": "Tastatură și mișcare redusă",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
     "href": "/ro/launch#publica-folderul",
     "title": "Publică folderul",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#publica-o-aplicatie-next-js",
+    "title": "Publică o aplicație Next.js",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#leaga-repository-ul",
+    "title": "Leagă repository-ul",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#variabile-de-mediu",
+    "title": "Variabile de mediu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#domeniu-si-metadate",
+    "title": "Domeniu și metadate",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#un-domeniu",
+    "title": "Un domeniu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#head-ul-paginii",
+    "title": "Head-ul paginii",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#sitemap-si-robots",
+    "title": "Sitemap și robots",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#automatizeaza-verificarile",
+    "title": "Automatizează verificările",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#la-fiecare-push",
+    "title": "La fiecare push",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#dupa-lansare",
+    "title": "După lansare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#urmareste-erorile",
+    "title": "Urmărește erorile",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#masoara-discret",
+    "title": "Măsoară discret",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#actualizeaza-dupa-program",
+    "title": "Actualizează după program",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#treci-din-nou-prin-lista",
+    "title": "Treci din nou prin listă",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
     "href": "/ro/launch#mergi-mai-departe",
     "title": "Mergi mai departe",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
+    "chapter": "Producție și lansare",
     "href": "/ro/launch#unde-e-documentata-fiecare-piesa",
     "title": "Unde e documentată fiecare piesă",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Lansare",
+    "chapter": "Producție și lansare",
     "href": "/ro/launch#bibliotecile-folosite-aici",
     "title": "Bibliotecile folosite aici",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Referință",
+    "href": "/ro/reference#depanare",
+    "title": "Depanare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Referință",
+    "href": "/ro/reference#glosar",
+    "title": "Glosar",
     "text": ""
    }
   ]

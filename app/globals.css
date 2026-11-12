@@ -55,23 +55,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .menu a:hover, .menu a:focus-visible, .menu a[aria-current] { color: var(--fg); }
 .menu a:hover::after, .menu a:focus-visible::after { transform: scaleX(1); }
 .menu a[aria-current]::after { transform: scaleX(1); background: var(--accent); }
-/* eleven chapters: tighter below 1400px, an icon-only search below 1200px, and below 1100px the menu scrolls
-   sideways with faded edges (Topbar keeps the current chapter in view) */
-.menu { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+/* fifteen chapters in three levels, with a hairline between levels. The menu is tight, the search shows as an icon
+   below 1500px, and when the menu does not fit it scrolls sideways, fading the edge that has more beyond it (Topbar
+   keeps the current chapter in view and sets data-fade) */
+.menu { flex: 0 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .menu::-webkit-scrollbar { display: none; }
-@media (max-width: 1400px) {
-  .menu { gap: 0; }
-  .menu a { padding: 10px 9px; }
-  .menu a::after { left: 9px; right: 9px; }
-}
-@media (max-width: 1200px) {
+.menu a { padding: 10px 9px; white-space: nowrap; }
+.menu a::after { left: 9px; right: 9px; }
+.menu-sep { flex: none; width: 1px; height: 14px; margin: 0 6px; background: var(--line); }
+@media (max-width: 1500px) {
   .kbd-btn .kbd-label, .kbd-btn kbd { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .kbd-btn { padding: 0 11px; }
 }
-@media (max-width: 1100px) {
-  .menu { flex: 1 1 auto; mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
-  .menu a { white-space: nowrap; }
-}
+.menu[data-fade='l'] { mask-image: linear-gradient(90deg, transparent, #000 32px); }
+.menu[data-fade='r'] { mask-image: linear-gradient(270deg, transparent, #000 32px); }
+.menu[data-fade='lr'] { mask-image: linear-gradient(90deg, transparent, #000 32px, #000 calc(100% - 32px), transparent); }
 .actions { display: flex; align-items: center; gap: 18px; }
 .signin { font: 400 13px/1 var(--sans); color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .signin:hover, .signin:focus-visible { color: var(--fg); }
@@ -658,6 +656,7 @@ body:has(.rail-bar) .progress { display: none; }
   .tab-dots i.now { width: 14px; background: var(--accent); }
   .sheet-h { display: flex; justify-content: space-between; font: 400 12px/1.3 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; }
   .sheet-card a[aria-current] b { color: var(--accent); }
+  .sheet-level { margin: 0; padding: 18px 6px 8px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 }
 /* the chapter art and the next-chapter band bleed past the edges on purpose; clip them at the page so phones never
    widen the layout. clip, unlike hidden, makes no scroll container, so the sticky section labels keep working */
@@ -804,3 +803,7 @@ a.dm-replay { display: inline-flex; align-items: center; text-decoration: none; 
 .motion-switch { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
 .motion-switch button { padding: 0; background: none; border: 0; border-bottom: 1px solid var(--line); color: var(--fg); font: inherit; cursor: pointer; }
 .motion-switch button:hover, .motion-switch button:focus-visible { border-color: var(--accent); }
+
+/* home: the chapter list grouped by level */
+.level + .level { margin-top: 56px; }
+.level-h { margin: 0 0 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }

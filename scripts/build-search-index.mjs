@@ -6,7 +6,23 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { slugify } from '../lib/slug.mjs';
 
 const root = new URL('..', import.meta.url);
-const ids = ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'gsap', 'webgl', 'examples', 'advanced', 'launch'];
+const ids = [
+  'start',
+  'skills',
+  'prompting',
+  'build',
+  'motion',
+  'playground',
+  'gsap',
+  'webgl',
+  'examples',
+  'design',
+  'architecture',
+  'performance',
+  'testing',
+  'launch',
+  'reference',
+];
 const locales = { en: '', ro: '/ro' };
 const WPM = 230;
 
@@ -26,7 +42,7 @@ const squash = (s) => decode(s).replace(/\s+/g, ' ').trim();
 /* chapter titles per locale, read from lib/chapters.ts so search results name the chapter in the reader's language */
 const chaptersSrc = await readFile(new URL('lib/chapters.ts', root), 'utf8');
 const titles = { en: {}, ro: {} };
-for (const m of chaptersSrc.matchAll(/id: '([a-z]+)',\s*n: '\d+',\s*title: '([^']+)'/g)) titles.en[m[1]] = m[2];
+for (const m of chaptersSrc.matchAll(/id: '([a-z]+)',\s*n: '\d+',\s*(?:level: \d,\s*)?title: '([^']+)'/g)) titles.en[m[1]] = m[2];
 for (const m of chaptersSrc.matchAll(/^  ([a-z]+): \{\s*title: '([^']+)'/gm)) titles.ro[m[1]] = m[2];
 
 const entries = { en: [], ro: [] };
@@ -35,6 +51,7 @@ for (const [locale, prefix] of Object.entries(locales)) {
   const names = titles[locale];
   const out = entries[locale];
   for (const id of ids) {
+    if (!names[id]) throw new Error(`search index: no ${locale} title for chapter "${id}" in lib/chapters.ts`);
     const src = await readFile(new URL(`content/${locale}/${id}.mdx`, root), 'utf8');
     const tokens = new RegExp(String.raw`<Stick left="([^"]+)"|<Row\b([^>]*?\btitle="[^"]+"[^>]*)>|<CodeBlock\s+lang="Prompt"\s+code=\{\s*(${STR})\s*\}`, 'g');
     let anchor = '';

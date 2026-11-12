@@ -1,0 +1,96 @@
+export const meta = {
+  title: "Performanță: fluid pe un telefon real.",
+  lede: "Un site cu scroll e judecat în prima secundă și la fiecare cadru după ea. Măsoară ce simt vizitatorii, stabilește un buget și nu lucra pe ecran când nu se uită nimeni.",
+};
+
+<section className="sec">
+  <Stick left="01 · Ce măsori" right="Core Web Vitals" />
+  <div className="rows">
+    <Row cls="rv" num="LCP" title="Largest Contentful Paint">
+      <p>Cât durează până apare cel mai mare element de pe ecran, de obicei imaginea sau titlul din hero. Bun înseamnă 2,5 secunde sau mai puțin.</p>
+    </Row>
+    <Row cls="rv" num="INP" title="Interaction to Next Paint">
+      <p>Cât de repede răspunde pagina la o atingere, un clic sau o tastă. Bun înseamnă 200 de milisecunde sau mai puțin. Handlerele de scroll lungi și buclele grele îl înrăutățesc.</p>
+    </Row>
+    <Row cls="rv" num="CLS" title="Cumulative Layout Shift">
+      <p>Cât sare layout-ul în timp ce se încarcă. Bun înseamnă 0,1 sau mai puțin. Dă fiecărei imagini și fiecărui video o lățime și o înălțime și rezervă loc pentru fonturi și elemente încorporate.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Performanță și accesibilitate" right="Scroll fluid" />
+  <div className="rows">
+    <Row cls="rv" num="Mișcă" title="Animă transform și opacity">
+      <p>Acestea se pot procesa fără recalcularea layoutului. Animarea lui width, height, top sau left obligă browserul să refacă layoutul la fiecare cadru.</p>
+    </Row>
+    <Row cls="rv" num="Grupează" title="Întâi citești, apoi scrii">
+      <p>Citește întâi toate măsurătorile, apoi aplică toate stilurile. Amestecarea lor într-o buclă forțează recalculări repetate.</p>
+    </Row>
+    <Row cls="rv" num="Indiciu" title="Folosește will-change cu măsură">
+      <p>Aplică-l pe puținele elemente care se mișcă tot timpul, cum ar fi straturile de parallax. Pe fiecare element costă memorie.</p>
+    </Row>
+    <Row cls="rv" num="Oprește" title="Nu face nimic în afara ecranului">
+      <p>Oprește buclele și sari peste actualizări pentru secțiunile care nu sunt vizibile. Exemplul oprește parallaxul după ce hero-ul a ieșit din ecran.</p>
+    </Row>
+    <Row cls="rv" num="Redu" title="Respectă reduced motion">
+      <p>Verifică <code className="i">prefers-reduced-motion</code> în CSS și în JavaScript. Oferă un layout static care se citește bine și singur.</p>
+    </Row>
+    <Row cls="rv" num="Taste" title="Păstrează tastatura funcțională">
+      <p>Ordinea Tab, focusul vizibil și linkurile ancoră trebuie să se comporte la fel ca fără efecte. Secțiunile fixate nu trebuie să blocheze focusul.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Lucrează doar pe ecran" right="IntersectionObserver" />
+  <div className="rows steps-list">
+    <Row cls="rv" num="1" title="Oprește ce nu vede nimeni">
+      <p>Bucla de mai jos desenează doar cât timp canvasul ei se vede. Derulează-l în afara ecranului și contorul de cadre se oprește: nicio baterie cheltuită pe o scenă pe care n-o vede nimeni.</p>
+      <p className="tip">Browserele opresc deja requestAnimationFrame într-un tab ascuns. Secțiunile din afara ecranului, într-un tab vizibil, sunt treaba ta.</p>
+    </Row>
+  </div>
+  <Demo id="offscreen" name="Lucrează doar pe ecran" locale="ro" />
+</section>
+<section className="sec">
+  <Stick left="04 · Un buget" right="Imagini, video, fonturi, scripturi" />
+  <div className="rows">
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Tabel. Derulează în lateral ca să vezi toate coloanele.">
+    <table>
+      <thead>
+        <tr><th>Resursă</th><th>Regulă</th><th>De ce</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Imaginea hero</td><td>AVIF sau WebP, dimensionată cu srcset, <code className="i">fetchpriority="high"</code></td><td>De obicei e elementul LCP</td></tr>
+        <tr><td>Celelalte imagini</td><td><code className="i">loading="lazy"</code>, cu lățime și înălțime</td><td>Nimic nu se încarcă înainte să fie nevoie, nimic nu sare</td></tr>
+        <tr><td>Video</td><td>Fără sunet, <code className="i">playsinline</code>, cu poster, sub câțiva MB, <code className="i">preload="metadata"</code></td><td>Pornirea automată e permisă doar fără sunet; posterul acoperă așteptarea</td></tr>
+        <tr><td>Fonturi</td><td>Cel mult două familii, woff2, <code className="i">font-display: swap</code></td><td>Textul apare imediat, nu după descărcare</td></tr>
+        <tr><td>Scripturi</td><td>Biblioteci doar pe paginile care le folosesc, încărcate cu <code className="i">defer</code> sau ca module</td><td>Pagina poate răspunde cât se încarcă scripturile</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div className="rows">
+    <Row cls="rv" num="a" title="Imagini și video în HTML">
+      <CodeBlock lang="index.html" code={"<!-- imaginea hero: dimensionată, formate moderne, încărcată prima -->\n<picture>\n  <source srcset=\"hero-1600.avif 1600w, hero-800.avif 800w\" type=\"image/avif\" sizes=\"100vw\">\n  <img src=\"hero-1600.jpg\" srcset=\"hero-1600.jpg 1600w, hero-800.jpg 800w\" sizes=\"100vw\"\n       width=\"1600\" height=\"900\" alt=\"…\" fetchpriority=\"high\">\n</picture>\n\n<!-- imaginile de mai jos: încărcate doar când se apropie de ecran -->\n<img src=\"studio.jpg\" width=\"1200\" height=\"800\" alt=\"…\" loading=\"lazy\" decoding=\"async\">\n\n<!-- video de fundal: fără sunet, în pagină pe telefon, cu poster cât se încarcă -->\n<video src=\"loop.mp4\" poster=\"loop.jpg\" autoplay muted loop playsinline preload=\"metadata\"></video>"} />
+    </Row>
+    <Row cls="rv" num="b" title="Un singur font variabil, preîncărcat">
+      <CodeBlock lang="index.html" code={"<link rel=\"preload\" href=\"/fonts/inter-var.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\n<style>\n  @font-face {\n    font-family: Inter;\n    src: url(/fonts/inter-var.woff2) format('woff2');\n    font-weight: 100 900;\n    font-display: swap; /* textul apare imediat într-un font de rezervă */\n  }\n</style>"} />
+    </Row>
+  </div>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Măsoară" right="Laborator și teren" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Lighthouse">
+      <p>În Chrome DevTools, deschide tab-ul Lighthouse și rulează un raport pentru mobil. Repară întâi cea mai mare problemă și rulează din nou.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Panoul Performance">
+      <p>Înregistrează în timp ce derulezi, cu procesorul încetinit de patru ori. Blocurile lungi galbene sunt JavaScript pe firul principal; cele mov sunt layout. Amândouă pierd cadre.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Un telefon real">
+      <p>Un telefon Android de gamă medie, pe date mobile, îți spune mai mult decât orice scor. Derulează toată pagina de două ori și notează fiecare sacadare.</p>
+    </Row>
+    <Row cls="rv" num="d" title="Cere dovezi">
+      <CodeBlock lang="Prompt" code={"Rulează Lighthouse în modul mobil și dă-mi LCP, INP sau TBT și CLS. Listează cele mai mari trei oportunități, cu fișierul și rândul din care vine fiecare. Nu schimba nimic încă."} />
+    </Row>
+  </div>
+</section>

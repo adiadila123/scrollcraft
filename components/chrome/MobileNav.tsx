@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { chapterHref, chaptersFor, getChapter, neighbours, routeOf } from '@/lib/chapters';
 import { useLocale } from '@/lib/useLocale';
 import { useProgress } from '@/lib/progress';
@@ -106,12 +106,15 @@ export default function MobileNav() {
             <span>{t.allChapters}</span>
             <span>{t.readOf(done.length, chapters.length)}</span>
           </div>
-          {chapters.map((c) => (
-            <Link key={c.id} href={chapterHref(c.id, locale)} aria-current={route === c.id ? 'page' : undefined} onClick={() => setOpenOn(null)}>
-              <span className="mono">{c.n}</span>
-              <b>{c.title}</b>
-              <em>{done.includes(c.id) ? t.read : c.desc}</em>
-            </Link>
+          {chapters.map((c, i) => (
+            <Fragment key={c.id}>
+              {c.level !== chapters[i - 1]?.level ? <p className="sheet-level mono">{t.levels[c.level - 1]}</p> : null}
+              <Link href={chapterHref(c.id, locale)} aria-current={route === c.id ? 'page' : undefined} onClick={() => setOpenOn(null)}>
+                <span className="mono">{c.n}</span>
+                <b>{c.title}</b>
+                <em>{done.includes(c.id) ? t.read : c.desc}</em>
+              </Link>
+            </Fragment>
           ))}
         </div>
       </div>

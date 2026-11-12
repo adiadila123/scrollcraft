@@ -48,13 +48,20 @@ export default function HomePage({ locale }: { locale: Locale }) {
         <div className="sec-head rv">
           <h2 style={{ maxWidth: '18ch' } as CSSProperties}>{t.eight}</h2>
         </div>
-        <div className="rows">
-          {chaptersFor(locale).map((c) => (
-            <Row key={c.id} cls="rv" num={c.n} title={<Link href={chapterHref(c.id, locale)}>{c.title}</Link>}>
-              <p>{c.summary}</p>
-            </Row>
-          ))}
-        </div>
+        {[1, 2, 3, 4].map((level) => (
+          <div key={level} className="level">
+            <h3 className="level-h mono rv">{dicts[locale].nav.levels[level - 1]}</h3>
+            <div className="rows">
+              {chaptersFor(locale)
+                .filter((c) => c.level === level)
+                .map((c) => (
+                  <Row key={c.id} cls="rv" num={c.n} title={<Link href={chapterHref(c.id, locale)}>{c.title}</Link>}>
+                    <p>{c.summary}</p>
+                  </Row>
+                ))}
+            </div>
+          </div>
+        ))}
       </section>
       <section className="wrap sec rv">
         <div className="sec-head">

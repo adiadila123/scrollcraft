@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { chapterHref, chaptersFor, routeOf } from '@/lib/chapters';
 import { stripLocale, withLocale } from '@/lib/i18n';
 import { useLocale } from '@/lib/useLocale';
@@ -18,13 +18,30 @@ export default function Topbar() {
   const [scrolled, setScrolled] = useState(false);
   useScroll((y) => setScrolled(y > 8));
   const solid = route !== 'home' || scrolled;
-  /* on narrower screens the menu scrolls sideways: bring the current chapter into view */
+  /* the menu scrolls sideways when it does not fit: bring the current chapter into view */
   const menu = useRef<HTMLElement>(null);
   useEffect(() => {
     const nav = menu.current;
     const cur = nav?.querySelector<HTMLElement>('[aria-current]');
     if (nav && cur) nav.scrollLeft = cur.offsetLeft - nav.offsetLeft - (nav.clientWidth - cur.offsetWidth) / 2;
   }, [route]);
+  /* fade an edge only when there is more menu beyond it */
+  useEffect(() => {
+    const nav = menu.current;
+    if (!nav) return;
+    const fade = () => {
+      const max = nav.scrollWidth - nav.clientWidth;
+      nav.dataset.fade = `${nav.scrollLeft > 1 ? 'l' : ''}${nav.scrollLeft < max - 1 ? 'r' : ''}`;
+    };
+    fade();
+    nav.addEventListener('scroll', fade, { passive: true });
+    const ro = new ResizeObserver(fade);
+    ro.observe(nav);
+    return () => {
+      nav.removeEventListener('scroll', fade);
+      ro.disconnect();
+    };
+  }, []);
 
   return (
     <header className={solid ? 'topbar solid' : 'topbar'} id="topbar">
@@ -32,10 +49,13 @@ export default function Topbar() {
         Scrollcraft
       </Link>
       <nav className="menu" ref={menu} aria-label={t.nav.primary}>
-        {chaptersFor(locale).map((c) => (
-          <Link key={c.id} href={chapterHref(c.id, locale)} aria-current={route === c.id ? 'page' : undefined}>
-            {c.nav}
-          </Link>
+        {chaptersFor(locale).map((c, i, all) => (
+          <Fragment key={c.id}>
+            {i > 0 && c.level !== all[i - 1].level ? <span className="menu-sep" aria-hidden="true" /> : null}
+            <Link href={chapterHref(c.id, locale)} aria-current={route === c.id ? 'page' : undefined}>
+              {c.nav}
+            </Link>
+          </Fragment>
         ))}
       </nav>
       <div className="top-tools">

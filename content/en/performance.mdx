@@ -1,0 +1,96 @@
+export const meta = {
+  title: "Performance: smooth on a real phone.",
+  lede: "A scroll site is judged in the first second and on every frame after it. Measure what visitors feel, set a budget, and keep the work off the screen when nobody is looking.",
+};
+
+<section className="sec">
+  <Stick left="01 · What to measure" right="Core Web Vitals" />
+  <div className="rows">
+    <Row cls="rv" num="LCP" title="Largest Contentful Paint">
+      <p>How long until the biggest thing on screen, usually the hero image or heading, has appeared. Good is 2.5 seconds or less.</p>
+    </Row>
+    <Row cls="rv" num="INP" title="Interaction to Next Paint">
+      <p>How quickly the page responds to a tap, click or key. Good is 200 milliseconds or less. Long scroll handlers and heavy loops make it worse.</p>
+    </Row>
+    <Row cls="rv" num="CLS" title="Cumulative Layout Shift">
+      <p>How much the layout jumps while it loads. Good is 0.1 or less. Give every image and video a width and height, and reserve space for fonts and embeds.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Performance and access" right="Smooth scrolling" />
+  <div className="rows">
+    <Row cls="rv" num="Move" title="Animate transform and opacity">
+      <p>These can be handled without recalculating layout. Animating width, height, top or left makes the browser redo layout on every frame.</p>
+    </Row>
+    <Row cls="rv" num="Batch" title="Read, then write">
+      <p>Read all measurements first, then apply all styles. Mixing them in a loop forces repeated layout work.</p>
+    </Row>
+    <Row cls="rv" num="Hint" title="Use will-change sparingly">
+      <p>Apply it to the few elements that move constantly, such as parallax layers. On every element it costs memory.</p>
+    </Row>
+    <Row cls="rv" num="Stop" title="Do nothing off screen">
+      <p>Pause loops and skip updates for sections that are not visible. The example stops the parallax once the hero has left the screen.</p>
+    </Row>
+    <Row cls="rv" num="Reduce" title="Respect reduced motion">
+      <p>Check <code className="i">prefers-reduced-motion</code> in CSS and in JavaScript. Provide a static layout that reads well on its own.</p>
+    </Row>
+    <Row cls="rv" num="Keys" title="Keep the keyboard working">
+      <p>Tab order, visible focus and anchor links must behave the same as without effects. Pinned sections should not trap focus.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Only work on screen" right="IntersectionObserver" />
+  <div className="rows steps-list">
+    <Row cls="rv" num="1" title="Stop what nobody can see">
+      <p>The loop below draws only while its canvas is visible. Scroll it away and the frame counter stops: no battery spent on a scene off screen.</p>
+      <p className="tip">Browsers already pause requestAnimationFrame in a hidden tab. Off-screen sections on a visible tab are your job.</p>
+    </Row>
+  </div>
+  <Demo id="offscreen" name="Only work on screen" />
+</section>
+<section className="sec">
+  <Stick left="04 · A budget" right="Images, video, fonts, scripts" />
+  <div className="rows">
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Table. Scroll sideways to see every column.">
+    <table>
+      <thead>
+        <tr><th>Asset</th><th>Rule</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hero image</td><td>AVIF or WebP, sized with srcset, <code className="i">fetchpriority="high"</code></td><td>It is usually the LCP element</td></tr>
+        <tr><td>Other images</td><td><code className="i">loading="lazy"</code>, width and height set</td><td>Nothing loads before it is needed, nothing jumps</td></tr>
+        <tr><td>Video</td><td>Muted, <code className="i">playsinline</code>, a poster, under a few MB, <code className="i">preload="metadata"</code></td><td>Autoplay is only allowed muted; the poster covers the wait</td></tr>
+        <tr><td>Fonts</td><td>Two families at most, woff2, <code className="i">font-display: swap</code></td><td>Text appears at once instead of after the download</td></tr>
+        <tr><td>Scripts</td><td>Libraries only on pages that use them, loaded with <code className="i">defer</code> or as modules</td><td>The page can respond while scripts load</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div className="rows">
+    <Row cls="rv" num="a" title="Images and video in HTML">
+      <CodeBlock lang="index.html" code={"<!-- the hero image: sized, modern formats, loaded first -->\n<picture>\n  <source srcset=\"hero-1600.avif 1600w, hero-800.avif 800w\" type=\"image/avif\" sizes=\"100vw\">\n  <img src=\"hero-1600.jpg\" srcset=\"hero-1600.jpg 1600w, hero-800.jpg 800w\" sizes=\"100vw\"\n       width=\"1600\" height=\"900\" alt=\"…\" fetchpriority=\"high\">\n</picture>\n\n<!-- images further down: loaded only when they come near the screen -->\n<img src=\"studio.jpg\" width=\"1200\" height=\"800\" alt=\"…\" loading=\"lazy\" decoding=\"async\">\n\n<!-- background video: silent, inline on phones, a poster while it loads -->\n<video src=\"loop.mp4\" poster=\"loop.jpg\" autoplay muted loop playsinline preload=\"metadata\"></video>"} />
+    </Row>
+    <Row cls="rv" num="b" title="One variable font, preloaded">
+      <CodeBlock lang="index.html" code={"<link rel=\"preload\" href=\"/fonts/inter-var.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\n<style>\n  @font-face {\n    font-family: Inter;\n    src: url(/fonts/inter-var.woff2) format('woff2');\n    font-weight: 100 900;\n    font-display: swap; /* text shows at once in a fallback font */\n  }\n</style>"} />
+    </Row>
+  </div>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Measure" right="Lab and field" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Lighthouse">
+      <p>In Chrome DevTools, open the Lighthouse tab and run a mobile report. Fix the largest item first and run it again.</p>
+    </Row>
+    <Row cls="rv" num="b" title="The Performance panel">
+      <p>Record while you scroll, with the CPU slowed down four times. Long yellow blocks are JavaScript on the main thread; purple ones are layout. Both cause dropped frames.</p>
+    </Row>
+    <Row cls="rv" num="c" title="A real phone">
+      <p>A mid-range Android phone on mobile data tells you more than any score. Scroll the whole page twice and note every stutter.</p>
+    </Row>
+    <Row cls="rv" num="d" title="Ask for evidence">
+      <CodeBlock lang="Prompt" code={"Run Lighthouse in mobile mode and give me LCP, INP or TBT, and CLS. List the three biggest opportunities with the file and line each one comes from. Do not change anything yet."} />
+    </Row>
+  </div>
+</section>

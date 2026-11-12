@@ -1,4 +1,5 @@
 import { gsapDemos } from './demos-gsap';
+import { proDemos } from './demos-pro';
 import { webglDemos } from './demos-webgl';
 
 /**
@@ -447,7 +448,7 @@ io.observe(h);`,
   },
 };
 
-export const demos: Record<string, DemoSource> = { ...basicDemos, ...gsapDemos, ...webglDemos };
+export const demos: Record<string, DemoSource> = { ...basicDemos, ...gsapDemos, ...webglDemos, ...proDemos };
 
 /**
  * Library URLs in the preview code point at jsDelivr, so the code works when pasted elsewhere. Inside the tutorial

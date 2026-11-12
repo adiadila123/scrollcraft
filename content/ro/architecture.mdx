@@ -1,0 +1,93 @@
+export const meta = {
+  title: "Arhitectură: o structură care rezistă când site-ul crește.",
+  lede: "Un site de o pagină poate trăi în trei fișiere. Când are multe secțiuni, rute sau oameni care lucrează la el, câteva decizii de structură îl păstrează rapid și ușor de schimbat.",
+};
+
+<section className="sec">
+  <Stick left="01 · Cum alegi tehnologiile" right="Simplu, GSAP, Next.js, Flask" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Pentru un site cu scroll, tehnologiile contează mai puțin decât disciplina. Începe simplu. Adaugă o bibliotecă atunci când o problemă anume o cere.</p>
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Tabel. Derulează în lateral ca să vezi toate coloanele.">
+    <table>
+      <thead>
+        <tr>
+          <th>Opțiune</th>
+          <th>Folosește-o când</th>
+          <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>HTML, CSS, JS simple</td>
+          <td>O pagină sau câteva, un portofoliu, o pagină de prezentare, proiectul din acest tutorial</td>
+          <td>Gestionezi singur structura fișierelor și markupul repetat</td>
+        </tr>
+        <tr>
+          <td>JavaScript simplu plus GSAP</td>
+          <td>Multe timeline-uri legate de scroll sau fixate, care trebuie să rămână sincronizate</td>
+          <td>Încă o bibliotecă de încărcat și de învățat</td>
+        </tr>
+        <tr>
+          <td>Next.js cu React</td>
+          <td>Multe rute, componente comune, un CMS, randare pe server pentru motoarele de căutare</td>
+          <td>Un pas de build, un server sau o găzduire care îl suportă și efecte care trebuie curățate la demontare</td>
+        </tr>
+        <tr>
+          <td>Flask</td>
+          <td>Ai nevoie de backend: un formular de contact, o bază de date, un API</td>
+          <td>Nu animă nimic. Servește pagina și se ocupă de date</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Structura folderelor" right="Simplu și Next.js" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Împarte după ce se schimbă împreună">
+      <p>Secțiunile se schimbă odată cu conținutul, componentele de mișcare odată cu designul, iar bucla aproape niciodată. Ține-le pe fiecare la locul ei.</p>
+      <CodeBlock lang="Structură" code={"Site simplu\n  index.html\n  style.css            întâi tokenurile, apoi secțiunile în ordinea paginii\n  app.js               o buclă, o funcție pentru fiecare efect\n  assets/              imagini, video, fonturi\n\nNext.js\n  app/                 rute și layout-uri (componente de server)\n  components/\n    sections/          un fișier pentru fiecare secțiune a paginii\n    motion/            Reveal, Pin, Parallax: componente mici de client\n  lib/\n    ticker.ts          singura buclă de animație\n  content/             text și date, ținute în afara componentelor\n  public/              imagini, video, fonturi"} />
+    </Row>
+    <Row cls="rv" num="b" title="Ține conținutul în afara componentelor">
+      <p>Textul, căile imaginilor și listele de funcții stau în fișiere de date sau într-un CMS. Componentele decid doar cum arată și cum se mișcă, iar site-ul poate primi o a doua limbă fără să le atingi.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · O buclă pentru tot site-ul" right="requestAnimationFrame" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="De ce una singură">
+      <p>Zece efecte cu zece bucle citesc fiecare poziția scrollului și scriu fiecare stiluri, într-o ordine pe care n-o controlează nimeni. O singură buclă citește o dată și actualizează totul în același cadru, și se poate opri când tab-ul e ascuns.</p>
+      <CodeBlock lang="ticker.js" code={"// ticker.js: o singură buclă requestAnimationFrame pentru tot site-ul\nconst jobs = new Set();\nlet raf = 0;\n\nfunction frame(time) {\n  for (const job of jobs) job(time);\n  raf = jobs.size ? requestAnimationFrame(frame) : 0;\n}\n\n/** Rulează fn la fiecare cadru. Întoarce o funcție care o oprește. */\nexport function onFrame(fn) {\n  jobs.add(fn);\n  if (!raf && !document.hidden) raf = requestAnimationFrame(frame);\n  return () => jobs.delete(fn);\n}\n\n// nu desena cât tab-ul e ascuns, pornește din nou când revine\ndocument.addEventListener('visibilitychange', () => {\n  if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }\n  else if (jobs.size && !raf) raf = requestAnimationFrame(frame);\n});"} />
+    </Row>
+    <Row cls="rv" num="b" title="Lenis și GSAP o împart">
+      <p>Dacă site-ul folosește GSAP, ticker-ul lui e bucla: condu Lenis din <code className="i">gsap.ticker</code> ca în capitolul GSAP și adaugă-ți efectele în același ticker.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Next.js și React" right="Aceleași efecte, cu curățenie" />
+  <p className="lede rv" style={{ marginTop: '0' }}>În React, efectele se mută în <code className="i">useEffect</code>, iar tot ce pornești trebuie oprit la demontare. În App Router-ul Next.js, componenta are nevoie de <code className="i">‘use client’</code>, pentru că folosește browserul. Schița de mai jos nu a fost rulată aici; instalează{' '}<code className="i">lenis</code> și <code className="i">gsap</code> cu npm și testeaz-o în proiectul tău.</p>
+  <div className="rv">
+    <CodeBlock
+      lang="tsx"
+      code={
+        "// components/Cinematic.tsx\n'use client';\nimport { useEffect, useRef, type ReactNode } from 'react';\nimport Lenis from 'lenis';\nimport gsap from 'gsap';\nimport { ScrollTrigger } from 'gsap/ScrollTrigger';\n\ngsap.registerPlugin(ScrollTrigger);\n\nexport default function Cinematic({ children }: { children: ReactNode }) {\n  const root = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;\n    if (reduced) return;\n\n    const lenis = new Lenis({ lerp: 0.1 });\n    const tick = (time: number) => lenis.raf(time * 1000);\n    lenis.on('scroll', ScrollTrigger.update);\n    gsap.ticker.add(tick);\n    gsap.ticker.lagSmoothing(0);\n\n    const ctx = gsap.context(() => {\n      gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {\n        gsap.from(el, {\n          y: 28, opacity: 0, duration: 0.9, ease: 'power3.out',\n          scrollTrigger: { trigger: el, start: 'top 85%', once: true }\n        });\n      });\n    }, root);\n\n    return () => {\n      ctx.revert();\n      gsap.ticker.remove(tick);\n      lenis.destroy();\n    };\n  }, []);\n\n  return <div ref={root}>{children}</div>;\n}"
+      }
+    />
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Îmbunătățire progresivă" right="Merge și fără efecte" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Întâi conținutul">
+      <p>Pagina trebuie să se citească întreagă cu JavaScript oprit, cu un script blocat sau cu animațiile dezactivate de sistem. Efectele se adaugă deasupra; nu țin niciodată conținutul ostatic.</p>
+      <CodeBlock lang="index.html" code={"<!-- clasa se adaugă înainte să se deseneze pagina, doar când rulează JavaScript -->\n<script>document.documentElement.classList.add('js');</script>\n\n<style>\n  /* conținutul se ascunde doar când există un script care să-l arate */\n  .js .reveal { opacity: 0; transform: translateY(24px); }\n  .js .reveal.in { opacity: 1; transform: none; transition: opacity .6s, transform .6s; }\n</style>"} />
+    </Row>
+    <Row cls="rv" num="b" title="Întâi serverul, în Next.js">
+      <p>Păstrează secțiunile ca componente de server și învelește doar părțile care se mișcă în componente mici de client, precum <code className="i">&lt;Reveal&gt;</code>. Ajunge mai puțin JavaScript pe telefon, iar textul e în HTML pentru motoarele de căutare.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Curăță">
+      <p>Fiecare listener, observer, buclă și ScrollTrigger pe care îl creezi se elimină când componenta lui părăsește pagina. În React, asta face funcția întoarsă din <code className="i">useEffect</code>, sau <code className="i">useGSAP</code>, care o face în locul tău.</p>
+    </Row>
+  </div>
+</section>

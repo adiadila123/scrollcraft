@@ -1,0 +1,80 @@
+export const meta = {
+  title: "Design systems: one source of truth.",
+  lede: "A cinematic site feels deliberate because every size, colour and movement comes from a short list of decisions. Write that list down once, as tokens, and you and the AI both build from it.",
+};
+
+<section className="sec">
+  <Stick left="01 · Tokens" right="Four kinds" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Colour">
+      <p>Name colours by their job, not their hue: <code className="i">--accent</code> and <code className="i">--muted</code>, not <code className="i">--blue</code>. A minimalist page needs five or six, with one accent.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Type">
+      <p>A scale of four or five steps. Each step is a <code className="i">clamp()</code>, so headings grow with the screen without a breakpoint for every size.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Space">
+      <p>One unit and its multiples. When every gap is 8, 16, 24, 48 or 96, sections line up without anyone measuring.</p>
+    </Row>
+    <Row cls="rv" num="d" title="Motion">
+      <p>Durations, easing curves and distances are design decisions too. Three durations and two curves cover almost every movement on a scroll site.</p>
+      <CodeBlock lang="style.css" code={":root {\n  /* colour: named by role, not by hue */\n  --bg: #000;  --surface: #070a0d;  --line: #20262b;\n  --fg: #eaf0f4;  --muted: #8d989f;  --accent: #5cc8ff;\n\n  /* type: a short scale that grows with the screen */\n  --t-sm: 13px;\n  --t-md: clamp(15px, 1.2vw + 12px, 18px);\n  --t-lg: clamp(22px, 2.4vw + 14px, 32px);\n  --t-xl: clamp(40px, 8vw, 112px);\n\n  /* space: one unit and its multiples */\n  --s1: 8px;  --s2: 16px;  --s3: 24px;  --s4: 48px;  --s5: 96px;\n\n  /* motion: three durations, two curves, one distance */\n  --dur-fast: .2s;  --dur-base: .6s;  --dur-slow: 1.2s;\n  --ease-out: cubic-bezier(.2, .7, .2, 1);\n  --ease-in-out: cubic-bezier(.65, 0, .35, 1);\n  --rise: 24px;\n}"} />
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Tokens, live" right="Press the button, then scroll" />
+  <div className="rows steps-list">
+    <Row cls="rv" num="1" title="A page built only from tokens">
+      <p>Every value on the page below reads a variable. The button changes one token, <code className="i">--accent</code>, and the labels, borders and focus ring all follow.</p>
+      <p className="tip">Reduced motion is handled the same way: the media query sets the durations to zero instead of overriding every transition.</p>
+    </Row>
+  </div>
+  <Demo id="tokens" name="A page built from tokens" />
+</section>
+<section className="sec">
+  <Stick left="03 · Components read tokens" right="Never raw values" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="One rule">
+      <p>A component never writes a raw colour, size, gap or duration. If it needs a value that is not there, add a token first, then use it.</p>
+      <CodeBlock lang="style.css" code={".btn {\n  padding: var(--s1) var(--s3);\n  font-size: var(--t-sm);\n  color: var(--fg);\n  border: 1px solid var(--line);\n  border-radius: 99px;\n  transition: border-color var(--dur-fast) var(--ease-out);\n}\n.btn:hover, .btn:focus-visible { border-color: var(--accent); }\n\n/* a variant changes tokens, not rules */\n.btn[data-tone=\"solid\"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }"} />
+    </Row>
+    <Row cls="rv" num="b" title="Variants through attributes">
+      <p>A variant such as <code className="i">data-tone="solid"</code> swaps a few tokens. The markup stays readable, and the AI cannot invent a seventh shade of grey.</p>
+    </Row>
+    <Row cls="rv" num="c" title="With Tailwind">
+      <p>In Tailwind 4 the same tokens go in an <code className="i">@theme</code> block, and become classes like <code className="i">bg-accent</code>. The rule does not change: utilities only, no arbitrary values.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · A design file for the AI" right="DESIGN.md" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Write the decisions down">
+      <p>Put a short <code className="i">DESIGN.md</code> next to your rules file. The AI reads it before every change, so the fifth section looks like the first.</p>
+      <CodeBlock lang="DESIGN.md" code={"# DESIGN.md\n\n## Mood\nQuiet, dark, editorial. One idea per screen. Motion is slow and rare.\n\n## Tokens\nAll values live in :root in style.css. Never write a raw colour, size,\ngap or duration anywhere else. If a value is missing, add a token first.\n\n## Type\nTwo families at most. Headings light (300), tight tracking (-0.04em).\nBody 15–18px, line height 1.5, lines no wider than 65 characters.\n\n## Colour\nBlack background, one accent (--accent) for links, focus and progress.\nBody text at least 4.5:1 contrast.\n\n## Motion\nReveals: --rise upwards over --dur-base with --ease-out, once.\nScrubbed scenes: no easing (the scroll is the easing).\nNothing moves under prefers-reduced-motion: set the durations to 0.\n\n## Do not\nGradients on text, glassmorphism cards, bouncing, more than one accent,\ninvented numbers or logos."} />
+    </Row>
+    <Row cls="rv" num="b" title="Point the AI at it">
+      <CodeBlock lang="Prompt" code={"Read DESIGN.md and the :root tokens in style.css before you change anything. Use only those tokens. If you need a new value, propose the token first and wait for my answer."} />
+    </Row>
+    <Row cls="rv" num="c" title="Audit drift">
+      <CodeBlock lang="Prompt" code={"List every raw colour, font size, gap and duration in the CSS that does not come from a token. For each one, say which token it should use or propose a new one."} />
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Stay minimal" right="Fewer, stronger decisions" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="One accent">
+      <p>It marks what can be clicked, what has focus and how far you have read. Used anywhere else, it stops meaning anything.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Two families at most">
+      <p>One for text, optionally one monospace for labels. Weight and size carry the hierarchy.</p>
+    </Row>
+    <Row cls="rv" num="3" title="One curve for most movement">
+      <p>A single ease-out for reveals and transitions makes the whole site move with one hand. Scrubbed scenes use none: the scroll is the easing.</p>
+    </Row>
+    <Row cls="rv" num="4" title="Space before decoration">
+      <p>When a section feels empty, add space around it, not a gradient, a shadow or another card.</p>
+    </Row>
+  </div>
+</section>

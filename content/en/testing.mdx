@@ -1,0 +1,100 @@
+export const meta = {
+  title: "Testing and QA: prove it works.",
+  lede: "A scroll site can look perfect on your laptop and break on a phone, with a screen reader or with motion turned off. Check by hand once, then let tests check it on every change.",
+};
+
+<section className="sec">
+  <Stick left="01 · Release checklist" right="Tick as you go" />
+  <Checklist
+    items={[
+      'The site runs from a local server, not from file://',
+      'The browser console shows no errors',
+      'I checked it at 375, 768 and 1440 px wide',
+      'Nothing overlaps or is clipped on a phone-sized window',
+      'Every reveal element becomes visible once I scroll to it',
+      'Reduced motion turns off smooth scroll, parallax and reveal movement',
+      'Everything works with the keyboard alone, with visible focus',
+      'Body text has a contrast ratio of at least 4.5 to 1',
+      'Images are compressed and I use at most two font families',
+      'There are no invented statistics, quotes or customer logos',
+      'Every external library is pinned to an exact version',
+      'I ran Lighthouse in Chrome DevTools and noted the scores',
+    ]}
+  />
+  <p className="muted" style={{ marginTop: '20px', maxWidth: '56ch' }}>Ticks are saved in this browser only, so they may reset in a private window.</p>
+</section>
+<section className="sec">
+  <Stick left="02 · Ask for evidence" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Do not accept “tested”">
+      <p>AI tools sometimes report checks they did not run. Ask what was run, on which widths, and what was skipped. Then open the page and look yourself.</p>
+      <CodeBlock
+        lang="Prompt"
+        code={'List every check you actually ran, with the width or tool you used. List every check you could not run and why.'}
+      />
+    </Row>
+    <Row cls="rv" num="b" title="Measure, then fix">
+      <p>In Chrome DevTools, the Lighthouse tab gives performance and accessibility scores. Fix the biggest item first and run it again. The Performance tab shows what blocks the main thread while you scroll.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Common mistakes">
+      <p>Opening the file directly instead of through a server. Missing doctype, which breaks Lenis. Page-level scroll snap together with smooth scroll. Parallax offsets that push hero text off a phone screen. <code className="i">will-change</code> on every element. Content hidden by CSS that no script ever reveals. <code className="i">overflow: hidden</code> on the html or body element, which can leave two scroll contexts.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="03 · Browser tests" right="Playwright" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Install">
+      <p>Playwright drives real Chromium, Firefox and WebKit browsers, on desktop and phone sizes.</p>
+      <CodeBlock lang="bash" code={"npm init playwright@latest"} />
+    </Row>
+    <Row cls="rv" num="b" title="Two screen sizes">
+      <CodeBlock lang="playwright.config.ts" code={"// playwright.config.ts\nimport { defineConfig, devices } from '@playwright/test';\n\nexport default defineConfig({\n  testDir: 'tests',\n  projects: [\n    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },\n    { name: 'phone', use: { ...devices['Pixel 7'] } },\n  ],\n  // serve the folder while the tests run\n  webServer: { command: 'npx serve -l 3000 .', url: 'http://localhost:3000' },\n  use: { baseURL: 'http://localhost:3000' },\n});"} />
+    </Row>
+    <Row cls="rv" num="c" title="Three tests every scroll site needs">
+      <p>No errors on load, every hidden element revealed when you reach it, and a page that still reads with reduced motion.</p>
+      <CodeBlock lang="site.spec.ts" code={"// tests/site.spec.ts\nimport { test, expect } from '@playwright/test';\n\ntest('loads with no console errors', async ({ page }) => {\n  const errors: string[] = [];\n  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));\n  page.on('pageerror', (e) => errors.push(e.message));\n  await page.goto('/');\n  await expect(page.locator('h1')).toBeVisible();\n  expect(errors).toEqual([]);\n});\n\ntest('every reveal becomes visible once scrolled to', async ({ page }) => {\n  await page.goto('/');\n  for (const el of await page.locator('.reveal').all()) {\n    await el.scrollIntoViewIfNeeded();\n    await expect(el).toHaveClass(/\\bin\\b/);\n  }\n});\n\ntest('reduced motion: content is visible without scrolling effects', async ({ page }) => {\n  await page.emulateMedia({ reducedMotion: 'reduce' });\n  await page.goto('/');\n  await expect(page.locator('.reveal').first()).toHaveCSS('transform', 'none');\n});"} />
+      <p className="tip">Run them with <code className="i">npx playwright test</code>. Add <code className="i">--ui</code> to watch each step in a browser.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Accessibility audit" right="axe" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Automated checks">
+      <p>axe catches missing labels, low contrast, wrong roles and focus traps. It finds about a third of real problems, so it complements the keyboard test, it does not replace it.</p>
+      <CodeBlock lang="bash" code={"npm install -D @axe-core/playwright"} />
+      <CodeBlock lang="a11y.spec.ts" code={"// tests/a11y.spec.ts\nimport { test, expect } from '@playwright/test';\nimport AxeBuilder from '@axe-core/playwright';\n\ntest('no accessibility violations', async ({ page }) => {\n  await page.goto('/');\n  const results = await new AxeBuilder({ page }).analyze();\n  expect(results.violations).toEqual([]);\n});"} />
+    </Row>
+    <Row cls="rv" num="b" title="By hand">
+      <p>Tab through the whole page: focus is always visible, the order makes sense, nothing gets stuck in a pinned section. Then turn on VoiceOver or NVDA and listen to the first screen.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Screenshot comparisons" right="Catch visual changes" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Compare against a saved picture">
+      <p>The first run saves a screenshot; later runs fail when the page looks different. Freeze animations so the picture is the same every time.</p>
+      <CodeBlock lang="site.spec.ts" code={"test('the hero looks the same as last time', async ({ page }) => {\n  await page.goto('/');\n  // animations are frozen at their end so the picture is stable\n  await expect(page).toHaveScreenshot('hero.png', { animations: 'disabled' });\n});"} />
+      <p className="tip">Update the saved pictures on purpose with <code className="i">npx playwright test --update-snapshots</code>, after you have looked at the difference.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="06 · Real devices" right="What tests cannot feel" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="An iPhone with Safari">
+      <p>Address bar resizing, <code className="i">100vh</code> versus <code className="i">100svh</code>, and momentum scrolling behave differently from Chrome.</p>
+    </Row>
+    <Row cls="rv" num="2" title="A mid-range Android phone">
+      <p>The device most visitors actually use. If scrolling stutters here, it stutters for them.</p>
+    </Row>
+    <Row cls="rv" num="3" title="A mouse wheel and a trackpad">
+      <p>A wheel jumps in steps, a trackpad glides. Smooth scrolling and scrubbed scenes must feel right with both.</p>
+    </Row>
+    <Row cls="rv" num="4" title="Keyboard and reduced motion">
+      <p>Space, Page Down and the arrow keys must scroll. Turn on reduced motion in the system settings and read the whole page once.</p>
+    </Row>
+  </div>
+</section>

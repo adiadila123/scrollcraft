@@ -8,21 +8,31 @@ Built with Next.js 16 (App Router), React 19, TypeScript, MDX, three.js, GSAP an
 
 ## What is inside
 
-Eleven chapters, each at `/<chapter>` in English and `/ro/<chapter>` in Romanian:
+Fifteen chapters in three levels, each at `/<chapter>` in English and `/ro/<chapter>` in Romanian:
 
-| #   | Chapter    | What it covers                                                                             |
-| --- | ---------- | ------------------------------------------------------------------------------------------ |
-| 01  | Start      | Choosing an AI tool, installing it, setting up a project folder                            |
-| 02  | Skills     | What skills are, where to find them, how to install and write them                         |
-| 03  | Prompting  | A five-part brief, a project rules file, steering patterns                                 |
-| 04  | Build      | Ten steps with the exact prompt for each, and a complete example on StackBlitz             |
-| 05  | Motion     | Nine scroll techniques and five real-world recipes, each running live beside its code      |
-| 06  | Playground | Live experiments with smoothing, parallax speed, stagger and easing                        |
-| 07  | GSAP       | Timelines, scrub, pinning, SVG drawing and split text, live; useGSAP; CSS scroll timelines |
-| 08  | WebGL      | four three.js scenes driven by scroll: a model, particles, a shader, an image transition   |
-| 09  | Examples   | Three complete sites (product launch, studio portfolio, long-read), viewable full screen   |
-| 10  | Advanced   | Choosing a stack, a Next.js version, performance, a fault table and a glossary             |
-| 11  | Launch     | Testing on three widths and publishing                                                     |
+| #                         | Chapter               | What it covers                                                                                 |
+| ------------------------- | --------------------- | ---------------------------------------------------------------------------------------------- |
+| **Level 1 · Foundations** |                       |                                                                                                |
+| 01                        | Start                 | Choosing an AI tool, installing it, setting up a project folder                                |
+| 02                        | Skills                | What skills are, where to find them, how to install and write them                             |
+| 03                        | Prompting             | A five-part brief, a project rules file, steering patterns                                     |
+| 04                        | Build                 | Ten steps with the exact prompt for each, and a complete example on StackBlitz                 |
+| **Level 2 · Motion**      |                       |                                                                                                |
+| 05                        | Motion                | Nine scroll techniques and five real-world recipes, each running live beside its code          |
+| 06                        | Playground            | Live experiments with smoothing, parallax speed, stagger and easing                            |
+| 07                        | GSAP                  | Timelines, scrub, pinning, SVG drawing and split text, live; useGSAP; CSS scroll timelines     |
+| 08                        | WebGL                 | Four three.js scenes driven by scroll: a model, particles, a shader, an image transition       |
+| 09                        | Examples              | Three complete sites (product launch, studio portfolio, long-read), viewable full screen       |
+| **Level 3 · Production**  |                       |                                                                                                |
+| 10                        | Design systems        | Colour, type, space and motion tokens, components that read them, a DESIGN.md for the AI       |
+| 11                        | Architecture          | Choosing a stack, folder structure, one animation loop, React cleanup, progressive enhancement |
+| 12                        | Performance           | Core Web Vitals, an asset budget, smooth-scrolling rules, measuring                            |
+| 13                        | Testing and QA        | Release checklist, Playwright tests, axe, screenshot comparisons, real devices                 |
+| 14                        | Production and launch | Publishing static or Next.js, domain and metadata, CI, looking after the site                  |
+| **Appendix**              |                       |                                                                                                |
+| 15                        | Reference             | A fault table and a glossary                                                                   |
+
+The old `/advanced` address redirects to Architecture.
 
 Interface features: a search palette (⌘K or Ctrl K), `[` and `]` to step through chapters, Back and Next at the end
 of every chapter, a course bar on phones, reading progress that resumes where you left off, and project fields that
@@ -74,8 +84,8 @@ push and pull request, and a weekly workflow checks the external links.
       chapters.ts           the chapter list: routes, navigation, metadata, sitemap and search all read it
       dict.ts i18n.ts       interface text in both languages, and the locale helpers
       content.ts            maps each chapter id and language to its MDX file
-      demos.ts              the small runnable pages behind every <Demo>; demos-gsap.ts and demos-webgl.ts hold
-                            the GSAP and WebGL chapters' previews
+      demos.ts              the small runnable pages behind every <Demo>; demos-gsap.ts, demos-webgl.ts and
+                            demos-pro.ts hold the GSAP, WebGL and level 3 chapters' previews
       examples.ts           the example sites, in order, for the full-screen viewer
       ticker.ts             the single requestAnimationFrame loop; pauses while the tab is hidden
       hero/                 the three.js particle head and its shaders (loaded on the home page only)
@@ -91,7 +101,7 @@ push and pull request, and a weekly workflow checks the external links.
 
 ## Adding a chapter
 
-1. Add an entry to `lib/chapters.ts`.
+1. Add an entry to `lib/chapters.ts`, with its `level` (1 to 3, or 4 for the appendix).
 2. Write `content/en/your-chapter.mdx`: `export const meta = { title, lede }`, then the sections, using the components in `mdx-components.tsx`. Keep text that wraps inside a component on one line, or MDX wraps it in an extra paragraph. Prettier skips these files for the same reason.
 3. Write the Romanian version as `content/ro/your-chapter.mdx`, add its titles to `lib/chapters.ts`, and import both in `lib/content.ts`.
 

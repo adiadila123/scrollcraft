@@ -2,12 +2,14 @@ import { stripLocale, withLocale, type Locale } from './i18n';
 
 /** Single source of truth for the chapter list. Routes, navigation, metadata, the sitemap and search all read from here. */
 /** art names the particle shape drawn behind the chapter title and in the band that leads into it. */
-export type Chapter = { id: string; n: string; title: string; nav: string; desc: string; summary: string; art: string };
+/** level groups the course: 1 foundations, 2 motion, 3 production, 4 the reference appendix. */
+export type Chapter = { id: string; n: string; level: 1 | 2 | 3 | 4; title: string; nav: string; desc: string; summary: string; art: string };
 
 export const chapters: Chapter[] = [
   {
     id: 'start',
     n: '01',
+    level: 1,
     title: 'Start',
     nav: 'Start',
     desc: 'Tools and setup',
@@ -17,6 +19,7 @@ export const chapters: Chapter[] = [
   {
     id: 'skills',
     n: '02',
+    level: 1,
     title: 'Skills',
     nav: 'Skills',
     desc: 'Find, install, write',
@@ -26,6 +29,7 @@ export const chapters: Chapter[] = [
   {
     id: 'prompting',
     n: '03',
+    level: 1,
     title: 'Prompting',
     nav: 'Prompts',
     desc: 'Brief the AI',
@@ -35,6 +39,7 @@ export const chapters: Chapter[] = [
   {
     id: 'build',
     n: '04',
+    level: 1,
     title: 'Build',
     nav: 'Build',
     desc: 'Steps and full example',
@@ -44,6 +49,7 @@ export const chapters: Chapter[] = [
   {
     id: 'motion',
     n: '05',
+    level: 2,
     title: 'Motion',
     nav: 'Motion',
     desc: 'Techniques and recipes',
@@ -53,6 +59,7 @@ export const chapters: Chapter[] = [
   {
     id: 'playground',
     n: '06',
+    level: 2,
     title: 'Playground',
     nav: 'Playground',
     desc: 'Live experiments',
@@ -62,6 +69,7 @@ export const chapters: Chapter[] = [
   {
     id: 'gsap',
     n: '07',
+    level: 2,
     title: 'GSAP',
     nav: 'GSAP',
     desc: 'Timelines and ScrollTrigger',
@@ -71,6 +79,7 @@ export const chapters: Chapter[] = [
   {
     id: 'webgl',
     n: '08',
+    level: 2,
     title: 'WebGL',
     nav: 'WebGL',
     desc: 'Three.js and shaders',
@@ -80,6 +89,7 @@ export const chapters: Chapter[] = [
   {
     id: 'examples',
     n: '09',
+    level: 2,
     title: 'Examples',
     nav: 'Examples',
     desc: 'Three complete sites',
@@ -87,22 +97,64 @@ export const chapters: Chapter[] = [
     art: 'lattice',
   },
   {
-    id: 'advanced',
+    id: 'design',
     n: '10',
-    title: 'Advanced',
-    nav: 'Advanced',
-    desc: 'Next.js, performance, fixes',
-    summary: 'Choosing a stack, a Next.js version, performance rules, a fault table and a glossary.',
-    art: 'graph',
+    level: 3,
+    title: 'Design systems',
+    nav: 'Design',
+    desc: 'Tokens and rules',
+    summary: 'Colour, type, spacing and motion as tokens, components that only read them, and a design file the AI follows.',
+    art: 'rings',
+  },
+  {
+    id: 'architecture',
+    n: '11',
+    level: 3,
+    title: 'Architecture',
+    nav: 'Architecture',
+    desc: 'Stack, structure, cleanup',
+    summary: 'Choosing a stack, a folder structure that scales, one animation loop for the whole site, and effects that clean up after themselves.',
+    art: 'net',
+  },
+  {
+    id: 'performance',
+    n: '12',
+    level: 3,
+    title: 'Performance',
+    nav: 'Performance',
+    desc: 'Fast on a real phone',
+    summary: 'Core Web Vitals, a budget for images, video and fonts, the rules that keep scrolling smooth, and how to measure.',
+    art: 'stream',
+  },
+  {
+    id: 'testing',
+    n: '13',
+    level: 3,
+    title: 'Testing and QA',
+    nav: 'Testing',
+    desc: 'Check before you ship',
+    summary: 'A release checklist, browser tests with Playwright, an accessibility audit, screenshot comparisons and real devices.',
+    art: 'terrain',
   },
   {
     id: 'launch',
-    n: '11',
-    title: 'Launch',
+    n: '14',
+    level: 3,
+    title: 'Production and launch',
     nav: 'Launch',
-    desc: 'Test and publish',
-    summary: 'Test on three screen widths, fix what breaks, and publish the folder.',
+    desc: 'Publish and maintain',
+    summary: 'Publish a static folder or a Next.js app, connect a domain, add metadata, automate checks, and keep the site healthy.',
     art: 'plume',
+  },
+  {
+    id: 'reference',
+    n: '15',
+    level: 4,
+    title: 'Reference',
+    nav: 'Reference',
+    desc: 'Fixes and terms',
+    summary: 'A table of common faults with their causes and fixes, and a glossary of the terms used in the course.',
+    art: 'graph',
   },
 ];
 
@@ -144,12 +196,6 @@ const ro: Record<string, Pick<Chapter, 'title' | 'nav' | 'desc' | 'summary'>> = 
     desc: 'Experimente live',
     summary: 'Patru experimente live: netezirea scrollului, viteza parallax, decalajul apariției și curbele de easing.',
   },
-  advanced: {
-    title: 'Avansat',
-    nav: 'Avansat',
-    desc: 'Next.js, performanță, reparații',
-    summary: 'Alegerea tehnologiilor, o versiune Next.js, reguli de performanță, un tabel de erori și un glosar.',
-  },
   gsap: {
     title: 'GSAP',
     nav: 'GSAP',
@@ -168,11 +214,41 @@ const ro: Record<string, Pick<Chapter, 'title' | 'nav' | 'desc' | 'summary'>> = 
     desc: 'Trei site-uri complete',
     summary: 'O lansare de produs, un portofoliu de studio și un articol lung, fiecare rulând live, cu prompturile și codul complet.',
   },
+  design: {
+    title: 'Design systems',
+    nav: 'Design',
+    desc: 'Tokenuri și reguli',
+    summary: 'Culoare, tipografie, spațiere și mișcare ca tokenuri, componente care doar le citesc și un fișier de design pe care AI-ul îl urmează.',
+  },
+  architecture: {
+    title: 'Arhitectură',
+    nav: 'Arhitectură',
+    desc: 'Tehnologii, structură, curățenie',
+    summary: 'Cum alegi tehnologiile, o structură de foldere care crește, o singură buclă de animație pentru tot site-ul și efecte care se curăță singure.',
+  },
+  performance: {
+    title: 'Performanță',
+    nav: 'Performanță',
+    desc: 'Rapid pe un telefon real',
+    summary: 'Core Web Vitals, un buget pentru imagini, video și fonturi, regulile care păstrează scrollul fluid și cum măsori.',
+  },
+  testing: {
+    title: 'Testare și QA',
+    nav: 'Testare',
+    desc: 'Verifici înainte să publici',
+    summary: 'O listă de verificare pentru lansare, teste în browser cu Playwright, un audit de accesibilitate, comparații de capturi și dispozitive reale.',
+  },
   launch: {
-    title: 'Lansare',
+    title: 'Producție și lansare',
     nav: 'Lansare',
-    desc: 'Testezi și publici',
-    summary: 'Testezi pe trei lățimi de ecran, repari ce se strică și publici folderul.',
+    desc: 'Publici și întreții',
+    summary: 'Publici un folder static sau o aplicație Next.js, legi un domeniu, adaugi metadate, automatizezi verificările și ții site-ul sănătos.',
+  },
+  reference: {
+    title: 'Referință',
+    nav: 'Referință',
+    desc: 'Reparații și termeni',
+    summary: 'Un tabel cu problemele frecvente, cauzele și reparațiile lor, și un glosar al termenilor folosiți în curs.',
   },
 };
 

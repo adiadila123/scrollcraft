@@ -26,4 +26,20 @@ export const test = base.extend<{ consoleErrors: string[]; showLoader: boolean }
 
 export { expect };
 
-export const CHAPTERS = ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'gsap', 'webgl', 'examples', 'advanced', 'launch'];
+export const CHAPTERS = [
+  'start',
+  'skills',
+  'prompting',
+  'build',
+  'motion',
+  'playground',
+  'gsap',
+  'webgl',
+  'examples',
+  'design',
+  'architecture',
+  'performance',
+  'testing',
+  'launch',
+  'reference',
+];

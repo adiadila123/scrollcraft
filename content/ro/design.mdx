@@ -1,0 +1,80 @@
+export const meta = {
+  title: "Design systems: o singură sursă de adevăr.",
+  lede: "Un site cinematic pare gândit pentru că fiecare mărime, culoare și mișcare vine dintr-o listă scurtă de decizii. Scrie lista o singură dată, ca tokenuri, și construiți din ea și tu, și AI-ul.",
+};
+
+<section className="sec">
+  <Stick left="01 · Tokenuri" right="Patru tipuri" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Culoare">
+      <p>Numește culorile după rolul lor, nu după nuanță: <code className="i">--accent</code> și <code className="i">--muted</code>, nu <code className="i">--blue</code>. O pagină minimalistă are nevoie de cinci-șase, cu un singur accent.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Tipografie">
+      <p>O scară de patru-cinci trepte. Fiecare treaptă e un <code className="i">clamp()</code>, așa că titlurile cresc odată cu ecranul fără un breakpoint pentru fiecare mărime.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Spațiu">
+      <p>O unitate și multiplii ei. Când fiecare spațiu e 8, 16, 24, 48 sau 96, secțiunile se aliniază fără să măsoare cineva.</p>
+    </Row>
+    <Row cls="rv" num="d" title="Mișcare">
+      <p>Duratele, curbele de easing și distanțele sunt și ele decizii de design. Trei durate și două curbe acoperă aproape orice mișcare pe un site cu scroll.</p>
+      <CodeBlock lang="style.css" code={":root {\n  /* culoare: numită după rol, nu după nuanță */\n  --bg: #000;  --surface: #070a0d;  --line: #20262b;\n  --fg: #eaf0f4;  --muted: #8d989f;  --accent: #5cc8ff;\n\n  /* tipografie: o scară scurtă care crește cu ecranul */\n  --t-sm: 13px;\n  --t-md: clamp(15px, 1.2vw + 12px, 18px);\n  --t-lg: clamp(22px, 2.4vw + 14px, 32px);\n  --t-xl: clamp(40px, 8vw, 112px);\n\n  /* spațiu: o unitate și multiplii ei */\n  --s1: 8px;  --s2: 16px;  --s3: 24px;  --s4: 48px;  --s5: 96px;\n\n  /* mișcare: trei durate, două curbe, o distanță */\n  --dur-fast: .2s;  --dur-base: .6s;  --dur-slow: 1.2s;\n  --ease-out: cubic-bezier(.2, .7, .2, 1);\n  --ease-in-out: cubic-bezier(.65, 0, .35, 1);\n  --rise: 24px;\n}"} />
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Tokenuri, live" right="Apasă butonul, apoi derulează" />
+  <div className="rows steps-list">
+    <Row cls="rv" num="1" title="O pagină construită doar din tokenuri">
+      <p>Fiecare valoare din pagina de mai jos citește o variabilă. Butonul schimbă un singur token, <code className="i">--accent</code>, iar etichetele, marginile și conturul de focus îl urmează toate.</p>
+      <p className="tip">Reducerea mișcării se rezolvă la fel: media query-ul pune duratele pe zero, în loc să rescrie fiecare tranziție.</p>
+    </Row>
+  </div>
+  <Demo id="tokens" name="O pagină construită din tokenuri" locale="ro" />
+</section>
+<section className="sec">
+  <Stick left="03 · Componentele citesc tokenuri" right="Niciodată valori brute" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="O singură regulă">
+      <p>O componentă nu scrie niciodată o culoare, o mărime, un spațiu sau o durată brută. Dacă îi trebuie o valoare care nu există, adaugi întâi un token, apoi îl folosești.</p>
+      <CodeBlock lang="style.css" code={".btn {\n  padding: var(--s1) var(--s3);\n  font-size: var(--t-sm);\n  color: var(--fg);\n  border: 1px solid var(--line);\n  border-radius: 99px;\n  transition: border-color var(--dur-fast) var(--ease-out);\n}\n.btn:hover, .btn:focus-visible { border-color: var(--accent); }\n\n/* o variantă schimbă tokenuri, nu reguli */\n.btn[data-tone=\"solid\"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }"} />
+    </Row>
+    <Row cls="rv" num="b" title="Variante prin atribute">
+      <p>O variantă precum <code className="i">data-tone="solid"</code> schimbă câteva tokenuri. Markup-ul rămâne lizibil, iar AI-ul nu poate inventa a șaptea nuanță de gri.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Cu Tailwind">
+      <p>În Tailwind 4 aceleași tokenuri intră într-un bloc <code className="i">@theme</code> și devin clase precum <code className="i">bg-accent</code>. Regula nu se schimbă: doar utilitare, fără valori arbitrare.</p>
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="04 · Un fișier de design pentru AI" right="DESIGN.md" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Scrie deciziile">
+      <p>Pune un <code className="i">DESIGN.md</code> scurt lângă fișierul cu regulile proiectului. AI-ul îl citește înaintea fiecărei schimbări, așa că a cincea secțiune arată ca prima.</p>
+      <CodeBlock lang="DESIGN.md" code={"# DESIGN.md\n\n## Atmosferă\nLiniștit, întunecat, editorial. O idee pe ecran. Mișcarea e lentă și rară.\n\n## Tokenuri\nToate valorile stau în :root, în style.css. Nu scrie nicăieri altundeva\no culoare, o mărime, un spațiu sau o durată brută. Dacă lipsește o valoare,\nadaugă întâi un token.\n\n## Tipografie\nCel mult două familii. Titluri subțiri (300), spațiere strânsă (-0.04em).\nText 15–18px, înălțimea rândului 1.5, rânduri de cel mult 65 de caractere.\n\n## Culoare\nFundal negru, un singur accent (--accent) pentru linkuri, focus și progres.\nTextul are contrast de cel puțin 4.5:1.\n\n## Mișcare\nApariții: în sus cu --rise, în --dur-base, cu --ease-out, o singură dată.\nScene derulate: fără easing (scrollul e easing-ul).\nSub prefers-reduced-motion nu se mișcă nimic: duratele devin 0.\n\n## Nu\nDegradeuri pe text, carduri de sticlă, sărituri, mai mult de un accent,\ncifre sau logouri inventate."} />
+    </Row>
+    <Row cls="rv" num="b" title="Trimite AI-ul la el">
+      <CodeBlock lang="Prompt" code={"Citește DESIGN.md și tokenurile din :root din style.css înainte să schimbi ceva. Folosește doar acele tokenuri. Dacă îți trebuie o valoare nouă, propune întâi tokenul și așteaptă răspunsul meu."} />
+    </Row>
+    <Row cls="rv" num="c" title="Verifică abaterile">
+      <CodeBlock lang="Prompt" code={"Listează fiecare culoare, mărime de font, spațiu și durată din CSS care nu vine dintr-un token. Pentru fiecare, spune ce token ar trebui să folosească sau propune unul nou."} />
+    </Row>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="05 · Rămâi minimalist" right="Decizii mai puține, mai ferme" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="Un singur accent">
+      <p>Marchează ce se poate apăsa, ce are focus și cât ai citit. Folosit în altă parte, nu mai înseamnă nimic.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Cel mult două familii">
+      <p>Una pentru text și, opțional, una monospace pentru etichete. Grosimea și mărimea duc ierarhia.</p>
+    </Row>
+    <Row cls="rv" num="3" title="O curbă pentru aproape toată mișcarea">
+      <p>Un singur ease-out pentru apariții și tranziții face ca tot site-ul să se miște ca dintr-o singură mână. Scenele derulate nu au niciuna: scrollul e easing-ul.</p>
+    </Row>
+    <Row cls="rv" num="4" title="Spațiu înainte de decor">
+      <p>Când o secțiune pare goală, adaugă spațiu în jurul ei, nu un degradeu, o umbră sau încă un card.</p>
+    </Row>
+  </div>
+</section>

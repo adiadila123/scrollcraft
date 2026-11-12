@@ -1,0 +1,134 @@
+export const meta = {
+  title: "Reference: faults and terms.",
+  lede: "Come back here when something breaks or a word is unfamiliar. Each fault has its likely cause and a fix; each term has a one-line definition.",
+};
+
+<section className="sec">
+  <Stick left="01 · Troubleshooting" right="Symptom, cause, fix" />
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Table. Scroll sideways to see every column.">
+    <table>
+      <thead>
+        <tr>
+          <th>Symptom</th>
+          <th>Likely cause</th>
+          <th>Fix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Smooth scroll does nothing</td>
+          <td>No doctype, so the browser is in quirks mode</td>
+          <td>Start the file with{' '}<code className="i">{'<'}!doctype html{'>'}</code></td>
+        </tr>
+        <tr>
+          <td>Two scrollbars or a jump</td>
+          <td><code className="i">overflow: hidden</code> on html or body</td>
+          <td>Use <code className="i">overflow-x: clip</code> on body</td>
+        </tr>
+        <tr>
+          <td>Sticky section never sticks</td>
+          <td>An ancestor has overflow set</td>
+          <td>Remove it, or use <code className="i">clip</code></td>
+        </tr>
+        <tr>
+          <td>Gallery ends early or late</td>
+          <td>Width measured before fonts loaded</td>
+          <td>Measure again in <code className="i">document.fonts.ready</code> and on resize</td>
+        </tr>
+        <tr>
+          <td>Content stays invisible</td>
+          <td>Class name mismatch, or threshold too high for a tall element</td>
+          <td>Check the class, lower the threshold</td>
+        </tr>
+        <tr>
+          <td>Anchor links jump</td>
+          <td>Native jump fights Lenis</td>
+          <td>Call <code className="i">lenis.scrollTo(target)</code></td>
+        </tr>
+        <tr>
+          <td>Trigger positions are wrong</td>
+          <td>Images loaded after GSAP measured</td>
+          <td>Call <code className="i">ScrollTrigger.refresh()</code> on load</td>
+        </tr>
+        <tr>
+          <td>Choppy on a phone</td>
+          <td>Animating top, left or width</td>
+          <td>Animate transform and opacity only</td>
+        </tr>
+        <tr>
+          <td>Hero text pushed off screen</td>
+          <td>Parallax offset too large on small widths</td>
+          <td>Lower the speed or the layer inset on narrow screens</td>
+        </tr>
+        <tr>
+          <td>Pinned section jumps or leaves a gap</td>
+          <td>A transformed or filtered ancestor, or two pins on one element</td>
+          <td>Pin one section at a time, outside transformed parents</td>
+        </tr>
+        <tr>
+          <td>A blank WebGL canvas</td>
+          <td>No WebGL on this computer, or the renderer created twice</td>
+          <td>Create it once inside <code className="i">try</code> and show a fallback</td>
+        </tr>
+        <tr>
+          <td>Animations never play on one computer</td>
+          <td>The system asks for reduced motion</td>
+          <td>Check the setting; respect it, and offer an opt-in</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section className="sec">
+  <Stick left="02 · Glossary" right="Twelve terms" />
+  <dl className="glossary rv">
+    <div className="gl">
+      <dt className="mono">Lerp</dt>
+      <dd>Linear interpolation. Each frame, move a fixed fraction of the remaining distance to the target.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Easing</dt>
+      <dd>The curve that sets how fast something moves at each point in its journey.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Pinning</dt>
+      <dd>Holding an element in place while the page scrolls past it. In CSS this is usually position: sticky.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Scrub</dt>
+      <dd>Tying an animation’s progress to scroll position instead of time.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Parallax</dt>
+      <dd>Layers moving at different speeds, which the eye reads as depth.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Quirks mode</dt>
+      <dd>A legacy rendering mode a browser uses when the doctype is missing.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Layout thrash</dt>
+      <dd>Reading layout values and writing styles in a loop, which forces repeated recalculation.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Composited layer</dt>
+      <dd>A layer the GPU can move without redoing layout or paint. Transform and opacity changes usually qualify.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Design token</dt>
+      <dd>A named value, such as a colour, size or duration, that every component reads instead of a raw number.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Shader</dt>
+      <dd>A small program that runs on the graphics card, once per vertex or once per pixel.</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Core Web Vitals</dt>
+      <dd>Three measures of how a page feels: loading (LCP), responsiveness (INP) and visual stability (CLS).</dd>
+    </div>
+    <div className="gl">
+      <dt className="mono">Progressive enhancement</dt>
+      <dd>Building the page so it works in full without scripts or effects, then adding them on top.</dd>
+    </div>
+  </dl>
+</section>
