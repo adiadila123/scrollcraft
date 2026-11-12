@@ -473,7 +473,7 @@ test.describe('lessons', () => {
     await expect(boxes.first()).toBeChecked();
   });
 
-  for (const id of ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'gsap', 'webgl', 'examples'])
+  for (const id of CHAPTERS.filter((c) => c !== 'reference'))
     test(`/${id} has the full lesson frame`, async ({ page, isMobile }) => {
       test.skip(isMobile, 'one viewport is enough for the structure');
       await page.goto(`/${id}`);
@@ -487,6 +487,12 @@ test.describe('lessons', () => {
       ])
         await expect(page.locator(`#${part}`), part).toBeAttached();
     });
+
+  test('the Reference appendix has objectives but no practice', async ({ page }) => {
+    await page.goto('/reference');
+    await expect(page.locator('#what-you-will-learn + .goals li')).toHaveCount(3);
+    await expect(page.locator('#practice-work-with-ai')).toHaveCount(0);
+  });
 
   test('Romanian lessons are in Romanian', async ({ page }) => {
     await page.goto('/ro/start');

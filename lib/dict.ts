@@ -87,7 +87,7 @@ const en = {
     end: 'End of the sample list',
     more: 'Loading more',
   },
-  checklist: { heading: '01 · Checklist', done: (n: number, t: number) => `${n} of ${t} done` },
+  checklist: { heading: '01 · Release checklist', done: (n: number, t: number) => `${n} of ${t} done` },
   /** the lesson frame around each chapter: objectives on top, practice after it */
   lesson: {
     ...labels.en,
@@ -295,7 +295,7 @@ const ro: Dict = {
     end: 'Sfârșitul listei',
     more: 'Se încarcă',
   },
-  checklist: { heading: '01 · Lista de verificare', done: (n, t) => `${n} din ${t} bifate` },
+  checklist: { heading: '01 · Lista pentru lansare', done: (n, t) => `${n} din ${t} bifate` },
   lesson: {
     ...labels.ro,
     how: {

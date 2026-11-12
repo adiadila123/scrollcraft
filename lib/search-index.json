@@ -10,11 +10,11 @@
    "gsap": 4,
    "webgl": 4,
    "examples": 5,
-   "design": 2,
-   "architecture": 2,
-   "performance": 2,
-   "testing": 2,
-   "launch": 2,
+   "design": 4,
+   "architecture": 4,
+   "performance": 4,
+   "testing": 4,
+   "launch": 3,
    "reference": 2
   },
   "ro": {
@@ -27,11 +27,11 @@
    "gsap": 4,
    "webgl": 3,
    "examples": 5,
-   "design": 2,
-   "architecture": 2,
-   "performance": 2,
-   "testing": 2,
-   "launch": 1,
+   "design": 3,
+   "architecture": 4,
+   "performance": 3,
+   "testing": 3,
+   "launch": 3,
    "reference": 2
   }
  },
@@ -1726,6 +1726,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Turn colour, type, space and motion into a short list of named tokens. Build components that read tokens and never hold raw values. Make a theme or a reduced-motion version by changing tokens, not rules. Write a `DESIGN.md` that keeps the AI consistent from the first section to the last."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/design#practice-work-with-ai",
+    "title": "Work with AI: Extract tokens",
+    "text": "Read CLAUDE.md and style.css. Propose a token set for the site for [subject]: colours named by role, a type scale of four or five clamp() steps, a spacing scale from one unit, and motion tokens (durations, easing, distance). Show me the :root block and a table of which raw values each token replaces. Do not edit the CSS yet."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/design#practice-work-with-ai",
+    "title": "Work with AI: Write DESIGN.md",
+    "text": "Write DESIGN.md for the site for [subject] from the tokens we agreed: mood in one line, the token rules, type, colour, motion and a short list of things not to do. Under 60 lines. Then add one line to CLAUDE.md telling you to read DESIGN.md before any visual change."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#exercise-1",
+    "title": "Exercises: Name by role",
+    "text": "Rename these tokens by role: `--blue`, `--grey-400`, `--white`, `--dark`."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#exercise-2",
+    "title": "Exercises: Reduced motion by token",
+    "text": "Make every transition on the page stop under reduced motion with one rule."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#exercise-3",
+    "title": "Exercises: Spot the drift",
+    "text": "Find three raw values in your CSS that should be tokens."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/design#practice-course-project",
+    "title": "Course project",
+    "text": "Give the site for [subject] a design system it can grow with."
+   },
+   {
+    "kind": "section",
     "chapter": "Architecture",
     "href": "/architecture#choosing-a-stack",
     "title": "Choosing a stack",
@@ -1807,6 +1856,55 @@
     "href": "/architecture#clean-up",
     "title": "Clean up",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Choose a stack by the problem: plain files, GSAP, Next.js or a backend. Organise files so content, sections, motion and the loop each live in one place. Run every effect from one animation loop that stops when the tab is hidden. Make the page work in full without JavaScript, and clean up every effect in React."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Architecture",
+    "href": "/architecture#practice-work-with-ai",
+    "title": "Work with AI: One loop",
+    "text": "Read CLAUDE.md and app.js. Refactor every scroll and animation effect in the site for [subject] to run from one requestAnimationFrame loop in ticker.js, with an onFrame(fn) function that returns a stop function and pauses while the tab is hidden. Behaviour must stay identical. Give me the plan first, then move one effect at a time."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Architecture",
+    "href": "/architecture#practice-work-with-ai",
+    "title": "Work with AI: Without JavaScript",
+    "text": "List everything on the page that is hidden, positioned or created by JavaScript. For each, tell me what a visitor sees with JavaScript turned off, and the smallest change that makes it readable."
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#exercise-1",
+    "title": "Exercises: Pick the stack",
+    "text": "Choose a stack for each: a one-page launch site; a studio site with forty projects and a CMS; a landing page with a contact form that stores messages."
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#exercise-2",
+    "title": "Exercises: Count the loops",
+    "text": "Search your `app.js` for `requestAnimationFrame` and `addEventListener('scroll'`. How many separate loops and listeners do you have?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#exercise-3",
+    "title": "Exercises: Turn JavaScript off",
+    "text": "In Chrome DevTools, open the command menu, run “Disable JavaScript” and reload your page."
+   },
+   {
+    "kind": "section",
+    "chapter": "Architecture",
+    "href": "/architecture#practice-course-project",
+    "title": "Course project",
+    "text": "Make the site for [subject] easy to change: one loop, clear files, and content that survives without scripts."
    },
    {
     "kind": "section",
@@ -1964,10 +2062,52 @@
    },
    {
     "kind": "section",
-    "chapter": "Testing and QA",
-    "href": "/testing#release-checklist",
-    "title": "Release checklist",
-    "text": ""
+    "chapter": "Performance",
+    "href": "/performance#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Explain LCP, INP and CLS and the good threshold for each. Set and follow a budget for images, video, fonts and scripts. Keep scrolling smooth: transform and opacity, batched reads, nothing off screen. Measure with Lighthouse, the Performance panel and a real phone, and fix the biggest item first."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Performance",
+    "href": "/performance#practice-work-with-ai",
+    "title": "Work with AI: Baseline",
+    "text": "Run Lighthouse in mobile mode on the site for [subject] and give me LCP, CLS and Total Blocking Time, plus the three biggest opportunities with the file and line each one comes from. Do not change anything yet."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Performance",
+    "href": "/performance#practice-work-with-ai",
+    "title": "Work with AI: Fix one thing",
+    "text": "Read CLAUDE.md. Fix only the first opportunity from the baseline. Then run Lighthouse again with the same settings and show me the before and after numbers side by side."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#exercise-1",
+    "title": "Exercises: Find the LCP element",
+    "text": "In the Lighthouse report or the Performance panel, find which element is your Largest Contentful Paint."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#exercise-2",
+    "title": "Exercises: Stop the layout shift",
+    "text": "Your CLS is 0.25. Find what moves while the page loads."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#exercise-3",
+    "title": "Exercises: Pause off screen",
+    "text": "Make one looping effect in your site stop when it is not visible."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performance",
+    "href": "/performance#practice-course-project",
+    "title": "Course project",
+    "text": "Make the site for [subject] fast on a mid-range phone, with numbers to prove it."
    },
    {
     "kind": "section",
@@ -2104,6 +2244,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Run a release checklist by hand before every launch. Write browser tests with Playwright for load, reveals and reduced motion. Add an automated accessibility audit with axe, and check the keyboard by hand. Catch visual changes with screenshot comparisons, and test on real devices."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Testing and QA",
+    "href": "/testing#practice-work-with-ai",
+    "title": "Work with AI: Set up Playwright",
+    "text": "Read CLAUDE.md. Set up Playwright for the site for [subject] with a desktop and a Pixel 7 project and a webServer that serves the folder on port 3000. Add three tests: no console errors on load; every .reveal element gets the in class once scrolled to; with reduced motion, reveals have no transform. Run them and show me the output."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Testing and QA",
+    "href": "/testing#practice-work-with-ai",
+    "title": "Work with AI: Prove the test can fail",
+    "text": "For each test you wrote, break the page on purpose so that test fails, run it, show me the failure, then undo the break. If a test cannot fail, rewrite it."
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#exercise-1",
+    "title": "Exercises: A test that cannot fail",
+    "text": "What is wrong with `expect(await page.locator('.reveal').count()).toBeGreaterThanOrEqual(0)`?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#exercise-2",
+    "title": "Exercises: What axe cannot see",
+    "text": "Name two accessibility problems that an automated audit will not find on a scroll site."
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#exercise-3",
+    "title": "Exercises: Stable screenshots",
+    "text": "Your screenshot test fails on every run although nothing changed. Why?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Testing and QA",
+    "href": "/testing#practice-course-project",
+    "title": "Course project",
+    "text": "Make the site for [subject] check itself, so later changes cannot quietly break it."
+   },
+   {
+    "kind": "section",
     "chapter": "Production and launch",
     "href": "/launch#publish-the-folder",
     "title": "Publish the folder",
@@ -2230,6 +2419,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Publish a static site or a Next.js app, with preview deployments for every branch. Connect a domain and add the metadata for search results and shared links. Run lint, the build and the tests automatically on every push. Look after the site once it is live: errors, updates and repeat checks."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Production and launch",
+    "href": "/launch#practice-work-with-ai",
+    "title": "Work with AI: Metadata",
+    "text": "Read CLAUDE.md. Add the head metadata for the site for [subject]: title, description, canonical URL, Open Graph title, description and image, and the Twitter card. Use only text from brief.md. Also add a sitemap.xml and a robots.txt that points to it. Show me the changes."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Production and launch",
+    "href": "/launch#practice-work-with-ai",
+    "title": "Work with AI: CI workflow",
+    "text": "Write .github/workflows/ci.yml that runs on every push and pull request: install with npm ci, lint, build, install Playwright with Chromium and run the tests. Pin the action versions. Explain each step in one line."
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#exercise-1",
+    "title": "Exercises: Preview before production",
+    "text": "Push a branch with a visible change. Find its preview address and check it before you merge."
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#exercise-2",
+    "title": "Exercises: Check the shared card",
+    "text": "Paste your site’s address into a messaging app or a social post draft. Does the card show the right title, text and image?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#exercise-3",
+    "title": "Exercises: Break the build on purpose",
+    "text": "Push a commit with a lint error to a branch. What does CI do?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Production and launch",
+    "href": "/launch#practice-course-project",
+    "title": "Course project",
+    "text": "Put the site for [subject] online, and set it up to stay healthy."
+   },
+   {
+    "kind": "section",
     "chapter": "Reference",
     "href": "/reference#troubleshooting",
     "title": "Troubleshooting",
@@ -2241,6 +2479,13 @@
     "href": "/reference#glossary",
     "title": "Glossary",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Reference",
+    "href": "/reference#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Find the likely cause of a common scroll fault from its symptom. Apply the fix, then confirm it with the same check that showed the fault. Look up the terms used across the course."
    }
   ],
   "ro": [
@@ -3933,6 +4178,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Transformi culoarea, tipografia, spațiul și mișcarea într-o listă scurtă de tokenuri cu nume. Construiești componente care citesc tokenuri și nu țin niciodată valori brute. Faci o temă sau o variantă cu mișcare redusă schimbând tokenuri, nu reguli. Scrii un `DESIGN.md` care ține AI-ul consecvent de la prima secțiune la ultima."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/ro/design#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Extrage tokenurile",
+    "text": "Citește CLAUDE.md și style.css. Propune un set de tokenuri pentru site-ul pentru [subiect]: culori numite după rol, o scară tipografică de patru-cinci trepte clamp(), o scară de spațiere dintr-o singură unitate și tokenuri de mișcare (durate, easing, distanță). Arată-mi blocul :root și un tabel cu valorile brute pe care le înlocuiește fiecare token. Nu edita încă CSS-ul."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Design systems",
+    "href": "/ro/design#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Scrie DESIGN.md",
+    "text": "Scrie DESIGN.md pentru site-ul pentru [subiect], din tokenurile convenite: atmosfera într-un rând, regulile tokenurilor, tipografia, culoarea, mișcarea și o listă scurtă de lucruri de evitat. Sub 60 de rânduri. Apoi adaugă în CLAUDE.md un rând care îți spune să citești DESIGN.md înaintea oricărei schimbări vizuale."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#exercise-1",
+    "title": "Exerciții: Numește după rol",
+    "text": "Redenumește după rol aceste tokenuri: `--blue`, `--grey-400`, `--white`, `--dark`."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#exercise-2",
+    "title": "Exerciții: Mișcare redusă prin tokenuri",
+    "text": "Oprește fiecare tranziție din pagină sub mișcare redusă, cu o singură regulă."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#exercise-3",
+    "title": "Exerciții: Găsește abaterile",
+    "text": "Găsește trei valori brute în CSS-ul tău care ar trebui să fie tokenuri."
+   },
+   {
+    "kind": "section",
+    "chapter": "Design systems",
+    "href": "/ro/design#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Dă site-ului pentru [subiect] un design system cu care să poată crește."
+   },
+   {
+    "kind": "section",
     "chapter": "Arhitectură",
     "href": "/ro/architecture#cum-alegi-tehnologiile",
     "title": "Cum alegi tehnologiile",
@@ -4014,6 +4308,55 @@
     "href": "/ro/architecture#curata",
     "title": "Curăță",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Alegi tehnologiile după problemă: fișiere simple, GSAP, Next.js sau un backend. Organizezi fișierele astfel încât conținutul, secțiunile, mișcarea și bucla să stea fiecare într-un singur loc. Rulezi fiecare efect dintr-o singură buclă de animație, care se oprește când tab-ul e ascuns. Faci pagina să meargă complet fără JavaScript și cureți fiecare efect în React."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: O singură buclă",
+    "text": "Citește CLAUDE.md și app.js. Refactorizează fiecare efect de scroll și de animație din site-ul pentru [subiect] ca să ruleze dintr-o singură buclă requestAnimationFrame în ticker.js, cu o funcție onFrame(fn) care întoarce o funcție de oprire și face pauză cât tab-ul e ascuns. Comportamentul trebuie să rămână identic. Dă-mi întâi planul, apoi mută câte un efect o dată."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Fără JavaScript",
+    "text": "Listează tot ce e ascuns, poziționat sau creat de JavaScript în pagină. Pentru fiecare, spune-mi ce vede un vizitator cu JavaScript oprit și cea mai mică schimbare care îl face lizibil."
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#exercise-1",
+    "title": "Exerciții: Alege tehnologiile",
+    "text": "Alege tehnologiile pentru fiecare: un site de lansare de o pagină; un site de studio cu patruzeci de proiecte și un CMS; o pagină de prezentare cu un formular de contact care salvează mesajele."
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#exercise-2",
+    "title": "Exerciții: Numără buclele",
+    "text": "Caută în `app.js` după `requestAnimationFrame` și `addEventListener('scroll'`. Câte bucle și câți listeneri separați ai?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#exercise-3",
+    "title": "Exerciții: Oprește JavaScript",
+    "text": "În Chrome DevTools, deschide meniul de comenzi, rulează „Disable JavaScript” și reîncarcă pagina."
+   },
+   {
+    "kind": "section",
+    "chapter": "Arhitectură",
+    "href": "/ro/architecture#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Fă site-ul pentru [subiect] ușor de schimbat: o buclă, fișiere clare și conținut care rezistă fără scripturi."
    },
    {
     "kind": "section",
@@ -4171,10 +4514,52 @@
    },
    {
     "kind": "section",
-    "chapter": "Testare și QA",
-    "href": "/ro/testing#lista-pentru-lansare",
-    "title": "Lista pentru lansare",
-    "text": ""
+    "chapter": "Performanță",
+    "href": "/ro/performance#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Explici LCP, INP și CLS și pragul bun pentru fiecare. Stabilești și respecți un buget pentru imagini, video, fonturi și scripturi. Păstrezi scrollul fluid: transform și opacity, citiri grupate, nimic în afara ecranului. Măsori cu Lighthouse, panoul Performance și un telefon real și repari întâi cea mai mare problemă."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Performanță",
+    "href": "/ro/performance#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Punctul de plecare",
+    "text": "Rulează Lighthouse în modul mobil pe site-ul pentru [subiect] și dă-mi LCP, CLS și Total Blocking Time, plus cele mai mari trei oportunități, cu fișierul și rândul din care vine fiecare. Nu schimba încă nimic."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Performanță",
+    "href": "/ro/performance#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Repară un singur lucru",
+    "text": "Citește CLAUDE.md. Repară doar prima oportunitate din punctul de plecare. Apoi rulează din nou Lighthouse cu aceleași setări și arată-mi cifrele de dinainte și de după, una lângă alta."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#exercise-1",
+    "title": "Exerciții: Găsește elementul LCP",
+    "text": "În raportul Lighthouse sau în panoul Performance, găsește care element e Largest Contentful Paint."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#exercise-2",
+    "title": "Exerciții: Oprește săriturile",
+    "text": "CLS-ul tău e 0,25. Găsește ce se mișcă în timp ce se încarcă pagina."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#exercise-3",
+    "title": "Exerciții: Pauză în afara ecranului",
+    "text": "Fă ca un efect în buclă din site-ul tău să se oprească atunci când nu se vede."
+   },
+   {
+    "kind": "section",
+    "chapter": "Performanță",
+    "href": "/ro/performance#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Fă site-ul pentru [subiect] rapid pe un telefon de gamă medie, cu cifre care s-o dovedească."
    },
    {
     "kind": "section",
@@ -4311,6 +4696,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Parcurgi de mână o listă de verificare înaintea fiecărei lansări. Scrii teste în browser cu Playwright pentru încărcare, apariții și mișcare redusă. Adaugi un audit automat de accesibilitate cu axe și verifici tastatura de mână. Prinzi schimbările vizuale cu comparații de capturi și testezi pe dispozitive reale."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Pregătește Playwright",
+    "text": "Citește CLAUDE.md. Pregătește Playwright pentru site-ul pentru [subiect], cu un proiect desktop și unul Pixel 7 și un webServer care servește folderul pe portul 3000. Adaugă trei teste: nicio eroare în consolă la încărcare; fiecare element .reveal primește clasa in după ce ajungi la el; cu mișcare redusă, aparițiile nu au transform. Rulează-le și arată-mi rezultatul."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Dovedește că testul poate pica",
+    "text": "Pentru fiecare test scris, strică intenționat pagina ca testul să pice, rulează-l, arată-mi eșecul, apoi anulează stricăciunea. Dacă un test nu poate pica, rescrie-l."
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#exercise-1",
+    "title": "Exerciții: Un test care nu poate pica",
+    "text": "Ce e greșit în `expect(await page.locator('.reveal').count()).toBeGreaterThanOrEqual(0)`?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#exercise-2",
+    "title": "Exerciții: Ce nu vede axe",
+    "text": "Numește două probleme de accesibilitate pe care un audit automat nu le găsește pe un site cu scroll."
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#exercise-3",
+    "title": "Exerciții: Capturi stabile",
+    "text": "Testul cu capturi pică la fiecare rulare, deși nu s-a schimbat nimic. De ce?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Testare și QA",
+    "href": "/ro/testing#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Fă site-ul pentru [subiect] să se verifice singur, ca schimbările de mai târziu să nu-l poată strica pe nesimțite."
+   },
+   {
+    "kind": "section",
     "chapter": "Producție și lansare",
     "href": "/ro/launch#publica-folderul",
     "title": "Publică folderul",
@@ -4437,6 +4871,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Publici un site static sau o aplicație Next.js, cu previzualizări pentru fiecare ramură. Legi un domeniu și adaugi metadatele pentru rezultatele căutării și pentru linkurile distribuite. Rulezi automat lint, build-ul și testele la fiecare push. Ai grijă de site după lansare: erori, actualizări și verificări repetate."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Metadate",
+    "text": "Citește CLAUDE.md. Adaugă metadatele din head pentru site-ul pentru [subiect]: titlu, descriere, adresă canonică, titlu, descriere și imagine Open Graph și cardul Twitter. Folosește doar text din brief.md. Adaugă și un sitemap.xml și un robots.txt care trimite la el. Arată-mi schimbările."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Workflow de CI",
+    "text": "Scrie .github/workflows/ci.yml care rulează la fiecare push și pull request: instalează cu npm ci, lint, build, instalează Playwright cu Chromium și rulează testele. Fixează versiunile acțiunilor. Explică fiecare pas într-un rând."
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#exercise-1",
+    "title": "Exerciții: Previzualizare înainte de producție",
+    "text": "Fă push pe o ramură cu o schimbare vizibilă. Găsește-i adresa de previzualizare și verific-o înainte de merge."
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#exercise-2",
+    "title": "Exerciții: Verifică cardul distribuit",
+    "text": "Lipește adresa site-ului într-o aplicație de mesagerie sau într-o postare nepublicată. Cardul arată titlul, textul și imaginea corecte?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#exercise-3",
+    "title": "Exerciții: Strică intenționat build-ul",
+    "text": "Fă push pe o ramură cu o eroare de lint. Ce face CI-ul?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Producție și lansare",
+    "href": "/ro/launch#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Pune online site-ul pentru [subiect] și pregătește-l să rămână sănătos."
+   },
+   {
+    "kind": "section",
     "chapter": "Referință",
     "href": "/ro/reference#depanare",
     "title": "Depanare",
@@ -4448,6 +4931,13 @@
     "href": "/ro/reference#glosar",
     "title": "Glosar",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Referință",
+    "href": "/ro/reference#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Găsești cauza probabilă a unei probleme frecvente de scroll pornind de la simptom. Aplici reparația, apoi o confirmi cu aceeași verificare care a arătat problema. Cauți termenii folosiți pe parcursul cursului."
    }
   ]
  }
