@@ -70,7 +70,7 @@ test.describe('romanian', () => {
     await expect(page).toHaveURL(/\/ro\/build$/);
     await expect(page.locator('h1')).toHaveText('Construiește-l, pas cu pas.');
     if (!isMobile)
-      await expect(page.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name: 'Construcție' })).toHaveAttribute('aria-current', 'page');
+      await expect(page.getByRole('navigation', { name: 'Principal' }).getByRole('button', { name: /^Fundamente/ })).toHaveAttribute('data-here', '');
     await page.getByRole('link', { name: 'Read in English' }).first().click();
     await expect(page).toHaveURL(/\/build$/);
   });
@@ -103,10 +103,30 @@ test.describe('navigation', () => {
   test('client-side navigation moves focus to the new heading', async ({ page, isMobile }) => {
     test.skip(isMobile, 'the desktop menu is hidden on phones');
     await page.goto('/start');
-    await page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Motion' }).click();
+    const nav = page.getByRole('navigation', { name: 'Primary' });
+    await nav.getByRole('button', { name: /^Motion/ }).click();
+    await nav.getByRole('link', { name: /^05 Motion/ }).click();
     await expect(page).toHaveURL(/\/motion$/);
     await expect(page.locator('h1')).toBeFocused();
-    await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Motion' })).toHaveAttribute('aria-current', 'page');
+    await expect(nav.getByRole('button', { name: /^Motion/ })).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#tb-level-2 a[aria-current="page"]')).toHaveAttribute('href', '/motion');
+  });
+
+  test('the topbar opens a level with its chapters, marks where you are and closes with Escape', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'the desktop menu is hidden on phones');
+    await page.goto('/gsap');
+    const nav = page.getByRole('navigation', { name: 'Primary' });
+    const level = nav.getByRole('button', { name: /^Motion/ });
+    await expect(level).toHaveAttribute('data-here', '');
+    await expect(page.locator('.tb-where')).toContainText('07 / 15');
+    await level.click();
+    const panel = page.locator('#tb-level-2');
+    await expect(panel.getByRole('link')).toHaveCount(5);
+    await expect(panel.locator('a[aria-current="page"]')).toHaveAttribute('href', '/gsap');
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+    await expect(level).toBeFocused();
+    await expect(nav.getByRole('link', { name: 'Reference' })).toHaveAttribute('href', '/reference');
   });
 
   test('leaving the Motion page straight away does not throw', async ({ page }) => {

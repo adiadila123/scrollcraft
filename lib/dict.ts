@@ -16,6 +16,15 @@ const en = {
     chapters: 'Chapters',
     /** headings for the four groups of chapters (Chapter.level 1 to 4) */
     levels: ['Level 1 · Foundations', 'Level 2 · Motion', 'Level 3 · Production', 'Appendix'],
+    /** the topbar: a short name and one line for each level */
+    levelNames: ['Foundations', 'Motion', 'Production', 'Reference'],
+    levelLines: [
+      'Tools, skills and prompts, then a first site built step by step.',
+      'Scroll techniques, GSAP, WebGL and three complete sites.',
+      'Design systems, architecture, performance, testing and launch.',
+      'Faults with their fixes, and the terms used in the course.',
+    ],
+    where: (n: string, total: number) => `Chapter ${Number(n)} of ${total}`,
     allChapters: 'All chapters',
     read: 'Read',
     previous: (t: string) => `Previous: ${t}`,
@@ -38,8 +47,6 @@ const en = {
     blurb:
       'A free tutorial on building a cinematic scroll website with Claude, Gemini or ChatGPT. Commands were checked against official documentation in November 2026. Check the linked pages before you rely on them.',
     chapters: 'Chapters',
-    /** headings for the four groups of chapters (Chapter.level 1 to 4) */
-    levels: ['Level 1 · Foundations', 'Level 2 · Motion', 'Level 3 · Production', 'Appendix'],
     docs: 'Official docs',
     finds: 'Find skills',
     rights: '© 2026 Scrollcraft. A free tutorial.',
@@ -203,6 +210,14 @@ const ro: Dict = {
     home: 'Acasă',
     chapters: 'Capitole',
     levels: ['Nivelul 1 · Fundamente', 'Nivelul 2 · Mișcare', 'Nivelul 3 · Producție', 'Anexă'],
+    levelNames: ['Fundamente', 'Mișcare', 'Producție', 'Referință'],
+    levelLines: [
+      'Unelte, skilluri și prompturi, apoi un prim site construit pas cu pas.',
+      'Tehnici de scroll, GSAP, WebGL și trei site-uri complete.',
+      'Design systems, arhitectură, performanță, testare și lansare.',
+      'Probleme cu reparațiile lor și termenii folosiți în curs.',
+    ],
+    where: (n, total) => `Capitolul ${Number(n)} din ${total}`,
     allChapters: 'Toate capitolele',
     read: 'Citit',
     previous: (t) => `Înapoi: ${t}`,
@@ -225,7 +240,6 @@ const ro: Dict = {
     blurb:
       'Un tutorial gratuit despre cum construiești un site cinematic cu scroll, folosind Claude, Gemini sau ChatGPT. Comenzile au fost verificate în documentația oficială în noiembrie 2026. Verifică paginile din linkuri înainte să te bazezi pe ele.',
     chapters: 'Capitole',
-    levels: ['Nivelul 1 · Fundamente', 'Nivelul 2 · Mișcare', 'Nivelul 3 · Producție', 'Anexă'],
     docs: 'Documentație oficială',
     finds: 'Unde găsești skilluri',
     rights: '© 2026 Scrollcraft. Un tutorial gratuit.',

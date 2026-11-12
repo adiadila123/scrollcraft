@@ -34,7 +34,8 @@ Fifteen chapters in three levels, each at `/<chapter>` in English and `/ro/<chap
 
 The old `/advanced` address redirects to Architecture.
 
-Interface features: a search palette (⌘K or Ctrl K), `[` and `]` to step through chapters, Back and Next at the end
+Interface features: a topbar grouped by level, where each level opens a panel with its chapters and your reading
+progress, a search palette (⌘K or Ctrl K), `[` and `]` to step through chapters, Back and Next at the end
 of every chapter, a course bar on phones, reading progress that resumes where you left off, and project fields that
 fill your own subject into every prompt. Smooth scrolling, parallax and reveals all switch off under
 `prefers-reduced-motion`.
