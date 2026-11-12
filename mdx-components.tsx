@@ -3,6 +3,7 @@ import OpenInStackBlitz from '@/components/build/OpenInStackBlitz';
 import PromptFeed from '@/components/build/PromptFeed';
 import Scrollytelling from '@/components/build/Scrollytelling';
 import Checklist from '@/components/launch/Checklist';
+import Criteria from '@/components/lesson/Criteria';
 import HorizontalScroll from '@/components/motion/HorizontalScroll';
 import { EasingLab, LerpLab, ParallaxLab, StaggerLab } from '@/components/playground/Labs';
 import { Callout, Cell, CodeBlock, Demo, Example, PlatformPanel, PlatformTabs, Row, Stick } from '@/components/ui';
@@ -14,6 +15,7 @@ const components: MDXComponents = {
   Cell,
   Checklist,
   CodeBlock,
+  Criteria,
   Demo,
   Example,
   EasingLab,

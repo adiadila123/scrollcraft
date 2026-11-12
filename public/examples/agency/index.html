@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Halden Studio · Tidewater, a case study</title>
+    <meta name="description" content="A fictional design studio case study, built for the Scrollcraft tutorial." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="#top">Halden</a>
+      <a class="contact-link" href="#contact">Start a project</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="kicker">Case study · Tidewater ferries</p>
+        <h1 class="title">A ferry line that reads like the coast it serves.</h1>
+        <dl class="meta">
+          <div>
+            <dt>Scope</dt>
+            <dd>Identity, wayfinding, motion</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>Strategy, design, engineering</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- process: pinned while three steps hand over; without motion they are a plain list -->
+      <section class="process" aria-label="Process">
+        <div class="process-bar" aria-hidden="true"><i></i></div>
+        <article class="step">
+          <span class="num">01</span>
+          <h2>Listen</h2>
+          <p>Two weeks on the boats, with the crews and the people who ride them every day.</p>
+        </article>
+        <article class="step">
+          <span class="num">02</span>
+          <h2>Reduce</h2>
+          <p>One idea: the line between land and water, drawn once and used everywhere.</p>
+        </article>
+        <article class="step">
+          <span class="num">03</span>
+          <h2>Move</h2>
+          <p>Motion rules, so screens, signs and tickets all behave the same way.</p>
+        </article>
+      </section>
+
+      <!-- the route draws itself as you scroll, and each stop lights up when the line reaches it -->
+      <section class="route" aria-labelledby="route-title">
+        <div class="route-pin">
+          <h2 id="route-title">One line, drawn once.</h2>
+          <svg viewBox="0 0 400 230" role="img" aria-label="The ferry route, from the harbour past the lighthouse to the islands">
+            <path class="route-ghost" d="M20 200 C 70 200, 100 130, 160 125 S 260 80, 300 70 S 360 40, 380 28" />
+            <path class="route-line" d="M20 200 C 70 200, 100 130, 160 125 S 260 80, 300 70 S 360 40, 380 28" />
+            <circle class="stop" cx="20" cy="200" r="5" />
+            <circle class="stop" cx="160" cy="125" r="5" />
+            <circle class="stop" cx="380" cy="28" r="5" />
+          </svg>
+          <ol class="stops">
+            <li>Harbour</li>
+            <li>Lighthouse</li>
+            <li>Islands</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- deliverables: a strip that moves sideways while you scroll down; without motion, a grid -->
+      <section class="work" aria-labelledby="work-title">
+        <div class="work-pin">
+          <h2 id="work-title">What we made</h2>
+          <div class="work-track">
+            <figure class="tile">
+              <div class="art a1"></div>
+              <figcaption>Signs for every pier</figcaption>
+            </figure>
+            <figure class="tile">
+              <div class="art a2"></div>
+              <figcaption>Timetables you can read in the rain</figcaption>
+            </figure>
+            <figure class="tile">
+              <div class="art a3"></div>
+              <figcaption>Tickets that fold into a map</figcaption>
+            </figure>
+            <figure class="tile">
+              <div class="art a4"></div>
+              <figcaption>Screens on board</figcaption>
+            </figure>
+            <figure class="tile">
+              <div class="art a5"></div>
+              <figcaption>A livery for the boats</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <h2 class="end">Have a line to draw?</h2>
+        <a class="btn" href="#top">Start a project</a>
+      </section>
+    </main>
+
+    <footer class="foot">A fictional studio and client, built for the Scrollcraft tutorial.</footer>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/DrawSVGPlugin.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

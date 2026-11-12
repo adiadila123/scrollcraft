@@ -1,0 +1,381 @@
+:root {
+  --bg: #06080a;
+  --fg: #eef1f2;
+  --muted: #8f9aa1;
+  --line: #1e2428;
+  --accent: #4fd1c5;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* minimal scrollbars: thin, no track, a quiet thumb */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(238, 241, 242, 0.24) transparent;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(238, 241, 242, 0.24);
+  border-radius: 3px;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  background: var(--bg);
+  color: var(--fg);
+}
+body {
+  margin: 0;
+  font:
+    400 17px/1.55 system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+h1,
+h2,
+p,
+figure {
+  margin: 0;
+}
+a {
+  color: inherit;
+}
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px clamp(20px, 4vw, 48px);
+  background: linear-gradient(var(--bg), transparent);
+}
+.brand {
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 13px;
+}
+.contact-link {
+  font-size: 14px;
+  text-decoration: none;
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+}
+.contact-link:hover,
+.contact-link:focus-visible {
+  border-color: var(--accent);
+}
+
+/* hero */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  align-content: end;
+  gap: 28px;
+  padding: 120px clamp(20px, 6vw, 96px) 12vh;
+}
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.title {
+  max-width: 16ch;
+  font-weight: 300;
+  font-size: clamp(40px, 8.4vw, 116px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+.meta {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  font-size: 14px;
+}
+.meta dt {
+  color: var(--muted);
+}
+.meta dd {
+  margin: 2px 0 0;
+}
+
+/* process: a list by default; pinned and handed over only when motion runs (the .animated class) */
+.process {
+  position: relative;
+  display: grid;
+  gap: 48px;
+  padding: 12vh clamp(20px, 6vw, 96px);
+  border-top: 1px solid var(--line);
+}
+.process-bar {
+  display: none;
+}
+.step {
+  display: grid;
+  gap: 10px;
+  max-width: 36ch;
+}
+.num {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+.step h2 {
+  font-weight: 300;
+  font-size: clamp(40px, 7vw, 88px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.step p {
+  color: var(--muted);
+}
+.animated .process {
+  height: 100svh;
+  padding: 0;
+  overflow: hidden;
+}
+.animated .step {
+  position: absolute;
+  inset: 0;
+  align-content: center;
+  max-width: none;
+  padding: 0 clamp(20px, 6vw, 96px);
+}
+.animated .step p {
+  max-width: 36ch;
+}
+.animated .process-bar {
+  display: block;
+  position: absolute;
+  left: clamp(20px, 6vw, 96px);
+  right: clamp(20px, 6vw, 96px);
+  top: 96px;
+  height: 1px;
+  background: var(--line);
+}
+.process-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+/* route: the line is drawn in full and every stop is lit, unless motion runs */
+.route {
+  border-top: 1px solid var(--line);
+}
+.route-pin {
+  display: grid;
+  gap: 28px;
+  align-content: center;
+  padding: 12vh clamp(20px, 6vw, 96px);
+}
+.route h2 {
+  font-weight: 300;
+  font-size: clamp(32px, 5vw, 64px);
+  letter-spacing: -0.035em;
+}
+.route svg {
+  width: min(100%, 760px);
+  overflow: visible;
+}
+.route path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.route-ghost {
+  stroke: var(--line);
+  stroke-dasharray: 3 7;
+}
+.route-line {
+  stroke: var(--accent);
+}
+.stop {
+  fill: var(--accent);
+  transition: fill 0.3s;
+}
+.stops {
+  display: flex;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.stops li {
+  transition: color 0.3s;
+}
+.animated .route {
+  height: 260vh;
+}
+.animated .route-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  padding-block: 0;
+}
+/* not yet reached: a grey dot and a grey label, still readable */
+.animated .stop:not(.on) {
+  fill: var(--line);
+}
+.animated .stops li:not(.on) {
+  color: var(--muted);
+}
+
+/* work: a grid by default; a sideways strip when motion runs */
+.work {
+  border-top: 1px solid var(--line);
+}
+.work-pin {
+  display: grid;
+  gap: 32px;
+  padding: 12vh clamp(20px, 6vw, 96px);
+}
+.work h2 {
+  font-weight: 300;
+  font-size: clamp(32px, 5vw, 64px);
+  letter-spacing: -0.035em;
+}
+.work-track {
+  display: grid;
+  gap: 16px;
+}
+.tile {
+  display: grid;
+  gap: 12px;
+}
+.tile figcaption {
+  color: var(--muted);
+  font-size: 15px;
+}
+.art {
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+/* each artwork is drawn in CSS with the studio's one idea: a line between land and water */
+.art::after {
+  content: '';
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 58%;
+  height: 40%;
+  border-top: 2px solid var(--accent);
+  border-radius: 50% 50% 0 0;
+}
+.a1 {
+  background: linear-gradient(160deg, #10302e, #06080a 70%);
+}
+.a2 {
+  background: linear-gradient(200deg, #1b2a36, #06080a 70%);
+}
+.a3 {
+  background: linear-gradient(140deg, #2b2416, #06080a 70%);
+}
+.a4 {
+  background: linear-gradient(180deg, #14202a, #06080a 70%);
+}
+.a5 {
+  background: linear-gradient(120deg, #0f2a22, #06080a 70%);
+}
+.a2::after {
+  top: 40%;
+}
+.a3::after {
+  top: 70%;
+  border-radius: 0 50% 0 0;
+}
+.a4::after {
+  top: 50%;
+  border-radius: 40% 60% 0 0;
+}
+.animated .work-pin {
+  height: 100svh;
+  align-content: center;
+  padding-block: 0;
+  overflow: hidden;
+}
+.animated .work-track {
+  display: flex;
+  width: max-content;
+}
+.animated .tile {
+  width: min(78vw, 420px);
+}
+
+/* contact */
+.contact {
+  min-height: 70svh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 24px;
+  text-align: center;
+  padding: 80px 20px;
+  border-top: 1px solid var(--line);
+}
+.end {
+  font-weight: 300;
+  font-size: clamp(40px, 7vw, 96px);
+  letter-spacing: -0.045em;
+}
+.btn {
+  padding: 15px 30px;
+  border-radius: 99px;
+  background: var(--accent);
+  color: #03100f;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn:hover,
+.btn:focus-visible {
+  filter: brightness(1.1);
+}
+.foot {
+  padding: 30px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+}
+
+/* larger screens */
+@media (min-width: 700px) {
+  .meta {
+    grid-template-columns: repeat(2, max-content);
+    gap: 48px;
+  }
+  .work-track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .work-track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.motion-on) .stop,
+  html:not(.motion-on) .stops li {
+    transition: none;
+  }
+}

@@ -338,7 +338,7 @@ test.describe('features', () => {
   test('each example site runs, shows its full code and opens on StackBlitz', async ({ page }) => {
     await page.goto('/examples');
     const sites = page.locator('.dm-site');
-    await expect(sites).toHaveCount(3);
+    await expect(sites).toHaveCount(5);
     const first = sites.first();
     await first.scrollIntoViewIfNeeded();
     await expect(page.frameLocator('.dm-site iframe').first().locator('h1')).toContainText('Sound that');
@@ -379,6 +379,81 @@ test.describe('features', () => {
     await page.goto('/playground');
     await page.locator('input[type="range"]').first().fill('0.3');
     await expect(page.locator('.code pre').first()).toHaveText('new Lenis({ lerp: 0.3 })');
+  });
+});
+
+/* the five portfolio projects, opened on their own: the same checks each one's portfolio-ready list starts with */
+test.describe('portfolio projects', () => {
+  const SITES = ['launch', 'portfolio', 'longread', 'agency', 'showcase'];
+  /* the widest position, in pixels, at which the page scrolls sideways, or -1; checked all the way down, because
+     pinned sections change the layout as they pass */
+  const overflow = (page: import('@playwright/test').Page) =>
+    page.evaluate(async () => {
+      for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight / 2) {
+        scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 40));
+        if (document.documentElement.scrollWidth > innerWidth) return Math.round(y);
+      }
+      return -1;
+    });
+
+  for (const id of SITES) {
+    test(`${id}: fits 375, 768 and 1440 pixels and passes axe`, async ({ page, isMobile }) => {
+      test.skip(isMobile, 'the widths are set here, so one project is enough');
+      for (const width of [375, 768, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        await page.goto(`/live/${id}/index.html`);
+        await page.waitForLoadState('networkidle');
+        expect(await overflow(page), `sideways scroll at ${width} px`).toBe(-1);
+      }
+      await page.evaluate(() => scrollTo(0, 0));
+      await page.waitForTimeout(1500); /* the opening reveal */
+      const axe = await audit(page);
+      const serious = axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
+      expect(serious.map((v) => `${v.id}: ${v.nodes.length} × ${v.help}`)).toEqual([]);
+    });
+
+    test(`${id}: with reduced motion nothing moves and everything reads`, async ({ page }) => {
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await page.goto(`/live/${id}/index.html`);
+      await page.waitForLoadState('networkidle');
+      expect(await overflow(page)).toBe(-1);
+      const running = await page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length);
+      expect(running, 'running animations').toBe(0);
+      for (const el of await page.locator('main :is(h1, h2, h3, p, li, figcaption)').all()) {
+        await el.scrollIntoViewIfNeeded();
+        await expect(el).toBeVisible();
+        expect(await el.evaluate((e) => Number(getComputedStyle(e).opacity))).toBeGreaterThan(0.9);
+      }
+      const axe = await audit(page);
+      expect(axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id)).toEqual([]);
+    });
+  }
+
+  test('the WebGL showcase reads without WebGL and its glaze buttons still work', async ({ page, consoleErrors }) => {
+    await page.addInitScript(() => {
+      HTMLCanvasElement.prototype.getContext = () => null;
+    });
+    await page.goto('/live/showcase/index.html');
+    await expect(page.locator('html')).toHaveClass(/no-webgl/);
+    await expect(page.locator('.fallback')).toBeVisible();
+    await page.getByRole('button', { name: /Tenmoku/i }).click();
+    await expect(page.getByRole('button', { name: /Tenmoku/i })).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('html')).toHaveAttribute('data-glaze', 'tenmoku');
+    /* three.js reports the missing context, which is the point of this test; anything else still fails it */
+    expect(consoleErrors.filter((e) => !/Error creating WebGL context/.test(e))).toEqual([]);
+    consoleErrors.length = 0;
+  });
+
+  test('the GSAP case study drops its pins when reduced motion is turned on', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'same layout logic on both');
+    await page.goto('/live/agency/index.html');
+    await expect(page.locator('html')).toHaveClass(/animated/);
+    await expect(page.locator('.pin-spacer')).not.toHaveCount(0);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(page.locator('html')).not.toHaveClass(/animated/);
+    await expect(page.locator('.pin-spacer')).toHaveCount(0);
+    await expect(page.locator('.stops li').last()).toBeVisible();
   });
 });
 

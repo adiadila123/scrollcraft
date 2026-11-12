@@ -153,17 +153,19 @@ main > p {
   position: sticky;
   top: 0;
   z-index: 1;
-  height: 44svh;
+  height: 46svh;
   display: grid;
   place-items: center;
   align-content: center;
-  gap: 14px;
-  background: linear-gradient(var(--bg) 85%, transparent);
+  gap: 10px;
+  padding-bottom: 14px;
+  /* solid down to the caption, so the days scrolling underneath never show through it */
+  background: linear-gradient(var(--bg) 94%, transparent);
 }
 .map svg {
   width: min(100%, 340px);
   height: auto;
-  max-height: 34svh;
+  max-height: 32svh;
   overflow: visible;
 }
 .coast {
@@ -198,9 +200,9 @@ main > p {
   stroke: var(--accent);
 }
 .map figcaption {
-  display: none;
+  /* on phones too: the map is drawn for illustration, and the reader should know that at every size */
   font:
-    400 12px/1.4 system-ui,
+    400 11px/1.4 system-ui,
     sans-serif;
   color: var(--muted);
   text-align: center;
@@ -211,11 +213,6 @@ main > p {
   flex-direction: column;
   justify-content: center;
   gap: 12px;
-  opacity: 0.4;
-  transition: opacity 0.5s;
-}
-.day.on {
-  opacity: 1;
 }
 .day-n {
   font:
@@ -223,7 +220,22 @@ main > p {
     sans-serif;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+/* the day being read is lit by colour, not opacity, so the others still meet contrast */
+.day-n,
+.day h2,
+.day p:last-child {
+  color: var(--muted);
+  transition: color 0.5s;
+}
+.day.on .day-n {
   color: var(--accent);
+}
+.day.on h2 {
+  color: var(--fg);
+}
+.day.on p:last-child {
+  color: #cfc8ba;
 }
 .day h2 {
   font-weight: 400;
@@ -232,7 +244,6 @@ main > p {
   line-height: 1.05;
 }
 .day p:last-child {
-  color: #cfc8ba;
   max-width: 28em;
 }
 
@@ -268,7 +279,7 @@ main > p {
     max-height: 76svh;
   }
   .map figcaption {
-    display: block;
+    font-size: 12px;
   }
   .day {
     min-height: 100svh;
@@ -280,5 +291,12 @@ main > p {
     transition: none;
     transform: none;
     opacity: 1;
+  }
+  /* every day reads at full strength, and the stops switch without a fade */
+  html:not(.motion-on) :is(.day-n, .day h2, .day p:last-child) {
+    transition: none;
+  }
+  html:not(.motion-on) .stops circle {
+    transition: none;
   }
 }

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sora · a stoneware vase</title>
+    <meta name="description" content="A fictional product showcase in WebGL, built for the Scrollcraft tutorial." />
+    <link rel="stylesheet" href="style.css" />
+    <script type="importmap">
+      { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js" } }
+    </script>
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="#top">Sora</a>
+      <a class="buy" href="#order">Order</a>
+    </header>
+
+    <!-- the vase, drawn by three.js behind the text; a drawing stands in when WebGL is missing -->
+    <canvas class="stage" aria-hidden="true"></canvas>
+    <svg class="fallback" viewBox="0 0 120 200" aria-hidden="true">
+      <path d="M38 196 H82 Q90 196 92 186 Q104 130 98 96 Q92 64 74 46 Q70 30 72 6 H48 Q50 30 46 46 Q28 64 22 96 Q16 130 28 186 Q30 196 38 196 Z" />
+    </svg>
+
+    <main id="top">
+      <section class="panel hero">
+        <div class="card">
+          <p class="kicker">Atelier Sora</p>
+          <h1>A vase thrown by hand, turned by your scroll.</h1>
+          <p>Stoneware, glazed twice.</p>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="card">
+          <h2>Thrown on the wheel</h2>
+          <p>Each one starts as a single piece of clay, opened and pulled up by hand.</p>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="card">
+          <h2>Trimmed a day later</h2>
+          <p>The foot is cut when the clay is leather-hard, so the vase sits low and steady.</p>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="card">
+          <h2>Two glazes</h2>
+          <p>Choose one. The vase on screen changes with you.</p>
+          <div class="swatches" role="group" aria-label="Glaze">
+            <button type="button" data-glaze="celadon" aria-pressed="true"><i></i>Celadon</button>
+            <button type="button" data-glaze="tenmoku" aria-pressed="false"><i></i>Tenmoku</button>
+          </div>
+        </div>
+      </section>
+      <section class="panel order" id="order">
+        <div class="card">
+          <h2>Sora vase</h2>
+          <p>Made in small batches. No two are quite the same.</p>
+          <a class="btn" href="#top">Order</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">A fictional atelier, built for the Scrollcraft tutorial.</footer>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

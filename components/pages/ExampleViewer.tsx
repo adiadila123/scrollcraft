@@ -68,7 +68,7 @@ export function exampleRoute(locale: Locale) {
             )}
           </nav>
         </header>
-        <ExampleFrame key={s.id} src={`/examples/${s.id}/index.html`} title={dicts[locale].demo.title(s.name)} />
+        <ExampleFrame key={s.id} src={`/live/${s.id}/index.html`} title={dicts[locale].demo.title(s.name)} />
       </div>
     );
   }

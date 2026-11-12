@@ -58,8 +58,10 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 20px clamp(20px, 4vw, 48px);
-  mix-blend-mode: difference;
-  color: #fff;
+  /* a solid strip rather than a blend mode: readable over any project image, and contrast can be measured */
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+  color: var(--fg);
 }
 .brand {
   font-weight: 600;

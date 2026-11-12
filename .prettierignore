@@ -12,3 +12,4 @@ lib/particles/shapes.ts
 content/**/*.mdx
 .impeccable
 public/vendor
+public/live

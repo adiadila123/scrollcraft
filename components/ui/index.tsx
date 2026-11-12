@@ -61,7 +61,7 @@ export async function Example({ id, name, locale = 'en' }: { id: string; name: s
       <DemoView
         id={`site-${id}`}
         name={name}
-        src={`/examples/${id}/index.html`}
+        src={`/live/${id}/index.html`}
         full={t.full}
         fullHref={withLocale(locale, `/examples/${id}`)}
         files={SITE_FILES.map((f) => ({ label: f, node: <CodeBlock lang={f} code={code[f]} /> }))}

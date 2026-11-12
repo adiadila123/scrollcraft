@@ -9,7 +9,7 @@
    "playground": 2,
    "gsap": 4,
    "webgl": 4,
-   "examples": 5,
+   "examples": 10,
    "design": 4,
    "architecture": 4,
    "performance": 4,
@@ -26,7 +26,7 @@
    "playground": 2,
    "gsap": 4,
    "webgl": 3,
-   "examples": 5,
+   "examples": 9,
    "design": 3,
    "architecture": 4,
    "performance": 3,
@@ -1342,6 +1342,13 @@
    {
     "kind": "section",
     "chapter": "Examples",
+    "href": "/examples#launch-brief",
+    "title": "The brief",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
     "href": "/examples#launch-techniques",
     "title": "Techniques used",
     "text": ""
@@ -1391,8 +1398,22 @@
    {
     "kind": "section",
     "chapter": "Examples",
+    "href": "/examples#launch-ready",
+    "title": "Portfolio-ready",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
     "href": "/examples#studio-portfolio",
     "title": "Studio portfolio",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#portfolio-brief",
+    "title": "The brief",
     "text": ""
    },
    {
@@ -1440,8 +1461,22 @@
    {
     "kind": "section",
     "chapter": "Examples",
+    "href": "/examples#portfolio-ready",
+    "title": "Portfolio-ready",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
     "href": "/examples#editorial-long-read",
     "title": "Editorial long-read",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#longread-brief",
+    "title": "The brief",
     "text": ""
    },
    {
@@ -1489,8 +1524,155 @@
    {
     "kind": "section",
     "chapter": "Examples",
-    "href": "/examples#what-all-three-share",
-    "title": "What all three share",
+    "href": "/examples#longread-ready",
+    "title": "Portfolio-ready",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#agency-case-study",
+    "title": "Agency case study",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#agency-brief",
+    "title": "The brief",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#agency-techniques",
+    "title": "Techniques used",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#agency-why",
+    "title": "Why it feels cinematic",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#agency-prompts",
+    "title": "Prompts to rebuild it",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#agency-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Build a one-page case study for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with GSAP, ScrollTrigger, SplitText and DrawSVGPlugin from jsDelivr. Sections: a headline split into lines that rise out of a mask, a pinned process of three steps where each fades out before the next arrives, an SVG route drawn by the scroll whose stops light up as the line reaches them, a pinned strip of five pieces of work moving sideways, and a contact link. Dark background, one accent colour."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#agency-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Put every scroll effect inside gsap.matchMedia with (prefers-reduced-motion: no-preference), and add the class that switches on the pinned layout inside it too. The default CSS must be the plain document: steps one under another, the route fully drawn with every stop lit, the work as a grid. Run SplitText after document.fonts.ready with autoSplit, so lines are measured in the real font."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#agency-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Check it at 375, 768 and 1440 px, with and without reduced motion, and switch reduced motion on while the page is open: every pin must go and the plain layout must come back. Tell me what you could not test."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#agency-real",
+    "title": "Use your own route",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#agency-ready",
+    "title": "Portfolio-ready",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#product-showcase-in-webgl",
+    "title": "Product showcase in WebGL",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#showcase-brief",
+    "title": "The brief",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#showcase-techniques",
+    "title": "Techniques used",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#showcase-why",
+    "title": "Why it feels cinematic",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#showcase-prompts",
+    "title": "Prompts to rebuild it",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#showcase-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Build a product page for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with three.js loaded from jsDelivr through an import map. One fixed canvas behind five short sections. Make the product with LatheGeometry from a profile curve, light it with a hemisphere light, a warm key light and a cool rim light, and turn it with the scroll. On phones put it in the top half, above the text; on wide screens, beside it."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#showcase-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Render on demand: one requestAnimationFrame queued on scroll and resize, never a loop. Cap the pixel ratio at 2. Create the renderer in a try block and show an SVG drawing of the product if it fails. Add two colour buttons with aria-pressed that change the material and the drawing."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#showcase-prompts",
+    "title": "Prompts to rebuild it: prompt",
+    "text": "Under prefers-reduced-motion keep the product in one pose and change colour at once. Check it at 375, 768 and 1440 px and with WebGL turned off, and tell me what you could not test."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#showcase-real",
+    "title": "Use a real model",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#showcase-ready",
+    "title": "Portfolio-ready",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#what-all-five-share",
+    "title": "What all five share",
     "text": ""
    },
    {
@@ -1519,6 +1701,20 @@
     "chapter": "Examples",
     "href": "/examples#mobile-first",
     "title": "Mobile first",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#check-it-automatically",
+    "title": "Check it automatically",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#check-sites",
+    "title": "Fits every screen, sits still on request",
     "text": ""
    },
    {
@@ -3794,6 +3990,13 @@
    {
     "kind": "section",
     "chapter": "Exemple",
+    "href": "/ro/examples#launch-brief",
+    "title": "Brieful",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
     "href": "/ro/examples#launch-techniques",
     "title": "Tehnici folosite",
     "text": ""
@@ -3843,8 +4046,22 @@
    {
     "kind": "section",
     "chapter": "Exemple",
+    "href": "/ro/examples#launch-ready",
+    "title": "Gata de portofoliu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
     "href": "/ro/examples#portofoliu-de-studio",
     "title": "Portofoliu de studio",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-brief",
+    "title": "Brieful",
     "text": ""
    },
    {
@@ -3892,8 +4109,22 @@
    {
     "kind": "section",
     "chapter": "Exemple",
+    "href": "/ro/examples#portfolio-ready",
+    "title": "Gata de portofoliu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
     "href": "/ro/examples#articol-lung",
     "title": "Articol lung",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#longread-brief",
+    "title": "Brieful",
     "text": ""
    },
    {
@@ -3941,8 +4172,155 @@
    {
     "kind": "section",
     "chapter": "Exemple",
-    "href": "/ro/examples#ce-au-toate-trei-in-comun",
-    "title": "Ce au toate trei în comun",
+    "href": "/ro/examples#longread-ready",
+    "title": "Gata de portofoliu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#studiu-de-caz-pentru-o-agentie",
+    "title": "Studiu de caz pentru o agenție",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-brief",
+    "title": "Brieful",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-techniques",
+    "title": "Tehnici folosite",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-why",
+    "title": "De ce pare un film",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-prompts",
+    "title": "Prompturi ca să-l refaci",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Construiește un studiu de caz pe o pagină pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu GSAP, ScrollTrigger, SplitText și DrawSVGPlugin de pe jsDelivr. Secțiuni: un titlu împărțit în rânduri care se ridică dintr-o mască, un proces fixat de trei pași în care fiecare dispare înainte să apară următorul, un traseu SVG desenat de scroll ale cărui opriri se aprind când linia ajunge la ele, o bandă fixată de cinci lucrări care se mișcă lateral și un link de contact. Fundal închis, o singură culoare de accent."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Pune fiecare efect de scroll în gsap.matchMedia cu (prefers-reduced-motion: no-preference) și adaugă tot acolo clasa care pornește așezarea fixată. CSS-ul implicit trebuie să fie documentul simplu: pașii unul sub altul, traseul desenat complet cu toate opririle aprinse, lucrările într-o grilă. Rulează SplitText după document.fonts.ready, cu autoSplit, ca rândurile să fie măsurate în fontul real."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Verifică la 375, 768 și 1440 px, cu și fără mișcare redusă, și pornește mișcarea redusă cu pagina deschisă: toate fixările trebuie să dispară și să revină așezarea simplă. Spune-mi ce n-ai putut testa."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-real",
+    "title": "Folosește propriul traseu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#agency-ready",
+    "title": "Gata de portofoliu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#prezentare-de-produs-in-webgl",
+    "title": "Prezentare de produs în WebGL",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-brief",
+    "title": "Brieful",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-techniques",
+    "title": "Tehnici folosite",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-why",
+    "title": "De ce pare un film",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-prompts",
+    "title": "Prompturi ca să-l refaci",
+    "text": ""
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Construiește o pagină de produs pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu three.js încărcat de pe jsDelivr printr-un import map. Un singur canvas fix în spatele a cinci secțiuni scurte. Fă produsul cu LatheGeometry dintr-o curbă de profil, luminează-l cu o lumină emisferică, o lumină principală caldă și o margine rece și rotește-l cu scrollul. Pe telefon pune-l în jumătatea de sus, deasupra textului; pe ecranele late, lângă el."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Desenează la cerere: un singur requestAnimationFrame pus în coadă la scroll și la redimensionare, niciodată o buclă. Limitează densitatea de pixeli la 2. Creează rendererul într-un bloc try și arată un desen SVG al produsului dacă eșuează. Adaugă două butoane de culoare cu aria-pressed care schimbă materialul și desenul."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-prompts",
+    "title": "Prompturi ca să-l refaci: prompt",
+    "text": "Cu prefers-reduced-motion ține produsul într-o singură poziție și schimbă culoarea imediat. Verifică la 375, 768 și 1440 px și cu WebGL oprit și spune-mi ce n-ai putut testa."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-real",
+    "title": "Folosește un model real",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#showcase-ready",
+    "title": "Gata de portofoliu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#ce-au-toate-cinci-in-comun",
+    "title": "Ce au toate cinci în comun",
     "text": ""
    },
    {
@@ -3971,6 +4349,20 @@
     "chapter": "Exemple",
     "href": "/ro/examples#intai-telefonul",
     "title": "Întâi telefonul",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#verifica-automat",
+    "title": "Verifică automat",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#check-sites",
+    "title": "Încape pe orice ecran, stă nemișcat la cerere",
     "text": ""
    },
    {

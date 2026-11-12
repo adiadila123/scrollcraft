@@ -153,13 +153,16 @@ a {
   font-size: clamp(22px, 3.4vw, 40px);
   font-weight: 300;
   letter-spacing: -0.02em;
+}
+/* one caption at a time, only when the script runs: without it they read as a list (below) */
+html.js .spin-cap {
   opacity: 0;
   transform: translateY(14px);
   transition:
     opacity 0.6s,
     transform 0.6s var(--ease);
 }
-.spin-cap.on {
+html.js .spin-cap.on {
   opacity: 1;
   transform: none;
 }
@@ -234,11 +237,18 @@ a {
   align-items: center;
   text-align: center;
   gap: 12px;
-  opacity: 0.4;
-  transition: opacity 0.5s;
 }
-.feat.on {
-  opacity: 1;
+/* the feature being read is lit by colour, not opacity, so the others still meet contrast */
+.feat h2,
+.feat .num {
+  color: var(--muted);
+  transition: color 0.5s;
+}
+.feat.on h2 {
+  color: var(--fg);
+}
+.feat.on .num {
+  color: var(--accent);
 }
 .num {
   color: var(--accent);
@@ -327,11 +337,42 @@ a {
   }
 }
 
+/* without the script the speaker cannot turn, so the section is a still picture with its captions under it */
+html:not(.js) .spin {
+  height: auto;
+}
+html:not(.js) .spin-pin {
+  position: relative;
+  height: auto;
+}
+html:not(.js) .spin-cap {
+  position: static;
+  padding-bottom: 16px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.js:not(.motion-on) .line > span,
-  html:not(.motion-on) .spin-cap,
-  html:not(.motion-on) .feat {
+  html:not(.motion-on) .feat,
+  html:not(.motion-on) .feat :is(h2, .num) {
     transition: none;
     transform: none;
+  }
+  /* the same still picture: the speaker on its first frame and every caption under it */
+  html:not(.motion-on) .spin {
+    height: auto;
+  }
+  html:not(.motion-on) .spin-pin {
+    position: relative;
+    height: auto;
+  }
+  html:not(.motion-on) .spin-canvas {
+    height: 72svh;
+  }
+  html:not(.motion-on) .spin-cap {
+    position: static;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    padding-bottom: 16px;
   }
 }

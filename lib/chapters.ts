@@ -92,8 +92,9 @@ export const chapters: Chapter[] = [
     level: 2,
     title: 'Examples',
     nav: 'Examples',
-    desc: 'Three complete sites',
-    summary: 'A product launch, a studio portfolio and an editorial long-read, each running live with its prompts and full code.',
+    desc: 'Five portfolio projects',
+    summary:
+      'Five portfolio projects: a product launch, a studio portfolio, a long-read, an agency case study in GSAP and a product in WebGL. Each runs live, responsive and calm under reduced motion, with a brief, prompts and full code.',
     art: 'lattice',
   },
   {
@@ -211,8 +212,9 @@ const ro: Record<string, Pick<Chapter, 'title' | 'nav' | 'desc' | 'summary'>> = 
   examples: {
     title: 'Exemple',
     nav: 'Exemple',
-    desc: 'Trei site-uri complete',
-    summary: 'O lansare de produs, un portofoliu de studio și un articol lung, fiecare rulând live, cu prompturile și codul complet.',
+    desc: 'Cinci proiecte de portofoliu',
+    summary:
+      'Cinci proiecte de portofoliu: o lansare de produs, un portofoliu de studio, un articol lung, un studiu de caz în GSAP și un produs în WebGL. Fiecare rulează live, responsive și liniștit cu mișcare redusă, cu brief, prompturi și cod complet.',
   },
   design: {
     title: 'Design systems',

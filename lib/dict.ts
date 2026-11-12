@@ -21,7 +21,7 @@ const en = {
     levelNames: ['Foundations', 'Motion', 'Production', 'Reference'],
     levelLines: [
       'Tools, skills and prompts, then a first site built step by step.',
-      'Scroll techniques, GSAP, WebGL and three complete sites.',
+      'Scroll techniques, GSAP, WebGL and five portfolio projects.',
       'Design systems, architecture, performance, testing and launch.',
       'Faults with their fixes, and the terms used in the course.',
     ],
@@ -102,6 +102,7 @@ const en = {
     },
     met: (n: number, t: number) => `${n} of ${t} criteria met`,
     complete: 'All criteria met. This chapter is marked as complete.',
+    ready: 'All criteria met. This project is ready for your portfolio.',
   },
   loop: { stage: 'Stage' },
   stackblitz: {
@@ -229,7 +230,7 @@ const ro: Dict = {
     levelNames: ['Fundamente', 'Mișcare', 'Producție', 'Referință'],
     levelLines: [
       'Unelte, skilluri și prompturi, apoi un prim site construit pas cu pas.',
-      'Tehnici de scroll, GSAP, WebGL și trei site-uri complete.',
+      'Tehnici de scroll, GSAP, WebGL și cinci proiecte de portofoliu.',
       'Design systems, arhitectură, performanță, testare și lansare.',
       'Probleme cu reparațiile lor și termenii folosiți în curs.',
     ],
@@ -308,6 +309,7 @@ const ro: Dict = {
     },
     met: (n, t) => `${n} din ${t} criterii îndeplinite`,
     complete: 'Toate criteriile sunt îndeplinite. Capitolul e marcat ca terminat.',
+    ready: 'Toate criteriile sunt îndeplinite. Proiectul e gata de portofoliu.',
   },
   loop: { stage: 'Etapa' },
   stackblitz: {

@@ -1,6 +1,6 @@
 export const meta = {
-  title: "Three complete sites, taken apart.",
-  lede: "A product launch, a studio portfolio and an editorial long-read. Each runs below, with the techniques it uses, the prompts that rebuild it for your own project, and every line of code.",
+  title: "Five portfolio projects, taken apart.",
+  lede: "A product launch, a studio portfolio, an editorial long-read, an agency case study in GSAP and a product showcase in WebGL. Each runs below with its brief, the techniques it uses, the prompts that rebuild it for your own project, a portfolio-ready checklist and every line of code. All five fit any screen from 375 pixels up, and all five sit still under reduced motion.",
 };
 
 <section className="sec">
@@ -10,7 +10,7 @@ export const meta = {
       <p>Each site runs in a frame. Scroll inside it, or press View full screen to open it on its own screen, with a Back button to return here. Notice what moves, and how little: these are minimalist on purpose.</p>
     </Row>
     <Row cls="rv" num="b" title="Then read how it is built">
-      <p>The techniques list says which pieces from Motion each site combines. Every site is three files, no libraries and no build step, so each line can be read on its own.</p>
+      <p>The techniques list says which pieces from Motion each site combines. Every site is three files and no build step. The first three use no libraries; Halden Studio loads GSAP and Atelier Sora loads three.js from a CDN, so each line can still be read on its own.</p>
     </Row>
     <Row cls="rv" num="c" title="Rebuild it for your project">
       <p>The prompts fill in your project from the fields below. Paste them in order and inspect after each one, as in Build.</p>
@@ -24,13 +24,16 @@ export const meta = {
   <p className="lede rv" style={{ marginTop: '0' }}>A launch page for a fictional speaker. The product turns as you scroll, then a sticky tour walks through what it does.</p>
   <Example id="launch" name="Orbit One" />
   <div className="rows">
-    <Row cls="rv" num="1" title="Techniques used" anchor="launch-techniques">
+    <Row cls="rv" num="1" title="The brief" anchor="launch-brief">
+      <p>A start-up is launching one speaker and needs one page that makes people pre-order it. The product must be the hero, its three features must be clear in under a minute, and the page must stay quick on a mid-range phone.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Techniques used" anchor="launch-techniques">
       <p>Headline revealed line by line (Motion, recipe e). Frame-sequence scrub for the turning product (recipe c). Words lit at the pace of the scroll (technique 5). Sticky product tour (recipe a). A reading progress bar.</p>
     </Row>
-    <Row cls="rv" num="2" title="Why it feels cinematic" anchor="launch-why">
+    <Row cls="rv" num="3" title="Why it feels cinematic" anchor="launch-why">
       <p>One accent colour, used only for the progress bar, the button and the product’s single control. Every section does one thing and holds the screen for it. The product turns only while you scroll, so the reader directs the shot.</p>
     </Row>
-    <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="launch-prompts">
+    <Row cls="rv" num="4" title="Prompts to rebuild it" anchor="launch-prompts">
       <CodeBlock
         lang="Prompt"
         code={'Build a minimalist product launch page for [subject], for [audience], ending with one call to action: [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Sections: a hero headline revealed line by line, a pinned canvas section where scroll turns the product, one sentence whose words light up as you scroll, a sticky tour of three features, and a closing call to action. Dark background, one accent colour. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries.'}
@@ -44,12 +47,16 @@ export const meta = {
         code={'Check it: under prefers-reduced-motion the product stays on frame 0, every word is lit and the headline is visible at once. With JavaScript turned off, all text must be readable. Test at 375, 768 and 1440 px and tell me what you could not test.'}
       />
     </Row>
-    <Row cls="rv" num="4" title="Swap in real product frames" anchor="launch-real">
+    <Row cls="rv" num="5" title="Swap in real product frames" anchor="launch-real">
       <p>The example draws its frames in code so it needs no files. With a 3D render or a turntable shoot, export the frames and draw images instead:</p>
       <CodeBlock
         lang="JavaScript"
         code={"const FRAMES = 120;\nconst frames = Array.from({ length: FRAMES }, (_, i) => {\n  const img = new Image();\n  img.src = `frames/${String(i + 1).padStart(3, '0')}.webp`;\n  return img;\n});\nfunction drawFrame(i) {\n  const img = frames[i];\n  if (!img.complete) return; // the next scroll event draws it\n  ctx.clearRect(0, 0, cv.width, cv.height);\n  const s = Math.min(cv.width / img.width, cv.height / img.height);\n  ctx.drawImage(img, (cv.width - img.width * s) / 2, (cv.height - img.height * s) / 2, img.width * s, img.height * s);\n}"}
       />
+    </Row>
+    <Row cls="rv" num="6" title="Portfolio-ready" anchor="launch-ready">
+      <p>Tick each one as your version meets it. The ticks stay in this browser.</p>
+      <Criteria chapter="examples-launch" marks={false} items={["No horizontal scroll and nothing overlapping at 375, 768 and 1440 pixels wide.", "With reduced motion nothing moves, and every heading and paragraph is visible, in reading order.", "axe reports no serious violations, colour contrast included.", "Your own subject, words and images: no placeholder text or stock filler left.", "The product frames stay sharp on a high-density screen and the first one shows before any scroll.", "The feature tour lights the feature being read, on phones as well as on desktop.", "Published at a public URL, with three sentences beside it: the problem, what you built and what you would change."]} />
     </Row>
   </div>
 </section>
@@ -59,13 +66,16 @@ export const meta = {
   <p className="lede rv" style={{ marginTop: '0' }}>A typographic portfolio for a fictional design studio. Large type, a drifting line of services, projects that open as they arrive, and a process told sideways.</p>
   <Example id="portfolio" name="Field Studio" />
   <div className="rows">
-    <Row cls="rv" num="1" title="Techniques used" anchor="portfolio-techniques">
+    <Row cls="rv" num="1" title="The brief" anchor="portfolio-brief">
+      <p>A small design studio wants a portfolio that sounds like them: confident type, three projects and how they work. Visitors should remember the name and find the contact link without looking for it.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Techniques used" anchor="portfolio-techniques">
       <p>Headline revealed line by line (recipe e). Scroll-speed marquee (recipe d). Clip-path reveal with a slow counter-zoom (recipe b). Horizontal scroll in a pinned section (technique 8).</p>
     </Row>
-    <Row cls="rv" num="2" title="Why it feels cinematic" anchor="portfolio-why">
+    <Row cls="rv" num="3" title="Why it feels cinematic" anchor="portfolio-why">
       <p>The type does the work, so motion stays small. Each project image opens like a shutter while the picture inside settles back from a slight zoom, which reads as a camera move. The process section changes direction, a cut that tells the reader a new part has started.</p>
     </Row>
-    <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="portfolio-prompts">
+    <Row cls="rv" num="4" title="Prompts to rebuild it" anchor="portfolio-prompts">
       <CodeBlock
         lang="Prompt"
         code={'Build a typographic portfolio for [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. Light warm background, one sans-serif typeface, no accent colour. Sections: a three-line headline revealed line by line, a marquee of services that speeds up with the scroll, three projects whose images open with clip-path as they reach the middle of the screen, a pinned horizontal strip of five process steps, and a large contact link. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries.'}
@@ -75,12 +85,16 @@ export const meta = {
         code={'Set clip-path only from JavaScript so images are fully visible without it. Size the horizontal section from the strip width on load and on resize. Do not start the marquee under prefers-reduced-motion. Then test at 375, 768 and 1440 px.'}
       />
     </Row>
-    <Row cls="rv" num="4" title="Use real project images" anchor="portfolio-real">
+    <Row cls="rv" num="5" title="Use real project images" anchor="portfolio-real">
       <p>Replace each generated artwork with an image that fills its frame. Keep the width and height attributes so the page does not jump while images load:</p>
       <CodeBlock
         lang="HTML"
         code={'<figure class="clip">\n  <img class="art" src="work/tidewater.avif" alt="Tidewater ferry timetable poster"\n       width="1600" height="1200" loading="lazy" decoding="async">\n</figure>\n<!-- style.css: .art { object-fit: cover; } -->'}
       />
+    </Row>
+    <Row cls="rv" num="6" title="Portfolio-ready" anchor="portfolio-ready">
+      <p>Tick each one as your version meets it. The ticks stay in this browser.</p>
+      <Criteria chapter="examples-portfolio" marks={false} items={["No horizontal scroll and nothing overlapping at 375, 768 and 1440 pixels wide.", "With reduced motion nothing moves, and every heading and paragraph is visible, in reading order.", "axe reports no serious violations, colour contrast included.", "Your own subject, words and images: no placeholder text or stock filler left.", "Project images keep their width and height, so nothing jumps while they load.", "The horizontal strip ends exactly on its last card at every width.", "Published at a public URL, with three sentences beside it: the problem, what you built and what you would change."]} />
     </Row>
   </div>
 </section>
@@ -90,13 +104,16 @@ export const meta = {
   <p className="lede rv" style={{ marginTop: '0' }}>A fictional travel story. A layered cover, then a map that stays beside the text and draws the route day by day.</p>
   <Example id="longread" name="The Long Way North" />
   <div className="rows">
-    <Row cls="rv" num="1" title="Techniques used" anchor="longread-techniques">
+    <Row cls="rv" num="1" title="The brief" anchor="longread-brief">
+      <p>A magazine wants a travel story where readers follow the route as they read. The text comes first; the map supports it and must never get in the way on a phone.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Techniques used" anchor="longread-techniques">
       <p>Parallax cover in three layers (technique 7). Paragraphs that arrive once (technique 3). Scrollytelling with a pinned map (technique 9). An SVG path drawn by the scroll with stroke-dashoffset. A reading progress bar.</p>
     </Row>
-    <Row cls="rv" num="2" title="Why it feels cinematic" anchor="longread-why">
+    <Row cls="rv" num="3" title="Why it feels cinematic" anchor="longread-why">
       <p>The text stays calm and readable, set in a serif at a comfortable measure. All the motion sits in the margin: the map draws as the reader moves, so the story and the route keep the same pace. The map says it is drawn for illustration, so nobody reads it as real data.</p>
     </Row>
-    <Row cls="rv" num="3" title="Prompts to rebuild it" anchor="longread-prompts">
+    <Row cls="rv" num="4" title="Prompts to rebuild it" anchor="longread-prompts">
       <CodeBlock
         lang="Prompt"
         code={'Build an editorial long-read about [subject], for [audience], ending with [one action]. Plain HTML, CSS and JavaScript in three files, no libraries. A full-screen cover with three parallax layers, a serif body at about 65 characters per line, and a section where an SVG map stays pinned on the left while five short chapters scroll on the right. Draw the route with stroke-dashoffset from scroll progress and light each stop as its chapter crosses the middle of the screen. Write the CSS mobile first: phone layout as the base, wider screens added with min-width queries.'}
@@ -106,24 +123,112 @@ export const meta = {
         code={'On phones put the map above the text, smaller, and keep each chapter tall enough to read. Under prefers-reduced-motion draw the whole route at once and switch off the parallax. Label the map as illustrative unless I give you real coordinates.'}
       />
     </Row>
-    <Row cls="rv" num="4" title="Draw your own route" anchor="longread-real">
+    <Row cls="rv" num="5" title="Draw your own route" anchor="longread-real">
       <p>Draw the path in any vector editor, export it as SVG and copy its d attribute. The script measures it, so any shape works:</p>
       <CodeBlock
         lang="JavaScript"
         code={"const route = document.querySelector('.route');\nconst length = route.getTotalLength();\nroute.style.strokeDasharray = length;\n// on scroll, with p from 0 to 1:\nroute.style.strokeDashoffset = length * (1 - p);"}
       />
     </Row>
+    <Row cls="rv" num="6" title="Portfolio-ready" anchor="longread-ready">
+      <p>Tick each one as your version meets it. The ticks stay in this browser.</p>
+      <Criteria chapter="examples-longread" marks={false} items={["No horizontal scroll and nothing overlapping at 375, 768 and 1440 pixels wide.", "With reduced motion nothing moves, and every heading and paragraph is visible, in reading order.", "axe reports no serious violations, colour contrast included.", "Your own subject, words and images: no placeholder text or stock filler left.", "The body text keeps about 65 characters per line, and the map never covers it.", "Every stop on the map lights when its chapter reaches the middle of the screen.", "Published at a public URL, with three sentences beside it: the problem, what you built and what you would change."]} />
+    </Row>
   </div>
 </section>
 
 <section className="sec">
-  <Stick left="05 · What all three share" />
+  <Stick left="05 · Agency case study" right="Halden Studio" />
+  <p className="lede rv" style={{ marginTop: '0' }}>A case study for a fictional studio that redesigned a ferry line. Built with GSAP: a process told in a pinned section, a route drawn as you scroll, and the work shown in a strip that moves sideways.</p>
+  <Example id="agency" name="Halden Studio" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="The brief" anchor="agency-brief">
+      <p>A studio wants one case study that shows how it thinks, not only what it made: the problem, the process, the idea and the work, ending with a way to start a project. It will be sent to clients, so it has to feel finished on any screen.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Techniques used" anchor="agency-techniques">
+      <p>Headline split into its real lines with SplitText, each rising out of a mask (GSAP, technique 5). A pinned process timeline where each step leaves before the next arrives (techniques 1 and 3). A route drawn with DrawSVG, whose stops light up as the line reaches them (technique 4). A pinned strip that moves sideways by exactly its overflow. Everything is created inside <code className="i">gsap.matchMedia</code>.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Why it feels cinematic" anchor="agency-why">
+      <p>One idea carries the page: the line between the islands. It is drawn once, at the reader’s pace, and every stop it reaches lights up in the accent colour. The process holds the screen while it changes, like a cut between three shots, and the strip of work moves sideways, a turn that tells the reader the story has ended and the results have started.</p>
+    </Row>
+    <Row cls="rv" num="4" title="Prompts to rebuild it" anchor="agency-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={"Build a one-page case study for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with GSAP, ScrollTrigger, SplitText and DrawSVGPlugin from jsDelivr. Sections: a headline split into lines that rise out of a mask, a pinned process of three steps where each fades out before the next arrives, an SVG route drawn by the scroll whose stops light up as the line reaches them, a pinned strip of five pieces of work moving sideways, and a contact link. Dark background, one accent colour."}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={"Put every scroll effect inside gsap.matchMedia with (prefers-reduced-motion: no-preference), and add the class that switches on the pinned layout inside it too. The default CSS must be the plain document: steps one under another, the route fully drawn with every stop lit, the work as a grid. Run SplitText after document.fonts.ready with autoSplit, so lines are measured in the real font."}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={"Check it at 375, 768 and 1440 px, with and without reduced motion, and switch reduced motion on while the page is open: every pin must go and the plain layout must come back. Tell me what you could not test."}
+      />
+    </Row>
+    <Row cls="rv" num="5" title="Use your own route" anchor="agency-real">
+      <p>Draw the line in a vector editor, keep its d attribute, and place a circle on it for each stop. The script finds where each stop sits along the line, so it lights at the right moment for any shape:</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={"const at = stops.map((s) => {\n  const x = +s.getAttribute('cx'), y = +s.getAttribute('cy');\n  let best = 0, min = Infinity;\n  for (let i = 0; i <= 200; i++) {\n    const p = line.getPointAtLength((i / 200) * length);\n    const d = (p.x - x) ** 2 + (p.y - y) ** 2;\n    if (d < min) [min, best] = [d, i / 200];\n  }\n  return best; // 0 to 1 along the line\n});"}
+      />
+    </Row>
+    <Row cls="rv" num="6" title="Portfolio-ready" anchor="agency-ready">
+      <p>Tick each one as your version meets it. The ticks stay in this browser.</p>
+      <Criteria chapter="examples-agency" marks={false} items={["No horizontal scroll and nothing overlapping at 375, 768 and 1440 pixels wide.", "With reduced motion nothing moves, and every heading and paragraph is visible, in reading order.", "axe reports no serious violations, colour contrast included.", "Your own subject, words and images: no placeholder text or stock filler left.", "The headline splits again on resize and after the fonts load, with no line cut off.", "Turning reduced motion on while the page is open removes every pin and shows the plain layout.", "Published at a public URL, with three sentences beside it: the problem, what you built and what you would change."]} />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="06 · Product showcase in WebGL" right="Atelier Sora" />
+  <p className="lede rv" style={{ marginTop: '0' }}>A product page for a fictional ceramics studio. One three.js vase behind the page turns as you scroll, and the glaze can be changed. Without WebGL, a drawing stands in.</p>
+  <Example id="showcase" name="Atelier Sora" />
+  <div className="rows">
+    <Row cls="rv" num="1" title="The brief" anchor="showcase-brief">
+      <p>A ceramics studio sells one vase in two glazes and wants people to see its form from every side before they order. Most visitors come from Instagram on a phone, so it has to load fast and look right on a small screen.</p>
+    </Row>
+    <Row cls="rv" num="2" title="Techniques used" anchor="showcase-techniques">
+      <p>A three.js scene behind the page (WebGL, scene 1). The vase is a profile curve turned on a lathe, so it needs no model file. The scroll turns it and moves the camera. It renders on demand, only when something changed, with the pixel ratio capped at 2 (Keep it fast). An SVG drawing as the fallback, and glaze buttons that work with or without WebGL.</p>
+    </Row>
+    <Row cls="rv" num="3" title="Why it feels cinematic" anchor="showcase-why">
+      <p>The object is the only thing that moves, and it moves only when you do. Warm light from one side and a cool rim from behind give it a studio look without any texture. The cards are quiet and short, so the vase has the screen.</p>
+    </Row>
+    <Row cls="rv" num="4" title="Prompts to rebuild it" anchor="showcase-prompts">
+      <CodeBlock
+        lang="Prompt"
+        code={"Build a product page for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with three.js loaded from jsDelivr through an import map. One fixed canvas behind five short sections. Make the product with LatheGeometry from a profile curve, light it with a hemisphere light, a warm key light and a cool rim light, and turn it with the scroll. On phones put it in the top half, above the text; on wide screens, beside it."}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={"Render on demand: one requestAnimationFrame queued on scroll and resize, never a loop. Cap the pixel ratio at 2. Create the renderer in a try block and show an SVG drawing of the product if it fails. Add two colour buttons with aria-pressed that change the material and the drawing."}
+      />
+      <CodeBlock
+        lang="Prompt"
+        code={"Under prefers-reduced-motion keep the product in one pose and change colour at once. Check it at 375, 768 and 1440 px and with WebGL turned off, and tell me what you could not test."}
+      />
+    </Row>
+    <Row cls="rv" num="5" title="Use a real model" anchor="showcase-real">
+      <p>With a model from a 3D artist or a scan, export it as glTF, compress it, and load it in place of the lathe. Keep render on demand: draw once when it arrives.</p>
+      <CodeBlock
+        lang="JavaScript"
+        code={"import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';\n\nnew GLTFLoader().load('vase.glb', (gltf) => {\n  scene.remove(vase);\n  vase = gltf.scene;\n  scene.add(vase);\n  queue(); // draw once, now that it is here\n});"}
+      />
+    </Row>
+    <Row cls="rv" num="6" title="Portfolio-ready" anchor="showcase-ready">
+      <p>Tick each one as your version meets it. The ticks stay in this browser.</p>
+      <Criteria chapter="examples-showcase" marks={false} items={["No horizontal scroll and nothing overlapping at 375, 768 and 1440 pixels wide.", "With reduced motion nothing moves, and every heading and paragraph is visible, in reading order.", "axe reports no serious violations, colour contrast included.", "Your own subject, words and images: no placeholder text or stock filler left.", "Without WebGL the drawing stands in and every section still reads.", "The glaze buttons work with a keyboard, and say which glaze is chosen to a screen reader.", "Published at a public URL, with three sentences beside it: the problem, what you built and what you would change."]} />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="07 · What all five share" />
   <div className="rows">
     <Row cls="rv" num="a" title="One loop">
-      <p>A single scroll listener schedules one animation frame, and everything that follows the scroll updates there. Changes that happen once use IntersectionObserver instead.</p>
+      <p>A single scroll listener schedules one animation frame, and everything that follows the scroll updates there. Changes that happen once use IntersectionObserver instead. In Halden Studio GSAP’s ticker is that loop, and Atelier Sora draws a frame only when the scroll or the glaze changed.</p>
     </Row>
     <Row cls="rv" num="b" title="Readable without the effects">
-      <p>Content is hidden only under a <code className="i">.js</code> class, and every effect has a still version for <code className="i">prefers-reduced-motion</code>.</p>
+      <p>Content is hidden only under a class the script adds (<code className="i">.js</code>, or <code className="i">.animated</code> inside <code className="i">gsap.matchMedia</code>), and every effect has a still version for <code className="i">prefers-reduced-motion</code>. Atelier Sora has a drawing for when WebGL is missing.</p>
     </Row>
     <Row cls="rv" num="c" title="Restraint">
       <p>One typeface, one accent at most, and one idea per screen. The motion is there to pace the reading, not to decorate it.</p>
@@ -133,6 +238,19 @@ export const meta = {
       <CodeBlock
         lang="CSS"
         code={'/* phones: the scene on top, the text scrolls under it */\n.tour { display: grid; }\n.tour-device { position: sticky; top: 60px; height: 46svh; }\n\n/* wider screens add the second column */\n@media (min-width: 761px) {\n  .tour { grid-template-columns: 1fr 1fr; }\n  .tour-device { top: 0; height: 100svh; }\n}'}
+      />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="08 · Check it automatically" right="Playwright" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Fits every screen, sits still on request" anchor="check-sites">
+      <p>Each portfolio-ready list starts with the same three checks, and the tutorial runs them on all five sites with every change. Run the same test on yours: it scrolls the page at three widths looking for a horizontal scroll, then turns on reduced motion and checks that nothing runs and everything shows. Add the axe check from Testing for contrast.</p>
+      <CodeBlock
+        lang="TypeScript"
+        code={"import { test, expect } from '@playwright/test';\n\nfor (const width of [375, 768, 1440]) {\n  test(`fits at ${width} px`, async ({ page }) => {\n    await page.setViewportSize({ width, height: 900 });\n    await page.goto('/');\n    /* scroll the whole page: pinned sections change the layout as they pass */\n    const wide = await page.evaluate(async () => {\n      for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight / 2) {\n        scrollTo(0, y);\n        await new Promise((r) => setTimeout(r, 50));\n        if (document.documentElement.scrollWidth > innerWidth) return y;\n      }\n      return -1;\n    });\n    expect(wide).toBe(-1);\n  });\n}\n\ntest('reduced motion: nothing moves, everything reads', async ({ page }) => {\n  await page.emulateMedia({ reducedMotion: 'reduce' });\n  await page.goto('/');\n  const running = await page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length);\n  expect(running).toBe(0);\n  for (const el of await page.locator('main :is(h1, h2, p)').all()) await expect(el).toBeVisible();\n});"}
       />
     </Row>
   </div>
