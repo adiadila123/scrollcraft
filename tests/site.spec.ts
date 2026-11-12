@@ -155,7 +155,8 @@ test.describe('navigation', () => {
   });
 
   test('search palette finds a prompt and opens its chapter', async ({ page }) => {
-    await page.goto('/');
+    /* the shortcut is handled by script, so wait until the page has loaded it (the home page is the heaviest) */
+    await page.goto('/', { waitUntil: 'networkidle' });
     await page.keyboard.press('ControlOrMeta+k');
     const input = page.getByRole('combobox');
     await expect(input).toBeFocused();
