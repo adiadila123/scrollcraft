@@ -89,7 +89,7 @@ const en = {
     of: (n: number, t: number) => `Example ${n} of ${t}`,
     prev: (name: string) => `Previous example: ${name}`,
     next: (name: string) => `Next example: ${name}`,
-    description: 'A complete example from the Scrollcraft tutorial, chapter 08.',
+    description: 'A complete example from the Scrollcraft tutorial, chapter 09.',
   },
   motion: {
     notice: 'Animations are off because this device asks for less motion.',
@@ -150,7 +150,7 @@ const en = {
     keepScrolling: 'Keep scrolling',
     zoomA: 'Every image on this site is particles',
     zoomB: 'Scroll to zoom',
-    eight: 'Nine chapters, in order.',
+    eight: 'Eleven chapters, in order.',
     four: 'Four things at the end.',
     cells: [
       ['A working site', 'Smooth inertial scrolling, a parallax hero, reveals, one pinned moment and a mobile layout.'],
@@ -273,7 +273,7 @@ const ro: Dict = {
     of: (n, t) => `Exemplul ${n} din ${t}`,
     prev: (name) => `Exemplul anterior: ${name}`,
     next: (name) => `Exemplul următor: ${name}`,
-    description: 'Un exemplu complet din tutorialul Scrollcraft, capitolul 08.',
+    description: 'Un exemplu complet din tutorialul Scrollcraft, capitolul 09.',
   },
   motion: {
     notice: 'Animațiile sunt oprite pentru că acest dispozitiv cere mai puțină mișcare.',
@@ -335,7 +335,7 @@ const ro: Dict = {
     keepScrolling: 'Continuă să derulezi',
     zoomA: 'Fiecare imagine de pe site e făcută din particule',
     zoomB: 'Derulează pentru zoom',
-    eight: 'Nouă capitole, în ordine.',
+    eight: 'Unsprezece capitole, în ordine.',
     four: 'Patru lucruri la final.',
     cells: [
       ['Un site funcțional', 'Scroll lin cu inerție, un hero cu parallax, apariții, un moment fixat și o variantă pentru mobil.'],

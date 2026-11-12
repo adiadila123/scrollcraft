@@ -55,6 +55,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .menu a:hover, .menu a:focus-visible, .menu a[aria-current] { color: var(--fg); }
 .menu a:hover::after, .menu a:focus-visible::after { transform: scaleX(1); }
 .menu a[aria-current]::after { transform: scaleX(1); background: var(--accent); }
+/* eleven chapters: tighter below 1400px, an icon-only search below 1200px, and below 1100px the menu scrolls
+   sideways with faded edges (Topbar keeps the current chapter in view) */
+.menu { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.menu::-webkit-scrollbar { display: none; }
+@media (max-width: 1400px) {
+  .menu { gap: 0; }
+  .menu a { padding: 10px 9px; }
+  .menu a::after { left: 9px; right: 9px; }
+}
+@media (max-width: 1200px) {
+  .kbd-btn .kbd-label, .kbd-btn kbd { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .kbd-btn { padding: 0 11px; }
+}
+@media (max-width: 1100px) {
+  .menu { flex: 1 1 auto; mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
+  .menu a { white-space: nowrap; }
+}
 .actions { display: flex; align-items: center; gap: 18px; }
 .signin { font: 400 13px/1 var(--sans); color: var(--muted); text-decoration: none; transition: color 0.2s; }
 .signin:hover, .signin:focus-visible { color: var(--fg); }

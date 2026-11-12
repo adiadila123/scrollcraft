@@ -25,7 +25,10 @@ export const motionOverride = () => systemReducedMotion() && motionChoice() === 
  * Pages shown in frames cannot read the reader's choice, so it is passed in. A preview's source has its
  * reduced-motion query made impossible to match (in its CSS and its scripts alike); an example site gets ?motion=on.
  */
-export const withMotion = (doc: string) => doc.replaceAll('(prefers-reduced-motion: reduce)', '(prefers-reduced-motion: reduce) and (scripting: none)');
+export const withMotion = (doc: string) =>
+  doc
+    .replaceAll('(prefers-reduced-motion: reduce)', '(prefers-reduced-motion: reduce) and (scripting: none)')
+    .replaceAll('(prefers-reduced-motion: no-preference)', 'all');
 export const withMotionParam = (src: string) => `${src}?motion=on`;
 
 /** Reduced motion is respected unless the reader turned animations back on themselves. */

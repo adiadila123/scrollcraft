@@ -7,8 +7,10 @@
    "build": 3,
    "motion": 3,
    "playground": 1,
-   "advanced": 3,
+   "gsap": 2,
+   "webgl": 2,
    "examples": 4,
+   "advanced": 3,
    "launch": 1
   },
   "ro": {
@@ -18,8 +20,10 @@
    "build": 3,
    "motion": 3,
    "playground": 1,
-   "advanced": 3,
+   "gsap": 2,
+   "webgl": 2,
    "examples": 3,
+   "advanced": 3,
    "launch": 1
   }
  },
@@ -692,93 +696,212 @@
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#choosing-a-stack",
-    "title": "Choosing a stack",
+    "chapter": "GSAP",
+    "href": "/gsap#set-it-up",
+    "title": "Set it up",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#gsap-with-lenis",
-    "title": "GSAP with Lenis",
+    "chapter": "GSAP",
+    "href": "/gsap#install",
+    "title": "Install",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#css-scroll-timelines",
+    "chapter": "GSAP",
+    "href": "/gsap#share-one-clock-with-lenis",
+    "title": "Share one clock with Lenis",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#five-techniques-live",
+    "title": "Five techniques, live",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#timeline",
+    "title": "Timeline",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#scrub",
+    "title": "Scrub",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#pin",
+    "title": "Pin",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#draw-an-svg-line",
+    "title": "Draw an SVG line",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#split-text-into-lines",
+    "title": "Split text into lines",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#in-react-and-next-js",
+    "title": "In React and Next.js",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#clean-up-on-unmount",
+    "title": "Clean up on unmount",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#respect-reduced-motion-with-matchmedia",
+    "title": "Respect reduced motion with matchMedia",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#css-scroll-timelines",
     "title": "CSS scroll timelines",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#next-js-and-react",
-    "title": "Next.js and React",
+    "chapter": "GSAP",
+    "href": "/gsap#when-to-reach-for-gsap",
+    "title": "When to reach for GSAP",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#performance-and-access",
-    "title": "Performance and access",
+    "chapter": "GSAP",
+    "href": "/gsap#stay-with-plain-code",
+    "title": "Stay with plain code",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#animate-transform-and-opacity",
-    "title": "Animate transform and opacity",
+    "chapter": "GSAP",
+    "href": "/gsap#use-gsap",
+    "title": "Use GSAP",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#read-then-write",
-    "title": "Read, then write",
+    "chapter": "GSAP",
+    "href": "/gsap#use-both",
+    "title": "Use both",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#use-will-change-sparingly",
-    "title": "Use will-change sparingly",
+    "chapter": "WebGL",
+    "href": "/webgl#before-you-start",
+    "title": "Before you start",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#do-nothing-off-screen",
-    "title": "Do nothing off screen",
+    "chapter": "WebGL",
+    "href": "/webgl#use-it-for-one-hero-moment",
+    "title": "Use it for one hero moment",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#respect-reduced-motion",
+    "chapter": "WebGL",
+    "href": "/webgl#load-it-as-a-module",
+    "title": "Load it as a module",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#always-have-a-fallback",
+    "title": "Always have a fallback",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#four-scenes-live",
+    "title": "Four scenes, live",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#a-scene-driven-by-scroll",
+    "title": "A scene driven by scroll",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#particles-moved-on-the-gpu",
+    "title": "Particles moved on the GPU",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#a-full-screen-shader",
+    "title": "A full-screen shader",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#a-cinematic-transition",
+    "title": "A cinematic transition",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#keep-it-fast",
+    "title": "Keep it fast",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#cap-the-pixel-ratio-and-render-on-demand",
+    "title": "Cap the pixel ratio and render on demand",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#respect-reduced-motion",
     "title": "Respect reduced motion",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#keep-the-keyboard-working",
-    "title": "Keep the keyboard working",
-    "text": ""
-   },
-   {
-    "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#troubleshooting",
-    "title": "Troubleshooting",
-    "text": ""
-   },
-   {
-    "kind": "section",
-    "chapter": "Advanced",
-    "href": "/advanced#glossary",
-    "title": "Glossary",
+    "chapter": "WebGL",
+    "href": "/webgl#check-it-on-a-real-phone",
+    "title": "Check it on a real phone",
     "text": ""
    },
    {
@@ -996,6 +1119,83 @@
     "chapter": "Examples",
     "href": "/examples#mobile-first",
     "title": "Mobile first",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#choosing-a-stack",
+    "title": "Choosing a stack",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#next-js-and-react",
+    "title": "Next.js and React",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#performance-and-access",
+    "title": "Performance and access",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#animate-transform-and-opacity",
+    "title": "Animate transform and opacity",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#read-then-write",
+    "title": "Read, then write",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#use-will-change-sparingly",
+    "title": "Use will-change sparingly",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#do-nothing-off-screen",
+    "title": "Do nothing off screen",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#respect-reduced-motion",
+    "title": "Respect reduced motion",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#keep-the-keyboard-working",
+    "title": "Keep the keyboard working",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#troubleshooting",
+    "title": "Troubleshooting",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Advanced",
+    "href": "/advanced#glossary",
+    "title": "Glossary",
     "text": ""
    },
    {
@@ -1730,93 +1930,212 @@
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#cum-alegi-tehnologiile",
-    "title": "Cum alegi tehnologiile",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#instalarea",
+    "title": "Instalarea",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#gsap-cu-lenis",
-    "title": "GSAP cu Lenis",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#instaleaza",
+    "title": "Instalează",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#timeline-uri-de-scroll-in-css",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#un-singur-ceas-cu-lenis",
+    "title": "Un singur ceas cu Lenis",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#cinci-tehnici-live",
+    "title": "Cinci tehnici, live",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#timeline",
+    "title": "Timeline",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#scrub",
+    "title": "Scrub",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#fixare",
+    "title": "Fixare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#deseneaza-o-linie-svg",
+    "title": "Desenează o linie SVG",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#imparte-textul-pe-randuri",
+    "title": "Împarte textul pe rânduri",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#in-react-si-next-js",
+    "title": "În React și Next.js",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#curata-la-demontare",
+    "title": "Curăță la demontare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#respecta-reducerea-miscarii-cu-matchmedia",
+    "title": "Respectă reducerea mișcării cu matchMedia",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#timeline-uri-de-scroll-in-css",
     "title": "Timeline-uri de scroll în CSS",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#next-js-si-react",
-    "title": "Next.js și React",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#cand-apelezi-la-gsap",
+    "title": "Când apelezi la GSAP",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#performanta-si-accesibilitate",
-    "title": "Performanță și accesibilitate",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#ramai-la-cod-simplu",
+    "title": "Rămâi la cod simplu",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#anima-transform-si-opacity",
-    "title": "Animă transform și opacity",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#foloseste-gsap",
+    "title": "Folosește GSAP",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#intai-citesti-apoi-scrii",
-    "title": "Întâi citești, apoi scrii",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#foloseste-le-pe-amandoua",
+    "title": "Folosește-le pe amândouă",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#foloseste-will-change-cu-masura",
-    "title": "Folosește will-change cu măsură",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#inainte-sa-incepi",
+    "title": "Înainte să începi",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#nu-face-nimic-in-afara-ecranului",
-    "title": "Nu face nimic în afara ecranului",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#foloseste-l-pentru-un-singur-moment",
+    "title": "Folosește-l pentru un singur moment",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#respecta-reduced-motion",
-    "title": "Respectă reduced motion",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#incarca-l-ca-modul",
+    "title": "Încarcă-l ca modul",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#pastreaza-tastatura-functionala",
-    "title": "Păstrează tastatura funcțională",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#ai-mereu-o-varianta-de-rezerva",
+    "title": "Ai mereu o variantă de rezervă",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#depanare",
-    "title": "Depanare",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#patru-scene-live",
+    "title": "Patru scene, live",
     "text": ""
    },
    {
     "kind": "section",
-    "chapter": "Avansat",
-    "href": "/ro/advanced#glosar",
-    "title": "Glosar",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#o-scena-condusa-de-scroll",
+    "title": "O scenă condusă de scroll",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#particule-mutate-pe-placa-video",
+    "title": "Particule mutate pe placa video",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#un-shader-pe-tot-ecranul",
+    "title": "Un shader pe tot ecranul",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#o-tranzitie-cinematica",
+    "title": "O tranziție cinematică",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#pastreaza-l-rapid",
+    "title": "Păstrează-l rapid",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#limiteaza-densitatea-si-deseneaza-la-nevoie",
+    "title": "Limitează densitatea și desenează la nevoie",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#respecta-reducerea-miscarii",
+    "title": "Respectă reducerea mișcării",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#verifica-pe-un-telefon-real",
+    "title": "Verifică pe un telefon real",
     "text": ""
    },
    {
@@ -2034,6 +2353,83 @@
     "chapter": "Exemple",
     "href": "/ro/examples#intai-telefonul",
     "title": "Întâi telefonul",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#cum-alegi-tehnologiile",
+    "title": "Cum alegi tehnologiile",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#next-js-si-react",
+    "title": "Next.js și React",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#performanta-si-accesibilitate",
+    "title": "Performanță și accesibilitate",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#anima-transform-si-opacity",
+    "title": "Animă transform și opacity",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#intai-citesti-apoi-scrii",
+    "title": "Întâi citești, apoi scrii",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#foloseste-will-change-cu-masura",
+    "title": "Folosește will-change cu măsură",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#nu-face-nimic-in-afara-ecranului",
+    "title": "Nu face nimic în afara ecranului",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#respecta-reduced-motion",
+    "title": "Respectă reduced motion",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#pastreaza-tastatura-functionala",
+    "title": "Păstrează tastatura funcțională",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#depanare",
+    "title": "Depanare",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Avansat",
+    "href": "/ro/advanced#glosar",
+    "title": "Glosar",
     "text": ""
    },
    {

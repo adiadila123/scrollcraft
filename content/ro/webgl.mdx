@@ -1,0 +1,63 @@
+export const meta = {
+  title: "WebGL: o scenă în spatele paginii.",
+  lede: "three.js desenează cu placa video; așa obțin site-urile de agenție adâncime, lumină și particule pe care CSS nu le poate face. Patru scene mai jos, fiecare legată de scroll și rulând live lângă codul ei.",
+};
+
+<section className="sec">
+  <Stick left="01 · Înainte să începi" right="Când merită WebGL" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Folosește-l pentru un singur moment">
+      <p>Un produs pe care îl poți roti, un câmp de lumină, o tranziție între două imagini. O scenă care duce povestea merită greutatea; o scenă în fiecare secțiune, nu.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Încarcă-l ca modul">
+      <p>three.js vine ca modul ES. Pe o pagină simplă, un import map îi spune browserului unde se află <code className="i">three</code>; cu un bundler, instalează-l din npm și importă-l la fel.</p>
+      <CodeBlock lang="bash" code={'npm install three'} />
+    </Row>
+    <Row cls="rv" num="c" title="Ai mereu o variantă de rezervă">
+      <p>Unele calculatoare nu au WebGL: hardware vechi, sesiuni Remote Desktop, calculatoare de laborator blocate. Creează rendererul într-un <code className="i">try</code> și păstrează pagina lizibilă fără el.</p>
+      <CodeBlock lang="JavaScript" code={"const canvas = document.querySelector('canvas.gl');\nlet renderer;\ntry {\n  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });\n} catch {\n  // fără WebGL: spune asta și păstrează pagina lizibilă fără scenă\n  document.documentElement.classList.add('no-webgl');\n}"} />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="02 · Patru scene, live" right="Derulează în fiecare previzualizare" />
+  <div className="rows steps-list">
+    <Row cls="rv sticky-k" num="1" title="O scenă condusă de scroll">
+      <p>Un obiect, două lumini și o cameră. Poziția scrollului rotește obiectul și apropie camera, iar scena se desenează doar când se schimbă scrollul.</p>
+      <p className="tip">Desenatul la scroll, în loc de o buclă continuă, lasă placa video în repaus cât cititorul citește.</p>
+    </Row>
+    <Demo id="three-scene" name="O scenă condusă de scroll" locale="ro" />
+    <Row cls="rv sticky-k" num="2" title="Particule mutate pe placa video">
+      <p>Douăsprezece mii de puncte, fiecare cu două poziții. Un mic vertex shader le amestecă după un singur număr, așa că mișcarea nu costă nimic în JavaScript, oricâte puncte ar fi.</p>
+      <p className="tip">Tot ce ai actualiza pentru fiecare punct într-o buclă își are locul într-un atribut de shader și un uniform.</p>
+    </Row>
+    <Demo id="three-points" name="Particule mutate pe placa video" locale="ro" />
+    <Row cls="rv sticky-k" num="3" title="Un shader pe tot ecranul">
+      <p>Un dreptunghi care acoperă ecranul și un fragment shader care colorează fiecare pixel. Zgomotul plutește în timp; scrollul mută lumina de la noapte la zori.</p>
+      <p className="tip">Un fundal difuz se poate desena la densitate 1x. Nimeni nu vede diferența, iar pe un ecran retina costă un sfert din efort.</p>
+    </Row>
+    <Demo id="three-shader" name="Un shader pe tot ecranul" locale="ro" />
+    <Row cls="rv sticky-k" num="4" title="O tranziție cinematică">
+      <p>Două imagini pe un dreptunghi și un shader care trece de la una la alta de-a lungul unei margini neregulate pe măsură ce derulezi, în timp ce amândouă alunecă puțin: o dizolvare care se citește ca o mișcare de cameră.</p>
+      <p className="tip">Previzualizarea își desenează cele două imagini din cod. Cu fotografii, încarcă-le cu <code className="i">TextureLoader</code> și setează <code className="i">colorSpace</code> pe sRGB.</p>
+    </Row>
+    <Demo id="three-transition" name="O tranziție cinematică" locale="ro" />
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="03 · Păstrează-l rapid" right="Bugetul" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Limitează densitatea și desenează la nevoie">
+      <p>Două setări decid cea mai mare parte din cost: câți pixeli desenezi și cât de des. Curăță ce ai creat când scena dispare, altfel un site cu o singură pagină pierde memorie la fiecare vizită.</p>
+      <CodeBlock lang="JavaScript" code={"renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); // peste 2x costul crește, câștigul nu\n\n// desenează doar când s-a schimbat ceva\naddEventListener('scroll', () => requestAnimationFrame(render), { passive: true });\n\n// când scena dispare definitiv, eliberează memoria\ngeometry.dispose();\nmaterial.dispose();\ntexture.dispose();\nrenderer.dispose();"} />
+    </Row>
+    <Row cls="rv" num="b" title="Respectă reducerea mișcării">
+      <p>Fiecare previzualizare citește <code className="i">prefers-reduced-motion</code>: scenele stau pe loc, particulele arată forma finală, shaderul nu mai plutește, iar tranziția taie în loc să se dizolve.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Verifică pe un telefon real">
+      <p>Plăcile video de desktop ascund problemele. Deschide pagina pe un telefon de gamă medie, derulează un minut și simte dacă se încălzește. Dacă da, scade întâi densitatea sau numărul de puncte.</p>
+    </Row>
+  </div>
+</section>

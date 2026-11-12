@@ -6,7 +6,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { slugify } from '../lib/slug.mjs';
 
 const root = new URL('..', import.meta.url);
-const ids = ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'advanced', 'examples', 'launch'];
+const ids = ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'gsap', 'webgl', 'examples', 'advanced', 'launch'];
 const locales = { en: '', ro: '/ro' };
 const WPM = 230;
 

@@ -215,7 +215,7 @@ test.describe('features', () => {
     await page.locator('.next-band').scrollIntoViewIfNeeded();
     await page.waitForTimeout(300);
     await page.goto('/');
-    await expect(page.getByText('1 of 9 chapters read')).toBeVisible();
+    await expect(page.getByText('1 of 11 chapters read')).toBeVisible();
     await expect(page.getByRole('link', { name: /Next: 02 Skills/ })).toHaveAttribute('href', '/skills');
   });
 
@@ -267,6 +267,30 @@ test.describe('features', () => {
       await expect(stage).toBeVisible();
       await expect(code).toContainText('position: sticky');
     }
+  });
+
+  test('the GSAP and WebGL previews load their libraries from this site, not a CDN', async ({ page }) => {
+    const cdn: string[] = [];
+    page.on('request', (r) => {
+      if (r.url().includes('cdn.jsdelivr.net')) cdn.push(r.url());
+    });
+    for (const [chapter, check] of [
+      ['gsap', 'typeof gsap === "object"'],
+      ['webgl', 'import("three").then((m) => typeof m.WebGLRenderer === "function")'],
+    ] as const) {
+      await page.goto(`/${chapter}`);
+      const frames = page.locator('.dm iframe');
+      const count = await page.locator('.dm').count();
+      expect(count).toBeGreaterThanOrEqual(4);
+      for (let i = 0; i < count; i++) {
+        await page.locator('.dm').nth(i).scrollIntoViewIfNeeded();
+        const frame = await frames.nth(i).contentFrame();
+        await expect(frame.locator('body')).not.toBeEmpty();
+        const el = await frames.nth(i).elementHandle();
+        await expect.poll(async () => (await el!.contentFrame())!.evaluate(check)).toBe(true);
+      }
+    }
+    expect(cdn, 'requests to the CDN').toEqual([]);
   });
 
   test('each example site runs, shows its full code and opens on StackBlitz', async ({ page }) => {
@@ -384,8 +408,8 @@ test.describe('phone', () => {
     test.skip(!isMobile, 'phones only');
     await page.goto('/advanced');
     const bar = page.getByRole('navigation', { name: 'Course' });
-    await expect(bar.getByRole('link', { name: 'Previous: Playground' })).toHaveAttribute('href', '/playground');
-    await expect(bar.getByRole('link', { name: 'Next: Examples' })).toHaveAttribute('href', '/examples');
+    await expect(bar.getByRole('link', { name: 'Previous: Examples' })).toHaveAttribute('href', '/examples');
+    await expect(bar.getByRole('link', { name: 'Next: Launch' })).toHaveAttribute('href', '/launch');
     const all = bar.getByRole('button', { name: /Show all chapters/ });
     await all.click();
     const sheet = page.getByRole('dialog', { name: 'All chapters' });

@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "index": "node scripts/build-search-index.mjs",
-    "predev": "npm run index",
+    "predev": "npm run index && npm run vendor",
     "dev": "next dev",
-    "prebuild": "npm run index",
+    "prebuild": "npm run index && npm run vendor",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -15,7 +15,8 @@
     "format:check": "prettier --check .",
     "test": "playwright test",
     "check:links": "node scripts/check-links.mjs",
-    "verify": "npm run lint && npm run typecheck && npm run build && npm test"
+    "verify": "npm run lint && npm run typecheck && npm run build && npm test",
+    "vendor": "node scripts/copy-vendor.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "3.1.1",
@@ -41,6 +42,7 @@
     "@types/three": "0.187.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.4.5",
+    "gsap": "^3.15.1",
     "prettier": "3.9.10",
     "shiki": "4.6.0",
     "typescript": "5.9.3"

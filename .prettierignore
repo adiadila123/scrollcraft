@@ -11,3 +11,4 @@ lib/particles/shapes.ts
 # extra paragraph. Text inside components stays on one line by hand (see README, Adding a chapter).
 content/**/*.mdx
 .impeccable
+public/vendor

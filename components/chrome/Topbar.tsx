@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { chapterHref, chaptersFor, routeOf } from '@/lib/chapters';
 import { stripLocale, withLocale } from '@/lib/i18n';
 import { useLocale } from '@/lib/useLocale';
@@ -18,13 +18,20 @@ export default function Topbar() {
   const [scrolled, setScrolled] = useState(false);
   useScroll((y) => setScrolled(y > 8));
   const solid = route !== 'home' || scrolled;
+  /* on narrower screens the menu scrolls sideways: bring the current chapter into view */
+  const menu = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const nav = menu.current;
+    const cur = nav?.querySelector<HTMLElement>('[aria-current]');
+    if (nav && cur) nav.scrollLeft = cur.offsetLeft - nav.offsetLeft - (nav.clientWidth - cur.offsetWidth) / 2;
+  }, [route]);
 
   return (
     <header className={solid ? 'topbar solid' : 'topbar'} id="topbar">
       <Link className="mark" href={chapterHref('home', locale)}>
         Scrollcraft
       </Link>
-      <nav className="menu" aria-label={t.nav.primary}>
+      <nav className="menu" ref={menu} aria-label={t.nav.primary}>
         {chaptersFor(locale).map((c) => (
           <Link key={c.id} href={chapterHref(c.id, locale)} aria-current={route === c.id ? 'page' : undefined}>
             {c.nav}

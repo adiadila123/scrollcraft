@@ -1,8 +1,12 @@
+import { gsapDemos } from './demos-gsap';
+import { webglDemos } from './demos-webgl';
+
 /**
  * Small, complete pages for the live previews. Each runs on its own inside a sandboxed iframe and is also the code
  * the reader copies, so it has to be correct as written: no hidden helpers, reduced motion handled in every one.
  */
-export type DemoSource = { html: string; css: string; js?: string };
+/** module: the script is an ES module (the WebGL previews import three.js through an import map). */
+export type DemoSource = { html: string; css: string; js?: string; module?: boolean };
 
 /** Shared look for every preview, so the snippets stay about the technique. Not shown in the code tabs. */
 const DEMO_BASE = `*,*::before,*::after{box-sizing:border-box}
@@ -10,7 +14,7 @@ html{scrollbar-width:thin;scrollbar-color:rgba(238,242,245,.24) transparent}
 html,body{margin:0;background:#000;color:#eaf0f4;font:400 15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 .hint{position:fixed;left:10px;bottom:10px;z-index:99;padding:6px 8px;background:rgba(0,0,0,.75);font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:#7f8c95;pointer-events:none}`;
 
-export const demos: Record<string, DemoSource> = {
+const basicDemos: Record<string, DemoSource> = {
   sticky: {
     html: `<section>
   <h2 class="label">01 · Brief</h2>
@@ -443,7 +447,18 @@ io.observe(h);`,
   },
 };
 
+export const demos: Record<string, DemoSource> = { ...basicDemos, ...gsapDemos, ...webglDemos };
+
+/**
+ * Library URLs in the preview code point at jsDelivr, so the code works when pasted elsewhere. Inside the tutorial
+ * they load from the copies in public/vendor (scripts/copy-vendor.mjs), which also work on networks that block CDNs.
+ */
+const local = (code: string) => code.replace(/https:\/\/cdn\.jsdelivr\.net\/npm\/(gsap|three)@([\d.]+)\/(?:dist|build)\//g, '/vendor/$1/$2/');
+
 /** The full page for a preview: the shared base, the demo's own CSS and markup, its script, and a scroll hint. */
 export function demoDocument(d: DemoSource, hint: string) {
-  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${DEMO_BASE}\n${d.css}</style></head><body>${d.html}<span class="hint">${hint}</span>${d.js ? `<script>${d.js}</script>` : ''}</body></html>`;
+  const script = d.js ? `<script${d.module ? ' type="module"' : ''}>${d.js}</script>` : '';
+  return local(
+    `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${DEMO_BASE}\n${d.css}</style></head><body>${d.html}<span class="hint">${hint}</span>${script}</body></html>`,
+  );
 }

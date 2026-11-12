@@ -1,0 +1,63 @@
+export const meta = {
+  title: "WebGL: a scene behind the page.",
+  lede: "three.js draws with the graphics card, which is how agency sites get depth, light and particles that CSS cannot. Four scenes below, each tied to the scroll and running live beside its code.",
+};
+
+<section className="sec">
+  <Stick left="01 · Before you start" right="When WebGL is worth it" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Use it for one hero moment">
+      <p>A product you can turn, a field of light, a transition between two images. One scene that carries the story is worth the weight; a scene in every section is not.</p>
+    </Row>
+    <Row cls="rv" num="b" title="Load it as a module">
+      <p>three.js ships as an ES module. On a plain page, an import map tells the browser where <code className="i">three</code> lives; with a bundler, install it from npm and import it the same way.</p>
+      <CodeBlock lang="bash" code={'npm install three'} />
+    </Row>
+    <Row cls="rv" num="c" title="Always have a fallback">
+      <p>Some machines have no WebGL: old hardware, remote desktops, locked-down lab computers. Create the renderer inside <code className="i">try</code> and keep the page readable without it.</p>
+      <CodeBlock lang="JavaScript" code={"const canvas = document.querySelector('canvas.gl');\nlet renderer;\ntry {\n  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });\n} catch {\n  // no WebGL: say so, and keep the page readable without the scene\n  document.documentElement.classList.add('no-webgl');\n}"} />
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="02 · Four scenes, live" right="Scroll inside each preview" />
+  <div className="rows steps-list">
+    <Row cls="rv sticky-k" num="1" title="A scene driven by scroll">
+      <p>A mesh, two lights and a camera. The scroll position turns the object and moves the camera in, and the scene is drawn only when the scroll changes.</p>
+      <p className="tip">Rendering on scroll instead of in a constant loop leaves the graphics card idle while the reader is reading.</p>
+    </Row>
+    <Demo id="three-scene" name="A scene driven by scroll" />
+    <Row cls="rv sticky-k" num="2" title="Particles moved on the GPU">
+      <p>Twelve thousand points, each with two positions. A small vertex shader mixes them by one number, so the move costs JavaScript nothing however many points there are.</p>
+      <p className="tip">Anything you would update per point in a loop belongs in a shader attribute and a uniform.</p>
+    </Row>
+    <Demo id="three-points" name="Particles moved on the GPU" />
+    <Row cls="rv sticky-k" num="3" title="A full-screen shader">
+      <p>One rectangle covering the screen and a fragment shader that paints every pixel. Noise drifts with time; the scroll shifts the light from night to dawn.</p>
+      <p className="tip">A soft backdrop can render at 1x pixel ratio. Nobody sees the difference, and it costs a quarter of the work on a retina screen.</p>
+    </Row>
+    <Demo id="three-shader" name="A full-screen shader" />
+    <Row cls="rv sticky-k" num="4" title="A cinematic transition">
+      <p>Two images on one rectangle, and a shader that switches from one to the other along a ragged edge as you scroll, while both slide a little: a dissolve that reads as a camera move.</p>
+      <p className="tip">The preview draws its two images in code. With photographs, load them with <code className="i">TextureLoader</code> and set <code className="i">colorSpace</code> to sRGB.</p>
+    </Row>
+    <Demo id="three-transition" name="A cinematic transition" />
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="03 · Keep it fast" right="The budget" />
+  <div className="rows">
+    <Row cls="rv" num="a" title="Cap the pixel ratio and render on demand">
+      <p>Two settings decide most of the cost: how many pixels you draw and how often. Clean up what you create when the scene goes away, or a single-page site leaks memory with every visit.</p>
+      <CodeBlock lang="JavaScript" code={"renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); // past 2x the cost grows, the gain does not\n\n// draw only when something changed\naddEventListener('scroll', () => requestAnimationFrame(render), { passive: true });\n\n// when the scene leaves the page for good, give the memory back\ngeometry.dispose();\nmaterial.dispose();\ntexture.dispose();\nrenderer.dispose();"} />
+    </Row>
+    <Row cls="rv" num="b" title="Respect reduced motion">
+      <p>Every preview reads <code className="i">prefers-reduced-motion</code>: the scenes hold still, the particles show their final shape, the shader stops drifting and the transition cuts instead of dissolving.</p>
+    </Row>
+    <Row cls="rv" num="c" title="Check it on a real phone">
+      <p>Desktop graphics cards hide problems. Open the page on a mid-range phone, scroll it for a minute, and feel whether it gets warm. If it does, lower the pixel ratio or the point count first.</p>
+    </Row>
+  </div>
+</section>
