@@ -5,11 +5,11 @@
    "skills": 6,
    "prompting": 4,
    "build": 5,
-   "motion": 3,
-   "playground": 1,
-   "gsap": 2,
-   "webgl": 2,
-   "examples": 4,
+   "motion": 5,
+   "playground": 2,
+   "gsap": 4,
+   "webgl": 4,
+   "examples": 5,
    "design": 2,
    "architecture": 2,
    "performance": 2,
@@ -22,11 +22,11 @@
    "skills": 5,
    "prompting": 4,
    "build": 5,
-   "motion": 3,
-   "playground": 1,
-   "gsap": 2,
-   "webgl": 2,
-   "examples": 3,
+   "motion": 5,
+   "playground": 2,
+   "gsap": 4,
+   "webgl": 3,
+   "examples": 5,
    "design": 2,
    "architecture": 2,
    "performance": 2,
@@ -872,6 +872,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Name the nine scroll techniques and say what each one is for. Choose a technique by the job it does in the story, not by how impressive it looks. Build each one with CSS and a little JavaScript, with a still version under reduced motion. Combine two or three techniques on one page without them competing."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Motion",
+    "href": "/motion#practice-work-with-ai",
+    "title": "Work with AI: Add one technique",
+    "text": "Read CLAUDE.md. Add a sticky product tour to the site for [subject]: the device stays pinned while three features scroll past, and the active feature is the last one whose heading has passed 55% of the screen height. Plain CSS and JavaScript, one scroll listener, transform and opacity only. Under prefers-reduced-motion the features simply stack. Show me the plan first."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Motion",
+    "href": "/motion#practice-work-with-ai",
+    "title": "Work with AI: Explain it back",
+    "text": "Explain the code you just wrote line by line, as if I will maintain it alone: what runs on every frame, what runs once, and what I would change to make the effect slower or calmer."
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#exercise-1",
+    "title": "Exercises: Match technique to job",
+    "text": "For each job, pick a technique: keep a label visible while its section is read; show a long timeline; reveal a quote once; tell a product story in three beats."
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#exercise-2",
+    "title": "Exercises: Remove the JavaScript",
+    "text": "The sticky positioning demo uses no JavaScript. Which other technique in this chapter can also be built in CSS alone in current browsers?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#exercise-3",
+    "title": "Exercises: One too many",
+    "text": "A hero has parallax layers, a zoom on scroll, a split headline and a scroll-speed marquee. Remove the effects that compete and keep the page cinematic."
+   },
+   {
+    "kind": "section",
+    "chapter": "Motion",
+    "href": "/motion#practice-course-project",
+    "title": "Course project",
+    "text": "Give the site for [subject] its signature moments. Pick two recipes from section 02 that fit your story, and build them one at a time."
+   },
+   {
+    "kind": "section",
     "chapter": "Playground",
     "href": "/playground#smoothing",
     "title": "Smoothing",
@@ -897,6 +946,55 @@
     "href": "/playground#easing",
     "title": "Easing",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Playground",
+    "href": "/playground#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Feel how smoothing, parallax speed, stagger and easing change the mood of a page. Choose values on purpose and write them down as design decisions. Copy the exact line of code each setting produces. Keep motion values consistent across the whole site."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Playground",
+    "href": "/playground#practice-work-with-ai",
+    "title": "Work with AI: Apply the values",
+    "text": "Read CLAUDE.md. Collect every motion value in the site for [subject] into one place: the Lenis lerp, the parallax speed, the reveal stagger and the easing curve, as CSS custom properties and one JavaScript object. Use these values: lerp [value], parallax speed [value], stagger [value] ms, easing [cubic-bezier]. Replace the hard-coded numbers and list every line you changed."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Playground",
+    "href": "/playground#practice-work-with-ai",
+    "title": "Work with AI: Find stray values",
+    "text": "Search the CSS and JavaScript for durations, delays, easing curves and speeds that do not come from the shared motion values. List each one with its file and line. Do not change them yet."
+   },
+   {
+    "kind": "section",
+    "chapter": "Playground",
+    "href": "/playground#exercise-1",
+    "title": "Exercises: Calm versus lively",
+    "text": "Find a smoothing value that feels calm and one that feels lively. Write both down with one word for each feeling."
+   },
+   {
+    "kind": "section",
+    "chapter": "Playground",
+    "href": "/playground#exercise-2",
+    "title": "Exercises: Depth without nausea",
+    "text": "Set the parallax speed so the layers feel deep but the text never drifts far from where the reader expects it."
+   },
+   {
+    "kind": "section",
+    "chapter": "Playground",
+    "href": "/playground#exercise-3",
+    "title": "Exercises: One curve",
+    "text": "Pick a single easing curve for every reveal on your site and explain why it fits [subject]."
+   },
+   {
+    "kind": "section",
+    "chapter": "Playground",
+    "href": "/playground#practice-course-project",
+    "title": "Course project",
+    "text": "Turn your choices into the motion settings of the site for [subject], so every effect shares them."
    },
    {
     "kind": "section",
@@ -1019,6 +1117,55 @@
    },
    {
     "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Sequence several movements with a GSAP timeline and its position parameter. Tie a timeline to the scroll with ScrollTrigger: scrub, pin and start and end points. Draw SVG lines and reveal split text with the free GSAP plugins. Clean up in React with `useGSAP`, and respect reduced motion with `gsap.matchMedia()`."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "GSAP",
+    "href": "/gsap#practice-work-with-ai",
+    "title": "Work with AI: A pinned scene",
+    "text": "Read CLAUDE.md. Add a pinned scene to the site for [subject] with GSAP 3.15.1 and ScrollTrigger from jsDelivr: the section stays pinned for 200% of the screen height while three steps hand over one after another, with a progress line. Register the plugin, build it inside gsap.matchMedia so nothing animates under prefers-reduced-motion (the steps stack instead), and call ScrollTrigger.refresh() after images load. Show me the plan first."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "GSAP",
+    "href": "/gsap#practice-work-with-ai",
+    "title": "Work with AI: Check the triggers",
+    "text": "Turn on ScrollTrigger markers temporarily and tell me where each trigger starts and ends at 375 and 1440 pixels wide. Then remove the markers. Do not change anything else."
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#exercise-1",
+    "title": "Exercises: Read the position parameter",
+    "text": "In `tl.to(a, {…}).to(b, {…}, \"-=0.4\").to(c, {…}, \"<\")`, when does each tween start?"
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#exercise-2",
+    "title": "Exercises: Scrub or play",
+    "text": "For a headline that appears once, and for a product that rotates as you scroll, choose between `scrub` and `toggleActions`."
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#exercise-3",
+    "title": "Exercises: Clean up in React",
+    "text": "A component creates a ScrollTrigger in `useEffect` without cleanup. What happens after navigating away and back three times?"
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/gsap#practice-course-project",
+    "title": "Course project",
+    "text": "Give the site for [subject] one scene that only GSAP makes easy: a pinned sequence that tells part of the story."
+   },
+   {
+    "kind": "section",
     "chapter": "WebGL",
     "href": "/webgl#before-you-start",
     "title": "Before you start",
@@ -1107,6 +1254,55 @@
     "href": "/webgl#check-it-on-a-real-phone",
     "title": "Check it on a real phone",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Set up a three.js scene with a renderer, a camera, lights and one object. Drive a scene from the scroll position, drawing only when something changes. Move work to the graphics card with shaders and buffer attributes. Keep WebGL fast and safe: a pixel ratio cap, cleanup, reduced motion and a fallback."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "WebGL",
+    "href": "/webgl#practice-work-with-ai",
+    "title": "Work with AI: A hero scene",
+    "text": "Read CLAUDE.md. Add a three.js 0.187.0 scene behind the hero of the site for [subject], loaded as an ES module through an import map from jsDelivr. One object, two lights, no shadows, no post-processing. The scroll position rotates the object and moves the camera; draw only when the scroll changes. Cap the pixel ratio at 2, create the renderer inside try and show a still image when WebGL is missing, and keep the scene still under prefers-reduced-motion."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "WebGL",
+    "href": "/webgl#practice-work-with-ai",
+    "title": "Work with AI: Performance pass",
+    "text": "Measure the hero scene: frame time while scrolling, draw calls, and texture memory. Tell me the single change that would help a mid-range phone most. Do not change anything yet."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#exercise-1",
+    "title": "Exercises: Render on demand",
+    "text": "The scene draws 60 times a second even when the page is still. Change it to draw only when the scroll changes."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#exercise-2",
+    "title": "Exercises: The fallback",
+    "text": "Make the page readable on a computer without WebGL."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#exercise-3",
+    "title": "Exercises: Where the cost goes",
+    "text": "A particle hero is smooth on a laptop and stutters on a phone. List three changes, cheapest first."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/webgl#practice-course-project",
+    "title": "Course project",
+    "text": "If a 3D moment serves the story of [subject], add one. If it does not, skip this step: restraint is a design decision too."
    },
    {
     "kind": "section",
@@ -1324,6 +1520,55 @@
     "href": "/examples#mobile-first",
     "title": "Mobile first",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Read a complete site and recognise the techniques it combines. Explain why each example feels cinematic: pacing, restraint and one loop. Rebuild an example for your own subject with the prompts given. Replace placeholder media with real images, frames or a route."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#practice-work-with-ai",
+    "title": "Work with AI: Learn from an example",
+    "text": "Here are the three files of the Field Studio example. List the techniques it uses, where each one lives in the code, and the shared loop that drives them. Then tell me which one would fit the site for [subject] and why."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Examples",
+    "href": "/examples#practice-work-with-ai",
+    "title": "Work with AI: Adapt, do not copy",
+    "text": "Read CLAUDE.md. Add the clip-path reveal from the Field Studio example to the image sections of my site, using my existing scroll loop and motion values instead of copying its code. Keep my markup and class names. Show me the plan first."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#exercise-1",
+    "title": "Exercises: Spot the techniques",
+    "text": "Scroll the product launch example and list every technique you notice before reading its breakdown."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#exercise-2",
+    "title": "Exercises: The shared loop",
+    "text": "Open `app.js` of the portfolio example. Find the function that runs on scroll and list what it updates."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#exercise-3",
+    "title": "Exercises: Remove one thing",
+    "text": "Pick one example and decide which single effect you would remove to make it calmer. Explain what the page gains."
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#practice-course-project",
+    "title": "Course project",
+    "text": "Compare the site for [subject] with the example closest to it, and borrow one idea properly."
    },
    {
     "kind": "section",
@@ -2834,6 +3079,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Numești cele nouă tehnici de scroll și spui la ce folosește fiecare. Alegi o tehnică după rolul ei în poveste, nu după cât de spectaculoasă pare. Construiești fiecare tehnică cu CSS și puțin JavaScript, cu o variantă statică sub mișcare redusă. Combini două-trei tehnici pe o pagină fără să se bată între ele."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Adaugă o tehnică",
+    "text": "Citește CLAUDE.md. Adaugă un tur de produs sticky în site-ul pentru [subiect]: dispozitivul rămâne fixat cât trei funcții trec prin dreptul lui, iar funcția activă e ultima al cărei titlu a trecut de 55% din înălțimea ecranului. CSS și JavaScript simplu, un singur listener de scroll, doar transform și opacity. Sub prefers-reduced-motion, funcțiile stau una sub alta. Arată-mi întâi planul."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Explică-mi înapoi",
+    "text": "Explică-mi rând cu rând codul pe care tocmai l-ai scris, ca și cum îl voi întreține singur: ce rulează la fiecare cadru, ce rulează o singură dată și ce aș schimba ca efectul să fie mai lent sau mai calm."
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#exercise-1",
+    "title": "Exerciții: Potrivește tehnica cu rolul",
+    "text": "Alege câte o tehnică pentru fiecare rol: o etichetă rămâne vizibilă cât îi citești secțiunea; arăți o cronologie lungă; un citat apare o singură dată; spui povestea unui produs în trei momente."
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#exercise-2",
+    "title": "Exerciții: Fără JavaScript",
+    "text": "Demo-ul cu poziționare sticky nu folosește JavaScript. Ce altă tehnică din capitol se poate construi doar cu CSS în browserele actuale?"
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#exercise-3",
+    "title": "Exerciții: Unul în plus",
+    "text": "Un hero are straturi parallax, zoom la scroll, un titlu împărțit pe rânduri și un marquee după viteza scrollului. Scoate efectele care se bat între ele și păstrează pagina cinematică."
+   },
+   {
+    "kind": "section",
+    "chapter": "Mișcare",
+    "href": "/ro/motion#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Dă site-ului pentru [subiect] momentele lui de semnătură. Alege două rețete din secțiunea 02 care se potrivesc poveștii și construiește-le pe rând."
+   },
+   {
+    "kind": "section",
     "chapter": "Laborator",
     "href": "/ro/playground#netezire",
     "title": "Netezire",
@@ -2859,6 +3153,55 @@
     "href": "/ro/playground#easing",
     "title": "Easing",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Laborator",
+    "href": "/ro/playground#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Simți cum schimbă netezirea, viteza parallax, decalajul și easing-ul atmosfera unei pagini. Alegi valorile intenționat și le notezi ca decizii de design. Copiezi rândul exact de cod pe care îl produce fiecare setare. Păstrezi valorile de mișcare consecvente în tot site-ul."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Laborator",
+    "href": "/ro/playground#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Aplică valorile",
+    "text": "Citește CLAUDE.md. Adună fiecare valoare de mișcare din site-ul pentru [subiect] într-un singur loc: lerp-ul Lenis, viteza parallax, decalajul aparițiilor și curba de easing, ca proprietăți CSS și un singur obiect JavaScript. Folosește valorile: lerp [valoare], viteză parallax [valoare], decalaj [valoare] ms, easing [cubic-bezier]. Înlocuiește numerele scrise direct și listează fiecare rând schimbat."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Laborator",
+    "href": "/ro/playground#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Găsește valorile rătăcite",
+    "text": "Caută în CSS și JavaScript durate, întârzieri, curbe de easing și viteze care nu vin din valorile de mișcare comune. Listează-le pe fiecare, cu fișierul și rândul. Nu le schimba încă."
+   },
+   {
+    "kind": "section",
+    "chapter": "Laborator",
+    "href": "/ro/playground#exercise-1",
+    "title": "Exerciții: Calm sau viu",
+    "text": "Găsește o valoare de netezire care se simte calmă și una care se simte vie. Notează-le pe amândouă, cu câte un cuvânt pentru senzație."
+   },
+   {
+    "kind": "section",
+    "chapter": "Laborator",
+    "href": "/ro/playground#exercise-2",
+    "title": "Exerciții: Adâncime fără amețeală",
+    "text": "Setează viteza parallax astfel încât straturile să pară adânci, dar textul să nu plece niciodată departe de unde îl așteaptă cititorul."
+   },
+   {
+    "kind": "section",
+    "chapter": "Laborator",
+    "href": "/ro/playground#exercise-3",
+    "title": "Exerciții: O singură curbă",
+    "text": "Alege o singură curbă de easing pentru toate aparițiile din site și explică de ce se potrivește cu [subiect]."
+   },
+   {
+    "kind": "section",
+    "chapter": "Laborator",
+    "href": "/ro/playground#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Transformă alegerile tale în setările de mișcare ale site-ului pentru [subiect], ca toate efectele să le împartă."
    },
    {
     "kind": "section",
@@ -2981,6 +3324,55 @@
    },
    {
     "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Pui în ordine mai multe mișcări cu un timeline GSAP și parametrul lui de poziție. Legi un timeline de scroll cu ScrollTrigger: scrub, fixare, puncte de început și de sfârșit. Desenezi linii SVG și dezvălui text împărțit pe rânduri cu pluginurile gratuite GSAP. Cureți în React cu `useGSAP` și respecți mișcarea redusă cu `gsap.matchMedia()`."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: O scenă fixată",
+    "text": "Citește CLAUDE.md. Adaugă o scenă fixată în site-ul pentru [subiect] cu GSAP 3.15.1 și ScrollTrigger de pe jsDelivr: secțiunea rămâne fixată pe 200% din înălțimea ecranului, cât trei pași își predau locul unul după altul, cu o linie de progres. Înregistrează pluginul, construiește totul în gsap.matchMedia ca nimic să nu se animeze sub prefers-reduced-motion (pașii stau unul sub altul) și apelează ScrollTrigger.refresh() după ce se încarcă imaginile. Arată-mi întâi planul."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Verifică triggerele",
+    "text": "Pornește temporar markerele ScrollTrigger și spune-mi unde începe și unde se termină fiecare trigger la 375 și la 1440 de pixeli lățime. Apoi scoate markerele. Nu schimba nimic altceva."
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#exercise-1",
+    "title": "Exerciții: Citește parametrul de poziție",
+    "text": "În `tl.to(a, {…}).to(b, {…}, \"-=0.4\").to(c, {…}, \"<\")`, când pornește fiecare tween?"
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#exercise-2",
+    "title": "Exerciții: Scrub sau redare",
+    "text": "Pentru un titlu care apare o singură dată și pentru un produs care se rotește cât derulezi, alege între `scrub` și `toggleActions`."
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#exercise-3",
+    "title": "Exerciții: Curăță în React",
+    "text": "O componentă creează un ScrollTrigger în `useEffect`, fără curățenie. Ce se întâmplă după ce pleci de pe pagină și revii de trei ori?"
+   },
+   {
+    "kind": "section",
+    "chapter": "GSAP",
+    "href": "/ro/gsap#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Dă site-ului pentru [subiect] o scenă pe care doar GSAP o face ușoară: o secvență fixată care spune o parte din poveste."
+   },
+   {
+    "kind": "section",
     "chapter": "WebGL",
     "href": "/ro/webgl#inainte-sa-incepi",
     "title": "Înainte să începi",
@@ -3069,6 +3461,55 @@
     "href": "/ro/webgl#verifica-pe-un-telefon-real",
     "title": "Verifică pe un telefon real",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Pregătești o scenă three.js cu renderer, cameră, lumini și un obiect. Conduci o scenă cu poziția scrollului și desenezi doar când se schimbă ceva. Muți munca pe placa video cu shadere și atribute de buffer. Păstrezi WebGL rapid și sigur: limită de densitate, curățenie, mișcare redusă și variantă de rezervă."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: O scenă pentru hero",
+    "text": "Citește CLAUDE.md. Adaugă o scenă three.js 0.187.0 în spatele hero-ului din site-ul pentru [subiect], încărcată ca modul ES printr-un import map de pe jsDelivr. Un obiect, două lumini, fără umbre, fără post-procesare. Poziția scrollului rotește obiectul și mută camera; desenează doar când se schimbă scrollul. Limitează densitatea la 2, creează rendererul într-un try și arată o imagine statică dacă lipsește WebGL, iar sub prefers-reduced-motion scena stă pe loc."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Verificare de performanță",
+    "text": "Măsoară scena din hero: timpul pe cadru cât derulezi, numărul de desenări și memoria texturilor. Spune-mi singura schimbare care ar ajuta cel mai mult un telefon de gamă medie. Nu schimba încă nimic."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#exercise-1",
+    "title": "Exerciții: Desenează la nevoie",
+    "text": "Scena desenează de 60 de ori pe secundă chiar și când pagina stă. Schimb-o să deseneze doar când se schimbă scrollul."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#exercise-2",
+    "title": "Exerciții: Varianta de rezervă",
+    "text": "Fă pagina lizibilă pe un calculator fără WebGL."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#exercise-3",
+    "title": "Exerciții: Unde se duce costul",
+    "text": "Un hero cu particule merge lin pe laptop și sacadează pe telefon. Listează trei schimbări, de la cea mai ieftină."
+   },
+   {
+    "kind": "section",
+    "chapter": "WebGL",
+    "href": "/ro/webgl#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Dacă un moment 3D servește povestea pentru [subiect], adaugă unul. Dacă nu, sari peste pas: și reținerea e o decizie de design."
    },
    {
     "kind": "section",
@@ -3286,6 +3727,55 @@
     "href": "/ro/examples#intai-telefonul",
     "title": "Întâi telefonul",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Citești un site complet și recunoști tehnicile pe care le combină. Explici de ce fiecare exemplu pare cinematic: ritm, reținere și o singură buclă. Reconstruiești un exemplu pentru subiectul tău cu prompturile date. Înlocuiești materialele provizorii cu imagini, cadre sau un traseu reale."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Învață dintr-un exemplu",
+    "text": "Iată cele trei fișiere ale exemplului Field Studio. Listează tehnicile pe care le folosește, unde stă fiecare în cod și bucla comună care le conduce. Apoi spune-mi care s-ar potrivi în site-ul pentru [subiect] și de ce."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Exemple",
+    "href": "/ro/examples#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Adaptează, nu copia",
+    "text": "Citește CLAUDE.md. Adaugă dezvăluirea cu clip-path din exemplul Field Studio în secțiunile cu imagini din site-ul meu, folosind bucla de scroll și valorile de mișcare pe care le am deja, în loc să-i copiezi codul. Păstrează-mi markup-ul și numele claselor. Arată-mi întâi planul."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#exercise-1",
+    "title": "Exerciții: Găsește tehnicile",
+    "text": "Derulează exemplul de lansare de produs și listează fiecare tehnică pe care o observi, înainte să-i citești analiza."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#exercise-2",
+    "title": "Exerciții: Bucla comună",
+    "text": "Deschide `app.js` din exemplul de portofoliu. Găsește funcția care rulează la scroll și listează ce actualizează."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#exercise-3",
+    "title": "Exerciții: Scoate un lucru",
+    "text": "Alege un exemplu și decide ce singur efect ai scoate ca să fie mai calm. Explică ce câștigă pagina."
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Compară site-ul pentru [subiect] cu exemplul cel mai apropiat și împrumută corect o idee."
    },
    {
     "kind": "section",

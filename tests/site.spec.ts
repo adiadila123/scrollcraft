@@ -472,6 +472,21 @@ test.describe('lessons', () => {
     await expect(boxes.first()).toBeChecked();
   });
 
+  for (const id of ['start', 'skills', 'prompting', 'build', 'motion', 'playground', 'gsap', 'webgl', 'examples'])
+    test(`/${id} has the full lesson frame`, async ({ page, isMobile }) => {
+      test.skip(isMobile, 'one viewport is enough for the structure');
+      await page.goto(`/${id}`);
+      for (const part of [
+        'what-you-will-learn',
+        'practice-work-with-ai',
+        'practice-exercises',
+        'practice-course-project',
+        'practice-test-it',
+        'practice-assessment',
+      ])
+        await expect(page.locator(`#${part}`), part).toBeAttached();
+    });
+
   test('Romanian lessons are in Romanian', async ({ page }) => {
     await page.goto('/ro/start');
     await expect(page.locator('#ce-vei-invata + .goals li').first()).toContainText('Alegi între Claude Code');
