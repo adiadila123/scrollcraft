@@ -1,5 +1,4 @@
-import AxeBuilder from '@axe-core/playwright';
-import { CHAPTERS, expect, test } from './fixtures';
+import { audit, CHAPTERS, expect, test } from './fixtures';
 
 test.describe('routes', () => {
   for (const path of ['/', ...CHAPTERS.map((c) => `/${c}`)]) {
@@ -11,7 +10,7 @@ test.describe('routes', () => {
       await expect(page.locator('h1').first()).toBeVisible();
       if (path !== '/') await expect(page).toHaveTitle(new RegExp(`${path.slice(1)}`, 'i'));
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', path === '/' ? /^https?:\/\/[^/]+\/?$/ : new RegExp(`${path}$`));
-      const axe = await new AxeBuilder({ page }).disableRules(['color-contrast']).analyze();
+      const axe = await audit(page);
       const serious = axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
       expect(serious.map((v) => `${v.id}: ${v.nodes.length} × ${v.help}`)).toEqual([]);
     });
@@ -58,7 +57,7 @@ test.describe('romanian', () => {
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`${path}$`));
       const en = path.replace(/^\/ro/, '');
       await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', en ? new RegExp(`${en}$`) : /^https?:\/\/[^/]+\/?$/);
-      const axe = await new AxeBuilder({ page }).disableRules(['color-contrast']).analyze();
+      const axe = await audit(page);
       const serious = axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
       expect(serious.map((v) => `${v.id}: ${v.nodes.length} × ${v.help}`)).toEqual([]);
     });
@@ -409,7 +408,7 @@ test.describe('reduced motion', () => {
     await page.goto('/motion');
     const notice = page.getByRole('complementary', { name: 'Animations' });
     await expect(notice).toContainText('this device asks for less motion');
-    const axe = await new AxeBuilder({ page }).disableRules(['color-contrast']).analyze();
+    const axe = await audit(page);
     expect(axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id)).toEqual([]);
 
     await notice.getByRole('button', { name: 'Turn them on' }).click();

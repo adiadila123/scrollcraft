@@ -24,7 +24,9 @@ export function Statement({ text, dim }: { text: string; dim: string }) {
     if (hint.current) hint.current.style.opacity = clamp(1 - p * 8, 0, 1).toFixed(2);
     const n = words.current.length;
     words.current.forEach((w, i) => {
-      w.style.opacity = (0.16 + 0.84 * clamp((p - (0.08 + (0.74 * i) / n)) / 0.05, 0, 1)).toFixed(2);
+      /* unlit words stay at 3:1 contrast: white needs 0.38, the grey (dim) words 0.65 */
+      const floor = all[i][1] ? 0.65 : 0.38;
+      w.style.opacity = (floor + (1 - floor) * clamp((p - (0.08 + (0.74 * i) / n)) / 0.05, 0, 1)).toFixed(2);
     });
   });
 

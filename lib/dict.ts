@@ -96,7 +96,7 @@ const en = {
       claude:
         'Open a terminal in the project folder and run `claude`. Press Shift+Tab until plan mode is on, paste the prompt, read the plan, then approve it. Project rules go in `{rules}`.',
       gemini:
-        'Open a terminal in the project folder and run `gemini`, then paste the prompt. Gemini CLI asks before it edits a file or runs a command: read each request before you accept it. Project rules go in `{rules}`.',
+        'Open a terminal in the project folder and run `gemini`; the first time, it asks whether you trust the folder, so say yes for your project. Paste the prompt. Gemini CLI asks before it edits a file or runs a command: read each request before you accept it. Project rules go in `{rules}`.',
       chatgpt:
         'Open a terminal in the project folder and run `codex`, then paste the prompt and approve each change. In the ChatGPT app without Codex, attach the files, paste the prompt and copy the changes back yourself. Project rules go in `{rules}`.',
     },
@@ -302,7 +302,7 @@ const ro: Dict = {
       claude:
         'Deschide un terminal în folderul proiectului și rulează `claude`. Apasă Shift+Tab până se pornește modul plan, lipește promptul, citește planul, apoi aprobă-l. Regulile proiectului stau în `{rules}`.',
       gemini:
-        'Deschide un terminal în folderul proiectului, rulează `gemini` și lipește promptul. Gemini CLI cere voie înainte să editeze un fișier sau să ruleze o comandă: citește fiecare cerere înainte s-o accepți. Regulile proiectului stau în `{rules}`.',
+        'Deschide un terminal în folderul proiectului și rulează `gemini`; prima dată te întreabă dacă ai încredere în folder, așa că răspunde da pentru proiectul tău. Lipește promptul. Gemini CLI cere voie înainte să editeze un fișier sau să ruleze o comandă: citește fiecare cerere înainte s-o accepți. Regulile proiectului stau în `{rules}`.',
       chatgpt:
         'Deschide un terminal în folderul proiectului, rulează `codex`, lipește promptul și aprobă fiecare schimbare. În aplicația ChatGPT fără Codex, atașezi fișierele, lipești promptul și copiezi singur schimbările înapoi. Regulile proiectului stau în `{rules}`.',
     },

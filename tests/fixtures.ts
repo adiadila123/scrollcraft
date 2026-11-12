@@ -1,4 +1,5 @@
-import { test as base, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import { test as base, expect, type Page } from '@playwright/test';
 
 /** Every test fails on a console error or an uncaught exception, and skips the intro loader unless it opts in. */
 export const test = base.extend<{ consoleErrors: string[]; showLoader: boolean }>({
@@ -25,6 +26,21 @@ export const test = base.extend<{ consoleErrors: string[]; showLoader: boolean }
 });
 
 export { expect };
+
+/**
+ * An axe audit, contrast included. Running transitions are finished first (endless loops cannot be), so contrast is
+ * measured on what the reader settles on rather than halfway through a fade. The footer's large wordmark is excluded:
+ * it is decoration, hidden from assistive technology, and WCAG exempts decorative text from contrast.
+ */
+export async function audit(page: Page) {
+  await page.evaluate(() =>
+    document
+      .getAnimations()
+      .filter((a) => a.effect?.getComputedTiming().endTime !== Infinity)
+      .forEach((a) => a.finish()),
+  );
+  return new AxeBuilder({ page }).exclude('.bigmark').analyze();
+}
 
 export const CHAPTERS = [
   'start',

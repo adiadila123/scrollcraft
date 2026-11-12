@@ -280,7 +280,7 @@
     "chapter": "Skills",
     "href": "/skills#practice-work-with-ai",
     "title": "Work with AI: Write a skill",
-    "text": "Create a skill named scroll-motion-rules in .claude/skills/. Its SKILL.md needs a name and a description saying it applies when building or reviewing scroll animation. The body lists these rules: animate only transform and opacity; every effect has a still version under prefers-reduced-motion; hide content only under a .js class; reveals rise 24px over 0.6s with cubic-bezier(.2,.7,.2,1), once. Show me the file before you save it."
+    "text": "Create a skill named scroll-motion-rules in .claude/skills/. Its SKILL.md needs a name and a description saying it applies when building or reviewing scroll animation. The body lists these rules: animate only transform and opacity; every effect has a still version under prefers-reduced-motion; hide content only under a .js class; reveals rise 24px over 0.9s with cubic-bezier(.2,.7,.2,1), once. Show me the file before you save it."
    },
    {
     "kind": "section",
@@ -2732,7 +2732,7 @@
     "chapter": "Skilluri",
     "href": "/ro/skills#practica-lucrul-cu-ai",
     "title": "Lucrul cu AI: Scrie un skill",
-    "text": "Creează un skill numit scroll-motion-rules în .claude/skills/. SKILL.md are nevoie de un nume și de o descriere care spune că se aplică atunci când construiești sau verifici animații de scroll. Corpul listează regulile: animezi doar transform și opacity; fiecare efect are o variantă statică sub prefers-reduced-motion; ascunzi conținut doar sub o clasă .js; aparițiile urcă 24px în 0,6s cu cubic-bezier(.2,.7,.2,1), o singură dată. Arată-mi fișierul înainte să-l salvezi."
+    "text": "Creează un skill numit scroll-motion-rules în .claude/skills/. SKILL.md are nevoie de un nume și de o descriere care spune că se aplică atunci când construiești sau verifici animații de scroll. Corpul listează regulile: animezi doar transform și opacity; fiecare efect are o variantă statică sub prefers-reduced-motion; ascunzi conținut doar sub o clasă .js; aparițiile urcă 24px în 0,9s cu cubic-bezier(.2,.7,.2,1), o singură dată. Arată-mi fișierul înainte să-l salvezi."
    },
    {
     "kind": "section",

@@ -183,7 +183,7 @@ a {
   letter-spacing: -0.035em;
 }
 .js .words span {
-  opacity: 0.14;
+  opacity: 0.38; /* the lowest that keeps 3:1 contrast for unlit words */
   transition: opacity 0.25s;
 }
 .js .words span.lit {

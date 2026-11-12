@@ -117,7 +117,7 @@ io.observe(sentinel);`,
 .words { position: sticky; top: 0; height: 100vh; margin: 0; padding: 0 24px;
   display: flex; flex-wrap: wrap; align-content: center; gap: 0 .3em;
   font-size: clamp(24px, 7vw, 40px); font-weight: 300; line-height: 1.15; }
-.words span { opacity: .15; transition: opacity .2s; }
+.words span { opacity: .38; transition: opacity .2s; } /* still 3:1 contrast while unlit */
 .after { padding: 40px 24px 60vh; color: #7f8c95; }`,
     js: `const bar = document.querySelector('.bar');
 const pin = document.querySelector('.pin');
@@ -238,7 +238,7 @@ measure(); update();`,
 .scrolly { display: grid; padding: 0 16px; }
 .vis { position: sticky; top: 0; z-index: 1; height: 42vh; display: grid; place-items: center; background: #000; }
 .shape { width: 80px; height: 80px; border: 1px solid #5cc8ff; transition: border-radius .6s, transform .6s, background .6s; }
-.step { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0; opacity: .25; transition: opacity .4s; }
+.step { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0; opacity: .38; transition: opacity .4s; }
 .step.on { opacity: 1; }
 @media (min-width: 600px) {
   .scrolly { grid-template-columns: 1fr 1fr; gap: 16px; }

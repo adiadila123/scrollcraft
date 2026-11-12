@@ -319,7 +319,8 @@ html.snap-on { scroll-snap-type: y proximity; }
 /* 5. scroll-driven statement: words light up with scroll position */
 .pin { height: 240vh; position: relative; }
 .pin-in { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 28px; padding-block: var(--bar) 24px; }
-.w { opacity: 0.16; }
+.w { opacity: 0.38; } /* unlit words keep 3:1 contrast */
+.w.dim { opacity: 0.65; }
 
 /* 6. zoom on scroll */
 .zoom { margin: 0; position: relative; height: min(72vh, 680px); overflow: hidden; border: 1px solid var(--line); background: #000; }
@@ -342,9 +343,12 @@ html.snap-on { scroll-snap-type: y proximity; }
 .vpanel { position: absolute; inset: 0; display: grid; place-items: center; padding: 56px 24px 24px; animation: vin 0.6s var(--ease); }
 @keyframes vin { from { opacity: 0; } }
 .vlabel { position: absolute; left: 20px; top: 18px; }
-.step { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; gap: 14px; opacity: 0.28; transition: opacity 0.5s var(--ease); }
-.step.on { opacity: 1; }
-.step h3 { font-size: 1.7rem; font-weight: 300; letter-spacing: -0.03em; }
+.step { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+/* the active stage is shown by colour, not by fading the others: faded text would fall below 4.5:1 */
+.step h3 { font-size: 1.7rem; font-weight: 300; letter-spacing: -0.03em; color: var(--muted); transition: color 0.5s var(--ease); }
+.step .mono { transition: color 0.5s var(--ease); }
+.step.on h3 { color: var(--fg); }
+.step.on .mono { color: var(--accent); }
 .step p { color: var(--muted); max-width: 40ch; }
 .step:last-child { min-height: 60vh; }
 @media (max-width: 900px) {
