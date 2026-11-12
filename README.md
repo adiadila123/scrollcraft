@@ -85,6 +85,7 @@ push and pull request, and a weekly workflow checks the external links.
       chapters.ts           the chapter list: routes, navigation, metadata, sitemap and search all read it
       dict.ts i18n.ts       interface text in both languages, and the locale helpers
       content.ts            maps each chapter id and language to its MDX file
+      lessons/              the lesson frame per chapter: objectives, AI prompts, exercises, project, tests, criteria
       demos.ts              the small runnable pages behind every <Demo>; demos-gsap.ts, demos-webgl.ts and
                             demos-pro.ts hold the GSAP, WebGL and level 3 chapters' previews
       examples.ts           the example sites, in order, for the full-screen viewer
@@ -105,6 +106,12 @@ push and pull request, and a weekly workflow checks the external links.
 1. Add an entry to `lib/chapters.ts`, with its `level` (1 to 3, or 4 for the appendix).
 2. Write `content/en/your-chapter.mdx`: `export const meta = { title, lede }`, then the sections, using the components in `mdx-components.tsx`. Keep text that wraps inside a component on one line, or MDX wraps it in an extra paragraph. Prettier skips these files for the same reason.
 3. Write the Romanian version as `content/ro/your-chapter.mdx`, add its titles to `lib/chapters.ts`, and import both in `lib/content.ts`.
+
+4. Add its lesson frame to `lib/lessons/en.mjs` and `ro.mjs`: objectives (shown under the title), then a session with
+   the AI, exercises with hidden solutions, the course project step, how to test it, and acceptance criteria (shown
+   after the chapter). Prompts can use `{rules}` and `{skills}`, which become the rules file and skills folder of the
+   tool the reader picked. Ticking every criterion marks the chapter complete. The files are plain `.mjs` so the
+   search index script can read them; `lib/lessons/index.ts` checks them against the `Lesson` type.
 
 Interface text (navigation, buttons, labels) lives in `lib/dict.ts`; the Romanian object must have every key the English one has, so TypeScript catches a missing translation.
 

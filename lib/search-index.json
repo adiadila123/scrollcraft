@@ -1,10 +1,10 @@
 {
  "reading": {
   "en": {
-   "start": 3,
-   "skills": 4,
-   "prompting": 2,
-   "build": 3,
+   "start": 4,
+   "skills": 6,
+   "prompting": 4,
+   "build": 5,
    "motion": 3,
    "playground": 1,
    "gsap": 2,
@@ -18,10 +18,10 @@
    "reference": 2
   },
   "ro": {
-   "start": 2,
-   "skills": 4,
-   "prompting": 2,
-   "build": 3,
+   "start": 4,
+   "skills": 5,
+   "prompting": 4,
+   "build": 5,
    "motion": 3,
    "playground": 1,
    "gsap": 2,
@@ -92,6 +92,55 @@
     "href": "/start#which-one-should-you-pick",
     "title": "Which one should you pick?",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Start",
+    "href": "/start#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Choose between Claude Code, Gemini CLI and Codex for your situation. Install the tool and check that it runs from a terminal. Create a project folder and serve it on a local address. Start your AI inside the folder, so it can read and edit the files."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Start",
+    "href": "/start#practice-work-with-ai",
+    "title": "Work with AI: Get oriented",
+    "text": "Look at this folder and tell me what is in it. Do not create or change any file yet. Then tell me the command you would use to serve it locally on port 8000, and wait for my answer."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Start",
+    "href": "/start#practice-work-with-ai",
+    "title": "Work with AI: Check the setup",
+    "text": "Check that index.html, style.css and app.js exist and are linked: index.html loads style.css in the head and app.js with defer. If something is missing, show me the change before you make it."
+   },
+   {
+    "kind": "section",
+    "chapter": "Start",
+    "href": "/start#exercise-1",
+    "title": "Exercises: Two terminals",
+    "text": "Keep the local server running in one terminal and your AI in a second one, both inside the project folder. Close both, then open them again from scratch."
+   },
+   {
+    "kind": "section",
+    "chapter": "Start",
+    "href": "/start#exercise-2",
+    "title": "Exercises: Why not file://",
+    "text": "Open index.html by double-clicking it, then through http://localhost:8000. Compare the address bar in both cases."
+   },
+   {
+    "kind": "section",
+    "chapter": "Start",
+    "href": "/start#exercise-3",
+    "title": "Exercises: Know your versions",
+    "text": "Write down the versions of Node.js and of your AI tool. You will need them when something behaves differently from the course."
+   },
+   {
+    "kind": "section",
+    "chapter": "Start",
+    "href": "/start#practice-course-project",
+    "title": "Course project",
+    "text": "Across the course you build one cinematic one-page site for [subject]. Each chapter adds a step. This one sets up the folder."
    },
    {
     "kind": "section",
@@ -211,6 +260,55 @@
     "href": "/skills#check-that-it-loads",
     "title": "Check that it loads",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Skills",
+    "href": "/skills#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Explain what a skill is, and how its description decides when it loads. Find skills from trusted sources and judge one before you install it. Install a skill for your tool and check that it loads. Write a small skill of your own with a `SKILL.md` file."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Skills",
+    "href": "/skills#practice-work-with-ai",
+    "title": "Work with AI: Which skills are loaded",
+    "text": "List the skills you can use in this session, with one line on when each one loads. Do not run any of them."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Skills",
+    "href": "/skills#practice-work-with-ai",
+    "title": "Work with AI: Write a skill",
+    "text": "Create a skill named scroll-motion-rules in .claude/skills/. Its SKILL.md needs a name and a description saying it applies when building or reviewing scroll animation. The body lists these rules: animate only transform and opacity; every effect has a still version under prefers-reduced-motion; hide content only under a .js class; reveals rise 24px over 0.6s with cubic-bezier(.2,.7,.2,1), once. Show me the file before you save it."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skills",
+    "href": "/skills#exercise-1",
+    "title": "Exercises: Rewrite a description",
+    "text": "Open the `SKILL.md` of a skill you installed. Rewrite its description as one sentence that says what it does and when it should load."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skills",
+    "href": "/skills#exercise-2",
+    "title": "Exercises: Make it load",
+    "text": "Ask your AI for a reveal animation without naming your skill. Check whether it followed your rules."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skills",
+    "href": "/skills#exercise-3",
+    "title": "Exercises: Audit before installing",
+    "text": "Pick a third-party skill. Before installing it, read every file in its folder and write down anything you would not want it to do."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skills",
+    "href": "/skills#practice-course-project",
+    "title": "Course project",
+    "text": "Give the course project its own rules for motion, so every later step follows them without being reminded."
    },
    {
     "kind": "section",
@@ -379,6 +477,55 @@
     "href": "/prompting#keep-a-way-back",
     "title": "Keep a way back",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompting",
+    "href": "/prompting#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Write a five-part brief: outcome, facts, limits, format and evidence. Turn a vague request into a specific one. Keep the rules that never change in a project rules file. Steer a session: a plan before code, one change at a time, and a way back."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Prompting",
+    "href": "/prompting#practice-work-with-ai",
+    "title": "Work with AI: Plan before code",
+    "text": "Read CLAUDE.md and brief.md. Do not write code yet. Give me a numbered plan for the hero section of the site for [subject]: the files you will change, what each change does, and how I can check it in the browser. Wait for my approval."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Prompting",
+    "href": "/prompting#practice-work-with-ai",
+    "title": "Work with AI: Review as a sceptic",
+    "text": "Review your last change as a sceptical senior front-end developer. List what could break on a phone, with reduced motion and with the keyboard only. Do not fix anything yet."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompting",
+    "href": "/prompting#exercise-1",
+    "title": "Exercises: Rewrite a vague brief",
+    "text": "Rewrite “Make me a cool website with animations.” as a five-part brief for [subject]."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompting",
+    "href": "/prompting#exercise-2",
+    "title": "Exercises: Find the missing part",
+    "text": "This brief has no limits: “Build a one-page site for [subject] with a pinned product section and a contact link. Reply with the three files.” Add them."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompting",
+    "href": "/prompting#exercise-3",
+    "title": "Exercises: Ask for evidence",
+    "text": "Write the one sentence that makes the AI prove its work instead of saying “tested”."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompting",
+    "href": "/prompting#practice-course-project",
+    "title": "Course project",
+    "text": "Before any code, write down what the site is and the rules that never change."
    },
    {
     "kind": "section",
@@ -554,6 +701,55 @@
     "href": "/build#behaviour",
     "title": "Behaviour",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Build",
+    "href": "/build#what-you-will-learn",
+    "title": "What you will learn",
+    "text": "Run the same loop on every step: brief, generate, inspect, refine. Build the page in ten small steps instead of one large request. Add smooth scrolling, reveals, depth and a pinned moment that all respect reduced motion. Review the finished page on a phone and with the keyboard."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Build",
+    "href": "/build#practice-work-with-ai",
+    "title": "Work with AI: One step",
+    "text": "Read CLAUDE.md, brief.md and plan.md. Do step [number] only: [the step]. Change as few lines as possible, then tell me exactly how to check it in the browser, and what you did not check."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Build",
+    "href": "/build#practice-work-with-ai",
+    "title": "Work with AI: Art director review",
+    "text": "Act as an art director. Look at the page at 375 and 1440 pixels wide and list the five changes that would make it feel calmer and more deliberate, ranked by impact. Do not change anything yet."
+   },
+   {
+    "kind": "section",
+    "chapter": "Build",
+    "href": "/build#exercise-1",
+    "title": "Exercises: Break a step down",
+    "text": "Split “Add a pinned product section with three features” into changes small enough to check one at a time."
+   },
+   {
+    "kind": "section",
+    "chapter": "Build",
+    "href": "/build#exercise-2",
+    "title": "Exercises: Find the stutter",
+    "text": "In Chrome DevTools, record a Performance profile while you scroll the hero. Find what runs on every frame."
+   },
+   {
+    "kind": "section",
+    "chapter": "Build",
+    "href": "/build#exercise-3",
+    "title": "Exercises: The still version",
+    "text": "Turn on reduced motion in your system settings and scroll the whole page."
+   },
+   {
+    "kind": "section",
+    "chapter": "Build",
+    "href": "/build#practice-course-project",
+    "title": "Course project",
+    "text": "Now the course project gets its page. Work through the ten steps of this chapter for [subject], one prompt each."
    },
    {
     "kind": "section",
@@ -1861,6 +2057,55 @@
    },
    {
     "kind": "section",
+    "chapter": "Început",
+    "href": "/ro/start#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Alegi între Claude Code, Gemini CLI și Codex potrivit situației tale. Instalezi unealta și verifici că pornește din terminal. Creezi un folder de proiect și îl servești la o adresă locală. Pornești AI-ul în folder, ca să poată citi și edita fișierele."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Început",
+    "href": "/ro/start#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Orientează-te",
+    "text": "Uită-te în acest folder și spune-mi ce conține. Nu crea și nu modifica încă niciun fișier. Apoi spune-mi comanda cu care l-ai servi local pe portul 8000 și așteaptă răspunsul meu."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Început",
+    "href": "/ro/start#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Verifică structura",
+    "text": "Verifică dacă există index.html, style.css și app.js și dacă sunt legate: index.html încarcă style.css în head și app.js cu defer. Dacă lipsește ceva, arată-mi schimbarea înainte să o faci."
+   },
+   {
+    "kind": "section",
+    "chapter": "Început",
+    "href": "/ro/start#exercise-1",
+    "title": "Exerciții: Două terminale",
+    "text": "Ține serverul local pornit într-un terminal și AI-ul în al doilea, amândouă în folderul proiectului. Închide-le pe amândouă, apoi deschide-le din nou de la zero."
+   },
+   {
+    "kind": "section",
+    "chapter": "Început",
+    "href": "/ro/start#exercise-2",
+    "title": "Exerciții: De ce nu file://",
+    "text": "Deschide index.html cu dublu clic, apoi prin http://localhost:8000. Compară bara de adresă în cele două cazuri."
+   },
+   {
+    "kind": "section",
+    "chapter": "Început",
+    "href": "/ro/start#exercise-3",
+    "title": "Exerciții: Notează versiunile",
+    "text": "Notează versiunea de Node.js și pe cea a uneltei AI. Îți vor trebui când ceva se poartă altfel decât în curs."
+   },
+   {
+    "kind": "section",
+    "chapter": "Început",
+    "href": "/ro/start#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "De-a lungul cursului construiești un singur site cinematic de o pagină pentru [subiect]. Fiecare capitol adaugă un pas. Acesta pregătește folderul."
+   },
+   {
+    "kind": "section",
     "chapter": "Skilluri",
     "href": "/ro/skills#ce-este-un-skill",
     "title": "Ce este un skill",
@@ -1977,6 +2222,55 @@
     "href": "/ro/skills#verifica-daca-se-incarca",
     "title": "Verifică dacă se încarcă",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Skilluri",
+    "href": "/ro/skills#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Explici ce e un skill și cum descrierea lui decide când se încarcă. Găsești skilluri din surse de încredere și judeci unul înainte să-l instalezi. Instalezi un skill pentru unealta ta și verifici că se încarcă. Scrii un skill mic al tău, cu un fișier `SKILL.md`."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Skilluri",
+    "href": "/ro/skills#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Ce skilluri sunt încărcate",
+    "text": "Listează skillurile pe care le poți folosi în această sesiune, cu un rând despre când se încarcă fiecare. Nu rula niciunul."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Skilluri",
+    "href": "/ro/skills#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Scrie un skill",
+    "text": "Creează un skill numit scroll-motion-rules în .claude/skills/. SKILL.md are nevoie de un nume și de o descriere care spune că se aplică atunci când construiești sau verifici animații de scroll. Corpul listează regulile: animezi doar transform și opacity; fiecare efect are o variantă statică sub prefers-reduced-motion; ascunzi conținut doar sub o clasă .js; aparițiile urcă 24px în 0,6s cu cubic-bezier(.2,.7,.2,1), o singură dată. Arată-mi fișierul înainte să-l salvezi."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skilluri",
+    "href": "/ro/skills#exercise-1",
+    "title": "Exerciții: Rescrie o descriere",
+    "text": "Deschide `SKILL.md` al unui skill instalat. Rescrie-i descrierea ca o singură propoziție care spune ce face și când trebuie să se încarce."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skilluri",
+    "href": "/ro/skills#exercise-2",
+    "title": "Exerciții: Fă-l să se încarce",
+    "text": "Cere AI-ului o animație de apariție fără să-ți numești skillul. Verifică dacă a urmat regulile tale."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skilluri",
+    "href": "/ro/skills#exercise-3",
+    "title": "Exerciții: Verifică înainte să instalezi",
+    "text": "Alege un skill de la altcineva. Înainte să-l instalezi, citește fiecare fișier din folderul lui și notează orice n-ai vrea să facă."
+   },
+   {
+    "kind": "section",
+    "chapter": "Skilluri",
+    "href": "/ro/skills#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Dă proiectului cursului propriile reguli de mișcare, ca fiecare pas de mai târziu să le urmeze fără să i le amintești."
    },
    {
     "kind": "section",
@@ -2145,6 +2439,55 @@
     "href": "/ro/prompting#pastreaza-o-cale-de-intoarcere",
     "title": "Păstrează o cale de întoarcere",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompturi",
+    "href": "/ro/prompting#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Scrii un brief în cinci părți: rezultat, fapte, limite, format și dovezi. Transformi o cerere vagă într-una precisă. Păstrezi regulile care nu se schimbă într-un fișier de reguli al proiectului. Conduci o sesiune: un plan înainte de cod, o schimbare o dată și o cale de întoarcere."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Prompturi",
+    "href": "/ro/prompting#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Plan înainte de cod",
+    "text": "Citește CLAUDE.md și brief.md. Nu scrie încă cod. Dă-mi un plan numerotat pentru secțiunea hero a site-ului pentru [subiect]: fișierele pe care le schimbi, ce face fiecare schimbare și cum o pot verifica în browser. Așteaptă aprobarea mea."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Prompturi",
+    "href": "/ro/prompting#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Verifică sceptic",
+    "text": "Verifică ultima ta schimbare ca un programator front-end senior și sceptic. Listează ce s-ar putea strica pe telefon, cu mișcare redusă și doar cu tastatura. Nu repara încă nimic."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompturi",
+    "href": "/ro/prompting#exercise-1",
+    "title": "Exerciții: Rescrie un brief vag",
+    "text": "Rescrie „Fă-mi un site mișto cu animații.” ca un brief în cinci părți pentru [subiect]."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompturi",
+    "href": "/ro/prompting#exercise-2",
+    "title": "Exerciții: Găsește partea lipsă",
+    "text": "Acest brief nu are limite: „Construiește un site de o pagină pentru [subiect], cu o secțiune de produs fixată și un link de contact. Răspunde cu cele trei fișiere.” Adaugă-le."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompturi",
+    "href": "/ro/prompting#exercise-3",
+    "title": "Exerciții: Cere dovezi",
+    "text": "Scrie propoziția care pune AI-ul să-și dovedească munca, în loc să spună „testat”."
+   },
+   {
+    "kind": "section",
+    "chapter": "Prompturi",
+    "href": "/ro/prompting#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Înainte de orice cod, scrie ce este site-ul și regulile care nu se schimbă."
    },
    {
     "kind": "section",
@@ -2320,6 +2663,55 @@
     "href": "/ro/build#comportament",
     "title": "Comportament",
     "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Construcție",
+    "href": "/ro/build#ce-vei-invata",
+    "title": "Ce vei învăța",
+    "text": "Rulezi aceeași buclă la fiecare pas: brief, generare, inspectare, rafinare. Construiești pagina în zece pași mici, nu într-o singură cerere mare. Adaugi scroll lin, apariții, adâncime și un moment fixat, toate cu respect pentru mișcarea redusă. Verifici pagina terminată pe telefon și cu tastatura."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Construcție",
+    "href": "/ro/build#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Un pas",
+    "text": "Citește CLAUDE.md, brief.md și plan.md. Fă doar pasul [număr]: [pasul]. Schimbă cât mai puține rânduri, apoi spune-mi exact cum îl verific în browser și ce n-ai verificat."
+   },
+   {
+    "kind": "prompt",
+    "chapter": "Construcție",
+    "href": "/ro/build#practica-lucrul-cu-ai",
+    "title": "Lucrul cu AI: Verificare de art director",
+    "text": "Comportă-te ca un art director. Uită-te la pagină la 375 și la 1440 de pixeli lățime și listează cele cinci schimbări care ar face-o mai calmă și mai gândită, în ordinea impactului. Nu schimba încă nimic."
+   },
+   {
+    "kind": "section",
+    "chapter": "Construcție",
+    "href": "/ro/build#exercise-1",
+    "title": "Exerciții: Împarte un pas",
+    "text": "Împarte „Adaugă o secțiune de produs fixată, cu trei funcții” în schimbări destul de mici ca să le verifici pe rând."
+   },
+   {
+    "kind": "section",
+    "chapter": "Construcție",
+    "href": "/ro/build#exercise-2",
+    "title": "Exerciții: Găsește sacadarea",
+    "text": "În Chrome DevTools, înregistrează un profil Performance în timp ce derulezi hero-ul. Găsește ce rulează la fiecare cadru."
+   },
+   {
+    "kind": "section",
+    "chapter": "Construcție",
+    "href": "/ro/build#exercise-3",
+    "title": "Exerciții: Varianta statică",
+    "text": "Pornește mișcarea redusă din setările sistemului și derulează toată pagina."
+   },
+   {
+    "kind": "section",
+    "chapter": "Construcție",
+    "href": "/ro/build#practica-proiectul-cursului",
+    "title": "Proiectul cursului",
+    "text": "Acum proiectul cursului primește pagina. Parcurge cei zece pași din acest capitol pentru [subiect], câte un prompt pentru fiecare."
    },
    {
     "kind": "section",

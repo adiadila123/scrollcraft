@@ -3,6 +3,9 @@
  * to its anchor, plus an estimated reading time per chapter. Runs before dev and build.
  */
 import { readFile, writeFile } from 'node:fs/promises';
+import { labels } from '../lib/lessons/labels.mjs';
+import { en as lessonsEn } from '../lib/lessons/en.mjs';
+import { ro as lessonsRo } from '../lib/lessons/ro.mjs';
 import { slugify } from '../lib/slug.mjs';
 
 const root = new URL('..', import.meta.url);
@@ -24,6 +27,7 @@ const ids = [
   'reference',
 ];
 const locales = { en: '', ro: '/ro' };
+const lessons = { en: lessonsEn, ro: lessonsRo };
 const WPM = 230;
 
 /* a JavaScript string literal from the MDX source, single or double quoted */
@@ -85,7 +89,46 @@ for (const [locale, prefix] of Object.entries(locales)) {
     const count = (s) => s.split(/\s+/).filter((w) => /[a-z]{2,}/i.test(w)).length;
     /* code and prompts are skimmed rather than read, so they count for half */
     const code = [...src.matchAll(new RegExp(String.raw`code=\{\s*(${STR})\s*\}`, 'g'))].map((c) => literal(c[1])).join(' ');
-    reading[locale][id] = Math.max(1, Math.round((count(prose) + count(code) / 2) / WPM));
+    /* the lesson frame (lib/lessons): objectives before the chapter, practice after it */
+    const lesson = lessons[locale][id];
+    let lessonProse = '';
+    let lessonCode = '';
+    if (lesson) {
+      const L = labels[locale];
+      const at = (heading) => `${prefix}/${id}#${slugify(heading)}`;
+      const part = (name) => `${L.practice} · ${name}`;
+      out.push({ kind: 'section', chapter: names[id], href: at(L.objectives), title: L.objectives, text: lesson.objectives.join(' ') });
+      if (lesson.ai) {
+        for (const p of lesson.ai.prompts)
+          out.push({
+            kind: 'prompt',
+            chapter: names[id],
+            href: at(part(L.ai)),
+            title: `${L.ai}: ${p.label}`,
+            text: p.text.replaceAll('{rules}', 'CLAUDE.md').replaceAll('{skills}', '.claude/skills/'),
+          });
+      }
+      lesson.exercises?.forEach((ex, i) =>
+        out.push({ kind: 'section', chapter: names[id], href: `${prefix}/${id}#exercise-${i + 1}`, title: `${L.exercises}: ${ex.title}`, text: ex.task }),
+      );
+      if (lesson.project) out.push({ kind: 'section', chapter: names[id], href: at(part(L.project)), title: L.project, text: lesson.project.intro });
+      lessonProse = [
+        ...lesson.objectives,
+        lesson.ai?.intro ?? '',
+        ...(lesson.exercises ?? []).flatMap((ex) => [ex.title, ex.task, ex.hint, ex.solution]),
+        lesson.project?.intro ?? '',
+        ...(lesson.project?.steps ?? []),
+        ...(lesson.testing?.checks ?? []),
+        ...(lesson.criteria ?? []),
+      ].join(' ');
+      lessonCode = [
+        ...(lesson.ai?.prompts ?? []).map((p) => p.text),
+        ...(lesson.exercises ?? []).map((ex) => ex.code?.code ?? ''),
+        lesson.project?.code?.code ?? '',
+        lesson.testing?.code?.code ?? '',
+      ].join(' ');
+    }
+    reading[locale][id] = Math.max(1, Math.round((count(prose) + count(lessonProse) + (count(code) + count(lessonCode)) / 2) / WPM));
   }
 }
 

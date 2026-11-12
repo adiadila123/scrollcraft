@@ -828,3 +828,24 @@ a.dm-replay { display: inline-flex; align-items: center; text-decoration: none; 
 /* home: the chapter list grouped by level */
 .level + .level { margin-top: 56px; }
 .level-h { margin: 0 0 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+
+/* ---------- lesson frame: objectives, practice ---------- */
+.goals { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); display: grid; }
+.goals li { display: grid; grid-template-columns: 44px 1fr; gap: 8px; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; line-height: 1.45; }
+.goals li .mono { padding-top: 4px; font-size: 11px; color: var(--accent); }
+@media (min-width: 900px) { .goals { grid-template-columns: 1fr 1fr; column-gap: 48px; } }
+.ai-tools { margin-top: 28px; }
+.ai-how { max-width: 64ch; margin: 22px 0 8px; color: var(--muted); }
+.ai-prompt { margin-top: 26px; }
+.ai-label { margin: 0 0 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg); }
+.row .body details.solution { margin-top: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.row .body details.solution summary { padding: 14px 0; font-size: 0.95rem; }
+.row .body details.solution p { padding-bottom: 14px; }
+.row .body details.solution .code { margin-bottom: 18px; }
+.lesson-steps, .lesson-checks { margin: 28px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); counter-reset: step; max-width: 76ch; }
+.lesson-steps li, .lesson-checks li { position: relative; padding: 16px 0 16px 44px; border-bottom: 1px solid var(--line); line-height: 1.5; }
+.lesson-steps li::before { counter-increment: step; content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 19px; font: 400 11px/1 var(--mono); color: var(--accent); }
+.lesson-checks li::before { content: ""; position: absolute; left: 2px; top: 22px; width: 12px; height: 6px; border-left: 1px solid var(--accent); border-bottom: 1px solid var(--accent); transform: rotate(-45deg); }
+.lesson-steps + .rv, .lesson-checks + .rv { margin-top: 28px; }
+.criteria-state { margin: 20px 0 0; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.criteria-state.on { color: var(--accent); }

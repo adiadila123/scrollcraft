@@ -200,14 +200,16 @@ test.describe('features', () => {
 
   test('platform tabs work with the keyboard and are remembered across chapters', async ({ page }) => {
     await page.goto('/start');
-    const claude = page.getByRole('tab', { name: 'Claude' });
+    const claude = page.getByRole('tab', { name: 'Claude' }).first();
     await claude.focus();
     await page.keyboard.press('ArrowRight');
-    await expect(page.getByRole('tab', { name: 'Gemini' })).toHaveAttribute('aria-selected', 'true');
-    await expect(page.getByRole('tab', { name: 'Gemini' })).toBeFocused();
-    await expect(page.getByRole('tabpanel', { name: 'Gemini' })).toBeVisible();
+    await expect(page.getByRole('tab', { name: 'Gemini' }).first()).toHaveAttribute('aria-selected', 'true');
+    await expect(page.getByRole('tab', { name: 'Gemini' }).first()).toBeFocused();
+    await expect(page.getByRole('tabpanel', { name: 'Gemini' }).first()).toBeVisible();
+    /* every tab set follows the one choice: the lesson prompts below switch too */
+    await expect(page.getByRole('tab', { name: 'Gemini' }).last()).toHaveAttribute('aria-selected', 'true');
     await page.goto('/skills');
-    await expect(page.getByRole('tab', { name: 'Gemini' })).toHaveAttribute('aria-selected', 'true');
+    await expect(page.getByRole('tab', { name: 'Gemini' }).first()).toHaveAttribute('aria-selected', 'true');
   });
 
   test('the release checklist survives a reload', async ({ page }) => {
@@ -441,6 +443,40 @@ test('devices that allow motion never see the animations notice or switch', asyn
   await expect(page.locator('html')).toHaveClass(/lenis/);
   await expect(page.locator('.motion-notice')).toHaveCount(0);
   await expect(page.locator('.motion-switch')).toHaveCount(0);
+});
+
+test.describe('lessons', () => {
+  test('a lesson has objectives, prompts for the chosen tool, hidden solutions and criteria that complete it', async ({ page }) => {
+    await page.goto('/prompting');
+    await expect(page.locator('#what-you-will-learn + .goals li')).toHaveCount(4);
+
+    /* the prompt names the rules file of the tool picked in the tabs */
+    const ai = page.locator('#practice-work-with-ai').locator('..');
+    await ai.getByRole('tab', { name: 'Gemini' }).click();
+    await expect(ai.getByRole('tabpanel', { name: 'Gemini' })).toContainText('Read GEMINI.md and brief.md');
+    await ai.getByRole('tab', { name: 'Claude' }).click();
+    await expect(ai.getByRole('tabpanel', { name: 'Claude' })).toContainText('Read CLAUDE.md and brief.md');
+
+    const exercise = page.locator('#exercise-2');
+    await expect(exercise.getByText('no library except Lenis')).toBeHidden();
+    await exercise.getByText('Show the solution').click();
+    await expect(exercise.getByText(/no library except Lenis/)).toBeVisible();
+
+    const boxes = page.locator('#practice-assessment').locator('..').getByRole('checkbox');
+    await expect(boxes).toHaveCount(4);
+    for (let i = 0; i < 4; i++) await boxes.nth(i).check();
+    await expect(page.getByText('All criteria met. This chapter is marked as complete.')).toBeVisible();
+    const done = await page.evaluate(() => JSON.parse(localStorage.getItem('sc-progress') || '{}').done);
+    expect(done).toContain('prompting');
+    await page.reload();
+    await expect(boxes.first()).toBeChecked();
+  });
+
+  test('Romanian lessons are in Romanian', async ({ page }) => {
+    await page.goto('/ro/start');
+    await expect(page.locator('#ce-vei-invata + .goals li').first()).toContainText('Alegi între Claude Code');
+    await expect(page.locator('#practica-evaluare')).toBeAttached();
+  });
 });
 
 test.describe('phone', () => {

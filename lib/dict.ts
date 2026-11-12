@@ -1,4 +1,5 @@
 import type { Locale } from './i18n';
+import { labels } from './lessons/labels.mjs';
 
 /** Every interface string on the site. Chapter text lives in content/<locale>/*.mdx instead. */
 const en = {
@@ -87,6 +88,21 @@ const en = {
     more: 'Loading more',
   },
   checklist: { heading: '01 · Checklist', done: (n: number, t: number) => `${n} of ${t} done` },
+  /** the lesson frame around each chapter: objectives on top, practice after it */
+  lesson: {
+    ...labels.en,
+    /* {rules} becomes the selected tool's rules file */
+    how: {
+      claude:
+        'Open a terminal in the project folder and run `claude`. Press Shift+Tab until plan mode is on, paste the prompt, read the plan, then approve it. Project rules go in `{rules}`.',
+      gemini:
+        'Open a terminal in the project folder and run `gemini`, then paste the prompt. Gemini CLI asks before it edits a file or runs a command: read each request before you accept it. Project rules go in `{rules}`.',
+      chatgpt:
+        'Open a terminal in the project folder and run `codex`, then paste the prompt and approve each change. In the ChatGPT app without Codex, attach the files, paste the prompt and copy the changes back yourself. Project rules go in `{rules}`.',
+    },
+    met: (n: number, t: number) => `${n} of ${t} criteria met`,
+    complete: 'All criteria met. This chapter is marked as complete.',
+  },
   loop: { stage: 'Stage' },
   stackblitz: {
     title: 'Northlight: a cinematic scroll example',
@@ -280,6 +296,19 @@ const ro: Dict = {
     more: 'Se încarcă',
   },
   checklist: { heading: '01 · Lista de verificare', done: (n, t) => `${n} din ${t} bifate` },
+  lesson: {
+    ...labels.ro,
+    how: {
+      claude:
+        'Deschide un terminal în folderul proiectului și rulează `claude`. Apasă Shift+Tab până se pornește modul plan, lipește promptul, citește planul, apoi aprobă-l. Regulile proiectului stau în `{rules}`.',
+      gemini:
+        'Deschide un terminal în folderul proiectului, rulează `gemini` și lipește promptul. Gemini CLI cere voie înainte să editeze un fișier sau să ruleze o comandă: citește fiecare cerere înainte s-o accepți. Regulile proiectului stau în `{rules}`.',
+      chatgpt:
+        'Deschide un terminal în folderul proiectului, rulează `codex`, lipește promptul și aprobă fiecare schimbare. În aplicația ChatGPT fără Codex, atașezi fișierele, lipești promptul și copiezi singur schimbările înapoi. Regulile proiectului stau în `{rules}`.',
+    },
+    met: (n, t) => `${n} din ${t} criterii îndeplinite`,
+    complete: 'Toate criteriile sunt îndeplinite. Capitolul e marcat ca terminat.',
+  },
   loop: { stage: 'Etapa' },
   stackblitz: {
     title: 'Northlight: un exemplu de scroll cinematic',
