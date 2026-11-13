@@ -948,3 +948,64 @@ html.motion-on.js .kit-reveal {
     transition-duration: 0s !important;
   }
 }
+
+/* ---- advanced layer ---- */
+/* the sea chart behind the hero */
+.tide {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.hero .title .char {
+  display: inline-block;
+  will-change: transform;
+}
+/* process: each step is a panel of the same water as the page, so the circular wipe that opens it shows only
+   the new words covering the old */
+.animated .step {
+  background: var(--bg);
+}
+.animated .big-num {
+  z-index: 2;
+  /* room for the outline past the last glyph's advance */
+  padding-right: 0.08em;
+}
+.animated .process-bar {
+  z-index: 3;
+}
+/* the map tips up from the table into view */
+.animated .route svg {
+  will-change: transform;
+}
+/* a ring that follows a fine pointer, and grows over anything you can press */
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    width 0.3s var(--ease),
+    height 0.3s var(--ease),
+    margin 0.3s var(--ease),
+    background 0.3s,
+    opacity 0.3s;
+}
+html.pointer .cursor {
+  opacity: 1;
+}
+html.pointer .cursor.over {
+  width: 70px;
+  height: 70px;
+  margin: -35px 0 0 -35px;
+  background: rgba(79, 209, 197, 0.12);
+}

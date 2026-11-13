@@ -262,3 +262,92 @@ if (!still) drift();
   );
   paint();
 }
+
+/* the hero's ground: three or four soft fields of colour drift on slow orbits and blend where they meet, and a
+   halftone grid lies over them, its dots swelling around a fine pointer. Scrolling away lifts the colour off the
+   page. It runs only while the hero is on screen; with reduced motion it is drawn once and holds. */
+(() => {
+  const cv = document.querySelector('.field');
+  const g = cv.getContext('2d');
+  const INKS = [
+    { c: '217, 196, 160', x: 0.2, y: 0.3, r: 0.55, sx: 0.13, sy: 0.17, ph: 0 },
+    { c: '181, 199, 192', x: 0.78, y: 0.25, r: 0.5, sx: 0.11, sy: 0.09, ph: 2 },
+    { c: '226, 186, 164', x: 0.6, y: 0.8, r: 0.6, sx: 0.09, sy: 0.14, ph: 4 },
+    { c: '196, 204, 218', x: 0.12, y: 0.85, r: 0.45, sx: 0.15, sy: 0.1, ph: 1 },
+  ];
+  const pt = { x: -1e4, y: -1e4, sx: -1e4, sy: -1e4 };
+  let d = 1;
+  let t = 0;
+  let on = false;
+  function size() {
+    d = Math.min(devicePixelRatio || 1, 2);
+    cv.width = cv.clientWidth * d;
+    cv.height = cv.clientHeight * d;
+  }
+  function draw() {
+    const w = cv.width;
+    const h = cv.height;
+    const out = clamp(-hero.getBoundingClientRect().top / hero.offsetHeight, 0, 1);
+    g.clearRect(0, 0, w, h);
+    /* the inks: each a radial field on its own slow orbit; multiply lets them deepen where they overlap */
+    g.globalCompositeOperation = 'multiply';
+    INKS.forEach((k) => {
+      const x = (k.x + Math.sin(t * k.sx + k.ph) * 0.12) * w;
+      const y = (k.y + Math.cos(t * k.sy + k.ph) * 0.1 - out * 0.35) * h;
+      const r = k.r * Math.max(w, h) * (1 + Math.sin(t * 0.2 + k.ph) * 0.08);
+      const f = g.createRadialGradient(x, y, 0, x, y, r);
+      const a = 0.42 * (1 - out * 0.8);
+      f.addColorStop(0, `rgba(${k.c}, ${a})`);
+      f.addColorStop(0.6, `rgba(${k.c}, ${a * 0.35})`);
+      f.addColorStop(1, `rgba(${k.c}, 0)`);
+      g.fillStyle = f;
+      g.fillRect(0, 0, w, h);
+    });
+    /* the halftone: a dot every 22px, larger near the pointer and along a slow diagonal swell */
+    g.globalCompositeOperation = 'source-over';
+    g.fillStyle = 'rgba(20, 20, 20, 0.14)';
+    const step = 22 * d;
+    for (let y = step / 2; y < h; y += step) {
+      for (let x = step / 2; x < w; x += step) {
+        const near = Math.max(0, 1 - Math.hypot(x - pt.sx * d, y - pt.sy * d) / (180 * d));
+        const swell = (Math.sin((x + y) / (140 * d) - t * 0.8) + 1) * 0.5;
+        const r = d * (0.6 + swell * 0.5 + near * near * 3.2);
+        g.beginPath();
+        g.arc(x, y, r, 0, 6.283);
+        g.fill();
+      }
+    }
+  }
+  function frame() {
+    if (!on) return;
+    t += 0.016;
+    pt.sx += (pt.x - pt.sx) * 0.12;
+    pt.sy += (pt.y - pt.sy) * 0.12;
+    draw();
+    requestAnimationFrame(frame);
+  }
+  size();
+  draw();
+  addEventListener('resize', () => {
+    size();
+    draw();
+  });
+  if (still) return;
+  hero.addEventListener('pointermove', (e) => {
+    const r = cv.getBoundingClientRect();
+    pt.x = e.clientX - r.left;
+    pt.y = e.clientY - r.top;
+    if (pt.sx < -1e3) {
+      pt.sx = pt.x;
+      pt.sy = pt.y;
+    }
+  });
+  hero.addEventListener('pointerleave', () => {
+    pt.x = pt.y = -1e4;
+  });
+  new IntersectionObserver(([e]) => {
+    const was = on;
+    on = e.isIntersecting;
+    if (on && !was) requestAnimationFrame(frame);
+  }).observe(hero);
+})();

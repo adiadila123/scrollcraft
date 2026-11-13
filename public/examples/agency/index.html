@@ -12,6 +12,7 @@
     <div class="bars" aria-hidden="true"><i></i><i></i></div>
     <div class="grain" aria-hidden="true"></div>
     <div class="progress" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
     <header class="nav">
       <a class="brand" href="#top">Halden</a>
       <nav class="links" aria-label="Sections">
@@ -25,6 +26,8 @@
 
     <main id="top">
       <section class="hero">
+        <!-- the sea chart: contour lines drawn on a canvas; the tide rises as you scroll and the water answers the pointer -->
+        <canvas class="tide" aria-hidden="true"></canvas>
         <p class="kicker">Case study · Tidewater ferries</p>
         <h1 class="title">A ferry line that reads like the coast it serves.</h1>
         <!-- the studio's one idea, drawn under the headline: the line between land and water -->
@@ -44,7 +47,7 @@
       </section>
 
       <!-- process: pinned while three steps hand over; without motion they are a plain list -->
-      <section class="process" id="process" aria-label="Process">
+      <section class="process" id="process" aria-label="Process" data-tint="#061217">
         <div class="process-bar" aria-hidden="true"><i></i></div>
         <div class="big-num" aria-hidden="true"><span>01</span><span>02</span><span>03</span></div>
         <article class="step">
@@ -65,7 +68,7 @@
       </section>
 
       <!-- the route draws itself as you scroll, and each stop lights up when the line reaches it -->
-      <section class="route" aria-labelledby="route-title">
+      <section class="route" aria-labelledby="route-title" data-tint="#05101a">
         <div class="route-pin">
           <h2 id="route-title">One line, drawn once.</h2>
           <svg viewBox="0 0 400 230" role="img" aria-label="The ferry route, from the harbour past the lighthouse to the islands">
@@ -106,7 +109,7 @@
       </section>
 
       <!-- deliverables: a strip that moves sideways while you scroll down; without motion, a grid -->
-      <section class="work" aria-labelledby="work-title">
+      <section class="work" aria-labelledby="work-title" data-tint="#0a0b0f">
         <div class="work-pin">
           <h2 id="work-title">What we made</h2>
           <div class="work-track">
@@ -135,7 +138,7 @@
       </section>
 
       <!-- what changed: three short statements, then the brief in the client's words -->
-      <section class="outcome" id="outcome" aria-labelledby="outcome-title">
+      <section class="outcome" id="outcome" aria-labelledby="outcome-title" data-tint="#06080a">
         <h2 id="outcome-title" class="rise">What changed</h2>
         <ol class="outcomes">
           <li class="rise"><span>01</span><b>One system</b> for signs, screens, tickets and boats, where there had been four.</li>

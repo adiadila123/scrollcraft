@@ -8,6 +8,23 @@ if (motionOn) document.documentElement.classList.add('motion-on');
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches && !motionOn;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
+/* the cover's own life (lighthouse, mist, stars, birds, the title's entrance) runs only when motion is allowed */
+if (!still) document.documentElement.classList.add('moving');
+const cover = document.querySelector('.cover');
+/* the title is split into words for its entrance; the heading keeps its text, so it reads the same */
+const title = cover.querySelector('h1');
+title.innerHTML = title.textContent
+  .split(' ')
+  .map((w, i) => `<span class="w" style="--i:${i}">${w}</span>`)
+  .join(' ');
+
+/* on a tall screen the cover is cropped to a narrow strip; the strip is moved over the lighthouse and the sun,
+   so the phone sees the same scene and not only bare sky */
+const tall = matchMedia('(max-aspect-ratio: 1/1)');
+const frame = () => cover.querySelectorAll('.layer').forEach((l) => l.setAttribute('viewBox', tall.matches ? '330 0 1600 900' : '0 0 1600 900'));
+frame();
+tall.addEventListener('change', frame);
+
 const bar = document.querySelector('.progress');
 const layers = [...document.querySelectorAll('[data-speed]')];
 const journey = document.querySelector('.journey');
@@ -45,6 +62,7 @@ function update() {
   const leaning = Math.abs(lean.tx - lean.x) > 0.001;
   if (!still && scrollY < innerHeight * 1.2) {
     /* the nearer the layer, the further a fine pointer moves it sideways: depth from the hand as well as the scroll */
+    cover.style.setProperty('--out', clamp(scrollY / innerHeight, 0, 1).toFixed(3));
     layers.forEach((l) => {
       const near = (0.6 - l.dataset.speed) * 40;
       l.style.transform = `translate3d(${(lean.x * -near).toFixed(1)}px,${(scrollY * l.dataset.speed).toFixed(1)}px,0)`;

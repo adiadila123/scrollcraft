@@ -798,6 +798,143 @@ html.motion-on.js .kit-reveal {
 }
 
 /* reduced motion: state changes happen at once, nothing fades or slides into place */
+/* ---- the cover at dusk: the sun sets and the sky darkens as the reader leaves, the lighthouse sweeps, mist
+   drifts in the valleys, stars come out and birds cross. --out is 0 on arrival and 1 when the cover has gone ---- */
+.cover {
+  --out: 0;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 100%, transparent, #070a0c 70%);
+  opacity: calc(var(--out) * 0.85);
+}
+.cover-text {
+  z-index: 2;
+  transform: translateY(calc(var(--out) * -12svh));
+  opacity: calc(1 - var(--out) * 1.4);
+}
+.sun,
+.sun-glow {
+  transform: translateY(calc(var(--out) * 220px));
+}
+.stars {
+  opacity: calc(0.35 + var(--out) * 0.65);
+}
+.beam {
+  transform-box: view-box;
+  transform-origin: 1099px 598px;
+  transform: rotate(10deg);
+}
+.lamp {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.birds {
+  display: none;
+}
+/* the title arrives one word at a time */
+.cover h1 .w {
+  display: inline-block;
+}
+.moving .birds {
+  display: inline;
+}
+.moving .bird {
+  animation: fly 26s linear infinite;
+}
+.moving .bird:nth-child(2) {
+  animation-duration: 31s;
+  animation-delay: -9s;
+}
+.moving .bird:nth-child(3) {
+  animation-duration: 29s;
+  animation-delay: -17s;
+}
+.moving .beam {
+  animation: sweep 9s ease-in-out infinite alternate;
+}
+.moving .lamp {
+  animation: breathe 3s ease-in-out infinite;
+}
+.moving .fog {
+  animation: drift 40s ease-in-out infinite alternate;
+}
+.moving .f2 {
+  animation-duration: 52s;
+  animation-direction: alternate-reverse;
+}
+.moving .f3 {
+  animation-duration: 34s;
+}
+.moving .stars circle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+.moving .stars circle:nth-child(2n) {
+  animation-delay: -1.3s;
+}
+.moving .stars circle:nth-child(3n) {
+  animation-delay: -2.7s;
+}
+.moving .cover h1 .w {
+  animation: word 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(0.35s + var(--i) * 0.12s);
+}
+.moving .cover :is(.kicker, .standfirst) {
+  animation: word 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.moving .cover .kicker {
+  animation-delay: 0.2s;
+}
+.moving .cover .standfirst {
+  animation-delay: 0.9s;
+}
+@keyframes fly {
+  from {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(900px, -60px);
+  }
+  to {
+    transform: translate(1900px, 20px);
+  }
+}
+@keyframes sweep {
+  from {
+    transform: rotate(-18deg);
+  }
+  to {
+    transform: rotate(32deg);
+  }
+}
+@keyframes breathe {
+  50% {
+    transform: scale(1.6);
+    opacity: 0.7;
+  }
+}
+@keyframes drift {
+  to {
+    transform: translateX(160px);
+  }
+}
+@keyframes twinkle {
+  50% {
+    opacity: 0.2;
+  }
+}
+@keyframes word {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em) rotate(2deg);
+    filter: blur(8px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html:not(.motion-on) *,
   html:not(.motion-on) *::before,
