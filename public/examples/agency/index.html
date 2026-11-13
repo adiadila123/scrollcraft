@@ -8,9 +8,18 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- the film layer: letterbox bars for the signature moment, and grain -->
+    <div class="bars" aria-hidden="true"><i></i><i></i></div>
+    <div class="grain" aria-hidden="true"></div>
     <div class="progress" aria-hidden="true"></div>
     <header class="nav">
       <a class="brand" href="#top">Halden</a>
+      <nav class="links" aria-label="Sections">
+        <a href="#process">Process</a>
+        <a href="#route-title">Idea</a>
+        <a href="#work-title">Work</a>
+        <a href="#outcome">Outcome</a>
+      </nav>
       <a class="contact-link" href="#contact">Start a project</a>
     </header>
 
@@ -35,7 +44,7 @@
       </section>
 
       <!-- process: pinned while three steps hand over; without motion they are a plain list -->
-      <section class="process" aria-label="Process">
+      <section class="process" id="process" aria-label="Process">
         <div class="process-bar" aria-hidden="true"><i></i></div>
         <div class="big-num" aria-hidden="true"><span>01</span><span>02</span><span>03</span></div>
         <article class="step">
@@ -125,6 +134,149 @@
         </div>
       </section>
 
+      <!-- what changed: three short statements, then the brief in the client's words -->
+      <section class="outcome" id="outcome" aria-labelledby="outcome-title">
+        <h2 id="outcome-title" class="rise">What changed</h2>
+        <ol class="outcomes">
+          <li class="rise"><span>01</span><b>One system</b> for signs, screens, tickets and boats, where there had been four.</li>
+          <li class="rise"><span>02</span><b>Timetables</b> set large enough to read from the back of a queue.</li>
+          <li class="rise"><span>03</span><b>A line</b> that passengers now draw on postcards without being asked.</li>
+        </ol>
+        <blockquote class="brief rise">
+          <p>“We asked for a new logo. We got a way of explaining the islands.”</p>
+          <footer>The client, in the fictional brief</footer>
+        </blockquote>
+      </section>
+
+      <section class="services" aria-labelledby="services-title">
+        <h2 id="services-title" class="rise">What we do</h2>
+        <ul>
+          <li class="rise">Identity</li>
+          <li class="rise">Wayfinding</li>
+          <li class="rise">Digital products</li>
+          <li class="rise">Motion systems</li>
+        </ul>
+      </section>
+
+      <!-- zoom on scroll: the picture settles into its frame as the frame crosses the screen -->
+      <section class="kit-section kit-zoomer" id="livery" aria-labelledby="livery-title">
+        <div class="kit-head"><h2 id="livery-title" class="kit-reveal">The livery, up close</h2></div>
+        <figure class="kit-zoom" style="aspect-ratio: 21 / 9; margin: 0">
+          <svg viewBox="0 0 1050 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="1050" height="450" fill="#0d1418" />
+            <path d="M80 300 H 900 L 980 250 H 140 Z" fill="#eef1f2" />
+            <path d="M80 300 H 900 L 980 250 L 990 270 L 910 330 H 100 Z" fill="#1e2428" />
+            <path d="M120 285 C 300 270, 420 300, 600 280 S 860 262, 960 262" fill="none" stroke="#4fd1c5" stroke-width="5" />
+            <rect x="420" y="190" width="260" height="60" rx="6" fill="#eef1f2" />
+            <rect x="440" y="205" width="220" height="18" fill="#0d1418" />
+            <path d="M0 360 C 120 350, 240 372, 360 360 S 620 350, 760 362 S 960 370, 1050 360" fill="none" stroke="#12202a" stroke-width="3" />
+          </svg>
+        </figure>
+        <p class="kit-reveal" style="margin-top: 18px; max-width: 46ch; color: var(--muted)">
+          The line runs the length of every boat, at the height of the water it crosses.
+        </p>
+      </section>
+
+      <!-- horizontal scroll with snap: a native track that settles on a card; the buttons step through it -->
+      <section class="kit-section kit-carousel" id="other" aria-labelledby="other-title">
+        <div class="kit-head">
+          <h2 id="other-title" class="kit-reveal">Other work</h2>
+          <div class="kit-buttons">
+            <button type="button" data-dir="-1" aria-label="Previous project">←</button><button type="button" data-dir="1" aria-label="Next project">→</button>
+          </div>
+        </div>
+        <div class="kit-track" tabindex="0" role="region" aria-label="Other work">
+          <figure class="kit-card">
+            <div class="kit-art" style="background: linear-gradient(90deg, #0d1418 0 40%, #4fd1c533 40% 55%, #0d1418 55%)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Northgate Library</h3>
+              <p>Seven entrances, one way of finding your way.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: radial-gradient(circle at 30% 70%, #4fd1c544, transparent 50%), #0b1114" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Harbour Market</h3>
+              <p>Stalls, signs and a map on the floor.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: repeating-linear-gradient(0deg, #12202a 0 14px, #0b1114 14px 28px)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Coastal Rail</h3>
+              <p>Timetables that fit on a ticket.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: conic-gradient(from 0deg at 50% 50%, #4fd1c533, #0b1114 40%)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Island Radio</h3>
+              <p>A sound and a mark for a small station.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: linear-gradient(160deg, #1b2a36, #06080a 70%)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Pier Theatre</h3>
+              <p>Posters for a season by the sea.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- infinite scroll: more entries arrive as the end of the list comes near; the button does it for keyboards -->
+      <section class="kit-section kit-feed" id="journal" aria-labelledby="journal-title">
+        <div class="kit-head"><h2 id="journal-title" class="kit-reveal">Studio journal</h2></div>
+        <ul class="kit-list" aria-live="polite">
+          <li>
+            <span class="kit-tag">Note</span>
+            <p><b>Drawing with water</b>Why the Tidewater line wobbles on purpose.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Talk</span>
+            <p><b>Motion for signs</b>Can a printed sign move? Ours pretend to.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Note</span>
+            <p><b>The rain test</b>Every timetable is read from three metres in a shower.</p>
+          </li>
+        </ul>
+        <template
+          ><li>
+            <span class="kit-tag">Note</span>
+            <p><b>One accent colour</b>And what we say when asked for a second.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Talk</span>
+            <p><b>Wayfinding is writing</b>The best sign is a short sentence.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Note</span>
+            <p><b>Postcards</b>Passengers drew the line. We did not ask them to.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Note</span>
+            <p><b>Night ferries</b>How the line works when the sea is black.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Talk</span>
+            <p><b>Small studios, big systems</b>Five people, four hundred signs.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Note</span>
+            <p><b>Starting again</b>What we keep from every project, and what we throw away.</p>
+          </li></template
+        >
+        <div class="kit-end"><button type="button" class="kit-more">Load more</button><span class="kit-status" role="status">3 shown</span></div>
+      </section>
+      <!-- the next case study, as a teaser -->
+      <section class="next" aria-labelledby="next-title">
+        <p class="kicker">Next case study</p>
+        <h2 id="next-title" class="rise">Northgate Library</h2>
+        <p class="rise">Wayfinding for a building with seven entrances and no front door.</p>
+        <div class="next-art rise" aria-hidden="true"></div>
+      </section>
+
       <section class="contact" id="contact">
         <h2 class="end">Have a line to draw?</h2>
         <svg class="underline" viewBox="0 0 600 30" preserveAspectRatio="none" aria-hidden="true">
@@ -134,7 +286,21 @@
       </section>
     </main>
 
-    <footer class="foot">A fictional studio and client, built for the Scrollcraft tutorial.</footer>
+    <footer class="foot">
+      <div class="foot-cols">
+        <p class="brand">Halden</p>
+        <ul>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#work-title">Work</a></li>
+          <li><a href="#outcome">Outcome</a></li>
+        </ul>
+        <ul>
+          <li><a href="mailto:studio@example.com">studio@example.com</a></li>
+          <li><a href="#top">Back to top</a></li>
+        </ul>
+      </div>
+      <p class="foot-note">A fictional studio and client, built for the Scrollcraft tutorial.</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js"></script>

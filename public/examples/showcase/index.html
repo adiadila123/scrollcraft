@@ -3,23 +3,43 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sora · a stoneware vase</title>
-    <meta name="description" content="A fictional product showcase in WebGL, built for the Scrollcraft tutorial." />
+    <title>Sora · a stoneware vase, thrown by hand</title>
+    <meta name="description" content="A fictional product landing page in WebGL, built for the Scrollcraft tutorial." />
     <link rel="stylesheet" href="style.css" />
     <script type="importmap">
       { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js" } }
     </script>
   </head>
   <body>
+    <a class="skip" href="#making">Skip to the story</a>
     <header class="nav">
       <a class="brand" href="#top">Sora</a>
+      <nav class="links" aria-label="Sections">
+        <a href="#making">Making</a>
+        <a href="#glazes">Glazes</a>
+        <a href="#details">Details</a>
+        <a href="#studio">Studio</a>
+      </nav>
       <a class="buy" href="#order">Order</a>
     </header>
-    <!-- where the piece is in the making; the step being read is lit -->
-    <nav class="steps" aria-label="Making">
+
+    <!-- the scene: one three.js canvas behind the whole page; a drawing stands in when WebGL is missing -->
+    <canvas class="stage" aria-hidden="true"></canvas>
+    <div class="heat" aria-hidden="true"></div>
+    <!-- film: letterbox bars that close in while the story plays, and a fine grain over everything -->
+    <div class="bars" aria-hidden="true"><i></i><i></i></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="progress" aria-hidden="true"></div>
+    <svg class="fallback" viewBox="0 0 120 200" aria-hidden="true">
+      <ellipse class="fb-shadow" cx="60" cy="196" rx="46" ry="4" />
+      <path d="M38 196 H82 Q90 196 92 186 Q104 130 98 96 Q92 64 74 46 Q70 30 72 6 H48 Q50 30 46 46 Q28 64 22 96 Q16 130 28 186 Q30 196 38 196 Z" />
+    </svg>
+
+    <!-- where the piece is in the making; the chapter being read is lit -->
+    <nav class="steps" aria-label="Chapters">
       <ol>
         <li>
-          <a href="#top"><span>01</span> Clay</a>
+          <a href="#clay"><span>01</span> Clay</a>
         </li>
         <li>
           <a href="#thrown"><span>02</span> Thrown</a>
@@ -28,61 +48,283 @@
           <a href="#trimmed"><span>03</span> Trimmed</a>
         </li>
         <li>
-          <a href="#glaze"><span>04</span> Glazed</a>
+          <a href="#fired"><span>04</span> Fired</a>
         </li>
         <li>
-          <a href="#order"><span>05</span> Yours</a>
+          <a href="#glazed"><span>05</span> Glazed</a>
         </li>
       </ol>
     </nav>
 
-    <!-- the vase, drawn by three.js behind the text; a drawing stands in when WebGL is missing -->
-    <canvas class="stage" aria-hidden="true"></canvas>
-    <svg class="fallback" viewBox="0 0 120 200" aria-hidden="true">
-      <ellipse class="fb-shadow" cx="60" cy="196" rx="46" ry="4" />
-      <path d="M38 196 H82 Q90 196 92 186 Q104 130 98 96 Q92 64 74 46 Q70 30 72 6 H48 Q50 30 46 46 Q28 64 22 96 Q16 130 28 186 Q30 196 38 196 Z" />
-    </svg>
-
     <main id="top">
-      <section class="panel hero">
-        <div class="card">
-          <p class="kicker">Atelier Sora</p>
-          <h1>A vase thrown by hand, turned by your scroll.</h1>
-          <p>Stoneware, glazed twice.</p>
+      <section class="scene hero" data-stage="0">
+        <p class="kicker reveal">Atelier Sora · Stoneware</p>
+        <h1 class="mega">
+          <span class="ln"><span>Thrown</span></span>
+          <span class="ln"
+            ><span>by <em>hand.</em></span></span
+          >
+        </h1>
+        <p class="lede reveal">One vase, made from a single piece of clay. Scroll, and watch it being made.</p>
+        <p class="cue" aria-hidden="true"><i></i>Scroll</p>
+      </section>
+
+      <div id="making">
+        <section class="scene chapter" id="clay" data-stage="1" data-side="left">
+          <p class="big-n" aria-hidden="true">01</p>
+          <h2>
+            <span class="ln"><span>A lump of</span></span
+            ><span class="ln"><span>wet clay.</span></span>
+          </h2>
+          <p class="reveal">Every Sora starts the same way: one weighed piece of stoneware, wedged by hand until there is no air left in it.</p>
+        </section>
+        <section class="scene chapter" id="thrown" data-stage="2" data-side="right">
+          <p class="big-n" aria-hidden="true">02</p>
+          <h2>
+            <span class="ln"><span>Pulled up</span></span
+            ><span class="ln"><span>on the wheel.</span></span>
+          </h2>
+          <p class="reveal">Opened, then raised in three pulls. The rings a potter’s fingers leave stay until the wall is smoothed.</p>
+        </section>
+        <section class="scene chapter" id="trimmed" data-stage="3" data-side="left">
+          <p class="big-n" aria-hidden="true">03</p>
+          <h2>
+            <span class="ln"><span>Trimmed a</span></span
+            ><span class="ln"><span>day later.</span></span>
+          </h2>
+          <p class="reveal">When the clay is leather-hard, the foot is cut. The vase sits lower, lighter and steady.</p>
+        </section>
+        <section class="scene chapter" id="fired" data-stage="4" data-side="right">
+          <p class="big-n" aria-hidden="true">04</p>
+          <h2>
+            <span class="ln"><span>Fired</span></span
+            ><span class="ln"><span>until it glows.</span></span>
+          </h2>
+          <p class="reveal">Twice through the kiln. The second firing is hot enough to turn clay into stone.</p>
+        </section>
+        <section class="scene chapter" id="glazed" data-stage="5" data-side="left">
+          <p class="big-n" aria-hidden="true">05</p>
+          <h2>
+            <span class="ln"><span>Dipped</span></span
+            ><span class="ln"><span>in glaze.</span></span>
+          </h2>
+          <p class="reveal">Held by the foot and dipped once. Where the glaze stops, the bare clay shows: no two lines are alike.</p>
+        </section>
+      </div>
+
+      <section class="scene glazes" id="glazes" data-stage="6">
+        <h2 class="reveal">Two glazes</h2>
+        <p class="reveal">Choose one. The vase changes with you.</p>
+        <div class="swatches" role="group" aria-label="Glaze">
+          <button type="button" data-glaze="celadon" aria-pressed="true"><i></i><span>Celadon</span><small>Pale green, glassy</small></button>
+          <button type="button" data-glaze="tenmoku" aria-pressed="false"><i></i><span>Tenmoku</span><small>Dark iron, glossy</small></button>
         </div>
       </section>
-      <section class="panel" id="thrown">
-        <div class="card">
-          <h2>Thrown on the wheel</h2>
-          <p>Each one starts as a single piece of clay, opened and pulled up by hand.</p>
-        </div>
+
+      <!-- zoom on scroll: the picture settles into its frame as the frame crosses the screen -->
+      <section class="kit-section kit-zoomer sheet" data-stage="7" id="close" aria-labelledby="close-title">
+        <div class="kit-head"><h2 id="close-title" class="kit-reveal">Up close</h2></div>
+        <figure class="kit-zoom" style="aspect-ratio: 21 / 9; margin: 0">
+          <div
+            style="
+              background:
+                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.35), transparent 30%),
+                radial-gradient(#2d3a30 1px, transparent 1.8px) 0 0 / 22px 26px,
+                radial-gradient(#3a4a3c 1.2px, transparent 2px) 9px 13px / 31px 23px,
+                linear-gradient(170deg, #b4cdb8, #8fae97 60%, #d9c6a8 61%, #cdb796);
+            "
+          ></div>
+        </figure>
+        <p class="kit-reveal" style="margin-top: 18px; max-width: 46ch; color: var(--muted)">
+          Iron in the clay rises through the glaze in the kiln and leaves these dark specks. No two pieces have the same pattern.
+        </p>
       </section>
-      <section class="panel" id="trimmed">
-        <div class="card">
-          <h2>Trimmed a day later</h2>
-          <p>The foot is cut when the clay is leather-hard, so the vase sits low and steady.</p>
-        </div>
-      </section>
-      <section class="panel" id="glaze">
-        <div class="card">
-          <h2>Two glazes</h2>
-          <p>Choose one. The vase on screen changes with you.</p>
-          <div class="swatches" role="group" aria-label="Glaze">
-            <button type="button" data-glaze="celadon" aria-pressed="true"><i></i>Celadon</button>
-            <button type="button" data-glaze="tenmoku" aria-pressed="false"><i></i>Tenmoku</button>
+
+      <!-- horizontal scroll with snap: a native track that settles on a card; the buttons step through it -->
+      <section class="kit-section kit-carousel sheet" data-stage="7" id="batches" aria-labelledby="batches-title">
+        <div class="kit-head">
+          <h2 id="batches-title" class="kit-reveal">Past batches</h2>
+          <div class="kit-buttons">
+            <button type="button" data-dir="-1" aria-label="Previous batch">←</button><button type="button" data-dir="1" aria-label="Next batch">→</button>
           </div>
         </div>
-      </section>
-      <section class="panel order" id="order">
-        <div class="card">
-          <h2>Sora vase</h2>
-          <p>Made in small batches. No two are quite the same.</p>
-          <a class="btn" href="#top">Order</a>
+        <div class="kit-track" tabindex="0" role="region" aria-label="Past batches">
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="
+                background:
+                  radial-gradient(ellipse 34% 40% at 50% 58%, #9fbfa8 0 98%, transparent 100%),
+                  radial-gradient(ellipse 12% 6% at 50% 20%, #9fbfa8 0 98%, transparent 100%),
+                  linear-gradient(90deg, transparent 44%, #9fbfa8 44% 56%, transparent 56%) 0 0 / 100% 42% no-repeat,
+                  #15110d;
+              "
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Batch 14</h3>
+              <p>Celadon, a little greener than usual.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="
+                background:
+                  radial-gradient(ellipse 34% 40% at 50% 58%, #4a2d1c 0 98%, transparent 100%),
+                  radial-gradient(ellipse 12% 6% at 50% 20%, #4a2d1c 0 98%, transparent 100%),
+                  linear-gradient(90deg, transparent 44%, #4a2d1c 44% 56%, transparent 56%) 0 0 / 100% 42% no-repeat,
+                  #15110d;
+              "
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Batch 13</h3>
+              <p>Tenmoku, glossy, with rust at the lip.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="
+                background:
+                  radial-gradient(ellipse 34% 40% at 50% 58%, #b9cdb6 0 98%, transparent 100%),
+                  radial-gradient(ellipse 12% 6% at 50% 20%, #b9cdb6 0 98%, transparent 100%),
+                  linear-gradient(90deg, transparent 44%, #b9cdb6 44% 56%, transparent 56%) 0 0 / 100% 42% no-repeat,
+                  #15110d;
+              "
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Batch 12</h3>
+              <p>Celadon, thin, the clay shows through.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="
+                background:
+                  radial-gradient(ellipse 34% 40% at 50% 58%, #2f1d12 0 98%, transparent 100%),
+                  radial-gradient(ellipse 12% 6% at 50% 20%, #2f1d12 0 98%, transparent 100%),
+                  linear-gradient(90deg, transparent 44%, #2f1d12 44% 56%, transparent 56%) 0 0 / 100% 42% no-repeat,
+                  #15110d;
+              "
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Batch 11</h3>
+              <p>Tenmoku, dipped twice.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="
+                background:
+                  radial-gradient(ellipse 34% 40% at 50% 58%, #d6c2a6 0 98%, transparent 100%),
+                  radial-gradient(ellipse 12% 6% at 50% 20%, #d6c2a6 0 98%, transparent 100%),
+                  linear-gradient(90deg, transparent 44%, #d6c2a6 44% 56%, transparent 56%) 0 0 / 100% 42% no-repeat,
+                  #15110d;
+              "
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Batch 10</h3>
+              <p>The first batch with a trimmed foot.</p>
+            </figcaption>
+          </figure>
         </div>
+      </section>
+
+      <!-- infinite scroll: more entries arrive as the end of the list comes near; the button does it for keyboards -->
+      <section class="kit-section kit-feed sheet" data-stage="7" id="kiln" aria-labelledby="kiln-title">
+        <div class="kit-head"><h2 id="kiln-title" class="kit-reveal">Notes from the kiln</h2></div>
+        <ul class="kit-list" aria-live="polite">
+          <li>
+            <span class="kit-tag">Firing 42</span>
+            <p><b>A slow cool</b>We left the kiln shut a day longer. The celadon came out clearer.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Firing 41</span>
+            <p><b>Two cracked</b>The clay was too wet at trimming. Back to the wheel.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Firing 40</span>
+            <p><b>Tenmoku test</b>More iron, and the edge of the glaze turned rust.</p>
+          </li>
+        </ul>
+        <template
+          ><li>
+            <span class="kit-tag">Firing 39</span>
+            <p><b>A new shelf</b>Twelve vases fit now, if nobody breathes.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Firing 38</span>
+            <p><b>The foot</b>Trimmed a little deeper, and the vase sits lower.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Firing 37</span>
+            <p><b>Dipping by hand</b>Every glaze line is different, which is the point.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Firing 36</span>
+            <p><b>Bisque</b>The first firing, to make the clay strong enough to glaze.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Firing 35</span>
+            <p><b>Clay</b>A new stoneware, with more iron in it.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Firing 34</span>
+            <p><b>The shape</b>One vase, the same shape, made again and again.</p>
+          </li></template
+        >
+        <div class="kit-end"><button type="button" class="kit-more">Load more</button><span class="kit-status" role="status">3 shown</span></div>
+      </section>
+      <section class="sheet details" id="details" data-stage="7">
+        <h2 class="reveal">Details</h2>
+        <dl class="specs">
+          <div class="reveal">
+            <dt>Height</dt>
+            <dd>24 cm</dd>
+          </div>
+          <div class="reveal">
+            <dt>Widest</dt>
+            <dd>17 cm</dd>
+          </div>
+          <div class="reveal">
+            <dt>Clay</dt>
+            <dd>Stoneware, fired twice</dd>
+          </div>
+          <div class="reveal">
+            <dt>Inside</dt>
+            <dd>Glazed, holds water</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="sheet studio" id="studio" data-stage="7">
+        <p class="kicker reveal">The studio</p>
+        <p class="quote reveal">We make one shape, in small batches, and keep changing it a little. The vase you get is the one we made that week.</p>
+        <ul class="facts">
+          <li class="reveal"><b>One</b> shape, made by hand</li>
+          <li class="reveal"><b>Two</b> firings in the kiln</li>
+          <li class="reveal"><b>Small</b> batches, no two alike</li>
+        </ul>
+      </section>
+
+      <section class="sheet order" id="order" data-stage="7">
+        <h2 class="reveal">Sora vase</h2>
+        <p class="reveal">Made in small batches. Tell us your glaze and we will write when the next batch is out of the kiln.</p>
+        <a class="btn" href="mailto:studio@example.com?subject=Sora%20vase">Join the next batch</a>
       </section>
     </main>
 
-    <footer class="foot">A fictional atelier, built for the Scrollcraft tutorial.</footer>
+    <footer class="foot">
+      <p>Sora · a fictional atelier, built for the Scrollcraft tutorial.</p>
+      <a href="#top">Back to top</a>
+    </footer>
     <script type="module" src="app.js"></script>
   </body>
 </html>

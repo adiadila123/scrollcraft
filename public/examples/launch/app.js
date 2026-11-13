@@ -28,6 +28,13 @@ let frame = -1;
 /* the speaker's story in three acts, all from one number: it turns and plays (sound rings spread around it), it opens
    (the fabric shell lifts off the aluminium core and the driver), and it closes again while the view tilts down to
    the one button. Frame 0 is the closed speaker from the front: the still frame for reduced motion. */
+/* the shell's colour, chosen in the colours section */
+const TONES = {
+  graphite: ['#33393d', '#1b1f22', '#07080a'],
+  sand: ['#c9bda6', '#91866f', '#3b352c'],
+  clay: ['#b4694a', '#74402b', '#2a140c'],
+};
+let tone = 'graphite';
 const ease = (t) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
 const span = (p, a, b) => ease((p - a) / (b - a));
 
@@ -61,7 +68,8 @@ function drawFrame(i) {
   const tilt = span(p, 0.66, 0.95); /* the view tilts down to the top of the speaker */
   const k = 0.2 + tilt * 0.3; /* how round the ellipses are: the camera's height */
   const a = p * Math.PI * 2.4; /* the turn */
-  const cx = w / 2;
+  /* a fine pointer leans the speaker a little off centre, like a camera drifting on a slider */
+  const cx = w / 2 + lean.x * w * 0.018;
   const cy = h * (0.46 + open * 0.1 + tilt * 0.02); /* lower while open, so the lifted shell clears the bar */
   const R = u * 0.18;
   const H = R * 1.55;
@@ -149,9 +157,9 @@ function drawFrame(i) {
   const sBottom = bottom - lift;
   ctx.globalAlpha = 1 - open * 0.55;
   band(cx, sTop, sBottom, R, k, [
-    [0, '#33393d'],
-    [0.3, '#1b1f22'],
-    [1, '#07080a'],
+    [0, TONES[tone][0]],
+    [0.3, TONES[tone][1]],
+    [1, TONES[tone][2]],
   ]);
   const dot = Math.max(1, u / 520);
   for (let col = 0; col < 36; col++) {
@@ -203,18 +211,46 @@ words.innerHTML = words.textContent
 const spans = [...words.children];
 
 const bar = document.querySelector('.progress');
+let shownP = 0;
+const lean = { x: 0, tx: 0 };
+addEventListener(
+  'pointermove',
+  (e) => {
+    if (still || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    lean.tx = (e.clientX / innerWidth) * 2 - 1;
+    queue();
+  },
+  { passive: true },
+);
+
 let queued = false;
 function update() {
   queued = false;
   const max = document.documentElement.scrollHeight - innerHeight;
   bar.style.transform = `scaleX(${max ? scrollY / max : 0})`;
 
-  const p = through(spin);
+  /* the film has weight: the frame shown eases towards the scrolled one, so a fling glides to a stop */
+  const target = through(spin);
+  shownP = still ? target : shownP + (target - shownP) * 0.12;
+  const p = shownP;
+  lean.x += (lean.tx - lean.x) * 0.08;
+  const settling = Math.abs(target - shownP) > 0.0004 || Math.abs(lean.tx - lean.x) > 0.001;
   const i = still ? 0 : Math.round(p * (FRAMES - 1));
-  if (i !== frame) {
+  if (i !== frame || settling) {
     frame = i;
     drawFrame(i);
   }
+  /* letterbox while the speaker holds the screen */
+  const sr = spin.getBoundingClientRect();
+  document.documentElement.classList.toggle('film', !still && sr.top < innerHeight * 0.2 && sr.bottom > innerHeight * 0.8);
+  /* depth in the tour: each feature's number drifts slower than its heading */
+  if (!still)
+    feats.forEach((f) => {
+      const r = f.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      f.style.setProperty('--shift', ((r.top + r.height / 2 - innerHeight / 2) / innerHeight).toFixed(3));
+    });
+  if (settling) queue();
   let cur = 0;
   caps.forEach((c, k) => {
     if (p >= +c.dataset.at) cur = k;
@@ -260,3 +296,110 @@ function updateTour() {
 
 sizeCanvas();
 update();
+
+/* colours: recolour the drawing in the section and the speaker in the film, which redraws its current frame */
+const colours = document.querySelector('.colours');
+const toneButtons = colours.querySelectorAll('[data-tone]');
+toneButtons.forEach((b) =>
+  b.addEventListener('click', () => {
+    toneButtons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    tone = b.dataset.tone;
+    colours.dataset.tone = tone;
+    frame = -1;
+    queue();
+  }),
+);
+
+/* ---- the scroll kit, the same in all five projects: navigation that follows the reader, reveals, a zoom that
+   follows the scroll, a snapping carousel with buttons, and a list that loads more as you reach it ---- */
+(() => {
+  const root = document.documentElement;
+  const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches && !root.classList.contains('motion-on');
+
+  /* scroll-linked navigation: the link to the section in view is marked as the current location */
+  const links = [...document.querySelectorAll('header nav a[href^="#"]')];
+  const targets = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const spy = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const id = `#${e.target.id}`;
+        links.forEach((a) => (a.getAttribute('href') === id ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current')));
+      }),
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  targets.forEach((t) => spy.observe(t));
+
+  /* reveal on scroll: pieces marked .kit-reveal fade and rise once, as they enter */
+  const reveal = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('kit-in');
+        reveal.unobserve(e.target);
+      }),
+    { rootMargin: '0px 0px -10% 0px' },
+  );
+  document.querySelectorAll('.kit-reveal').forEach((el) => reveal.observe(el));
+
+  /* zoom on scroll: the picture inside .kit-zoom starts larger and settles to its frame as the frame crosses the screen */
+  const zooms = [...document.querySelectorAll('.kit-zoom')];
+  let queued = false;
+  function zoom() {
+    queued = false;
+    zooms.forEach((z) => {
+      const r = z.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height)));
+      z.style.setProperty('--zoom', calm() ? '1' : (1.28 - p * 0.28).toFixed(3));
+    });
+  }
+  if (zooms.length) {
+    addEventListener(
+      'scroll',
+      () => {
+        if (!queued) {
+          queued = true;
+          requestAnimationFrame(zoom);
+        }
+      },
+      { passive: true },
+    );
+    zoom();
+  }
+
+  /* snapping carousel: the track snaps by itself; the buttons move it one card at a time */
+  document.querySelectorAll('.kit-carousel').forEach((c) => {
+    const track = c.querySelector('.kit-track');
+    const step = () => (track.firstElementChild?.getBoundingClientRect().width ?? 300) + 16;
+    const go = (dir) => track.scrollBy({ left: dir * step(), behavior: calm() ? 'auto' : 'smooth' });
+    c.querySelector('[data-dir="-1"]')?.addEventListener('click', () => go(-1));
+    c.querySelector('[data-dir="1"]')?.addEventListener('click', () => go(1));
+  });
+
+  /* infinite scroll: when the end of a .kit-feed comes near, the next items are copied in from its template;
+     the button does the same for keyboards, and the status line says when there is nothing more */
+  document.querySelectorAll('.kit-feed').forEach((feed) => {
+    const list = feed.querySelector('.kit-list');
+    const pool = [...feed.querySelector('template').content.children];
+    const more = feed.querySelector('.kit-more');
+    const status = feed.querySelector('.kit-status');
+    const load = () => {
+      const next = pool.splice(0, 3);
+      next.forEach((el) => list.append(el.cloneNode(true)));
+      status.textContent = pool.length ? `${list.children.length} shown` : 'That is everything.';
+      if (!pool.length) {
+        more.hidden = true;
+        watch.disconnect();
+        return;
+      }
+      /* observe again: if the end is still in reach after the new items, this loads the next ones too */
+      watch.unobserve(end);
+      watch.observe(end);
+    };
+    const watch = new IntersectionObserver((entries) => entries.some((e) => e.isIntersecting) && load(), { rootMargin: '0px 0px 200px 0px' });
+    const end = feed.querySelector('.kit-end');
+    watch.observe(end);
+    more.addEventListener('click', load);
+  });
+})();

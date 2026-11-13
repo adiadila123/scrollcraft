@@ -222,7 +222,35 @@ export const meta = {
 </section>
 
 <section className="sec">
-  <Stick left="07 · Ce au toate cinci în comun" />
+  <Stick left="07 · Fiecare tehnică, în fiecare proiect" right="Unde să cauți" />
+  <p className="lede rv" style={{ marginTop: '0' }}>Toate cele cinci proiecte folosesc același vocabular de scroll, fiecare cu vocea lui. Aici e locul fiecărei tehnici, ca să deschizi fișierul și s-o citești.</p>
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Tabel. Derulează în lateral ca să vezi toate coloanele.">
+    <table>
+      <thead>
+        <tr><th>Tehnică</th><th>Orbit One</th><th>Field Studio</th><th>The Long Way North</th><th>Halden Studio</th><th>Atelier Sora</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Poziționare sticky</td><td>Boxa care se rotește; dispozitivul din tur</td><td>Banda de proces fixată; declarația</td><td>Harta lângă zile</td><td>Procesul și traseul, fixate de GSAP</td><td>Canvasul din spatele paginii; șina de capitole</td></tr>
+        <tr><td>Scroll snap</td><td>Caruselul „Where it fits”</td><td>Caruselul „Journal”</td><td>Caruselul „From the notebook”</td><td>Caruselul „Other work”</td><td>Caruselul „Past batches”</td></tr>
+        <tr><td>Declanșate de scroll</td><td>Rândurile titlului; apariții</td><td>Dezvăluiri cu clip; apariții</td><td>Paragrafe care apar o dată</td><td>ScrollTrigger.batch pentru secțiunile de final</td><td>Rânduri și paragrafe, o dată</td></tr>
+        <tr><td>Scroll infinit</td><td>„From the workshop”</td><td>„Archive”</td><td>„More from North”</td><td>„Studio journal”</td><td>„Notes from the kiln”</td></tr>
+        <tr><td>Conduse de scroll</td><td>Secvența de cadre, bara de progres</td><td>Poziția benzii, linia de progres</td><td>Desenarea traseului, bara de progres</td><td>Timeline-uri derulate, bara de progres</td><td>Tot filmul, bara de progres</td></tr>
+        <tr><td>Zoom la scroll</td><td>„Made for the middle of the room”</td><td>Zoomul invers din fiecare proiect</td><td>„Day three, from the top”</td><td>„The livery, up close”</td><td>„Up close” și camera</td></tr>
+        <tr><td>Parallax</td><td>Numerele funcțiilor alunecă mai încet</td><td>Straturile ilustrațiilor, după adâncime</td><td>Coperta în patru straturi</td><td>Titlul și linia lui</td><td>Numerele și titlurile capitolelor</td></tr>
+        <tr><td>Scroll orizontal</td><td>Caruselul camerelor</td><td>Banda de proces fixată</td><td>Caruselul carnetului</td><td>Banda de lucrări fixată</td><td>Caruselul loturilor</td></tr>
+        <tr><td>Scrollytelling</td><td>Boxa se deschide și se închide</td><td>Cuvintele declarației</td><td>Traseul, zi cu zi</td><td>Feribotul care traversează harta</td><td>De la lut la vază, în cinci capitole</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div className="rows">
+    <Row cls="rv" num="a" title="Stratul de film" anchor="film-layer">
+      <p>Peste tehnici, toate proiectele împart un strat de film: o granulație fină, o apariție din negru la deschidere, benzi negre care se închid cât rulează momentul principal, inerție ca scena să alunece până se oprește și o mică aplecare după un pointer fin. Totul se oprește cu mișcare redusă, unde schimbările se fac imediat.</p>
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="08 · Ce au toate cinci în comun" />
   <div className="rows">
     <Row cls="rv" num="a" title="O singură buclă">
       <p>Un singur listener de scroll programează un singur cadru de animație, iar tot ce urmează scrollul se actualizează acolo. Schimbările care se întâmplă o dată folosesc IntersectionObserver. În Halden Studio bucla e tickerul GSAP, iar Atelier Sora desenează un cadru doar când s-au schimbat scrollul sau glazura.</p>
@@ -244,7 +272,7 @@ export const meta = {
 </section>
 
 <section className="sec">
-  <Stick left="08 · Verifică automat" right="Playwright" />
+  <Stick left="09 · Verifică automat" right="Playwright" />
   <div className="rows">
     <Row cls="rv" num="a" title="Încape pe orice ecran, stă nemișcat la cerere" anchor="check-sites">
       <p>Fiecare listă „gata de portofoliu” începe cu aceleași trei verificări, iar tutorialul le rulează pe toate cele cinci site-uri la fiecare schimbare. Rulează același test pe al tău: derulează pagina la trei lățimi căutând un scroll orizontal, apoi pornește mișcarea redusă și verifică că nu rulează nimic și că se vede totul. Pentru contrast, adaugă verificarea axe din Testare.</p>

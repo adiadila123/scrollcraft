@@ -3,8 +3,9 @@ import { audit, CHAPTERS, expect, test } from './fixtures';
 test.describe('routes', () => {
   for (const path of ['/', ...CHAPTERS.map((c) => `/${c}`)]) {
     test(`${path} renders with its own title and passes axe`, async ({ page }) => {
-      /* the home page builds the three.js hero, which makes the axe scan slow on a busy machine */
-      if (path === '/') test.slow();
+      /* the home page builds the three.js hero, and Examples holds five full sites in frames: both make the axe scan
+         slow on a busy machine */
+      if (path === '/' || path === '/examples') test.slow();
       const res = await page.goto(path);
       expect(res?.status()).toBe(200);
       await expect(page.locator('h1').first()).toBeVisible();
@@ -48,8 +49,9 @@ test.describe('routes', () => {
 test.describe('romanian', () => {
   for (const path of ['/ro', ...CHAPTERS.map((c) => `/ro/${c}`)]) {
     test(`${path} is in Romanian and passes axe`, async ({ page }) => {
-      /* the home page builds the three.js hero, which makes the axe scan slow on a busy machine */
-      if (path === '/ro') test.slow();
+      /* the home page builds the three.js hero, and Examples holds five full sites in frames: both make the axe scan
+         slow on a busy machine */
+      if (path === '/ro' || path === '/ro/examples') test.slow();
       const res = await page.goto(path);
       expect(res?.status()).toBe(200);
       await expect(page.locator('html')).toHaveAttribute('lang', 'ro');
@@ -420,13 +422,41 @@ test.describe('portfolio projects', () => {
       expect(await overflow(page)).toBe(-1);
       const running = await page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length);
       expect(running, 'running animations').toBe(0);
-      for (const el of await page.locator('main :is(h1, h2, h3, p, li, figcaption)').all()) {
+      /* answers inside a closed disclosure are hidden on purpose, until the reader opens it */
+      for (const el of await page.locator('main :is(h1, h2, h3, p, li, figcaption):not(details:not([open]) *)').all()) {
         await el.scrollIntoViewIfNeeded();
         await expect(el).toBeVisible();
         expect(await el.evaluate((e) => Number(getComputedStyle(e).opacity))).toBeGreaterThan(0.9);
       }
       const axe = await audit(page);
       expect(axe.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id)).toEqual([]);
+    });
+  }
+
+  for (const id of SITES) {
+    test(`${id}: every scroll technique is there and works`, async ({ page, isMobile }) => {
+      test.skip(isMobile, 'the same markup on both');
+      await page.goto(`/live/${id}/index.html`);
+      /* scroll snap on a horizontal track, with buttons that move it */
+      const track = page.locator('.kit-track');
+      await expect(track).toHaveCSS('scroll-snap-type', 'x mandatory');
+      await page.locator('.kit-carousel [data-dir="1"]').click();
+      await expect.poll(() => track.evaluate((t) => t.scrollLeft)).toBeGreaterThan(0);
+      /* infinite scroll: reaching the end of the list loads the rest, then says so */
+      const feed = page.locator('.kit-feed');
+      await expect
+        .poll(async () => {
+          await feed.locator('.kit-end').evaluate((e) => e.scrollIntoView({ block: 'end' }));
+          return feed.locator('.kit-status').textContent();
+        })
+        .toBe('That is everything.');
+      await expect(feed.locator('.kit-list li')).toHaveCount(9);
+      /* scroll-linked navigation: a link in the bar marks the section in view */
+      const link = page.locator('header nav a[href^="#"]').first();
+      await page.locator((await link.getAttribute('href'))!).scrollIntoViewIfNeeded();
+      await expect(page.locator('header nav a[aria-current="location"]')).toHaveCount(1);
+      /* a scroll-driven progress bar */
+      await expect(page.locator('.progress')).toBeAttached();
     });
   }
 

@@ -8,8 +8,17 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- the film layer: letterbox bars for the signature moment, and grain -->
+    <div class="bars" aria-hidden="true"><i></i><i></i></div>
+    <div class="grain" aria-hidden="true"></div>
     <header class="nav">
       <a class="brand" href="#top">Orbit</a>
+      <nav class="links" aria-label="Sections">
+        <a href="#design">Design</a>
+        <a href="#features">Features</a>
+        <a href="#colours">Colours</a>
+        <a href="#faq">Questions</a>
+      </nav>
       <a class="buy" href="#order">Pre-order</a>
     </header>
 
@@ -34,7 +43,7 @@
       </section>
 
       <!-- frame scrub: the canvas draws the product, the captions change with the scroll -->
-      <section class="spin" aria-label="The speaker, turning">
+      <section class="spin" id="design" aria-label="The speaker, turning">
         <div class="spin-pin">
           <canvas class="spin-canvas" aria-hidden="true"></canvas>
           <p class="spin-cap" data-at="0">Sound in every direction.</p>
@@ -48,7 +57,7 @@
       </section>
 
       <!-- product tour: the device stays pinned, the feature crossing the middle sets the screen -->
-      <section class="tour">
+      <section class="tour" id="features">
         <div class="tour-device" aria-hidden="true">
           <div class="tour-screen" data-i="0"><span>Play</span></div>
         </div>
@@ -71,6 +80,198 @@
         </div>
       </section>
 
+      <!-- colours: the choice recolours the drawing here and the speaker in the film above -->
+      <section class="colours" id="colours">
+        <div class="colours-text">
+          <p class="eyebrow">Colours</p>
+          <h2>Three colours, one shape.</h2>
+          <p>Each shell is woven in one colour, all the way through, so a scratch never shows a different one.</p>
+          <div class="tones" role="group" aria-label="Colour">
+            <button type="button" data-tone="graphite" aria-pressed="true"><i></i>Graphite</button>
+            <button type="button" data-tone="sand" aria-pressed="false"><i></i>Sand</button>
+            <button type="button" data-tone="clay" aria-pressed="false"><i></i>Clay</button>
+          </div>
+        </div>
+        <div class="swatch-speaker" aria-hidden="true"><span></span></div>
+      </section>
+
+      <!-- zoom on scroll: the picture settles into its frame as the frame crosses the screen -->
+      <section class="kit-section kit-zoomer" id="room" aria-labelledby="room-title">
+        <div class="kit-head"><h2 id="room-title" class="kit-reveal">Made for the middle of the room.</h2></div>
+        <figure class="kit-zoom" style="aspect-ratio: 21 / 9; margin: 0">
+          <svg viewBox="0 0 1050 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="1050" height="450" fill="#0b0d0f" />
+            <rect x="0" y="300" width="1050" height="150" fill="#121417" />
+            <g fill="none" stroke="rgba(255,138,61,0.35)">
+              <ellipse cx="525" cy="262" rx="120" ry="22" />
+              <ellipse cx="525" cy="262" rx="200" ry="38" />
+              <ellipse cx="525" cy="262" rx="290" ry="56" />
+            </g>
+            <rect x="330" y="262" width="390" height="16" rx="4" fill="#2a2420" />
+            <rect x="360" y="278" width="10" height="150" fill="#1d1916" />
+            <rect x="680" y="278" width="10" height="150" fill="#1d1916" />
+            <rect x="497" y="196" width="56" height="66" rx="10" fill="#2b3135" />
+            <ellipse cx="525" cy="196" rx="28" ry="6" fill="#0d0f11" />
+            <circle cx="525" cy="196" r="3" fill="#ff8a3d" />
+            <circle cx="860" cy="120" r="46" fill="rgba(255,214,170,0.08)" />
+            <rect x="852" y="60" width="16" height="70" fill="#1a1d20" />
+          </svg>
+        </figure>
+        <p class="kit-reveal" style="margin-top: 18px; max-width: 46ch; color: var(--muted)">
+          No front, no back: put it where people sit, and the sound reaches all of them.
+        </p>
+      </section>
+
+      <!-- horizontal scroll with snap: a native track that settles on a card; the buttons step through it -->
+      <section class="kit-section kit-carousel" id="rooms" aria-labelledby="rooms-title">
+        <div class="kit-head">
+          <h2 id="rooms-title" class="kit-reveal">Where it fits</h2>
+          <div class="kit-buttons">
+            <button type="button" data-dir="-1" aria-label="Previous room">←</button><button type="button" data-dir="1" aria-label="Next room">→</button>
+          </div>
+        </div>
+        <div class="kit-track" tabindex="0" role="region" aria-label="Where it fits">
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="background: radial-gradient(circle at 50% 70%, #ff8a3d55, transparent 50%), linear-gradient(#1b1f22, #0b0d0f)"
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Kitchen counter</h3>
+              <p>Loud enough for the radio, small enough to move for the chopping board.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="background: radial-gradient(circle at 40% 60%, #5cc8ff44, transparent 55%), linear-gradient(#15191c, #07080a)"
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Living room</h3>
+              <p>On the low table, with everyone around it.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="background: radial-gradient(circle at 60% 50%, #9be15d44, transparent 55%), linear-gradient(#171a1c, #08090a)"
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Studio desk</h3>
+              <p>Between the screens, playing to the whole room.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="background: radial-gradient(circle at 50% 30%, #ffd59e55, transparent 50%), linear-gradient(#1d2a12, #07080a)"
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Garden table</h3>
+              <p>For an evening outside, until the battery says goodnight.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div
+              class="kit-art"
+              style="background: radial-gradient(circle at 50% 50%, #b4694a55, transparent 55%), linear-gradient(#1a1412, #07080a)"
+              aria-hidden="true"
+            ></div>
+            <figcaption>
+              <h3>Bedside</h3>
+              <p>Quiet enough to fall asleep to.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- infinite scroll: more entries arrive as the end of the list comes near; the button does it for keyboards -->
+      <section class="kit-section kit-feed" id="workshop" aria-labelledby="workshop-title">
+        <div class="kit-head"><h2 id="workshop-title" class="kit-reveal">From the workshop</h2></div>
+        <ul class="kit-list" aria-live="polite">
+          <li>
+            <span class="kit-tag">Week 12</span>
+            <p><b>Shell sample four</b>The weave is finally tight enough that the dots do not show the core.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Week 11</span>
+            <p><b>The button, again</b>We tried two buttons for a week. Everyone went back to one.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Week 10</span>
+            <p><b>A heavier base</b>Twenty grams more at the bottom, and it stopped walking on the table.</p>
+          </li>
+        </ul>
+        <template
+          ><li>
+            <span class="kit-tag">Week 9</span>
+            <p><b>Ring colours</b>Orange for playing, blue for pairing, green for a group.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Week 8</span>
+            <p><b>The aluminium core</b>Turned from one piece, so nothing inside can rattle.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Week 7</span>
+            <p><b>Listening tests</b>Twelve rooms, one question: where is the front? Nobody could say.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Week 6</span>
+            <p><b>First drawings</b>A cylinder, because sound does not have a favourite side.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Week 5</span>
+            <p><b>The name</b>Orbit, because it plays all the way round.</p>
+          </li>
+          <li>
+            <span class="kit-tag">Week 4</span>
+            <p><b>The brief</b>One speaker, one button, for the middle of the room.</p>
+          </li></template
+        >
+        <div class="kit-end"><button type="button" class="kit-more">Load more</button><span class="kit-status" role="status">3 shown</span></div>
+      </section>
+      <section class="specs">
+        <h2>The details</h2>
+        <dl>
+          <div>
+            <dt>Sound</dt>
+            <dd>All the way round</dd>
+          </div>
+          <div>
+            <dt>Shell</dt>
+            <dd>Woven fabric</dd>
+          </div>
+          <div>
+            <dt>Core</dt>
+            <dd>Aluminium</dd>
+          </div>
+          <div>
+            <dt>Controls</dt>
+            <dd>One button</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2>Questions</h2>
+        <details>
+          <summary>Where should it go?</summary>
+          <p>In the middle of the room, or the middle of the table. It has no front, so it does not need a wall behind it.</p>
+        </details>
+        <details>
+          <summary>How do I pair my phone?</summary>
+          <p>Hold the button until the ring turns blue, then choose Orbit One in your phone’s settings.</p>
+        </details>
+        <details>
+          <summary>Can two play together?</summary>
+          <p>Yes. Hold the button on the second one while the first is playing, and they share the song.</p>
+        </details>
+      </section>
+
       <section class="order" id="order">
         <h2>Orbit One</h2>
         <p>Three colours. Shipping when it is ready.</p>
@@ -78,7 +279,22 @@
       </section>
     </main>
 
-    <footer class="foot">A fictional product, built for the Scrollcraft tutorial.</footer>
+    <footer class="foot">
+      <div class="foot-cols">
+        <p class="brand">Orbit</p>
+        <ul>
+          <li><a href="#design">Design</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#colours">Colours</a></li>
+          <li><a href="#faq">Questions</a></li>
+        </ul>
+        <ul>
+          <li><a href="#order">Pre-order</a></li>
+          <li><a href="#top">Back to top</a></li>
+        </ul>
+      </div>
+      <p class="foot-note">A fictional product, built for the Scrollcraft tutorial.</p>
+    </footer>
     <div class="progress" aria-hidden="true"></div>
     <script src="app.js"></script>
   </body>

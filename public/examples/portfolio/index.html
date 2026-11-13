@@ -8,9 +8,15 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- the film layer: letterbox bars for the signature moment, and grain -->
+    <div class="bars" aria-hidden="true"><i></i><i></i></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="progress" aria-hidden="true"></div>
     <header class="nav">
       <a class="brand" href="#top">Field Studio</a>
-      <nav><a href="#work">Work</a><a href="#contact">Contact</a></nav>
+      <nav aria-label="Sections">
+        <a href="#work">Work</a><a class="wide" href="#services">Services</a><a class="wide" href="#process">Process</a><a href="#contact">Contact</a>
+      </nav>
     </header>
 
     <main id="top">
@@ -99,7 +105,33 @@
       </section>
 
       <!-- horizontal gallery: vertical scroll moves the strip sideways while the section is pinned -->
-      <section class="hs" aria-label="Process, in five steps">
+      <!-- what the studio does: four rows that open to say how -->
+      <section class="services" id="services" aria-labelledby="services-title">
+        <h2 class="label" id="services-title">Services</h2>
+        <details>
+          <summary><span class="sn">01</span>Identity</summary>
+          <p>Names, marks and the rules that keep them consistent, from a business card to a building.</p>
+        </details>
+        <details>
+          <summary><span class="sn">02</span>Websites</summary>
+          <p>Fast, readable sites that a team can update without calling us.</p>
+        </details>
+        <details>
+          <summary><span class="sn">03</span>Motion</summary>
+          <p>How a brand moves on screen: timing, easing and when to stay still.</p>
+        </details>
+        <details>
+          <summary><span class="sn">04</span>Print</summary>
+          <p>Books, posters and packaging, set by hand and checked on paper.</p>
+        </details>
+      </section>
+
+      <!-- a statement whose words darken as you read them -->
+      <section class="manifesto" aria-label="How we work">
+        <p class="words">We would rather make one thing well than ten things loudly. Every project starts with listening and ends with a guide.</p>
+      </section>
+
+      <section class="hs" id="process" aria-label="Process, in five steps">
         <div class="hs-pin">
           <h2 class="label hs-label">Process</h2>
           <div class="hs-track">
@@ -133,13 +165,119 @@
         </div>
       </section>
 
+      <!-- horizontal scroll with snap: a native track that settles on a card; the buttons step through it -->
+      <section class="kit-section kit-carousel" id="journal" aria-labelledby="journal-title">
+        <div class="kit-head">
+          <h2 id="journal-title" class="kit-reveal">Journal</h2>
+          <div class="kit-buttons">
+            <button type="button" data-dir="-1" aria-label="Previous note">←</button><button type="button" data-dir="1" aria-label="Next note">→</button>
+          </div>
+        </div>
+        <div class="kit-track" tabindex="0" role="region" aria-label="Journal">
+          <figure class="kit-card">
+            <div class="kit-art" style="background: linear-gradient(160deg, #2c4a5c, #16242c)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>On restraint</h3>
+              <p>Why most of our first sketches are deleted by lunch.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: repeating-linear-gradient(0deg, #d9cdb4 0 18px, #cfc2a6 18px 20px)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Type on paper</h3>
+              <p>We print every specimen before anyone sees it on a screen.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: radial-gradient(circle at 30% 70%, #e0893a, #3a1c0b 60%)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Motion rules</h3>
+              <p>Three durations, two easings, and when to do nothing.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: linear-gradient(200deg, #6e5a3b, #2b2418)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Handing over</h3>
+              <p>A guide is part of the work, not an extra.</p>
+            </figcaption>
+          </figure>
+          <figure class="kit-card">
+            <div class="kit-art" style="background: conic-gradient(from 90deg at 50% 50%, #b8a37a, #d9cdb4, #b8a37a)" aria-hidden="true"></div>
+            <figcaption>
+              <h3>Small studios</h3>
+              <p>Why we stay at five people.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- infinite scroll: more entries arrive as the end of the list comes near; the button does it for keyboards -->
+      <section class="kit-section kit-feed" id="archive" aria-labelledby="archive-title">
+        <div class="kit-head"><h2 id="archive-title" class="kit-reveal">Archive</h2></div>
+        <ul class="kit-list" aria-live="polite">
+          <li>
+            <span class="kit-tag">2025</span>
+            <p><b>Harbour Lights</b>Identity for a fictional festival on the quay.</p>
+          </li>
+          <li>
+            <span class="kit-tag">2025</span>
+            <p><b>Paper Mill</b>Website for a fictional print workshop.</p>
+          </li>
+          <li>
+            <span class="kit-tag">2024</span>
+            <p><b>North Rail</b>Wayfinding for a fictional branch line.</p>
+          </li>
+        </ul>
+        <template
+          ><li>
+            <span class="kit-tag">2024</span>
+            <p><b>Salt &amp; Smoke</b>Packaging for a fictional smokehouse.</p>
+          </li>
+          <li>
+            <span class="kit-tag">2023</span>
+            <p><b>The Reading Room</b>Signage for a fictional library annex.</p>
+          </li>
+          <li>
+            <span class="kit-tag">2023</span>
+            <p><b>Fieldwork</b>Our own identity, redrawn.</p>
+          </li>
+          <li>
+            <span class="kit-tag">2022</span>
+            <p><b>Low Tide</b>Posters for a fictional film season.</p>
+          </li>
+          <li>
+            <span class="kit-tag">2022</span>
+            <p><b>Common Table</b>Menus and signs for a fictional canteen.</p>
+          </li>
+          <li>
+            <span class="kit-tag">2021</span>
+            <p><b>First Light</b>Identity for a fictional bakery.</p>
+          </li></template
+        >
+        <div class="kit-end"><button type="button" class="kit-more">Load more</button><span class="kit-status" role="status">3 shown</span></div>
+      </section>
       <section class="contact" id="contact">
         <p class="label">Contact</p>
         <a class="mail" href="mailto:hello@example.com">hello@example.com</a>
       </section>
     </main>
 
-    <footer class="foot">A fictional studio, built for the Scrollcraft tutorial.</footer>
+    <footer class="foot">
+      <div class="foot-cols">
+        <p class="brand">Field Studio</p>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+        </ul>
+        <ul>
+          <li><a href="mailto:hello@example.com">hello@example.com</a></li>
+          <li><a href="#top">Back to top</a></li>
+        </ul>
+      </div>
+      <p class="foot-note">A fictional studio, built for the Scrollcraft tutorial.</p>
+    </footer>
     <script src="app.js"></script>
   </body>
 </html>

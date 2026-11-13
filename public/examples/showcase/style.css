@@ -1,12 +1,15 @@
 :root {
-  --bg: #0a0908;
+  --kit-accent: var(--accent);
+  --bg: #0b0907;
   --fg: #f3efe9;
-  --muted: #a39b91;
-  --line: #2a2622;
-  --accent: #d9b38c;
+  --muted: #b1a89c;
+  --line: #2c2723;
+  --accent: #e0b78c;
   --glaze: #9fbfa8;
+  --heat: 0;
   --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --pad: clamp(20px, 6vw, 110px);
 }
 html[data-glaze='tenmoku'] {
   --glaze: #4a2d1c;
@@ -30,59 +33,100 @@ html[data-glaze='tenmoku'] {
   box-sizing: border-box;
 }
 html {
-  background: radial-gradient(120% 80% at 70% 30%, #1b1713, var(--bg) 60%) fixed;
+  background: radial-gradient(120% 90% at 60% 35%, #1d1813, var(--bg) 62%) fixed;
   color: var(--fg);
 }
 body {
   margin: 0;
   font:
-    400 17px/1.55 system-ui,
+    400 17px/1.6 system-ui,
     -apple-system,
     'Segoe UI',
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 h1,
 h2,
-p {
+p,
+dl,
+dd,
+ul {
   margin: 0;
 }
 a {
   color: inherit;
 }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 20;
+  padding: 10px 14px;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: 6px;
+}
+.skip:focus {
+  top: 12px;
+}
 
+/* the bar */
 .nav {
   position: fixed;
   inset: 0 0 auto;
   z-index: 10;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 18px clamp(20px, 4vw, 48px);
+  gap: 28px;
+  padding: 18px var(--pad);
+  background: linear-gradient(rgba(11, 9, 7, 0.85), transparent);
 }
 .brand {
   font-weight: 600;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
   text-decoration: none;
   font-size: 13px;
+  margin-right: auto;
+}
+.links {
+  display: none;
+  gap: 26px;
+  font-size: 14px;
+}
+.links a {
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.links a:hover,
+.links a:focus-visible {
+  color: var(--fg);
 }
 .buy {
   font-size: 14px;
   text-decoration: none;
-  padding: 9px 16px;
-  border: 1px solid var(--line);
+  padding: 9px 18px;
+  border: 1px solid rgba(224, 183, 140, 0.5);
   border-radius: 99px;
-  background: rgba(10, 9, 8, 0.6);
+  background: rgba(11, 9, 7, 0.5);
 }
 .buy:hover,
 .buy:focus-visible {
   border-color: var(--accent);
+  background: var(--accent);
+  color: #1a120a;
 }
 
-/* the scene sits behind everything and never scrolls */
+/* the scene sits behind everything and never scrolls; the kiln's heat is a glow laid over it */
 .stage,
-.fallback {
+.fallback,
+.heat {
   position: fixed;
   inset: 0;
   width: 100%;
@@ -90,11 +134,15 @@ a {
   z-index: 0;
   pointer-events: none;
 }
+.heat {
+  background: radial-gradient(60% 55% at 50% 60%, rgba(255, 106, 32, 0.32), transparent 70%), linear-gradient(transparent 40%, rgba(120, 30, 6, 0.45));
+  opacity: var(--heat);
+  mix-blend-mode: screen;
+}
 .fallback {
   display: none;
-  inset: 12vh 0 auto auto;
-  width: 100%;
-  height: 46vh;
+  inset: 16vh 0 auto auto;
+  height: 44vh;
 }
 .fallback path {
   fill: var(--glaze);
@@ -110,50 +158,348 @@ a {
   display: block;
 }
 
-/* phones: the vase fills the top of the screen, each panel's text sits in a card at the bottom */
-main {
+main,
+.foot {
   position: relative;
   z-index: 1;
 }
-.panel {
-  min-height: 100svh;
-  display: flex;
-  align-items: flex-end;
-  padding: 0 clamp(16px, 5vw, 96px) 8svh;
+/* letterbox: 0 outside the film, up to 7% of the screen top and bottom while it plays (wide screens only) */
+.bars {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  pointer-events: none;
 }
-.card {
-  position: relative;
-  display: grid;
-  gap: 12px;
-  max-width: 30rem;
-  padding: 26px 26px 28px;
-  background: linear-gradient(160deg, rgba(28, 24, 20, 0.82), rgba(10, 9, 8, 0.86));
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+.bars i {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 7vh;
+  background: #000;
+  transform: scaleY(var(--bars, 0));
 }
-/* a hairline of the accent along the card's top edge, like the lip of a glaze */
-.card::before {
+.bars i:first-child {
+  top: 0;
+  transform-origin: top;
+}
+.bars i:last-child {
+  bottom: 0;
+  transform-origin: bottom;
+}
+/* grain: a still noise texture, nudged a few pixels four times a second like film running through a gate */
+.grain {
+  position: fixed;
+  inset: -20px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* chapter depth: the outlined number drifts slower than the heading, which drifts slower than the page */
+.chapter {
+  --shift: 0;
+}
+.chapter .big-n {
+  translate: 0 calc(var(--shift) * 90px);
+}
+.chapter h2 {
+  translate: 0 calc(var(--shift) * 36px);
+}
+/* the glazes section takes on a faint wash of the chosen glaze */
+.glazes::before {
   content: '';
   position: absolute;
-  inset: -1px 24px auto;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.7;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(50% 45% at 50% 40%, var(--glaze), transparent 70%);
+  opacity: 0.16;
+  transition: background 0.6s;
 }
 
-/* the steps rail: phones show it as a row of numbers under the bar, wide screens as a column on the right */
+/* type: a book serif for display, a quiet sans for reading */
+h1,
+h2,
+.quote {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+em {
+  font-style: italic;
+  color: var(--accent);
+}
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+/* lines rise out of a mask when they arrive; only when the script runs and motion is allowed */
+.ln {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+.ln > span {
+  display: block;
+}
+
+/* hero: the title fills the top of the screen, the lump of clay sits below it */
+.scene {
+  position: relative;
+  min-height: 100svh;
+  padding: 0 var(--pad);
+}
+.hero {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  padding-top: 18svh;
+}
+.mega {
+  font-size: clamp(64px, 15vw, 230px);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+}
+.lede {
+  max-width: 30ch;
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--muted);
+}
+.cue {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  translate: -50% 0;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cue i {
+  width: 1px;
+  height: 42px;
+  background: linear-gradient(var(--accent), transparent);
+}
+
+/* chapters: the text sits on the scene itself, left or right, with a soft shadow of dark behind it */
+.chapter {
+  min-height: 150svh;
+  display: grid;
+  align-content: end;
+  gap: 14px;
+  /* phones: the text settles in the lower half of the screen while the section's middle passes */
+  padding-bottom: 38svh;
+}
+.chapter::before {
+  content: '';
+  position: absolute;
+  inset: 40% 0 0;
+  z-index: -1;
+  background: linear-gradient(transparent, rgba(11, 9, 7, 0.85) 70%);
+  pointer-events: none;
+}
+.chapter h2 {
+  font-size: clamp(42px, 7vw, 104px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+}
+.chapter p:not(.big-n) {
+  max-width: 34ch;
+  color: #cfc6b9;
+  font-size: clamp(16px, 1.4vw, 19px);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.8);
+}
+.big-n {
+  font-family: var(--serif);
+  font-size: clamp(64px, 16vw, 240px);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(224, 183, 140, 0.45);
+}
+
+/* glazes: the vase turns in the middle, two large choices underneath */
+.glazes {
+  display: grid;
+  align-content: end;
+  justify-items: center;
+  gap: 14px;
+  min-height: 130svh;
+  padding-bottom: 14svh;
+  text-align: center;
+}
+.glazes h2 {
+  font-size: clamp(40px, 6vw, 84px);
+  letter-spacing: -0.03em;
+}
+.glazes > p {
+  color: var(--muted);
+}
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.swatches button {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  align-items: center;
+  text-align: left;
+  min-width: 220px;
+  padding: 14px 22px 14px 16px;
+  font: inherit;
+  color: var(--fg);
+  background: rgba(11, 9, 7, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  cursor: pointer;
+  transition:
+    border-color 0.3s,
+    background 0.3s;
+}
+.swatches button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: rgba(40, 30, 22, 0.8);
+}
+.swatches i {
+  grid-row: span 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #9fbfa8;
+  box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.3);
+}
+button[data-glaze='tenmoku'] i {
+  background: #4a2d1c;
+}
+.swatches span {
+  font-family: var(--serif);
+  font-size: 22px;
+}
+.swatches small {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* the landing sections after the film: solid sheets over the dimmed scene */
+.sheet {
+  min-height: auto;
+  padding: 14svh var(--pad);
+  background: rgba(11, 9, 7, 0.88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--line);
+}
+.sheet h2 {
+  font-size: clamp(40px, 6vw, 84px);
+  letter-spacing: -0.03em;
+  margin-bottom: 40px;
+}
+.specs {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.specs div {
+  display: grid;
+  gap: 6px;
+  padding: 26px;
+  background: var(--bg);
+}
+.specs dt {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.specs dd {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 38px);
+}
+.studio {
+  display: grid;
+  gap: 32px;
+}
+.quote {
+  max-width: 24ch;
+  font-size: clamp(30px, 4.4vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.facts {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+}
+.facts b {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.5em;
+  color: var(--fg);
+  margin-right: 8px;
+}
+.order {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+}
+.order h2 {
+  margin-bottom: 0;
+}
+.order p {
+  max-width: 40ch;
+  color: var(--muted);
+}
+.btn {
+  margin-top: 8px;
+  padding: 16px 30px;
+  border-radius: 99px;
+  background: var(--accent);
+  color: #1a120a;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn:hover,
+.btn:focus-visible {
+  filter: brightness(1.08);
+}
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 30px var(--pad);
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+
+/* the chapters rail: a row of numbers under the bar on phones, a column on the right on wide screens */
 .steps {
   position: fixed;
   z-index: 9;
-  top: 64px;
+  top: 66px;
   left: 0;
   right: 0;
   display: flex;
   justify-content: center;
   pointer-events: none;
+  transition: opacity 0.4s;
 }
 .steps ol {
   display: flex;
@@ -162,7 +508,7 @@ main {
   padding: 4px;
   list-style: none;
   border-radius: 99px;
-  background: rgba(10, 9, 8, 0.6);
+  background: rgba(11, 9, 7, 0.6);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   pointer-events: auto;
@@ -195,47 +541,226 @@ main {
 .steps a[aria-current]:focus-visible {
   color: #1a120a;
 }
-.kicker {
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
+/* outside the film the rail steps back */
+html[data-out] .steps {
+  opacity: 0;
+  pointer-events: none;
 }
-/* a book serif for the display type, a quiet sans for the rest: hand-made, not technical */
-h1,
-h2 {
-  font-family: var(--serif);
-  font-weight: 400;
-}
-h1 {
-  font-size: clamp(36px, 6vw, 76px);
-  line-height: 1;
-  letter-spacing: -0.025em;
-}
-h1 em,
-h2 em {
-  color: var(--accent);
-}
-h2 {
-  font-size: clamp(30px, 4vw, 50px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-.card p {
-  color: var(--muted);
+html[data-out] .steps ol {
+  pointer-events: none;
 }
 
-.swatches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 8px;
+/* motion: lines and paragraphs arrive once, only when the script runs and motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+  .js .ln > span {
+    transform: translateY(108%);
+    transition: transform 1.1s var(--ease);
+  }
+  .js .in.ln > span,
+  .js .in .ln > span {
+    transform: none;
+  }
+  .js .in .ln:nth-child(2) > span {
+    transition-delay: 0.08s;
+  }
+  .js .reveal {
+    opacity: 0;
+    translate: 0 18px;
+    transition:
+      opacity 0.9s var(--ease),
+      translate 0.9s var(--ease);
+  }
+  .js .reveal.in {
+    opacity: 1;
+    translate: none;
+  }
+  .cue i {
+    animation: cue 2.2s var(--ease) infinite;
+    transform-origin: top;
+  }
+  .grain {
+    animation: gate 1s steps(4) infinite;
+  }
+  /* the page opens from black, while the lights come up on the clay */
+  .js body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: #000;
+    pointer-events: none;
+    animation: curtain 1.4s var(--ease) 0.1s forwards;
+  }
 }
-.swatches button {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
+@keyframes curtain {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+html.motion-on .grain {
+  animation: gate 1s steps(4) infinite;
+}
+@keyframes gate {
+  25% {
+    transform: translate(-8px, 5px);
+  }
+  50% {
+    transform: translate(6px, -7px);
+  }
+  75% {
+    transform: translate(-4px, -3px);
+  }
+}
+@keyframes cue {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+/* the reader turned animations on in the tutorial: the same arrivals, regardless of the device setting */
+html.motion-on.js .ln > span {
+  transform: translateY(108%);
+  transition: transform 1.1s var(--ease);
+}
+html.motion-on.js .in.ln > span,
+html.motion-on.js .in .ln > span {
+  transform: none;
+}
+html.motion-on.js .reveal {
+  opacity: 0;
+  translate: 0 18px;
+  transition:
+    opacity 0.9s var(--ease),
+    translate 0.9s var(--ease);
+}
+html.motion-on.js .reveal.in {
+  opacity: 1;
+  translate: none;
+}
+
+/* wider screens */
+@media (min-width: 900px) {
+  .links {
+    display: flex;
+  }
+  .bars {
+    display: block;
+  }
+  .chapter {
+    align-content: center;
+    padding-bottom: 0;
+    max-width: 52%;
+  }
+  .chapter[data-side='right'] {
+    margin-left: auto;
+    justify-items: end;
+    text-align: right;
+  }
+  .chapter::before {
+    inset: 0 -20%;
+    background: radial-gradient(50% 45% at 30% 55%, rgba(11, 9, 7, 0.75), transparent 75%);
+  }
+  .chapter[data-side='right']::before {
+    inset: 0 0 0 -20%; /* spread to the left only, so nothing passes the right edge of the page */
+    background: radial-gradient(50% 45% at 70% 55%, rgba(11, 9, 7, 0.75), transparent 75%);
+  }
+  /* wide screens: the rail sits at the foot of the screen, clear of the text on either side */
+  .steps {
+    top: auto;
+    bottom: 24px;
+  }
+  .steps a {
+    display: flex;
+    gap: 8px;
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+  .specs {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .studio {
+    grid-template-columns: 1fr 1.6fr;
+    align-items: end;
+  }
+  .studio .kicker {
+    grid-column: 1 / -1;
+  }
+  .facts {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .fallback {
+    inset: 18vh 8vw auto auto;
+    width: 30vw;
+    height: 64vh;
+  }
+}
+
+/* ---- the scroll kit's styles: the same in all five projects, coloured by each site's own tokens ---- */
+header nav a[aria-current='location'] {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--kit-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+/* reveal on scroll: hidden only when the script runs and motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+  .js .kit-reveal {
+    opacity: 0;
+    translate: 0 28px;
+    transition:
+      opacity 0.9s var(--ease),
+      translate 0.9s var(--ease);
+  }
+  .js .kit-reveal.kit-in {
+    opacity: 1;
+    translate: none;
+  }
+}
+html.motion-on.js .kit-reveal:not(.kit-in) {
+  opacity: 0;
+  translate: 0 28px;
+}
+html.motion-on.js .kit-reveal {
+  transition:
+    opacity 0.9s var(--ease),
+    translate 0.9s var(--ease);
+}
+.kit-section {
+  padding: 14vh clamp(20px, 6vw, 96px);
+  border-top: 1px solid var(--line);
+}
+.kit-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.kit-head h2 {
+  margin: 0;
+  font-weight: inherit;
+  font-size: clamp(32px, 4.8vw, 64px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.kit-buttons {
+  display: flex;
+  gap: 8px;
+}
+.kit-buttons button,
+.kit-more {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 16px;
   font: inherit;
   font-size: 15px;
   color: var(--fg);
@@ -244,92 +769,122 @@ h2 {
   border-radius: 99px;
   cursor: pointer;
 }
-.swatches button[aria-pressed='true'] {
-  border-color: var(--accent);
+.kit-buttons button:hover,
+.kit-buttons button:focus-visible,
+.kit-more:hover,
+.kit-more:focus-visible {
+  border-color: var(--kit-accent);
 }
-.swatches i {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #9fbfa8;
+/* scroll snap: a native horizontal track that settles on a card */
+.kit-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(78vw, 340px);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
 }
-button[data-glaze='tenmoku'] i {
-  background: #5a3a26;
+.kit-track > * {
+  scroll-snap-align: start;
+  margin: 0;
 }
-.btn {
-  justify-self: start;
-  margin-top: 8px;
-  padding: 14px 28px;
-  border-radius: 99px;
-  background: var(--accent);
-  color: #1a120a;
-  text-decoration: none;
-  font-weight: 600;
+.kit-card {
+  display: grid;
+  gap: 10px;
 }
-.btn:hover,
-.btn:focus-visible {
-  filter: brightness(1.08);
+.kit-card .kit-art {
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--line);
 }
-.foot {
-  position: relative;
-  z-index: 1;
-  padding: 30px 20px;
-  text-align: center;
+.kit-card h3 {
+  margin: 0;
+  font-weight: inherit;
+  font-size: 22px;
+}
+.kit-card p {
+  margin: 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 15px;
+}
+/* zoom on scroll: the frame stays put, the picture inside settles from 1.28x to 1x */
+.kit-zoom {
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.kit-zoom > * {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(var(--zoom, 1));
+  transform-origin: 50% 60%;
+}
+/* infinite scroll */
+.kit-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
   border-top: 1px solid var(--line);
-  background: var(--bg);
+}
+.kit-list li {
+  display: grid;
+  grid-template-columns: 7em 1fr;
+  gap: 4px 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.kit-list time,
+.kit-list .kit-tag {
+  color: var(--kit-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-top: 4px;
+}
+.kit-list p {
+  margin: 0;
+  color: var(--muted);
+}
+.kit-list b {
+  display: block;
+  color: var(--fg);
+  font-weight: inherit;
+  font-size: 1.15em;
+}
+.kit-end {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.kit-more {
+  display: none;
+}
+.js .kit-more:not([hidden]) {
+  display: inline-block;
 }
 
-/* larger screens: text on the left, the vase on the right */
-@media (min-width: 900px) {
-  .panel {
-    align-items: center;
-    padding-bottom: 0;
-  }
-  .steps {
-    top: 50%;
-    left: auto;
-    right: clamp(20px, 3vw, 40px);
-    translate: 0 -50%;
-  }
-  .steps ol {
-    flex-direction: column;
-    gap: 2px;
-    padding: 6px;
-    border-radius: 14px;
-  }
-  .steps a {
-    display: flex;
-    gap: 10px;
-    padding: 7px 12px;
-    border-radius: 9px;
-    font-size: 13px;
-  }
-  .fallback {
-    inset: 18vh 10vw auto auto;
-    width: 30vw;
-    height: 64vh;
-  }
+/* scroll-driven: a progress line along the top, scaled by how far down the page the reader is */
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 11;
+  height: 2px;
+  background: var(--kit-accent);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
 }
 
-/* where scroll-driven animations are supported, each card settles as it arrives; elsewhere it is simply there */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .card {
-      animation: settle linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 60%;
-    }
-  }
-  html.motion-on .card {
-    animation: settle linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 60%;
-  }
-}
-@keyframes settle {
-  from {
-    translate: 0 48px;
+/* reduced motion: state changes happen at once, nothing fades or slides into place */
+@media (prefers-reduced-motion: reduce) {
+  html:not(.motion-on) *,
+  html:not(.motion-on) *::before,
+  html:not(.motion-on) *::after {
+    transition-duration: 0s !important;
   }
 }

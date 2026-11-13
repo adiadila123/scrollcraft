@@ -222,7 +222,35 @@ export const meta = {
 </section>
 
 <section className="sec">
-  <Stick left="07 · What all five share" />
+  <Stick left="07 · Every technique, in every project" right="Where to look" />
+  <p className="lede rv" style={{ marginTop: '0' }}>All five projects use the same scroll vocabulary, each in its own voice. This is where each technique lives, so you can open the file and read it.</p>
+  <div className="tablewrap rv" tabIndex={0} role="region" aria-label="Table. Scroll sideways to see every column.">
+    <table>
+      <thead>
+        <tr><th>Technique</th><th>Orbit One</th><th>Field Studio</th><th>The Long Way North</th><th>Halden Studio</th><th>Atelier Sora</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Sticky positioning</td><td>The turning speaker; the tour device</td><td>The pinned process strip; the statement</td><td>The map beside the days</td><td>Process and route, pinned by GSAP</td><td>The canvas behind the page; the chapters rail</td></tr>
+        <tr><td>Scroll snap</td><td>“Where it fits” carousel</td><td>“Journal” carousel</td><td>“From the notebook” carousel</td><td>“Other work” carousel</td><td>“Past batches” carousel</td></tr>
+        <tr><td>Scroll triggered</td><td>Headline lines; reveals</td><td>Clip reveals; reveals</td><td>Paragraphs that arrive once</td><td>ScrollTrigger.batch for the closing sections</td><td>Lines and paragraphs, once</td></tr>
+        <tr><td>Infinite scroll</td><td>“From the workshop”</td><td>“Archive”</td><td>“More from North”</td><td>“Studio journal”</td><td>“Notes from the kiln”</td></tr>
+        <tr><td>Scroll driven</td><td>Frame scrub, progress bar</td><td>Strip position, progress line</td><td>Route drawing, progress bar</td><td>Scrubbed timelines, progress bar</td><td>The whole film, progress bar</td></tr>
+        <tr><td>Zoom on scroll</td><td>“Made for the middle of the room”</td><td>Counter-zoom inside each project</td><td>“Day three, from the top”</td><td>“The livery, up close”</td><td>“Up close”, and the camera</td></tr>
+        <tr><td>Parallax</td><td>Feature numbers drift slower</td><td>Artwork layers by depth</td><td>The four-layer cover</td><td>The title and its line</td><td>Chapter numbers and headings</td></tr>
+        <tr><td>Horizontal scroll</td><td>The rooms carousel</td><td>The pinned process strip</td><td>The notebook carousel</td><td>The pinned work strip</td><td>The batches carousel</td></tr>
+        <tr><td>Scrollytelling</td><td>The speaker opens and closes</td><td>The words of the statement</td><td>The route, day by day</td><td>The ferry crossing the chart</td><td>Clay to vase, in five chapters</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div className="rows">
+    <Row cls="rv" num="a" title="The film layer" anchor="film-layer">
+      <p>On top of the techniques, every project shares a film layer: a fine grain, a fade up from black as it opens, letterbox bars that close in while the signature moment plays, inertia so the scene glides to a stop, and a small lean towards a fine pointer. All of it switches off under reduced motion, where state changes happen at once.</p>
+    </Row>
+  </div>
+</section>
+
+<section className="sec">
+  <Stick left="08 · What all five share" />
   <div className="rows">
     <Row cls="rv" num="a" title="One loop">
       <p>A single scroll listener schedules one animation frame, and everything that follows the scroll updates there. Changes that happen once use IntersectionObserver instead. In Halden Studio GSAP’s ticker is that loop, and Atelier Sora draws a frame only when the scroll or the glaze changed.</p>
@@ -244,7 +272,7 @@ export const meta = {
 </section>
 
 <section className="sec">
-  <Stick left="08 · Check it automatically" right="Playwright" />
+  <Stick left="09 · Check it automatically" right="Playwright" />
   <div className="rows">
     <Row cls="rv" num="a" title="Fits every screen, sits still on request" anchor="check-sites">
       <p>Each portfolio-ready list starts with the same three checks, and the tutorial runs them on all five sites with every change. Run the same test on yours: it scrolls the page at three widths looking for a horizontal scroll, then turns on reduced motion and checks that nothing runs and everything shows. Add the axe check from Testing for contrast.</p>

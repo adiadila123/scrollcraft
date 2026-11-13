@@ -9,7 +9,7 @@
    "playground": 2,
    "gsap": 4,
    "webgl": 4,
-   "examples": 11,
+   "examples": 12,
    "design": 4,
    "architecture": 4,
    "performance": 4,
@@ -26,7 +26,7 @@
    "playground": 2,
    "gsap": 4,
    "webgl": 3,
-   "examples": 10,
+   "examples": 11,
    "design": 3,
    "architecture": 4,
    "performance": 3,
@@ -1666,6 +1666,20 @@
     "chapter": "Examples",
     "href": "/examples#showcase-ready",
     "title": "Portfolio-ready",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#every-technique-in-every-project",
+    "title": "Every technique, in every project",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Examples",
+    "href": "/examples#film-layer",
+    "title": "The film layer",
     "text": ""
    },
    {
@@ -4314,6 +4328,20 @@
     "chapter": "Exemple",
     "href": "/ro/examples#showcase-ready",
     "title": "Gata de portofoliu",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#fiecare-tehnica-in-fiecare-proiect",
+    "title": "Fiecare tehnică, în fiecare proiect",
+    "text": ""
+   },
+   {
+    "kind": "section",
+    "chapter": "Exemple",
+    "href": "/ro/examples#film-layer",
+    "title": "Stratul de film",
     "text": ""
    },
    {
