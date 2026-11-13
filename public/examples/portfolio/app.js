@@ -23,13 +23,28 @@ function revealClips() {
       x = 24 * (1 - e);
     fig.style.clipPath = `inset(${y}% ${x}% ${y}% ${x}%)`;
     fig.firstElementChild.style.transform = `scale(${(1.25 - 0.25 * e).toFixed(3)})`;
+    /* the artwork's layers settle at different speeds: the far ones barely move, the near ones travel most */
+    fig.querySelectorAll('[data-depth]').forEach((l) => {
+      l.style.transform = `translateY(${((1 - e) * +l.dataset.depth).toFixed(1)}px)`;
+    });
   });
+}
+
+/* the hero's last line, "that move.", moves: it slides right as the hero scrolls away */
+const hero = document.querySelector('.hero');
+/* the line's outer mask moves, so its rise-in reveal on the inner span is left alone */
+const mover = hero.querySelector('.dim').parentElement;
+function moveHero() {
+  const r = hero.getBoundingClientRect();
+  const p = still ? 0 : clamp(-r.top / r.height, 0, 1);
+  mover.style.transform = `translate3d(${(p * 12).toFixed(2)}vw,0,0)`;
 }
 
 /* horizontal gallery: the section is as tall as the strip overflows, so scrolling down moves it sideways one to one */
 const hs = document.querySelector('.hs');
 const pin = hs.querySelector('.hs-pin');
 const track = hs.querySelector('.hs-track');
+const bar = hs.querySelector('.hs-progress i');
 let max = 0;
 function measure() {
   max = Math.max(0, track.scrollWidth - pin.clientWidth);
@@ -38,12 +53,14 @@ function measure() {
 function moveTrack() {
   const p = clamp(-hs.getBoundingClientRect().top / (max || 1), 0, 1);
   track.style.transform = `translate3d(${(-p * max).toFixed(1)}px,0,0)`;
+  bar.style.transform = `scaleX(${p.toFixed(3)})`;
 }
 
 let queued = false;
 function update() {
   queued = false;
   revealClips();
+  moveHero();
   moveTrack();
 }
 const queue = () => {

@@ -64,9 +64,8 @@ export default function Footer({ locale }: { locale: Locale }) {
           <Column title={t.docs} links={docs} />
           <Column title={t.finds} links={finds} />
         </div>
-        <div className="bigmark" aria-hidden="true">
-          Scrollcraft
-        </div>
+        {/* drawn from a data attribute, so the decorative wordmark is not text that contrast rules apply to */}
+        <div className="bigmark" aria-hidden="true" data-mark="Scrollcraft" />
         <div className="f-bot">
           <span>{t.rights}</span>
           <BackToTop label={t.top} />

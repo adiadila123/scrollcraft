@@ -28,7 +28,7 @@ export const meta = {
       <p>Un start-up lansează o singură boxă și are nevoie de o pagină care să-i facă pe oameni s-o precomande. Produsul trebuie să fie vedeta, cele trei funcții trebuie să fie clare în mai puțin de un minut, iar pagina trebuie să rămână rapidă pe un telefon mediu.</p>
     </Row>
     <Row cls="rv" num="2" title="Tehnici folosite" anchor="launch-techniques">
-      <p>Titlu dezvăluit rând cu rând (Mișcare, rețeta e). Secvență de cadre derulată pentru produsul care se rotește (rețeta c). Cuvinte aprinse în ritmul scrollului (tehnica 5). Tur de produs fixat (rețeta a). O bară de progres a lecturii.</p>
+      <p>Titlu dezvăluit rând cu rând, peste linii de orbită desenate o dată când se deschide pagina (Mișcare, rețeta e). O secvență de cadre derulată care spune produsul în trei acte: se rotește în timp ce inele de sunet se întind pe podea, se deschide într-o vedere explodată cu carcasă, miez și difuzor, cu etichete și linii de legătură, apoi se închide în timp ce privirea coboară spre singurul buton (rețeta c). Cuvinte aprinse în ritmul scrollului (tehnica 5). Un tur de produs fixat, al cărui inel de lumină se umple și își schimbă culoarea pentru fiecare funcție (rețeta a). O bară de progres a lecturii.</p>
     </Row>
     <Row cls="rv" num="3" title="De ce pare un film" anchor="launch-why">
       <p>O singură culoare de accent, folosită doar pentru bara de progres, buton și singurul control al produsului. Fiecare secțiune face un singur lucru și ține ecranul pentru el. Produsul se rotește doar cât derulezi, așa că cititorul regizează cadrul.</p>
@@ -70,7 +70,7 @@ export const meta = {
       <p>Un studio mic de design vrea un portofoliu care să sune ca el: tipografie sigură, trei proiecte și felul în care lucrează. Vizitatorii trebuie să țină minte numele și să găsească linkul de contact fără să-l caute.</p>
     </Row>
     <Row cls="rv" num="2" title="Tehnici folosite" anchor="portfolio-techniques">
-      <p>Titlu dezvăluit rând cu rând (rețeta e). Bandă de text după viteza scrollului (rețeta d). Dezvăluire cu clip-path și un zoom lent în sens invers (rețeta b). Scroll orizontal într-o secțiune fixată (tehnica 8).</p>
+      <p>Titlu dezvăluit rând cu rând, cu ultimul rând, „that move.”, alunecând lateral când pleacă hero-ul (rețeta e). Bandă de text după viteza scrollului (rețeta d). Dezvăluire cu clip-path și un zoom lent în sens invers (rețeta b), iar în fiecare cadru o ilustrație SVG în straturi care se așază cu viteze diferite, ceea ce se citește ca adâncime. Scroll orizontal într-o secțiune fixată, cu numerele pașilor conturate și o linie de progres (tehnica 8).</p>
     </Row>
     <Row cls="rv" num="3" title="De ce pare un film" anchor="portfolio-why">
       <p>Tipografia face treaba, așa că mișcarea rămâne mică. Fiecare imagine de proiect se deschide ca un obturator, în timp ce poza din ea revine dintr-un zoom ușor, ceea ce se citește ca o mișcare de cameră. Secțiunea de proces schimbă direcția, o tăietură care îi spune cititorului că a început o parte nouă.</p>
@@ -108,7 +108,7 @@ export const meta = {
       <p>O revistă vrea o poveste de călătorie în care cititorul urmărește traseul în timp ce citește. Textul e pe primul loc; harta îl susține și nu trebuie să-l încurce niciodată pe telefon.</p>
     </Row>
     <Row cls="rv" num="2" title="Tehnici folosite" anchor="longread-techniques">
-      <p>Copertă cu parallax în trei straturi (tehnica 7). Paragrafe care apar o singură dată (tehnica 3). Scrollytelling cu o hartă fixată (tehnica 9). Un traseu SVG desenat de scroll cu stroke-dashoffset. O bară de progres a lecturii.</p>
+      <p>O copertă desenată ca un peisaj în patru straturi SVG (cer și lună, dealuri îndepărtate, un promontoriu cu far, faleze apropiate), cu parallax (tehnica 7). Paragrafe care apar o singură dată (tehnica 3). Scrollytelling cu o hartă fixată (tehnica 9): traseul se desenează cu stroke-dashoffset, un drumeț stă în vârful liniei desenate, iar lumina paginii trece de la amurg la noapte și la zori pe măsură ce se schimbă zilele. O bară de progres a lecturii.</p>
     </Row>
     <Row cls="rv" num="3" title="De ce pare un film" anchor="longread-why">
       <p>Textul rămâne calm și ușor de citit, cu un font serif la o lungime de rând comodă. Toată mișcarea stă pe margine: harta se desenează pe măsură ce cititorul înaintează, așa că povestea și traseul merg în același ritm. Harta spune că e desenată ca ilustrație, ca nimeni să n-o ia drept date reale.</p>
@@ -146,7 +146,7 @@ export const meta = {
       <p>Un studio vrea un singur studiu de caz care să arate cum gândește, nu doar ce a făcut: problema, procesul, ideea și lucrările, cu un final care te invită să începi un proiect. Va fi trimis clienților, deci trebuie să pară terminat pe orice ecran.</p>
     </Row>
     <Row cls="rv" num="2" title="Tehnici folosite" anchor="agency-techniques">
-      <p>Titlu împărțit în rândurile lui reale cu SplitText, fiecare ridicându-se dintr-o mască (GSAP, tehnica 5). Un timeline de proces fixat, în care fiecare pas pleacă înainte să vină următorul (tehnicile 1 și 3). Un traseu desenat cu DrawSVG, ale cărui opriri se aprind când linia ajunge la ele (tehnica 4). O bandă fixată care se mișcă lateral exact cât depășește ecranul. Totul e creat în <code className="i">gsap.matchMedia</code>.</p>
+      <p>Titlu împărțit în rândurile lui reale cu SplitText, fiecare ridicându-se dintr-o mască, cu linia studioului desenată sub el (GSAP, tehnicile 4 și 5). Un timeline de proces fixat, în care fiecare pas pleacă înainte să vină următorul, în timp ce un număr uriaș conturat se rostogolește la următorul (tehnicile 1 și 3). O hartă marină în care un singur timeline desenează traseul și dâra lui, duce feribotul de-a lungul lui cu MotionPathPlugin, rotește fasciculul farului și aprinde fiecare oprire. O bandă fixată care se mișcă lateral exact cât depășește ecranul, se înclină după viteza scrollului și lasă fiecare ilustrație să alunece în cadrul ei. Totul e creat în <code className="i">gsap.matchMedia</code>.</p>
     </Row>
     <Row cls="rv" num="3" title="De ce pare un film" anchor="agency-why">
       <p>O singură idee duce pagina: linia dintre insule. E desenată o singură dată, în ritmul cititorului, iar fiecare oprire la care ajunge se aprinde în culoarea de accent. Procesul ține ecranul cât se schimbă, ca o tăietură între trei cadre, iar banda de lucrări se mișcă lateral, o cotitură care îi spune cititorului că povestea s-a încheiat și au început rezultatele.</p>
@@ -154,7 +154,7 @@ export const meta = {
     <Row cls="rv" num="4" title="Prompturi ca să-l refaci" anchor="agency-prompts">
       <CodeBlock
         lang="Prompt"
-        code={"Construiește un studiu de caz pe o pagină pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu GSAP, ScrollTrigger, SplitText și DrawSVGPlugin de pe jsDelivr. Secțiuni: un titlu împărțit în rânduri care se ridică dintr-o mască, un proces fixat de trei pași în care fiecare dispare înainte să apară următorul, un traseu SVG desenat de scroll ale cărui opriri se aprind când linia ajunge la ele, o bandă fixată de cinci lucrări care se mișcă lateral și un link de contact. Fundal închis, o singură culoare de accent."}
+        code={"Construiește un studiu de caz pe o pagină pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu GSAP, ScrollTrigger, SplitText, DrawSVGPlugin și MotionPathPlugin de pe jsDelivr. Secțiuni: un titlu împărțit în rânduri care se ridică dintr-o mască, cu o linie desenată sub el; un proces fixat de trei pași în care fiecare dispare înainte să apară următorul, în timp ce un număr uriaș conturat se rostogolește la următorul; o hartă SVG a traseului în care un singur timeline derulat desenează linia și o dâră discretă, duce o ambarcațiune mică de-a lungul ei cu autoRotate și aprinde fiecare oprire când linia ajunge la ea; o bandă fixată de cinci lucrări care se mișcă lateral și se înclină după viteza scrollului; și un link de contact subliniat de aceeași linie. Fundal închis, o singură culoare de accent."}
       />
       <CodeBlock
         lang="Prompt"
@@ -188,7 +188,7 @@ export const meta = {
       <p>Un atelier de ceramică vinde o singură vază în două glazuri și vrea ca oamenii să-i vadă forma din toate părțile înainte să comande. Majoritatea vizitatorilor vin de pe Instagram, de pe telefon, așa că trebuie să se încarce repede și să arate bine pe un ecran mic.</p>
     </Row>
     <Row cls="rv" num="2" title="Tehnici folosite" anchor="showcase-techniques">
-      <p>O scenă three.js în spatele paginii (WebGL, scena 1). Vaza e o curbă de profil rotită la strung, așa că nu are nevoie de niciun fișier de model. Scrollul o rotește și mută camera. Se desenează la cerere, doar când s-a schimbat ceva, cu densitatea de pixeli limitată la 2 (Păstrează-l rapid). Un desen SVG ca rezervă și butoane de glazură care merg cu sau fără WebGL.</p>
+      <p>O scenă three.js în spatele paginii (WebGL, scena 1) în care scrollul face vaza: patru curbe de profil cu același număr de puncte sunt amestecate, așa că un bulgăre de lut ud e ridicat pe roată, cu inelele lăsate de degete, apoi e fasonat cu un picior. Un singur material e lut sub o linie de glazură și glazură deasupra ei, cu o margine ondulată și pistrui de fier, scris în MeshStandardMaterial cu onBeforeCompile; linia coboară ca și cum piesa ar fi scufundată. Roata coboară din cadru, iar camera vine la o vedere din trei sferturi. Se desenează la cerere, cu densitatea de pixeli limitată la 2 (Păstrează-l rapid), iar o șină de pași arată unde ești în facere.</p>
     </Row>
     <Row cls="rv" num="3" title="De ce pare un film" anchor="showcase-why">
       <p>Obiectul e singurul lucru care se mișcă și se mișcă doar când te miști tu. Lumina caldă dintr-o parte și o margine rece din spate îi dau un aer de studio fără nicio textură. Cardurile sunt discrete și scurte, așa că ecranul e al vazei.</p>
@@ -196,7 +196,7 @@ export const meta = {
     <Row cls="rv" num="4" title="Prompturi ca să-l refaci" anchor="showcase-prompts">
       <CodeBlock
         lang="Prompt"
-        code={"Construiește o pagină de produs pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu three.js încărcat de pe jsDelivr printr-un import map. Un singur canvas fix în spatele a cinci secțiuni scurte. Fă produsul cu LatheGeometry dintr-o curbă de profil, luminează-l cu o lumină emisferică, o lumină principală caldă și o margine rece și rotește-l cu scrollul. Pe telefon pune-l în jumătatea de sus, deasupra textului; pe ecranele late, lângă el."}
+        code={"Construiește o pagină de produs pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu three.js încărcat de pe jsDelivr printr-un import map. Un singur canvas fix în spatele a cinci secțiuni scurte care spun cum e făcut produsul. Fă produsul din curbe de profil cu același număr de puncte (materia primă, prima formă, forma finală, forma finală cu picior), construiește un singur LatheGeometry și rescrie-i pozițiile ca să treacă de la una la alta pe măsură ce cititorul trece între secțiuni, recalculând normalele. Folosește un singur MeshStandardMaterial cu onBeforeCompile pentru un finisaj care acoperă piesa deasupra unei linii, cu o margine ondulată, și coboară linia cu scrollul. Luminează-l cu o lumină emisferică, o lumină principală caldă și o margine rece. Pe telefon pune-l în jumătatea de sus, deasupra textului; pe ecranele late, lângă el."}
       />
       <CodeBlock
         lang="Prompt"
@@ -211,7 +211,7 @@ export const meta = {
       <p>Cu un model de la un artist 3D sau o scanare, exportă-l ca glTF, comprimă-l și încarcă-l în locul strungului. Păstrează desenarea la cerere: desenează o dată, când ajunge.</p>
       <CodeBlock
         lang="JavaScript"
-        code={"import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';\n\nnew GLTFLoader().load('vase.glb', (gltf) => {\n  scene.remove(vase);\n  vase = gltf.scene;\n  scene.add(vase);\n  queue(); // desenează o dată, acum că a ajuns\n});"}
+        code={"import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';\n\nnew GLTFLoader().load('vase.glb', (gltf) => {\n  group.remove(piece);\n  group.add(gltf.scene);\n  queue(); // desenează o dată, acum că a ajuns\n});"}
       />
     </Row>
     <Row cls="rv" num="6" title="Gata de portofoliu" anchor="showcase-ready">

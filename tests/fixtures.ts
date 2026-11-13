@@ -29,8 +29,8 @@ export { expect };
 
 /**
  * An axe audit, contrast included. Running transitions are finished first (endless loops cannot be), so contrast is
- * measured on what the reader settles on rather than halfway through a fade. The footer's large wordmark is excluded:
- * it is decoration, hidden from assistive technology, and WCAG exempts decorative text from contrast.
+ * measured on what the reader settles on rather than halfway through a fade. The footer's large wordmark is drawn
+ * with CSS generated content, so it is decoration rather than text and needs no exclusion.
  */
 export async function audit(page: Page) {
   await page.evaluate(() =>
@@ -39,7 +39,7 @@ export async function audit(page: Page) {
       .filter((a) => a.effect?.getComputedTiming().endTime !== Infinity)
       .forEach((a) => a.finish()),
   );
-  return new AxeBuilder({ page }).exclude('.bigmark').analyze();
+  return new AxeBuilder({ page }).analyze();
 }
 
 export const CHAPTERS = [

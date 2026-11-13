@@ -15,10 +15,31 @@
       <a class="brand" href="#top">Sora</a>
       <a class="buy" href="#order">Order</a>
     </header>
+    <!-- where the piece is in the making; the step being read is lit -->
+    <nav class="steps" aria-label="Making">
+      <ol>
+        <li>
+          <a href="#top"><span>01</span> Clay</a>
+        </li>
+        <li>
+          <a href="#thrown"><span>02</span> Thrown</a>
+        </li>
+        <li>
+          <a href="#trimmed"><span>03</span> Trimmed</a>
+        </li>
+        <li>
+          <a href="#glaze"><span>04</span> Glazed</a>
+        </li>
+        <li>
+          <a href="#order"><span>05</span> Yours</a>
+        </li>
+      </ol>
+    </nav>
 
     <!-- the vase, drawn by three.js behind the text; a drawing stands in when WebGL is missing -->
     <canvas class="stage" aria-hidden="true"></canvas>
     <svg class="fallback" viewBox="0 0 120 200" aria-hidden="true">
+      <ellipse class="fb-shadow" cx="60" cy="196" rx="46" ry="4" />
       <path d="M38 196 H82 Q90 196 92 186 Q104 130 98 96 Q92 64 74 46 Q70 30 72 6 H48 Q50 30 46 46 Q28 64 22 96 Q16 130 28 186 Q30 196 38 196 Z" />
     </svg>
 
@@ -30,19 +51,19 @@
           <p>Stoneware, glazed twice.</p>
         </div>
       </section>
-      <section class="panel">
+      <section class="panel" id="thrown">
         <div class="card">
           <h2>Thrown on the wheel</h2>
           <p>Each one starts as a single piece of clay, opened and pulled up by hand.</p>
         </div>
       </section>
-      <section class="panel">
+      <section class="panel" id="trimmed">
         <div class="card">
           <h2>Trimmed a day later</h2>
           <p>The foot is cut when the clay is leather-hard, so the vase sits low and steady.</p>
         </div>
       </section>
-      <section class="panel">
+      <section class="panel" id="glaze">
         <div class="card">
           <h2>Two glazes</h2>
           <p>Choose one. The vase on screen changes with you.</p>

@@ -9,7 +9,7 @@
    "playground": 2,
    "gsap": 4,
    "webgl": 4,
-   "examples": 10,
+   "examples": 11,
    "design": 4,
    "architecture": 4,
    "performance": 4,
@@ -26,7 +26,7 @@
    "playground": 2,
    "gsap": 4,
    "webgl": 3,
-   "examples": 9,
+   "examples": 10,
    "design": 3,
    "architecture": 4,
    "performance": 3,
@@ -1568,7 +1568,7 @@
     "chapter": "Examples",
     "href": "/examples#agency-prompts",
     "title": "Prompts to rebuild it: prompt",
-    "text": "Build a one-page case study for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with GSAP, ScrollTrigger, SplitText and DrawSVGPlugin from jsDelivr. Sections: a headline split into lines that rise out of a mask, a pinned process of three steps where each fades out before the next arrives, an SVG route drawn by the scroll whose stops light up as the line reaches them, a pinned strip of five pieces of work moving sideways, and a contact link. Dark background, one accent colour."
+    "text": "Build a one-page case study for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with GSAP, ScrollTrigger, SplitText, DrawSVGPlugin and MotionPathPlugin from jsDelivr. Sections: a headline split into lines that rise out of a mask, with one hand-drawn line drawn under it; a pinned process of three steps where each fades out before the next arrives while a huge outlined step number rolls to the next; an SVG chart of the route where one scrubbed timeline draws the line and a soft wake, moves a small vessel along it with autoRotate and lights each stop as the line reaches it; a pinned strip of five pieces of work moving sideways that leans with the scroll speed; and a contact link underlined by the same line. Dark background, one accent colour."
    },
    {
     "kind": "prompt",
@@ -1638,7 +1638,7 @@
     "chapter": "Examples",
     "href": "/examples#showcase-prompts",
     "title": "Prompts to rebuild it: prompt",
-    "text": "Build a product page for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with three.js loaded from jsDelivr through an import map. One fixed canvas behind five short sections. Make the product with LatheGeometry from a profile curve, light it with a hemisphere light, a warm key light and a cool rim light, and turn it with the scroll. On phones put it in the top half, above the text; on wide screens, beside it."
+    "text": "Build a product page for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with three.js loaded from jsDelivr through an import map. One fixed canvas behind five short sections that tell how the product is made. Make the product from profile curves with the same number of points (raw material, first shape, finished shape, finished with a foot), build one LatheGeometry and rewrite its positions to blend between them as the reader moves between sections, recomputing normals. Use one MeshStandardMaterial with onBeforeCompile for a finish that covers the piece above a line, with a wavering edge, and lower that line with the scroll. Light it with a hemisphere light, a warm key and a cool rim. On phones put it in the top half, above the text; on wide screens, beside it."
    },
    {
     "kind": "prompt",
@@ -4216,7 +4216,7 @@
     "chapter": "Exemple",
     "href": "/ro/examples#agency-prompts",
     "title": "Prompturi ca să-l refaci: prompt",
-    "text": "Construiește un studiu de caz pe o pagină pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu GSAP, ScrollTrigger, SplitText și DrawSVGPlugin de pe jsDelivr. Secțiuni: un titlu împărțit în rânduri care se ridică dintr-o mască, un proces fixat de trei pași în care fiecare dispare înainte să apară următorul, un traseu SVG desenat de scroll ale cărui opriri se aprind când linia ajunge la ele, o bandă fixată de cinci lucrări care se mișcă lateral și un link de contact. Fundal închis, o singură culoare de accent."
+    "text": "Construiește un studiu de caz pe o pagină pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu GSAP, ScrollTrigger, SplitText, DrawSVGPlugin și MotionPathPlugin de pe jsDelivr. Secțiuni: un titlu împărțit în rânduri care se ridică dintr-o mască, cu o linie desenată sub el; un proces fixat de trei pași în care fiecare dispare înainte să apară următorul, în timp ce un număr uriaș conturat se rostogolește la următorul; o hartă SVG a traseului în care un singur timeline derulat desenează linia și o dâră discretă, duce o ambarcațiune mică de-a lungul ei cu autoRotate și aprinde fiecare oprire când linia ajunge la ea; o bandă fixată de cinci lucrări care se mișcă lateral și se înclină după viteza scrollului; și un link de contact subliniat de aceeași linie. Fundal închis, o singură culoare de accent."
    },
    {
     "kind": "prompt",
@@ -4286,7 +4286,7 @@
     "chapter": "Exemple",
     "href": "/ro/examples#showcase-prompts",
     "title": "Prompturi ca să-l refaci: prompt",
-    "text": "Construiește o pagină de produs pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu three.js încărcat de pe jsDelivr printr-un import map. Un singur canvas fix în spatele a cinci secțiuni scurte. Fă produsul cu LatheGeometry dintr-o curbă de profil, luminează-l cu o lumină emisferică, o lumină principală caldă și o margine rece și rotește-l cu scrollul. Pe telefon pune-l în jumătatea de sus, deasupra textului; pe ecranele late, lângă el."
+    "text": "Construiește o pagină de produs pentru [subiect], pentru [public], care se încheie cu [o acțiune]. HTML, CSS și JavaScript în trei fișiere, cu three.js încărcat de pe jsDelivr printr-un import map. Un singur canvas fix în spatele a cinci secțiuni scurte care spun cum e făcut produsul. Fă produsul din curbe de profil cu același număr de puncte (materia primă, prima formă, forma finală, forma finală cu picior), construiește un singur LatheGeometry și rescrie-i pozițiile ca să treacă de la una la alta pe măsură ce cititorul trece între secțiuni, recalculând normalele. Folosește un singur MeshStandardMaterial cu onBeforeCompile pentru un finisaj care acoperă piesa deasupra unei linii, cu o margine ondulată, și coboară linia cu scrollul. Luminează-l cu o lumină emisferică, o lumină principală caldă și o margine rece. Pe telefon pune-l în jumătatea de sus, deasupra textului; pe ecranele late, lângă el."
    },
    {
     "kind": "prompt",

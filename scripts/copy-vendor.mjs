@@ -11,7 +11,7 @@ import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path';
 
 const FILES = {
-  gsap: ['dist/gsap.min.js', 'dist/ScrollTrigger.min.js', 'dist/SplitText.min.js', 'dist/DrawSVGPlugin.min.js'],
+  gsap: ['dist/gsap.min.js', 'dist/ScrollTrigger.min.js', 'dist/SplitText.min.js', 'dist/DrawSVGPlugin.min.js', 'dist/MotionPathPlugin.min.js'],
   three: ['build/three.module.js', 'build/three.core.js'],
 };
 

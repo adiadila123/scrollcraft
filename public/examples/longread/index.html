@@ -12,9 +12,42 @@
 
     <header class="cover">
       <!-- parallax: the farther the layer, the more it moves with the reader, so it seems to drift by more slowly -->
-      <div class="layer sky" data-speed="0.5" aria-hidden="true"></div>
-      <div class="layer far" data-speed="0.3" aria-hidden="true"></div>
-      <div class="layer near" data-speed="0.1" aria-hidden="true"></div>
+      <svg class="layer sky" data-speed="0.5" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#121c22" />
+            <stop offset="0.55" stop-color="#3a4a50" />
+            <stop offset="0.85" stop-color="#9a8462" />
+            <stop offset="1" stop-color="#c9a46a" />
+          </linearGradient>
+        </defs>
+        <rect width="1600" height="900" fill="url(#dusk)" />
+        <circle cx="1180" cy="330" r="40" fill="#f1dcae" opacity="0.85" />
+        <g fill="#e9e4da" opacity="0.5">
+          <circle cx="210" cy="120" r="1.6" />
+          <circle cx="420" cy="80" r="1.2" />
+          <circle cx="640" cy="160" r="1.4" />
+          <circle cx="900" cy="70" r="1.1" />
+          <circle cx="1320" cy="140" r="1.5" />
+          <circle cx="1480" cy="60" r="1.2" />
+          <circle cx="760" cy="230" r="1" />
+          <circle cx="300" cy="260" r="1.1" />
+        </g>
+      </svg>
+      <svg class="layer far" data-speed="0.3" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <path d="M0 640 C 160 600, 260 520, 420 540 S 700 610, 860 560 S 1120 470, 1300 520 S 1520 590, 1600 570 V 900 H 0 Z" fill="#2b3a3c" />
+        <rect y="660" width="1600" height="240" fill="#22302f" opacity="0.6" />
+      </svg>
+      <svg class="layer mid" data-speed="0.2" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <path
+          d="M0 720 C 200 690, 340 640, 520 660 S 800 730, 980 700 L 1080 690 L 1090 600 L 1100 600 L 1108 690 C 1250 690, 1420 720, 1600 700 V 900 H 0 Z"
+          fill="#18211f"
+        />
+        <path d="M1086 606 L 1112 606 L 1099 590 Z" fill="#e6b45c" />
+      </svg>
+      <svg class="layer near" data-speed="0.1" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <path d="M0 800 C 180 770, 300 760, 420 790 S 620 860, 760 850 S 1000 800, 1200 830 S 1460 880, 1600 860 V 900 H 0 Z" fill="#0d1113" />
+      </svg>
       <div class="cover-text">
         <p class="kicker">A long read · Fiction</p>
         <h1>The Long Way North</h1>
@@ -32,6 +65,13 @@
       <section class="journey">
         <figure class="map" aria-hidden="true">
           <svg viewBox="0 0 300 520">
+            <!-- contours inland, a north mark, and the walker who follows the drawn line -->
+            <path class="contour" d="M10 500 C 30 430, -6 392, 22 346 S 4 262, 42 222 S 34 128, 84 96 S 150 34, 222 22" />
+            <path class="contour" d="M-14 470 C 4 410, -20 380, 2 340 S -12 270, 18 236 S 12 150, 58 116 S 120 60, 196 44" />
+            <g class="north" transform="translate(262 470)">
+              <path d="M0 -16 L 6 4 L 0 0 L -6 4 Z" />
+              <text y="18" text-anchor="middle">N</text>
+            </g>
             <path class="coast" d="M40 510 C 60 440, 20 400, 50 350 S 30 260, 70 220 S 60 120, 110 90 S 170 20, 250 10" />
             <path class="route-bg" d="M70 490 C 90 430, 60 390, 85 345 S 70 265, 105 230 S 100 140, 140 110 S 190 50, 240 40" />
             <path class="route" d="M70 490 C 90 430, 60 390, 85 345 S 70 265, 105 230 S 100 140, 140 110 S 190 50, 240 40" />
@@ -41,6 +81,10 @@
               <circle cx="105" cy="230" r="5" />
               <circle cx="140" cy="110" r="5" />
               <circle cx="240" cy="40" r="5" />
+            </g>
+            <g class="walker" transform="translate(240 40)">
+              <circle class="walker-halo" r="12" />
+              <circle r="4.5" />
             </g>
           </svg>
           <figcaption>Route drawn for illustration. Not to scale.</figcaption>

@@ -93,6 +93,9 @@ a {
   gap: 40px;
   padding: 120px clamp(20px, 4vw, 48px) 48px;
 }
+.hero {
+  overflow-x: clip;
+}
 .split {
   font-weight: 500;
   font-size: clamp(52px, 11.5vw, 190px);
@@ -165,15 +168,18 @@ a {
   height: 100%;
   transform-origin: 50% 60%;
 }
-/* generated artwork, so the example needs no image files */
-.art-1 {
-  background: radial-gradient(circle at 30% 70%, #2c4a5c 0 18%, transparent 19%), repeating-linear-gradient(0deg, #1b2a33 0 14px, #223644 14px 28px);
+/* generated artwork in layers, so the example needs no image files; each layer's data-depth sets how far it
+   travels as the frame opens, which reads as depth */
+.art {
+  display: block;
 }
-.art-2 {
-  background: conic-gradient(from 200deg at 60% 40%, #b8a37a, #6e5a3b, #d9cdb4, #b8a37a);
+.art [data-depth] {
+  will-change: transform;
 }
-.art-3 {
-  background: radial-gradient(circle at 50% 45%, #ffd59e 0 6%, #e0893a 14%, #3a1c0b 40%, #120804 70%);
+.pnum {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
 }
 .project-text {
   display: grid;
@@ -191,6 +197,18 @@ a {
 }
 
 /* horizontal gallery */
+.hs-progress {
+  margin: 0 clamp(20px, 4vw, 48px);
+  height: 1px;
+  background: var(--line);
+}
+.hs-progress i {
+  display: block;
+  height: 100%;
+  background: var(--fg);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
 .hs-pin {
   position: sticky;
   top: 0;
@@ -221,8 +239,12 @@ a {
   border: 1px solid var(--line);
 }
 .step span {
-  font-size: 13px;
-  color: var(--muted);
+  font-size: clamp(64px, 8vw, 112px);
+  font-weight: 300;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px #8a877f;
 }
 .step h3 {
   font-size: clamp(34px, 4vw, 54px);

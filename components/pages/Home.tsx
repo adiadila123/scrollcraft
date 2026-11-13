@@ -55,7 +55,18 @@ export default function HomePage({ locale }: { locale: Locale }) {
               {chaptersFor(locale)
                 .filter((c) => c.level === level)
                 .map((c) => (
-                  <Row key={c.id} cls="rv" num={c.n} title={<Link href={chapterHref(c.id, locale)}>{c.title}</Link>}>
+                  <Row
+                    key={c.id}
+                    cls="rv"
+                    num={c.n}
+                    title={
+                      <Link href={chapterHref(c.id, locale)}>
+                        {c.title}
+                        {/* the number is shown beside the link; read with it, a one-word title like Start is not ambiguous */}
+                        <span className="sr-only"> · {c.n}</span>
+                      </Link>
+                    }
+                  >
                     <p>{c.summary}</p>
                   </Row>
                 ))}

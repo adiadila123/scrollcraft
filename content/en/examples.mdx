@@ -28,7 +28,7 @@ export const meta = {
       <p>A start-up is launching one speaker and needs one page that makes people pre-order it. The product must be the hero, its three features must be clear in under a minute, and the page must stay quick on a mid-range phone.</p>
     </Row>
     <Row cls="rv" num="2" title="Techniques used" anchor="launch-techniques">
-      <p>Headline revealed line by line (Motion, recipe e). Frame-sequence scrub for the turning product (recipe c). Words lit at the pace of the scroll (technique 5). Sticky product tour (recipe a). A reading progress bar.</p>
+      <p>Headline revealed line by line, over orbit lines drawn once as the page opens (Motion, recipe e). A frame-sequence scrub that tells the product in three acts: it turns while sound rings spread across the floor, it opens into an exploded view of shell, core and driver with labelled leader lines, and it closes as the view tilts down to the one button (recipe c). Words lit at the pace of the scroll (technique 5). A sticky product tour whose light ring fills and changes colour per feature (recipe a). A reading progress bar.</p>
     </Row>
     <Row cls="rv" num="3" title="Why it feels cinematic" anchor="launch-why">
       <p>One accent colour, used only for the progress bar, the button and the product’s single control. Every section does one thing and holds the screen for it. The product turns only while you scroll, so the reader directs the shot.</p>
@@ -70,7 +70,7 @@ export const meta = {
       <p>A small design studio wants a portfolio that sounds like them: confident type, three projects and how they work. Visitors should remember the name and find the contact link without looking for it.</p>
     </Row>
     <Row cls="rv" num="2" title="Techniques used" anchor="portfolio-techniques">
-      <p>Headline revealed line by line (recipe e). Scroll-speed marquee (recipe d). Clip-path reveal with a slow counter-zoom (recipe b). Horizontal scroll in a pinned section (technique 8).</p>
+      <p>Headline revealed line by line, with its last line, “that move.”, sliding sideways as the hero leaves (recipe e). Scroll-speed marquee (recipe d). Clip-path reveal with a slow counter-zoom (recipe b), and inside each frame an SVG artwork in layers that settle at different speeds, which reads as depth. Horizontal scroll in a pinned section with outlined step numbers and a progress line (technique 8).</p>
     </Row>
     <Row cls="rv" num="3" title="Why it feels cinematic" anchor="portfolio-why">
       <p>The type does the work, so motion stays small. Each project image opens like a shutter while the picture inside settles back from a slight zoom, which reads as a camera move. The process section changes direction, a cut that tells the reader a new part has started.</p>
@@ -108,7 +108,7 @@ export const meta = {
       <p>A magazine wants a travel story where readers follow the route as they read. The text comes first; the map supports it and must never get in the way on a phone.</p>
     </Row>
     <Row cls="rv" num="2" title="Techniques used" anchor="longread-techniques">
-      <p>Parallax cover in three layers (technique 7). Paragraphs that arrive once (technique 3). Scrollytelling with a pinned map (technique 9). An SVG path drawn by the scroll with stroke-dashoffset. A reading progress bar.</p>
+      <p>A cover drawn as a landscape in four SVG layers (sky and moon, far hills, a headland with a lighthouse, near cliffs) with parallax (technique 7). Paragraphs that arrive once (technique 3). Scrollytelling with a pinned map (technique 9): the route is drawn with stroke-dashoffset, a walker stands at the tip of the drawn line, and the page’s light shifts from dusk to night to dawn as the days change. A reading progress bar.</p>
     </Row>
     <Row cls="rv" num="3" title="Why it feels cinematic" anchor="longread-why">
       <p>The text stays calm and readable, set in a serif at a comfortable measure. All the motion sits in the margin: the map draws as the reader moves, so the story and the route keep the same pace. The map says it is drawn for illustration, so nobody reads it as real data.</p>
@@ -146,7 +146,7 @@ export const meta = {
       <p>A studio wants one case study that shows how it thinks, not only what it made: the problem, the process, the idea and the work, ending with a way to start a project. It will be sent to clients, so it has to feel finished on any screen.</p>
     </Row>
     <Row cls="rv" num="2" title="Techniques used" anchor="agency-techniques">
-      <p>Headline split into its real lines with SplitText, each rising out of a mask (GSAP, technique 5). A pinned process timeline where each step leaves before the next arrives (techniques 1 and 3). A route drawn with DrawSVG, whose stops light up as the line reaches them (technique 4). A pinned strip that moves sideways by exactly its overflow. Everything is created inside <code className="i">gsap.matchMedia</code>.</p>
+      <p>Headline split into its real lines with SplitText, each rising out of a mask, with the studio’s line drawn under it (GSAP, techniques 4 and 5). A pinned process timeline where each step leaves before the next arrives, while a huge outlined number rolls to the next (techniques 1 and 3). A sea chart where one timeline draws the route and its wake, sails the ferry along it with MotionPathPlugin, sweeps the lighthouse beam and lights each stop. A pinned strip that moves sideways by exactly its overflow, leans with the scroll speed, and lets each artwork drift inside its frame. Everything is created inside <code className="i">gsap.matchMedia</code>.</p>
     </Row>
     <Row cls="rv" num="3" title="Why it feels cinematic" anchor="agency-why">
       <p>One idea carries the page: the line between the islands. It is drawn once, at the reader’s pace, and every stop it reaches lights up in the accent colour. The process holds the screen while it changes, like a cut between three shots, and the strip of work moves sideways, a turn that tells the reader the story has ended and the results have started.</p>
@@ -154,7 +154,7 @@ export const meta = {
     <Row cls="rv" num="4" title="Prompts to rebuild it" anchor="agency-prompts">
       <CodeBlock
         lang="Prompt"
-        code={"Build a one-page case study for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with GSAP, ScrollTrigger, SplitText and DrawSVGPlugin from jsDelivr. Sections: a headline split into lines that rise out of a mask, a pinned process of three steps where each fades out before the next arrives, an SVG route drawn by the scroll whose stops light up as the line reaches them, a pinned strip of five pieces of work moving sideways, and a contact link. Dark background, one accent colour."}
+        code={"Build a one-page case study for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with GSAP, ScrollTrigger, SplitText, DrawSVGPlugin and MotionPathPlugin from jsDelivr. Sections: a headline split into lines that rise out of a mask, with one hand-drawn line drawn under it; a pinned process of three steps where each fades out before the next arrives while a huge outlined step number rolls to the next; an SVG chart of the route where one scrubbed timeline draws the line and a soft wake, moves a small vessel along it with autoRotate and lights each stop as the line reaches it; a pinned strip of five pieces of work moving sideways that leans with the scroll speed; and a contact link underlined by the same line. Dark background, one accent colour."}
       />
       <CodeBlock
         lang="Prompt"
@@ -188,7 +188,7 @@ export const meta = {
       <p>A ceramics studio sells one vase in two glazes and wants people to see its form from every side before they order. Most visitors come from Instagram on a phone, so it has to load fast and look right on a small screen.</p>
     </Row>
     <Row cls="rv" num="2" title="Techniques used" anchor="showcase-techniques">
-      <p>A three.js scene behind the page (WebGL, scene 1). The vase is a profile curve turned on a lathe, so it needs no model file. The scroll turns it and moves the camera. It renders on demand, only when something changed, with the pixel ratio capped at 2 (Keep it fast). An SVG drawing as the fallback, and glaze buttons that work with or without WebGL.</p>
+      <p>A three.js scene behind the page (WebGL, scene 1) where the scroll makes the vase: four profile curves with the same number of points are blended, so a lump of wet clay is thrown up on the wheel with the rings fingers leave, then trimmed with a foot. One material is clay below a glaze line and glaze above it, with a wavering edge and iron speckles, written into MeshStandardMaterial with onBeforeCompile; the line falls as if the piece were dipped. The wheel drops away and the camera comes round to a three-quarter view. It renders on demand with the pixel ratio capped at 2 (Keep it fast), and a steps rail shows where you are in the making.</p>
     </Row>
     <Row cls="rv" num="3" title="Why it feels cinematic" anchor="showcase-why">
       <p>The object is the only thing that moves, and it moves only when you do. Warm light from one side and a cool rim from behind give it a studio look without any texture. The cards are quiet and short, so the vase has the screen.</p>
@@ -196,7 +196,7 @@ export const meta = {
     <Row cls="rv" num="4" title="Prompts to rebuild it" anchor="showcase-prompts">
       <CodeBlock
         lang="Prompt"
-        code={"Build a product page for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with three.js loaded from jsDelivr through an import map. One fixed canvas behind five short sections. Make the product with LatheGeometry from a profile curve, light it with a hemisphere light, a warm key light and a cool rim light, and turn it with the scroll. On phones put it in the top half, above the text; on wide screens, beside it."}
+        code={"Build a product page for [subject], for [audience], ending with [one action]. HTML, CSS and JavaScript in three files, with three.js loaded from jsDelivr through an import map. One fixed canvas behind five short sections that tell how the product is made. Make the product from profile curves with the same number of points (raw material, first shape, finished shape, finished with a foot), build one LatheGeometry and rewrite its positions to blend between them as the reader moves between sections, recomputing normals. Use one MeshStandardMaterial with onBeforeCompile for a finish that covers the piece above a line, with a wavering edge, and lower that line with the scroll. Light it with a hemisphere light, a warm key and a cool rim. On phones put it in the top half, above the text; on wide screens, beside it."}
       />
       <CodeBlock
         lang="Prompt"
@@ -211,7 +211,7 @@ export const meta = {
       <p>With a model from a 3D artist or a scan, export it as glTF, compress it, and load it in place of the lathe. Keep render on demand: draw once when it arrives.</p>
       <CodeBlock
         lang="JavaScript"
-        code={"import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';\n\nnew GLTFLoader().load('vase.glb', (gltf) => {\n  scene.remove(vase);\n  vase = gltf.scene;\n  scene.add(vase);\n  queue(); // draw once, now that it is here\n});"}
+        code={"import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';\n\nnew GLTFLoader().load('vase.glb', (gltf) => {\n  group.remove(piece);\n  group.add(gltf.scene);\n  queue(); // draw once, now that it is here\n});"}
       />
     </Row>
     <Row cls="rv" num="6" title="Portfolio-ready" anchor="showcase-ready">

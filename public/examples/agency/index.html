@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="progress" aria-hidden="true"></div>
     <header class="nav">
       <a class="brand" href="#top">Halden</a>
       <a class="contact-link" href="#contact">Start a project</a>
@@ -17,6 +18,10 @@
       <section class="hero">
         <p class="kicker">Case study · Tidewater ferries</p>
         <h1 class="title">A ferry line that reads like the coast it serves.</h1>
+        <!-- the studio's one idea, drawn under the headline: the line between land and water -->
+        <svg class="horizon" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 40 C 150 40, 220 14, 380 18 S 640 46, 820 30 S 1060 8, 1200 20" />
+        </svg>
         <dl class="meta">
           <div>
             <dt>Scope</dt>
@@ -32,6 +37,7 @@
       <!-- process: pinned while three steps hand over; without motion they are a plain list -->
       <section class="process" aria-label="Process">
         <div class="process-bar" aria-hidden="true"><i></i></div>
+        <div class="big-num" aria-hidden="true"><span>01</span><span>02</span><span>03</span></div>
         <article class="step">
           <span class="num">01</span>
           <h2>Listen</h2>
@@ -54,11 +60,33 @@
         <div class="route-pin">
           <h2 id="route-title">One line, drawn once.</h2>
           <svg viewBox="0 0 400 230" role="img" aria-label="The ferry route, from the harbour past the lighthouse to the islands">
+            <defs>
+              <pattern id="swell" width="14" height="8" patternUnits="userSpaceOnUse">
+                <path d="M0 6 Q 3.5 3, 7 6 T 14 6" class="swell" />
+              </pattern>
+            </defs>
+            <rect class="sea" width="400" height="230" fill="url(#swell)" />
+            <!-- a channel between two coasts, and two islands at the far end -->
+            <path class="land" d="M0 0 H 330 C 300 20, 262 36, 230 48 S 160 84, 120 102 S 50 150, 0 168 Z" />
+            <path class="land" d="M400 230 H 64 C 110 196, 170 172, 226 152 S 330 116, 400 104 Z" />
+            <path class="coast" d="M330 0 C 300 20, 262 36, 230 48 S 160 84, 120 102 S 50 150, 0 168" />
+            <path class="coast" d="M64 230 C 110 196, 170 172, 226 152 S 330 116, 400 104" />
+            <path class="contour" d="M290 0 C 262 16, 228 28, 200 40 S 136 72, 100 88 S 40 126, 0 140" />
+            <path class="contour" d="M110 230 C 150 206, 200 188, 250 172 S 340 142, 400 134" />
+            <path class="land island" d="M364 40 C 370 24, 392 20, 400 26 V 62 C 388 66, 360 58, 364 40 Z" />
+            <path class="land island" d="M318 92 C 322 84, 338 82, 344 88 C 348 96, 336 102, 326 100 C 320 99, 316 97, 318 92 Z" />
             <path class="route-ghost" d="M20 200 C 70 200, 100 130, 160 125 S 260 80, 300 70 S 360 40, 380 28" />
+            <path class="route-wake" d="M20 200 C 70 200, 100 130, 160 125 S 260 80, 300 70 S 360 40, 380 28" />
             <path class="route-line" d="M20 200 C 70 200, 100 130, 160 125 S 260 80, 300 70 S 360 40, 380 28" />
             <circle class="stop" cx="20" cy="200" r="5" />
             <circle class="stop" cx="160" cy="125" r="5" />
             <circle class="stop" cx="380" cy="28" r="5" />
+            <!-- the lighthouse beam, and the ferry that follows the line -->
+            <path class="beam" d="M166 119 L 230 92 L 226 82 Z" />
+            <g class="boat" transform="translate(380 28) rotate(-28)">
+              <path d="M-9 -3 H 6 L 10 0 L 6 3 H -9 Z" />
+              <rect x="-5" y="-1.6" width="7" height="3.2" rx="1" class="cabin" />
+            </g>
           </svg>
           <ol class="stops">
             <li>Harbour</li>
@@ -99,6 +127,9 @@
 
       <section class="contact" id="contact">
         <h2 class="end">Have a line to draw?</h2>
+        <svg class="underline" viewBox="0 0 600 30" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M4 20 C 120 6, 220 26, 330 16 S 520 6, 596 14" />
+        </svg>
         <a class="btn" href="#top">Start a project</a>
       </section>
     </main>
@@ -108,6 +139,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MotionPathPlugin.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

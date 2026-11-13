@@ -5,9 +5,11 @@
   --line: #2a2622;
   --accent: #d9b38c;
   --glaze: #9fbfa8;
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 html[data-glaze='tenmoku'] {
-  --glaze: #5a3a26;
+  --glaze: #4a2d1c;
 }
 /* minimal scrollbars: thin, no track, a quiet thumb */
 * {
@@ -96,6 +98,10 @@ a {
 }
 .fallback path {
   fill: var(--glaze);
+  transition: fill 0.4s;
+}
+.fb-shadow {
+  fill: rgba(0, 0, 0, 0.5);
 }
 .no-webgl .stage {
   display: none;
@@ -116,15 +122,78 @@ main {
   padding: 0 clamp(16px, 5vw, 96px) 8svh;
 }
 .card {
+  position: relative;
   display: grid;
   gap: 12px;
   max-width: 30rem;
-  padding: 24px;
-  background: rgba(10, 9, 8, 0.78);
+  padding: 26px 26px 28px;
+  background: linear-gradient(160deg, rgba(28, 24, 20, 0.82), rgba(10, 9, 8, 0.86));
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+}
+/* a hairline of the accent along the card's top edge, like the lip of a glaze */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: -1px 24px auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.7;
+}
+
+/* the steps rail: phones show it as a row of numbers under the bar, wide screens as a column on the right */
+.steps {
+  position: fixed;
+  z-index: 9;
+  top: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.steps ol {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border-radius: 99px;
+  background: rgba(10, 9, 8, 0.6);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--line);
-  border-radius: 4px;
+  pointer-events: auto;
+}
+.steps a {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 99px;
+  font-size: 0;
+  color: var(--muted);
+  text-decoration: none;
+  transition:
+    color 0.3s,
+    background 0.3s;
+}
+.steps span {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+.steps a[aria-current] {
+  color: #1a120a;
+  background: var(--accent);
+}
+.steps a:hover,
+.steps a:focus-visible {
+  color: var(--fg);
+}
+.steps a[aria-current]:hover,
+.steps a[aria-current]:focus-visible {
+  color: #1a120a;
 }
 .kicker {
   font-size: 12px;
@@ -132,16 +201,25 @@ main {
   text-transform: uppercase;
   color: var(--accent);
 }
+/* a book serif for the display type, a quiet sans for the rest: hand-made, not technical */
+h1,
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+}
 h1 {
-  font-weight: 300;
-  font-size: clamp(34px, 6vw, 72px);
-  line-height: 1.02;
-  letter-spacing: -0.04em;
+  font-size: clamp(36px, 6vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+h1 em,
+h2 em {
+  color: var(--accent);
 }
 h2 {
-  font-weight: 300;
-  font-size: clamp(28px, 4vw, 48px);
-  letter-spacing: -0.03em;
+  font-size: clamp(30px, 4vw, 50px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 .card p {
   color: var(--muted);
@@ -209,9 +287,49 @@ button[data-glaze='tenmoku'] i {
     align-items: center;
     padding-bottom: 0;
   }
+  .steps {
+    top: 50%;
+    left: auto;
+    right: clamp(20px, 3vw, 40px);
+    translate: 0 -50%;
+  }
+  .steps ol {
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px;
+    border-radius: 14px;
+  }
+  .steps a {
+    display: flex;
+    gap: 10px;
+    padding: 7px 12px;
+    border-radius: 9px;
+    font-size: 13px;
+  }
   .fallback {
     inset: 18vh 10vw auto auto;
     width: 30vw;
     height: 64vh;
+  }
+}
+
+/* where scroll-driven animations are supported, each card settles as it arrives; elsewhere it is simply there */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .card {
+      animation: settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+  html.motion-on .card {
+    animation: settle linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
+@keyframes settle {
+  from {
+    translate: 0 48px;
   }
 }

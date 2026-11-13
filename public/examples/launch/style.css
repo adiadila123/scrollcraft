@@ -79,6 +79,9 @@ a {
 
 /* hero */
 .hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   min-height: 100svh;
   display: grid;
   align-content: center;
@@ -111,6 +114,44 @@ a {
 }
 .js .split.in .line:nth-child(3) > span {
   transition-delay: 0.2s;
+}
+.split em {
+  font-style: normal;
+  color: var(--accent);
+}
+.orbits {
+  position: absolute;
+  z-index: -1;
+  right: -18vw;
+  top: 50%;
+  width: min(130vw, 1100px);
+  translate: 0 -50%;
+  rotate: -14deg;
+  overflow: visible;
+}
+.orbits ellipse {
+  fill: none;
+  stroke: rgba(255, 138, 61, 0.22);
+  stroke-width: 1;
+}
+.orbits circle {
+  fill: var(--accent);
+}
+.js .orbits ellipse {
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: orbit-draw 2.4s var(--ease) 0.3s forwards;
+}
+.js .orbits ellipse:nth-child(2) {
+  animation-delay: 0.45s;
+}
+.js .orbits ellipse:nth-child(3) {
+  animation-delay: 0.6s;
+}
+@keyframes orbit-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 .sub {
   color: var(--muted);
@@ -208,23 +249,44 @@ html.js .spin-cap.on {
   place-items: center;
   background: var(--bg);
 }
+/* the speaker seen from above: a light ring around the button shows what it is doing */
 .tour-screen {
-  width: 120px;
-  aspect-ratio: 9 / 19;
-  border-radius: 22px;
-  border: 1px solid #2c3338;
+  --sweep: 0.33turn;
+  --tint: #ff8a3d;
+  position: relative;
+  width: min(56vw, 260px);
+  aspect-ratio: 1;
+  border-radius: 50%;
   display: grid;
   place-items: center;
   font-size: 18px;
   font-weight: 300;
-  background: radial-gradient(circle at 50% 30%, #3a1d0b, #050608 70%);
-  transition: background 0.6s;
+  background: radial-gradient(circle, #0d0f11 0 52%, transparent 53%), conic-gradient(from -90deg, var(--tint) 0 var(--sweep), #1a1e21 var(--sweep) 1turn);
+  box-shadow:
+    0 0 0 10px #0b0d0f,
+    0 0 0 11px #262c30,
+    0 40px 80px -30px rgba(255, 138, 61, 0.35);
+  transition:
+    --sweep 0.8s var(--ease),
+    --tint 0.6s;
 }
 .tour-screen[data-i='1'] {
-  background: radial-gradient(circle at 50% 30%, #0b2a3a, #050608 70%);
+  --sweep: 0.66turn;
+  --tint: #5cc8ff;
 }
 .tour-screen[data-i='2'] {
-  background: radial-gradient(circle at 50% 30%, #1d2a12, #050608 70%);
+  --sweep: 1turn;
+  --tint: #9be15d;
+}
+@property --sweep {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0turn;
+}
+@property --tint {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ff8a3d;
 }
 .tour-screen span {
   transition: opacity 0.3s;
@@ -326,8 +388,7 @@ html.js .spin-cap.on {
     background: none;
   }
   .tour-screen {
-    width: min(240px, 50vw);
-    border-radius: 36px;
+    width: min(360px, 30vw);
     font-size: 24px;
   }
   .feat {
@@ -351,8 +412,13 @@ html:not(.js) .spin-cap {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html.js:not(.motion-on) .orbits ellipse {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
   html.js:not(.motion-on) .line > span,
   html:not(.motion-on) .feat,
+  html:not(.motion-on) .tour-screen,
   html:not(.motion-on) .feat :is(h2, .num) {
     transition: none;
     transform: none;

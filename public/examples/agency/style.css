@@ -91,6 +91,44 @@ a {
   text-transform: uppercase;
   color: var(--accent);
 }
+.progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 11;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+/* a faint grid of soundings behind the hero, like a sea chart */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(70% 60% at 85% 20%, rgba(79, 209, 197, 0.1), transparent 70%),
+    linear-gradient(rgba(238, 241, 242, 0.035) 1px, transparent 1px) 0 0 / 100% 64px,
+    linear-gradient(90deg, rgba(238, 241, 242, 0.035) 1px, transparent 1px) 0 0 / 64px 100%;
+  mask-image: linear-gradient(transparent, #000 30%, #000 70%, transparent);
+}
+.horizon {
+  width: 100%;
+  height: clamp(28px, 4vw, 56px);
+  overflow: visible;
+}
+.horizon path,
+.underline path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
 .title {
   max-width: 16ch;
   font-weight: 300;
@@ -165,6 +203,30 @@ a {
   height: 1px;
   background: var(--line);
 }
+.big-num {
+  display: none;
+}
+/* the step's number, very large and outlined, behind the text; it rolls to the next as the steps hand over */
+.animated .big-num {
+  display: block;
+  position: absolute;
+  right: clamp(12px, 4vw, 72px);
+  top: 50%;
+  translate: 0 -50%;
+  height: 1em;
+  overflow: hidden;
+  font-size: clamp(160px, 34vw, 460px);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(79, 209, 197, 0.35);
+  pointer-events: none;
+}
+.big-num span {
+  display: block;
+  height: 1em;
+}
 .process-bar i {
   display: block;
   height: 100%;
@@ -203,6 +265,45 @@ a {
 }
 .route-line {
   stroke: var(--accent);
+}
+/* the wake: a wide, soft copy of the line behind the boat */
+.route-wake {
+  stroke: rgba(79, 209, 197, 0.16);
+  stroke-width: 9 !important;
+}
+.sea {
+  opacity: 0.7;
+}
+.swell {
+  fill: none;
+  stroke: #12202a;
+  stroke-width: 0.8;
+}
+.route .land {
+  fill: #0d151a;
+}
+.route .coast {
+  fill: none;
+  stroke: #2c3c45;
+  stroke-width: 1.2;
+}
+.island {
+  stroke: #2c3c45;
+  stroke-width: 1.2;
+}
+.route .contour {
+  fill: none;
+  stroke: #17232a;
+  stroke-width: 1;
+}
+.beam {
+  fill: rgba(255, 236, 170, 0.12);
+}
+.boat path {
+  fill: var(--fg);
+}
+.boat .cabin {
+  fill: var(--accent);
 }
 .stop {
   fill: var(--accent);
@@ -320,6 +421,20 @@ a {
 .animated .tile {
   width: min(78vw, 420px);
 }
+/* inside each frame the artwork is wider than the frame, so it can drift against the strip */
+.animated .art::before {
+  content: '';
+  position: absolute;
+  inset: 0 -12%;
+  background: inherit;
+  translate: var(--drift, 0) 0;
+}
+.art {
+  transition: border-color 0.3s;
+}
+.tile:hover .art {
+  border-color: var(--accent);
+}
 
 /* contact */
 .contact {
@@ -331,6 +446,12 @@ a {
   text-align: center;
   padding: 80px 20px;
   border-top: 1px solid var(--line);
+}
+.underline {
+  width: min(80vw, 560px);
+  height: 24px;
+  margin-top: -18px;
+  overflow: visible;
 }
 .end {
   font-weight: 300;
@@ -358,6 +479,30 @@ a {
 }
 
 /* larger screens */
+@media (min-width: 1000px) {
+  .route-pin {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    grid-template-rows: auto auto;
+    column-gap: 6vw;
+    align-content: center;
+  }
+  .route h2 {
+    align-self: end;
+  }
+  .route svg {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 100%;
+    max-height: 78svh;
+  }
+  .stops {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
 @media (min-width: 700px) {
   .meta {
     grid-template-columns: repeat(2, max-content);

@@ -71,14 +71,9 @@ blockquote {
   inset: -10% 0 0;
   will-change: transform;
 }
-.sky {
-  background: linear-gradient(#1b2a33, #3d4b4f 55%, #8a7a5c 100%);
-}
-.far {
-  background: radial-gradient(120% 60% at 30% 100%, #2b3a3c 0 50%, transparent 51%);
-}
-.near {
-  background: radial-gradient(90% 45% at 80% 105%, #0d1113 0 60%, transparent 61%);
+.layer {
+  width: 100%;
+  height: 110%;
 }
 .cover::after {
   content: '';
@@ -143,6 +138,30 @@ main > p {
   transform: none;
 }
 
+/* the light shifts across the five days, dusk to night to a cold dawn: the page's ground changes tone. The
+   tones stay dark, so the text keeps its contrast at every step */
+html {
+  --tone: #0d1113;
+  background: var(--tone);
+  transition: --tone 1.2s;
+}
+html[data-day='1'] {
+  --tone: #15140f;
+}
+html[data-day='2'] {
+  --tone: #0d1218;
+}
+html[data-day='3'] {
+  --tone: #0a0f1a;
+}
+html[data-day='4'] {
+  --tone: #101816;
+}
+@property --tone {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0d1113;
+}
 /* the journey: map pinned on the left, days scroll on the right */
 /* phones: the map sits on top, the days scroll underneath it */
 .journey {
@@ -160,13 +179,33 @@ main > p {
   gap: 10px;
   padding-bottom: 14px;
   /* solid down to the caption, so the days scrolling underneath never show through it */
-  background: linear-gradient(var(--bg) 94%, transparent);
+  background: linear-gradient(var(--tone) 94%, transparent);
 }
 .map svg {
   width: min(100%, 340px);
   height: auto;
   max-height: 32svh;
   overflow: visible;
+}
+.map .contour {
+  fill: none;
+  stroke: #1d2427;
+  stroke-width: 1;
+}
+.north path {
+  fill: var(--muted);
+}
+.north text {
+  font:
+    500 10px system-ui,
+    sans-serif;
+  fill: var(--muted);
+}
+.walker circle {
+  fill: var(--accent);
+}
+.walker .walker-halo {
+  fill: rgba(230, 180, 92, 0.18);
 }
 .coast {
   fill: none;
@@ -296,7 +335,8 @@ main > p {
   html:not(.motion-on) :is(.day-n, .day h2, .day p:last-child) {
     transition: none;
   }
-  html:not(.motion-on) .stops circle {
+  html:not(.motion-on) .stops circle,
+  html:not(.motion-on) {
     transition: none;
   }
 }

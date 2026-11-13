@@ -17,6 +17,7 @@ const heads = days.map((d) => d.querySelector('h2'));
 const stops = [...document.querySelectorAll('.stops circle')];
 const wide = matchMedia('(min-width: 761px)');
 let active = -1;
+const walker = document.querySelector('.walker');
 const length = route.getTotalLength();
 route.style.strokeDasharray = `${length}`;
 route.style.strokeDashoffset = `${length}`;
@@ -38,6 +39,9 @@ function update() {
   const r = journey.getBoundingClientRect();
   const p = still ? 1 : clamp((innerHeight * 0.5 - r.top) / (r.height - innerHeight * 0.5), 0, 1);
   route.style.strokeDashoffset = `${(length * (1 - p)).toFixed(1)}`;
+  /* the walker stands at the tip of the drawn line */
+  const at = route.getPointAtLength(length * p);
+  walker.setAttribute('transform', `translate(${at.x.toFixed(1)} ${at.y.toFixed(1)})`);
 
   /* the active day is the last one whose heading has passed a reading line: the middle of the screen, or just
      under the map on phones. Checked every frame, so a fast fling or a jump never skips a day. */
@@ -49,6 +53,7 @@ function update() {
   if (i !== active) {
     active = i;
     days.forEach((d, k) => d.classList.toggle('on', k === Math.max(0, i)));
+    document.documentElement.dataset.day = Math.max(0, i);
     stops.forEach((s, k) => s.classList.toggle('on', k <= i));
   }
 }

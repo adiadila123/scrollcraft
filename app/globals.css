@@ -267,6 +267,7 @@ footer { border-top: 1px solid var(--line); margin-top: 40px; overflow: hidden; 
 .f-col { display: grid; gap: 12px; align-content: start; }
 .f-col a { color: var(--muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; width: fit-content; }
 .f-col a:hover, .f-col a:focus-visible { color: var(--fg); }
+.bigmark::before { content: attr(data-mark); }
 .bigmark { font-weight: 300; font-size: clamp(5rem, 24vw, 19rem); letter-spacing: -0.07em; line-height: 0.8; color: #0b0f13; user-select: none; white-space: nowrap; margin-left: -0.04em; }
 .f-bot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 20px 36px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 .f-bot button { background: none; border: 0; padding: 0; color: var(--muted); font: inherit; cursor: pointer; transition: color 0.2s; }
