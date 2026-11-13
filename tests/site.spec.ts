@@ -460,6 +460,28 @@ test.describe('portfolio projects', () => {
     });
   }
 
+  test('each project runs its script inside the sandboxed full-screen viewer', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'the same frame on both');
+    test.slow();
+    for (const id of SITES) {
+      await page.goto(`/examples/${id}`);
+      /* the frame's origin is null, so this only passes when /live and /vendor answer with CORS */
+      await expect(page.frameLocator('.viewer iframe').locator('html')).toHaveClass(/\bjs\b/);
+    }
+  });
+
+  test('with reduced motion the WebGL showcase still tells its story, one state per chapter', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/live/showcase/index.html');
+    const step = page.locator('.steps a[aria-current]');
+    await page.locator('#thrown').evaluate((el: HTMLElement) => scrollTo(0, el.offsetTop + el.offsetHeight / 2 - innerHeight / 2));
+    await expect(step).toContainText('Thrown');
+    await page.locator('#fired').evaluate((el: HTMLElement) => scrollTo(0, el.offsetTop + el.offsetHeight / 2 - innerHeight / 2));
+    await expect(step).toContainText('Fired');
+    /* the kiln's glow is a state of that chapter, not an animation, so it shows here too */
+    await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--heat').trim())).toBe('1.000');
+  });
+
   test('the WebGL showcase reads without WebGL and its glaze buttons still work', async ({ page, consoleErrors }) => {
     await page.addInitScript(() => {
       HTMLCanvasElement.prototype.getContext = () => null;

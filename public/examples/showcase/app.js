@@ -324,7 +324,7 @@ if (renderer) {
   }
 
   /* the camera has weight: the shown stage eases towards the scrolled one, like a dolly on rails */
-  let shown = isStill() ? 6 : stage();
+  let shown = isStill() ? Math.round(stage()) : stage();
   /* the lights come up as the page opens, once */
   const born = performance.now();
   /* a fine pointer leans the camera a little; touch and reduced motion leave it still */
@@ -349,8 +349,9 @@ if (renderer) {
   function render() {
     queued = false;
     const still = isStill();
-    /* with reduced motion: the finished, glazed vase, off the wheel, in the glazes shot */
-    const target = still ? 6 : stage();
+    /* with reduced motion the story is still told, without movement: each section shows its own state at once
+       (the lump, the thrown vase, the trimmed one, the piece in the kiln, the glazed vase), cut rather than moved */
+    const target = still ? Math.round(stage()) : stage();
     shown = still ? target : shown + (target - shown) * 0.09;
     const moving = Math.abs(target - shown) > 0.0005;
     const s = shown;
@@ -376,7 +377,7 @@ if (renderer) {
       shape(throwT, trimT, ridges);
     }
     /* the kiln: heat rises into chapter 4 and cools on the way out */
-    const heat = isStill() ? 0 : smooth(3.35, 4, s) * (1 - smooth(4.2, 4.8, s));
+    const heat = smooth(3.35, 4, s) * (1 - smooth(4.2, 4.8, s));
     uniforms.uHeat.value = heat;
     html.style.setProperty('--heat', heat.toFixed(3));
     key.color.copy(KEY).lerp(FIRE, heat);

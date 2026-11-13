@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { MotionSwitch } from '@/components/chrome/MotionNotice';
 import { alternates } from '@/components/chrome/Shell';
 import ExampleFrame from '@/components/pages/ExampleFrame';
 import { chapterHref } from '@/lib/chapters';
@@ -51,22 +52,26 @@ export function exampleRoute(locale: Locale) {
             <span className="mono">{t.of(i + 1, exampleSites.length)}</span>
             <span className="vw-name">{s.name}</span>
           </h1>
-          <nav className="vw-steps" aria-label={t.of(i + 1, exampleSites.length)}>
-            {prev ? (
-              <Link className="vw-step" href={href(prev.id)} aria-label={t.prev(prev.name)}>
-                ‹
-              </Link>
-            ) : (
-              <span className="vw-step" aria-hidden="true" />
-            )}
-            {next ? (
-              <Link className="vw-step" href={href(next.id)} aria-label={t.next(next.name)}>
-                ›
-              </Link>
-            ) : (
-              <span className="vw-step" aria-hidden="true" />
-            )}
-          </nav>
+          {/* on devices that ask for less motion, the examples sit still; this turns the animations on from here too */}
+          <div className="vw-end">
+            <MotionSwitch />
+            <nav className="vw-steps" aria-label={t.of(i + 1, exampleSites.length)}>
+              {prev ? (
+                <Link className="vw-step" href={href(prev.id)} aria-label={t.prev(prev.name)}>
+                  ‹
+                </Link>
+              ) : (
+                <span className="vw-step" aria-hidden="true" />
+              )}
+              {next ? (
+                <Link className="vw-step" href={href(next.id)} aria-label={t.next(next.name)}>
+                  ›
+                </Link>
+              ) : (
+                <span className="vw-step" aria-hidden="true" />
+              )}
+            </nav>
+          </div>
         </header>
         <ExampleFrame key={s.id} src={`/live/${s.id}/index.html`} title={dicts[locale].demo.title(s.name)} />
       </div>

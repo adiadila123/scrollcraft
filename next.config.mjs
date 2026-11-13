@@ -16,7 +16,11 @@ const config = {
     ];
   },
   async headers() {
-    return [{ source: '/vendor/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] }];
+    /* the preview frames are sandboxed, so their origin is null: module scripts and libraries they load need CORS */
+    return [
+      { source: '/vendor/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
+      { source: '/live/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
+    ];
   },
 };
 
